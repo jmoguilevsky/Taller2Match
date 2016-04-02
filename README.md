@@ -34,3 +34,21 @@ _El ejemplo fue tomado del source de mongoose._
 3. Correr `./ejemplo` y verificar que en un web-explorer devuelva una response al entrar a _localhost:8000_  
 4. Para salir basta con ejecutar ctrl+c en la terminal donde lo estamos corriendo. La lib es inteligente como para  
 manejar signals, y hará que libere los recursos necesarios.  
+
+**Sphinx**
+`sudo apt-get install python-sphinx`
+
+(Antes de esto yo había hecho:
+
+1. `sudo apt-get install python-dev`
+2. `pip install sphinx`
+
+pero no sé si hace falta)
+
+Hay ejemplos para ver cómo escribir los documentos en la carpeta ejemploSphinx.
+Para crear el html:
+
+1. `cd ejemploSphinx`
+2. `make html`
+
+El html queda en la carpeta _build.
