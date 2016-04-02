@@ -25,3 +25,12 @@ Taller 2 - Match App
 `make`  
 3. `make install`  
 
+**Mongoose: Ejemplo**  
+_El ejemplo fue tomado del source de mongoose._  
+1. Correr, en una terminal:  
+`unzip mongoose-master.zip`  
+2. Compilar:  
+`g++ ejemploMongoose.cpp mongoose-master/mongoose.c -lpthread -DMG_ENABLE_THREADS -o ejemplo`  
+3. Correr `./ejemplo` y verificar que en un web-explorer devuelva una response al entrar a _localhost:8000_  
+4. Para salir basta con ejecutar ctrl+c en la terminal donde lo estamos corriendo. La lib es inteligente como para  
+manejar signals, y hará que libere los recursos necesarios.  
