@@ -15,3 +15,13 @@ Taller 2 - Match App
 `g++ -std=c++11 <nuestros cpp> -o <blablabla> -lrocksdb -pthread -lsnappy -lz -lbz2`  
 
 (SIN EL `std=c++11` NO ANDA)  
+
+**CMake v3.5.1**  
+1. Ir a [https://cmake.org/download/] y bajarse el source correspondiente al S.O. Yo voy a trabajar con la .tar.gz.  
+2. En una terminal, ejecutamos:  
+`tar xf cmake-3.5.1.tar.gz`  
+`cd cmake-3.5.1`  
+`./configure`  
+`make`  
+3. `make install`  
+
