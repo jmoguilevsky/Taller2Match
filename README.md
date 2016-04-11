@@ -35,20 +35,32 @@ _El ejemplo fue tomado del source de mongoose._
 4. Para salir basta con ejecutar ctrl+c en la terminal donde lo estamos corriendo. La lib es inteligente como para  
 manejar signals, y hará que libere los recursos necesarios.  
 
-**Sphinx**
-`sudo apt-get install python-sphinx`
+**Sphinx**  
+`sudo apt-get install python-sphinx`  
 
 (Antes de esto yo había hecho:
 
-1. `sudo apt-get install python-dev`
-2. `pip install sphinx`
+1. `sudo apt-get install python-dev`  
+2. `pip install sphinx`  
 
-pero no sé si hace falta)
+pero no sé si hace falta)  
 
-Hay ejemplos para ver cómo escribir los documentos en la carpeta ejemploSphinx.
-Para crear el html:
+Hay ejemplos para ver cómo escribir los documentos en la carpeta ejemploSphinx.  
+Para crear el html:  
 
-1. `cd ejemploSphinx`
-2. `make html`
+1. `cd ejemploSphinx`  
+2. `make html`  
 
-El html queda en la carpeta _build.
+El html queda en la carpeta _build.  
+
+**Docker**
+1. Crearse una cuenta en Docker. Puede omitirse si es que sólo queremos obtener la imagen para correrla.  
+2. Instalarlo: [https://docs.docker.com/linux/step_one/]  
+3. Una vez que tenemos docker instalado, hacemos:  
+`$ docker run -ti mvbattan4/applicationserver:ejemploMongoose`  
+`# make`  
+4. Podemos obtener la IP via el id de la imagen que estamos corriendo.  
+Falta ver cómo obtenemos el id programáticamente, ya que con esto podemos averiguar la ip:  
+`docker inspect --format '{{ .NetworkSettings.IPAddress }}' 70143dd46635`  
+5. Ir a la direccion _IP_:_PuertoDelEjemplo_  
+
