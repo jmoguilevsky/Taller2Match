@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 .idea
 *.txt
 *.cmake
 *~
-=======
-node_modules
 .env
 Dockerfile
 docker-compose.yml
->>>>>>> 3fc0ded01530e3a16c692ad515a65e2c2222d0a3
