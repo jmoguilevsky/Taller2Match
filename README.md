@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Taller 2 - Match App
 ====================   
 
@@ -105,4 +104,3 @@ For more information about using Node.js on Heroku, see these Dev Center article
 - [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
 - [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
 - [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
->>>>>>> 3fc0ded01530e3a16c692ad515a65e2c2222d0a3
