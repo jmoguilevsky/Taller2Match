@@ -15,6 +15,7 @@ void Server::clientHandler(struct mg_connection *connectionToClient, int ev,
                            void *p) {
 	if (connectionToClient->user_data == NULL) {
 		// Recién se creó la conexión. La linkeo al su ClientHandler.
+		std::cout << "connecting!" << std::endl;
 		connectionToClient->user_data = (void *) new ClientHandler(
 				connectionToClient, sharedAddress);
 		// Podríamos agregarla a un map o algo así si hace falta
@@ -25,10 +26,15 @@ void Server::clientHandler(struct mg_connection *connectionToClient, int ev,
 	if (ev == MG_EV_CLOSE) {
 		// Cuando se cierra la conexión, libero el ClientHandler.
 		// Borrar del map.
+		std::cout << "closing connection" << std::endl;;
 		delete handler;
 		return;
 	}
-	handler->handle(connectionToClient, ev);
+
+	if(ev == MG_EV_RECV) {
+		std::cout << "sending request to client handler" << std::endl;
+		handler->handle(connectionToClient, ev);
+	}
 }
 
 
@@ -40,6 +46,7 @@ void Server::init(const std::string &port, const std::string &sharedAddress) {
 	Server::sharedAddress = sharedAddress;
 	mg_mgr_init(&mgr, NULL);
 	listeningConnection = mg_bind(&mgr, port.c_str(), clientHandler);
+	mg_enable_multithreading(listeningConnection);
 	//mg_set_protocol_http_websocket(listeningConnection);
 	CONTINUE = true;
 	while (CONTINUE) {

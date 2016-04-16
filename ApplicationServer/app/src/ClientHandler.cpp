@@ -8,8 +8,11 @@
 ClientHandler::ClientHandler(struct mg_connection *connectionToClient, const std::string& sharedAddress) {
 	// Cuando se inicia la conexión con el cliente, le creo también su propia conexión al shared.
 	struct mg_mgr *mgr = connectionToClient->mgr;
-	connectionToShared -> user_data = (void*) this;
-	connectionToShared = mg_connect(mgr, sharedAddress.c_str(), sharedHandler);
+	struct mg_connect_opts opts;
+	opts.user_data = (void*) this;
+	this -> connectionToClient = connectionToClient;
+	connectionToShared = mg_connect_opt(mgr, sharedAddress.c_str(), sharedHandler,opts);
+	this -> waiting = false;
 }
 
 void ClientHandler::handleLastRequest(const std::string &requestAnswerFromShared) {
@@ -55,7 +58,7 @@ std::string ClientHandler::getRequestToShared(const std::string &originalRequest
 
 void ClientHandler::handle(struct mg_connection *Connection, int ev) {
 	if(ev == MG_EV_RECV){
-		std::string request = bufToString(connectionToClient);
+		std::string request = utils::bufToString(connectionToClient);
 		// Cuando llega un request del client, se lo paso al ClientHandler para que se encargue.
 		addRequest(request);
 		//TODO ? esto se podría hacer acá directamente.
@@ -69,7 +72,7 @@ void ClientHandler::sharedHandler(struct mg_connection *connectionToShared, int 
 	if(ev == MG_EV_RECV){
 		// Recibí una respuesta del shared, se la paso al clientHandler para que
 		// trabaje.
-		std::string requestAnswerFromShared = bufToString(connectionToShared);
+		std::string requestAnswerFromShared = utils::bufToString(connectionToShared);
 		clientHandler -> handleLastRequest(requestAnswerFromShared);
 	}
 	if(!clientHandler->isWaiting()){
