@@ -14,12 +14,12 @@ bool Server::CONTINUE;
 
 // Constants
 
-static const char* ECHOURI = "/echo/";
+static const char* ECHOURI = "/echo";
 
 static std::string echo(struct mg_connection *connectionToClient, struct http_message* httpMessage) {
 
 	char message[256];
-	mg_get_http_var(&httpMessage->body, "message", message, sizeof(message));
+	mg_get_http_var(&httpMessage->query_string, "message", message, sizeof(message));
 
 	return "{ echo: \"" + std::string(message) +"\" }";
 }
