@@ -1,7 +1,20 @@
+var pg = require('pg');
 var cool = require('cool-ascii-faces');
 var express = require('express');
-var pg = require('pg');
+var bodyParser  = require("body-parser"),
+var methodOverride = require("method-override");
 var app = express();
+var server   = http.createServer(app)
+
+/*
+var conString = "postgres://YourUserName:YourPassword@localhost:5432/YourDatabase";
+var client = new pg.Client(conString);
+client.connect();
+*/
+
+app.use(bodyParser.urlencoded({ extended: false }));  
+app.use(bodyParser.json());  
+app.use(methodOverride());
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -12,17 +25,17 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
-  response.render('pages/index');
+  response.send(process.env.DATABASE_URL);
 });
 
-app.get('/cool', function(request, response) {
+app.get('/cool2', function(request, response) {
   response.send(cool());
 });
 
 app.get('/db', function (request, response) {
     pg.defaults.ssl = true;
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-    client.query('SELECT * FROM test_table', function(err, result) {
+    client.query('SELECT * FROM usuario', function(err, result) {
       done();
       if (err)
        { console.error(err); response.send("Error " + err); }
@@ -35,3 +48,16 @@ app.get('/db', function (request, response) {
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
+
+
+var router = express.Router();
+
+router.get('/', function(req, res) {  
+   res.send("Hello World!");
+});
+
+app.use(router);
+
+exports.findAllUsers = function (request, response) {
+  // body...
+}

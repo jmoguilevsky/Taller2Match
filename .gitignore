@@ -2,3 +2,6 @@
 *.txt
 *.cmake
 *~
+.env
+Dockerfile
+docker-compose.yml
