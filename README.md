@@ -58,6 +58,7 @@ El html queda en la carpeta _build.
 2. Instalarlo: [https://docs.docker.com/linux/step_one/]  
 3. Una vez que tenemos docker instalado, hacemos:  
 `$ docker run -ti mvbattan4/applicationserver:ejemploMongoose`  
+'$ sudo usermod -aG docker <username>'  
 `# make`  
 4. Podemos obtener la IP via el id de la imagen que estamos corriendo.  
 Falta ver cómo obtenemos el id programáticamente, ya que con esto podemos averiguar la ip:  
