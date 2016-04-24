@@ -10,13 +10,17 @@
 // Esta clase lo único que hace es guardar y leer datos de una base de datos.
 
 class DB {
-	rocksdb::DB* db;
+	rocksdb::DB *db;
 public:
-	DB(const std::string & dbName);
+	DB(const std::string &dbName);
+
 	void save(const std::string &key, const std::string &value);
-	std::string get(const std::string &key);
+
 	~DB();
 
+	bool keyExists(std::string basic_string);
+
+	bool get(const std::string &key, std::string &value);
 };
 
 

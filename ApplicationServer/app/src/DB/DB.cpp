@@ -18,18 +18,25 @@ void DB::save(const std::string &key, const std::string &value) {
 	//TODO return status y ver qué pasa
 }
 
-std::string DB::get(const std::string &key) {
+bool DB::get(const std::string &key, std::string &value) {
 	// TODO : if (db == NULL) return ERROR;
-	std::string value;
 	rocksdb::Status s;
 	s = db->Get(rocksdb::ReadOptions(), key, &value);
 	//TODO ver qué hacemos con el status, si hace falta
-	return value;
+	return s.ok();
 }
 
 DB::~DB() {
 	delete db;
 }
+
+bool DB::keyExists(std::string basic_string) {
+	// TODO HACER ESTO BIEN
+	std::string value;
+	return get(basic_string, value);
+}
+
+
 
 
 

@@ -6,26 +6,36 @@
 #define MULTITHREADMULTICONNECTION_SERVER_H
 
 #include <iostream>
-#include "ClientHandler.h"
-#include "../mongoose-master/mongoose.h"
+#include "mongoose-master/mongoose.h"
+#include "HTTPRequest.h"
+#include "ConnectionToShared.h"
+#include "Handlers/RequestHandler.h"
+#include "DB/DBManager.h"
+#include <map>
+#include <vector>
 
 class Server {
-
-	static struct mg_mgr mgr;
-	static struct mg_connection *listeningConnection;
-	static std::vector<ClientHandler*> cHandlers;
-	static bool CONTINUE;
-	static std::string sharedAddress;
-private:
-	Server();
+	DBManager dbManager;
+	struct mg_mgr mgr;
+	struct mg_connection *listeningConnection;
+	bool CONTINUE;
+	std::string port;
+	std::string sharedAddress;
+	std::map<std::string, std::string> userPass;
 public:
 
-	static void init(const std::string &port, const std::string &sharedAddress);
+	void start();
 
-	static void stop();
+	void stop();
 
-	static void clientHandler(mg_connection *connectionToClient, int ev,
+	static void clientHandler(mg_connection *c, int ev,
 	                          void *p);
+
+	static RequestHandler getRequestHandler(HTTPRequest message);
+
+	Server(std::string port, std::string sharedAddress);
+
+	~Server();
 };
 
 #endif //MULTITHREADMULTICONNECTION_SERVER_H

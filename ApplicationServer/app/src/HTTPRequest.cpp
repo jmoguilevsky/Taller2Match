@@ -1,0 +1,72 @@
+//
+// Created by chris on 23/04/16.
+//
+
+#include "ConnectionToShared.h"
+#include "Server.h"
+
+#define CRLF "\r\n"
+#define HTTP_VERSION "HTTP/1.1"
+
+
+HTTPRequest::HTTPRequest(std::string verb, std::string uri,
+                         std::map<std::string, std::string> headers,
+                         std::string body) {
+	// TODO poner métodos para ver los headers!
+	this->verb = verb;
+	this->uri = uri;
+	this->body = body;
+	this->message = verb + " " + uri + " " + HTTP_VERSION + CRLF;
+	for (std::map<std::string, std::string>::iterator it = headers.begin();
+	     it != headers.end(); ++it) {
+		this->message += it->first + ":" + it->second + CRLF;
+	}
+	if (body != "")this->message += CRLF + body + CRLF;
+	this->message += CRLF;
+}
+
+HTTPRequest::HTTPRequest(struct http_message *hm) {
+	//TODO ver cómo separar los headers acá
+	verb = std::string(hm->method.p, hm->method.len);
+	uri = std::string(hm->uri.p, hm->uri.len);
+	body = std::string(hm->body.p, hm->body.len);
+	message = std::string(hm->message.p, hm->message.len);
+}
+
+std::string HTTPRequest::toString() {
+	// Devuelve todo como string, tal como se envía y se recibe el mensaje.
+	return message;
+}
+
+const char *HTTPRequest::toCString() {
+	return message.c_str();
+}
+
+std::string HTTPRequest::getVerb() {
+	return verb;
+}
+
+std::string HTTPRequest::getUri() {
+	return uri;
+}
+
+std::string HTTPRequest::getBody() {
+	return body;
+}
+
+bool HTTPRequest::isEmpty() {
+	// TODO DUDOSO....
+	return (verb == "") && (uri == "") && (body == "");
+}
+
+HTTPRequest::HTTPRequest() {
+	//std::cout << "this has been called" << std::endl;
+}
+
+std::string HTTPRequest::getHeader(std::string header) {
+	return headers.count(header) ? headers[header] : "";
+}
+
+
+
+
