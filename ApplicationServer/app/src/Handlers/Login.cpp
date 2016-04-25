@@ -5,15 +5,17 @@
 #include <fstream>
 #include "Login.h"
 #include "../json/json.h"
+#include <iostream>
 
-#define LOGIN_OK_PHRASE "LOGIN OK"
+#define LOGIN_OK_PHRASE "OK"
 #define USER_DOESNT_EXIST_PHRASE "USER_DOESNT_EXIST"
 #define WRONG_PASSWORD_PHRASE "WRONG_PASSWORD"
 
 HTTPResponse Login::handle() {
+
 	Json::Value loginData;
-	std::stringstream str(request.getBody());
-	str >> loginData;
+	Json::Reader reader;
+	reader.parse(request.getBody(), loginData);
 	std::string user = loginData["user"].asString();
 	std::string pass = loginData["pass"].asString();
 	int ret = db.login(user, pass);
@@ -31,9 +33,11 @@ HTTPResponse Login::handle() {
 		code = "XXX";
 		phrase = WRONG_PASSWORD_PHRASE;
 	}
-	return HTTPResponse(code, phrase, headers, body);
+	std::cout << "Logged in OK " << std::endl;
+	return HTTPResponse(code, phrase, headers, phrase);
 }
 
-Login::Login(HTTPRequest &request, LoginDB &db) : request(request), db(db) {
+Login::Login(HTTPRequest request, LoginDB &db) : db(db) {
+	this->request = request;
 }
 

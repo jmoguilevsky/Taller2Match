@@ -12,10 +12,10 @@
 
 class Login : public RequestHandler {
 private:
-	HTTPRequest &request;
+	HTTPRequest request;
 	LoginDB &db;
 public:
-	Login(HTTPRequest &request, LoginDB &db);
+	Login(HTTPRequest request, LoginDB &db);
 
 	HTTPResponse handle();
 };

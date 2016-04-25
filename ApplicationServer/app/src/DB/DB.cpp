@@ -1,7 +1,7 @@
 //
 
 #include "DB.h"
-
+#include <iostream>
 //
 // Created by chris on 13/04/16.
 
@@ -33,7 +33,8 @@ DB::~DB() {
 bool DB::keyExists(std::string basic_string) {
 	// TODO HACER ESTO BIEN
 	std::string value;
-	return get(basic_string, value);
+	get(basic_string, value);
+	return value != "";
 }
 
 

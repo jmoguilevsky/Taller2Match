@@ -13,7 +13,7 @@ HTTPResponse::HTTPResponse(std::string code, std::string phrase,
                            std::string body) {
 	message = code + " " + HTTP_VERSION + " " + phrase + CRLF;
 	for (std::map<std::string, std::string>::iterator it = headers.begin();
-	     it != headers.end(); ++i) {
+	     it != headers.end(); ++it) {
 		message += it->first + ":" + it->second + CRLF;
 	}
 	if (body != "") message += CRLF + body + CRLF;

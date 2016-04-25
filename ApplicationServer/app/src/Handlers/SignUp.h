@@ -11,10 +11,10 @@
 
 class SignUp : public RequestHandler {
 private:
-	HTTPRequest &request;
+	HTTPRequest request;
 	LoginDB &db;
 public:
-	SignUp(HTTPRequest &request, LoginDB &db);
+	SignUp(HTTPRequest request, LoginDB &db);
 
 	HTTPResponse handle();
 };

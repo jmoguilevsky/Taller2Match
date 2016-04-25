@@ -7,9 +7,10 @@
 #define ONE_DAY 86400 // En segundos
 #define LIKES_PER_DAY 10
 
+
 int MatchesDB::likeUser(const std::string &user1, const std::string &user2) {
 	// TODO return defines según cómo queda la cosa.
-
+	/*
 	std::vector<std::string> likesLimit = utils::valuesAsVector(likeLimit,
 	                                                            user1);
 	struct tm lastTime = utils::stringToTime(
@@ -41,32 +42,37 @@ int MatchesDB::likeUser(const std::string &user1, const std::string &user2) {
 		utils::appendValue(matches, user1, user2);
 		utils::appendValue(matches, user2, user1);
 	}
+	*/
 	return 0;
 }
 
 int MatchesDB::rejectUser(const std::string &user1, const std::string &user2) {
-	if (!utils::valueInDBList(likes, user1, user2) &&
+	/*if (!utils::valueInDBList(likes, user1, user2) &&
 	    !utils::valueInDBList(matches, user1, user2)) {
 		utils::appendValue(noMatches, user1, user2);
 	}
-	// TODO valor de retorno?
+	// TODO valor de retorno?*/
 	return 0;
 }
 
 int MatchesDB::getLikesReceived(const std::string &user) {
-	return utils::stringToInt(likesReceived->get(user));
+	/*return utils::stringToInt(likesReceived->get(user));*/
+	return 0;
 }
 
 std::vector<std::string> MatchesDB::getLikes(const std::string &user) {
-	return utils::valuesAsVector(likes, user);
+	/*return utils::valuesAsVector(likes, user);*/
+	return std::vector<std::string>();
 }
 
 std::vector<std::string> MatchesDB::getMatches(const std::string &user) {
 	// Devuelve los matches para el usuario.
-	return utils::valuesAsVector(matches, user);
+	/*return utils::valuesAsVector(matches, user);*/
+	return std::vector<std::string>();
 }
 
 std::vector<std::string> MatchesDB::getNoMatches(const std::string &user) {
 	// Devuelve los users que user rechazó.
-	return utils::valuesAsVector(noMatches, user);
+	/*return utils::valuesAsVector(noMatches, user);*/
+	return std::vector<std::string>();
 }

@@ -11,6 +11,7 @@
 #include "ConnectionToShared.h"
 #include "Handlers/RequestHandler.h"
 #include "DB/DBManager.h"
+#include "DB/LoginDB.h"
 #include <map>
 #include <vector>
 
@@ -22,6 +23,7 @@ class Server {
 	std::string port;
 	std::string sharedAddress;
 	std::map<std::string, std::string> userPass;
+	LoginDB db;
 public:
 
 	void start();
@@ -31,11 +33,11 @@ public:
 	static void clientHandler(mg_connection *c, int ev,
 	                          void *p);
 
-	static RequestHandler getRequestHandler(HTTPRequest message);
-
 	Server(std::string port, std::string sharedAddress);
 
 	~Server();
+
+	RequestHandler *getRequestHandler(HTTPRequest request);
 };
 
 #endif //MULTITHREADMULTICONNECTION_SERVER_H

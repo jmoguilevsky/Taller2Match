@@ -20,27 +20,15 @@ namespace utils {
 
 	tm currentDateTime();
 
-	tm currentDateTime() {
-		return tm();
-	}
+	tm currentDateTime();
 
 	std::string timeToString(tm tstruct);
 
-	std::string timeToString(tm tstruct) {
-		return __cxx11::basic_string < char, char_traits < char >, allocator <
-		                                                           char >> ();
-	}
+	tm stringToTime(std::string c);
 
 	tm stringToTime(std::string c);
 
-	tm stringToTime(std::string c) {
-		return tm();
-	}
-
 	int diffTimeInSeconds(tm t0, tm t1);
 
-	int diffTimeInSeconds(tm t0, tm t1) {
-		return 0;
-	}
 }
 #endif //MULTITHREADMULTICONNECTION_UTILS_H

@@ -11,8 +11,8 @@
 
 HTTPResponse SignUp::handle() {
 	Json::Value signUpData;
-	std::stringstream str(request.getBody());
-	str >> signUpData;
+	Json::Reader reader;
+	reader.parse(request.getBody(), signUpData);
 	std::string user = signUpData["user"].asString();
 	std::string pass = signUpData["pass"].asString();
 	int ret = db.newUser(user, pass);
@@ -27,6 +27,10 @@ HTTPResponse SignUp::handle() {
 		code = "XXX";
 		phrase = USER_CREATED_OK_PHRASE;
 	}
-	return HTTPResponse(code, phrase, headers, body);
+	std::cout << "Signed up OK " << std::endl;
+	return HTTPResponse(code, phrase, headers, phrase);
 }
 
+SignUp::SignUp(HTTPRequest request, LoginDB &db) : db(db) {
+	this->request = request;
+}

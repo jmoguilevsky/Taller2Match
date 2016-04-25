@@ -14,8 +14,6 @@ private:
 	HTTPRequest request;
 	HTTPResponse *response;
 
-	virtual HTTPRequest getDataFromShared();
-
 public:
 
 	/*HTTPRequest request(hm);
