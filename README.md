@@ -107,16 +107,52 @@ For more information about using Node.js on Heroku, see these Dev Center article
 - [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
 
 =====================
-Volley: guia de instalacion
-1. Tipear en la consola lo siguiente
-git clone https://android.googlesource.com/platform/frameworks/volley
-2. Asegurarse que en el proyecto de Android Studio, en el archivo Gradle Scripts->build.gradle(Module:app) 
-dentro de la parte de dependencies, abajo de todo, tenga la linea:
-compile 'com.mcxiaoke.volley:library-aar:1.0.0'
-Si no esta, hay que agregarla. A mi me queda asi la parte de dependencies:
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
-}
+**Volley: guia de instalacion**  
+1. Tipear en la consola lo siguiente  
+git clone https://android.googlesource.com/platform/frameworks/volley  
+2. Asegurarse que en el proyecto de Android Studio, en el archivo Gradle Scripts->build.gradle(Module:app)   
+dentro de la parte de dependencies, abajo de todo, tenga la linea:  
+compile 'com.mcxiaoke.volley:library-aar:1.0.0'  
+Si no esta, hay que agregarla. A mi me queda asi la parte de dependencies:  
+```dependencies {  
+    compile fileTree(dir: 'libs', include: ['*.jar'])  
+    testCompile 'junit:junit:4.12'  
+    compile 'com.android.support:appcompat-v7:23.3.0'  
+    compile 'com.mcxiaoke.volley:library-aar:1.0.0'  
+}```  
+
+**GoogleTests y LCOV**  
+1. Se consiguen el zip desde acá: https://github.com/google/googletest  
+2. Se extrae dicho zip.  
+3. Ir a /googletest y escribir `cmake`  
+4. Ejecutar `make`  
+5. `sudo make install`  
+6. Listo ! Tenemos instalado el framework de google para testing.  
+  
+Para compilar, usar los flags:  
+`g++ -std=c++11 ejemploGoogleTest.cpp -lgtest -lgtest_main -lpthread -g -o ejemplo`  
+  
+Se recomienda leer esto:  
+https://github.com/google/googletest/blob/master/googletest/docs/Documentation.md  
+
+Recuerden hacer `#include <gtest/gtest.h>` y definir las clases Tests que consideren necesarias.   
+
+*Para LCOV,*  
+1. Seguir el readme:  
+http://ltp.sourceforge.net/coverage/lcov/readme.php  
+
+En realidad lo que termina haciendo es instalar desde source con los pasos clásicos,  
+`make install` después de haber descomprimido el .tar.gz  
+
+2. Si queremos utilizar lcov, tenemos que compilar para generar archivos útiles para gcov.  
+Para esto, compilamos como:  
+`g++ -std=c++11 ejemploGoogleTest.cpp -lgtest -lgtest_main -lpthread -g -fprofile-arcs -ftest-coverage -o ejemplo`  
+Con esto estamos agregando los flags para los tests  
+
+_Uso_  
+`lcov --directory <appdir> --zerocounters`  
+`./ejemplo` # Corremos el ejemplo para poder generar el coverage. Esta info es capturada en unos archivos que se pueden ver con `ls`  
+`lcov --directory <appdir> --capture --output-file app.info` # O algun otro nombre en vez de app.info  
+`genhtml app.info`  
+`google-chrome index.html`  
+
