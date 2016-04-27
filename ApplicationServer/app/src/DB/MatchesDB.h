@@ -10,6 +10,7 @@
 #include "DB.h"
 #include "../utils.h"
 
+//! Manejo de las bases de datos relacionadas con los likes y los matches.
 class MatchesDB {
 	DB noMatches;
 	DB likes;

@@ -19,7 +19,7 @@ HTTPResponse Login::handle() {
 	std::string user = loginData["user"].asString();
 	std::string pass = loginData["pass"].asString();
 	int ret = db.login(user, pass);
-	std::map<std::string, std::string> headers;
+	std::map<std::string, std::string> headers;<
 	std::string code;
 	std::string phrase;
 	std::string body;

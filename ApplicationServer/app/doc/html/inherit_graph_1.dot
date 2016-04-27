@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="ConnectionToShared",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_connection_to_shared.html",tooltip="Una conexión al Shared Server, para hacer un request y esperar por la respuesta. "];
+}

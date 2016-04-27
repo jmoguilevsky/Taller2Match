@@ -7,6 +7,7 @@
 
 #include "../utils.h"
 
+//! Base de datos para historial de chats.
 class ChatDB {
 
 };

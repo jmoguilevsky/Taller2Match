@@ -1,0 +1,96 @@
+\hypertarget{class_server}{}\section{Server Class Reference}
+\label{class_server}\index{Server@{Server}}
+
+
+Clase principal, el \hyperlink{class_server}{Server}. (?)  
+
+
+
+
+{\ttfamily \#include $<$Server.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_server_a7eac07d2582fa01c2671362efa955b31}{start} ()
+\begin{DoxyCompactList}\small\item\em Inicia el server. \end{DoxyCompactList}\item 
+void \hyperlink{class_server_a07c45a7e101a3926d8f9685c3c5d14e4}{stop} ()
+\begin{DoxyCompactList}\small\item\em Detiene el server. \end{DoxyCompactList}\item 
+\hyperlink{class_server_ab304cb02833b94847e8655bbf929224d}{Server} (std\+::string port, std\+::string shared\+Address)
+\begin{DoxyCompactList}\small\item\em Crea el server con un port donde escucha conexiones entrantes, y una U\+R\+L (U\+R\+L\+:port) del Shared \hyperlink{class_server}{Server}. \end{DoxyCompactList}\item 
+\hyperlink{class_server_a4b3aa2579cb1c8cd1d069582c14d0fa6}{$\sim$\+Server} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_server_ac3f610990e6c5d339cf38cbf495f598e}{client\+Handler} (mg\+\_\+connection $\ast$c, int ev, void $\ast$p)
+\begin{DoxyCompactList}\small\item\em Event handler para las conexiones con los clientes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Clase principal, el \hyperlink{class_server}{Server}. (?) 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_server_ab304cb02833b94847e8655bbf929224d}{}\index{Server@{Server}!Server@{Server}}
+\index{Server@{Server}!Server@{Server}}
+\subsubsection[{Server}]{\setlength{\rightskip}{0pt plus 5cm}Server\+::\+Server (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{port, }
+\item[{std\+::string}]{shared\+Address}
+\end{DoxyParamCaption}
+)}\label{class_server_ab304cb02833b94847e8655bbf929224d}
+
+
+Crea el server con un port donde escucha conexiones entrantes, y una U\+R\+L (U\+R\+L\+:port) del Shared \hyperlink{class_server}{Server}. 
+
+\hypertarget{class_server_a4b3aa2579cb1c8cd1d069582c14d0fa6}{}\index{Server@{Server}!````~Server@{$\sim$\+Server}}
+\index{````~Server@{$\sim$\+Server}!Server@{Server}}
+\subsubsection[{$\sim$\+Server}]{\setlength{\rightskip}{0pt plus 5cm}Server\+::$\sim$\+Server (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_server_a4b3aa2579cb1c8cd1d069582c14d0fa6}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_server_ac3f610990e6c5d339cf38cbf495f598e}{}\index{Server@{Server}!client\+Handler@{client\+Handler}}
+\index{client\+Handler@{client\+Handler}!Server@{Server}}
+\subsubsection[{client\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}void Server\+::client\+Handler (
+\begin{DoxyParamCaption}
+\item[{mg\+\_\+connection $\ast$}]{c, }
+\item[{int}]{ev, }
+\item[{void $\ast$}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{class_server_ac3f610990e6c5d339cf38cbf495f598e}
+
+
+Event handler para las conexiones con los clientes. 
+
+\hypertarget{class_server_a7eac07d2582fa01c2671362efa955b31}{}\index{Server@{Server}!start@{start}}
+\index{start@{start}!Server@{Server}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}void Server\+::start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_server_a7eac07d2582fa01c2671362efa955b31}
+
+
+Inicia el server. 
+
+\hypertarget{class_server_a07c45a7e101a3926d8f9685c3c5d14e4}{}\index{Server@{Server}!stop@{stop}}
+\index{stop@{stop}!Server@{Server}}
+\subsubsection[{stop}]{\setlength{\rightskip}{0pt plus 5cm}void Server\+::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_server_a07c45a7e101a3926d8f9685c3c5d14e4}
+
+
+Detiene el server. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_server_8h}{Server.\+h}\item 
+\hyperlink{_server_8cpp}{Server.\+cpp}\end{DoxyCompactItemize}

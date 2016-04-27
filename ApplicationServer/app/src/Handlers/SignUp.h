@@ -9,6 +9,7 @@
 #include "RequestHandler.h"
 #include "../DB/LoginDB.h"
 
+//! Handler para la creación de un nuevo usuario.
 class SignUp : public RequestHandler {
 private:
 	HTTPRequest request;

@@ -16,39 +16,19 @@
 #define WRONG_PASSWORD 1
 #define LOGIN_OK 0
 
+//! Manejo de login y altas de usuarios en la base de datos de usuarios.
 class LoginDB {
 	DB db;
 public:
+	//! Abre una DB para datos de login con el nombre name.
 	LoginDB(std::string name) : db(name) {
 	}
 
-	int newUser(std::string user, std::string pass) {
-		std::cout << "before:" << std::endl;
-		std::string value;
-		bool exists = db.get(user, value);
-		std::cout << "value: " << value << " exists: " <<
-		(exists ? "USER_EXISTS" : "DOESNT_EXIST") << std::endl;
-		if (db.get(user, value)) {
-			std::cout << "key exists" << std::endl;
-			return USER_ALREADY_EXISTS;
-		}
-		db.save(user, pass);
-		std::cout << "after: " << std::endl;
-		exists = db.get(user, value);
-		std::cout << "value: " << value << " exists: " << exists << std::endl;
-		return USER_CREATED_OK;
-	}
+	//! Crea un nuevo usuario con user y pass. Devuelve USER_ALREADY_EXISTS o USER_CREATED_OK.
+	int newUser(std::string user, std::string pass);
 
-	int login(std::string user, std::string pass) {
-		std::string value;
-		bool exists = db.get(user, value);
-		if (!exists) {
-			return USER_DOESNT_EXIST;
-		} else if (pass != value) {
-			return WRONG_PASSWORD;
-		}
-		return LOGIN_OK;
-	}
+	//! Loguea al user con la pass. Devuelve USER_DOESNT_EXIST, WRONG_PASSWORD, o LOGIN_OK según el caso.
+	int login(std::string user, std::string pass);
 };
 
 #endif //APPSERVER_LOGINDB_H

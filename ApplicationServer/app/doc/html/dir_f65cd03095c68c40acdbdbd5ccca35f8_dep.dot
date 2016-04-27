@@ -1,0 +1,8 @@
+digraph "Handlers" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  dir_f65cd03095c68c40acdbdbd5ccca35f8 [shape=box, label="Handlers", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_f65cd03095c68c40acdbdbd5ccca35f8.html"];
+  dir_39ce8d35579d5eb10e41a1450265d156 [shape=box label="DB" URL="dir_39ce8d35579d5eb10e41a1450265d156.html"];
+  dir_f65cd03095c68c40acdbdbd5ccca35f8->dir_39ce8d35579d5eb10e41a1450265d156 [headlabel="2", labeldistance=1.5 headhref="dir_000001_000000.html"];
+}

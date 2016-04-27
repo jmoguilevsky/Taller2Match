@@ -1,0 +1,186 @@
+\hypertarget{namespace_json}{}\section{Json Namespace Reference}
+\label{namespace_json}\index{Json@{Json}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bfseries Built\+Styled\+Stream\+Writer}
+\item 
+struct {\bfseries Comment\+Style}
+\begin{DoxyCompactList}\small\item\em Scoped enums are not available until C++11. \end{DoxyCompactList}\item 
+class {\bfseries Our\+Char\+Reader}
+\item 
+class {\bfseries Our\+Features}
+\item 
+class {\bfseries Our\+Reader}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef char \hyperlink{namespace_json_a602bcf69c2042fb61c3b243cb16f04ca}{U\+Int\+To\+String\+Buffer}\mbox{[}\hyperlink{namespace_json_a0c5f614b019f20b4598dcaec09d9e820ae4f2008c7919f20d81286121d1374424}{uint\+To\+String\+Buffer\+Size}\mbox{]}
+\item 
+typedef std\+::auto\+\_\+ptr$<$ Char\+Reader $>$ \hyperlink{namespace_json_a4724efb8d41614b47036cb8b54233837}{Char\+Reader\+Ptr}
+\item 
+typedef std\+::auto\+\_\+ptr$<$ Stream\+Writer $>$ \hyperlink{namespace_json_a7132404aeebfc96d7c6ad2c66260afb5}{Stream\+Writer\+Ptr}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \hyperlink{namespace_json_a0c5f614b019f20b4598dcaec09d9e820ae4f2008c7919f20d81286121d1374424}{uint\+To\+String\+Buffer\+Size} = 3 $\ast$ sizeof(Largest\+U\+Int) + 1
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{namespace_json_a38f903cfdb57a6c4e86a7dcc42f3712c}{parse\+From\+Stream} (Char\+Reader\+::\+Factory const \&fact, J\+S\+O\+N\+C\+P\+P\+\_\+\+I\+S\+T\+R\+E\+A\+M \&sin, Value $\ast$root, J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G $\ast$errs)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+I\+S\+T\+R\+E\+A\+M \& \hyperlink{namespace_json_a52b40333cc8aa17c82ac359462ce691b}{operator$>$$>$} (J\+S\+O\+N\+C\+P\+P\+\_\+\+I\+S\+T\+R\+E\+A\+M \&sin, Value \&root)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+N\+O\+R\+E\+T\+U\+R\+N void \hyperlink{namespace_json_a0ab7ff7f99788262d92d9ff3d924e065}{throw\+Runtime\+Error} (J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G const \&msg)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+N\+O\+R\+E\+T\+U\+R\+N void \hyperlink{namespace_json_a27790f21f17922fac81e7cd72a5659a5}{throw\+Logic\+Error} (J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G const \&msg)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G \hyperlink{namespace_json_a4732517cb28d203cfd4354d05952a81b}{value\+To\+String} (Largest\+Int value)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G \hyperlink{namespace_json_a6283ea3db02efe9104ae6baff698245a}{value\+To\+String} (Largest\+U\+Int value)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G \hyperlink{namespace_json_a41f0a9fca69a534a8646ce0123683a8b}{value\+To\+String} (double value, bool use\+Special\+Floats, unsigned int precision)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G \hyperlink{namespace_json_a3cf0c8dbbdb898c4a6fad54670b34bd1}{value\+To\+String} (double value)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G \hyperlink{namespace_json_a0a706a1fffba4fe8a8c1ef75b2dbbfab}{value\+To\+String} (bool value)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G \hyperlink{namespace_json_aaf777a6923bcb4cf63a2729973fe5315}{value\+To\+Quoted\+String} (const char $\ast$value)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G \hyperlink{namespace_json_a2fedf74e669b85f356f2c00973172ce7}{write\+String} (Stream\+Writer\+::\+Factory const \&builder, Value const \&root)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+O\+S\+T\+R\+E\+A\+M \& \hyperlink{namespace_json_a0f440d134f8bab9725aa31cb9704d6af}{operator$<$$<$} (J\+S\+O\+N\+C\+P\+P\+\_\+\+O\+S\+T\+R\+E\+A\+M \&sout, Value const \&root)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const unsigned char \& \hyperlink{namespace_json_ab30055b4bbd82aecaca57ccecd63bbe6}{k\+Null\+Ref} = k\+Null\mbox{[}0\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{namespace_json_a4724efb8d41614b47036cb8b54233837}{}\index{Json@{Json}!Char\+Reader\+Ptr@{Char\+Reader\+Ptr}}
+\index{Char\+Reader\+Ptr@{Char\+Reader\+Ptr}!Json@{Json}}
+\subsubsection[{Char\+Reader\+Ptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::auto\+\_\+ptr$<$Char\+Reader$>$ {\bf Json\+::\+Char\+Reader\+Ptr}}\label{namespace_json_a4724efb8d41614b47036cb8b54233837}
+\hypertarget{namespace_json_a7132404aeebfc96d7c6ad2c66260afb5}{}\index{Json@{Json}!Stream\+Writer\+Ptr@{Stream\+Writer\+Ptr}}
+\index{Stream\+Writer\+Ptr@{Stream\+Writer\+Ptr}!Json@{Json}}
+\subsubsection[{Stream\+Writer\+Ptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::auto\+\_\+ptr$<$Stream\+Writer$>$ {\bf Json\+::\+Stream\+Writer\+Ptr}}\label{namespace_json_a7132404aeebfc96d7c6ad2c66260afb5}
+\hypertarget{namespace_json_a602bcf69c2042fb61c3b243cb16f04ca}{}\index{Json@{Json}!U\+Int\+To\+String\+Buffer@{U\+Int\+To\+String\+Buffer}}
+\index{U\+Int\+To\+String\+Buffer@{U\+Int\+To\+String\+Buffer}!Json@{Json}}
+\subsubsection[{U\+Int\+To\+String\+Buffer}]{\setlength{\rightskip}{0pt plus 5cm}typedef char Json\+::\+U\+Int\+To\+String\+Buffer\mbox{[}{\bf uint\+To\+String\+Buffer\+Size}\mbox{]}}\label{namespace_json_a602bcf69c2042fb61c3b243cb16f04ca}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{namespace_json_a0c5f614b019f20b4598dcaec09d9e820}{}\subsubsection[{anonymous enum}]{\setlength{\rightskip}{0pt plus 5cm}anonymous enum}\label{namespace_json_a0c5f614b019f20b4598dcaec09d9e820}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{uint\+To\+String\+Buffer\+Size@{uint\+To\+String\+Buffer\+Size}!Json@{Json}}\index{Json@{Json}!uint\+To\+String\+Buffer\+Size@{uint\+To\+String\+Buffer\+Size}}\item[{\em 
+\hypertarget{namespace_json_a0c5f614b019f20b4598dcaec09d9e820ae4f2008c7919f20d81286121d1374424}{}uint\+To\+String\+Buffer\+Size\label{namespace_json_a0c5f614b019f20b4598dcaec09d9e820ae4f2008c7919f20d81286121d1374424}
+}]Constant that specify the size of the buffer that must be passed to uint\+To\+String. \end{description}
+\end{Desc}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespace_json_a0f440d134f8bab9725aa31cb9704d6af}{}\index{Json@{Json}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Json@{Json}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}J\+S\+O\+N\+C\+P\+P\+\_\+\+O\+S\+T\+R\+E\+A\+M\& Json\+::operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{J\+S\+O\+N\+C\+P\+P\+\_\+\+O\+S\+T\+R\+E\+A\+M \&}]{sout, }
+\item[{Value const \&}]{root}
+\end{DoxyParamCaption}
+)}\label{namespace_json_a0f440d134f8bab9725aa31cb9704d6af}
+\hypertarget{namespace_json_a52b40333cc8aa17c82ac359462ce691b}{}\index{Json@{Json}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!Json@{Json}}
+\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}J\+S\+O\+N\+C\+P\+P\+\_\+\+I\+S\+T\+R\+E\+A\+M\& Json\+::operator$>$$>$ (
+\begin{DoxyParamCaption}
+\item[{J\+S\+O\+N\+C\+P\+P\+\_\+\+I\+S\+T\+R\+E\+A\+M \&}]{sin, }
+\item[{Value \&}]{root}
+\end{DoxyParamCaption}
+)}\label{namespace_json_a52b40333cc8aa17c82ac359462ce691b}
+\hypertarget{namespace_json_a38f903cfdb57a6c4e86a7dcc42f3712c}{}\index{Json@{Json}!parse\+From\+Stream@{parse\+From\+Stream}}
+\index{parse\+From\+Stream@{parse\+From\+Stream}!Json@{Json}}
+\subsubsection[{parse\+From\+Stream}]{\setlength{\rightskip}{0pt plus 5cm}bool Json\+::parse\+From\+Stream (
+\begin{DoxyParamCaption}
+\item[{Char\+Reader\+::\+Factory const \&}]{fact, }
+\item[{J\+S\+O\+N\+C\+P\+P\+\_\+\+I\+S\+T\+R\+E\+A\+M \&}]{sin, }
+\item[{Value $\ast$}]{root, }
+\item[{J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G $\ast$}]{errs}
+\end{DoxyParamCaption}
+)}\label{namespace_json_a38f903cfdb57a6c4e86a7dcc42f3712c}
+\hypertarget{namespace_json_a27790f21f17922fac81e7cd72a5659a5}{}\index{Json@{Json}!throw\+Logic\+Error@{throw\+Logic\+Error}}
+\index{throw\+Logic\+Error@{throw\+Logic\+Error}!Json@{Json}}
+\subsubsection[{throw\+Logic\+Error}]{\setlength{\rightskip}{0pt plus 5cm}J\+S\+O\+N\+C\+P\+P\+\_\+\+N\+O\+R\+E\+T\+U\+R\+N void Json\+::throw\+Logic\+Error (
+\begin{DoxyParamCaption}
+\item[{J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G const \&}]{msg}
+\end{DoxyParamCaption}
+)}\label{namespace_json_a27790f21f17922fac81e7cd72a5659a5}
+\hypertarget{namespace_json_a0ab7ff7f99788262d92d9ff3d924e065}{}\index{Json@{Json}!throw\+Runtime\+Error@{throw\+Runtime\+Error}}
+\index{throw\+Runtime\+Error@{throw\+Runtime\+Error}!Json@{Json}}
+\subsubsection[{throw\+Runtime\+Error}]{\setlength{\rightskip}{0pt plus 5cm}J\+S\+O\+N\+C\+P\+P\+\_\+\+N\+O\+R\+E\+T\+U\+R\+N void Json\+::throw\+Runtime\+Error (
+\begin{DoxyParamCaption}
+\item[{J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G const \&}]{msg}
+\end{DoxyParamCaption}
+)}\label{namespace_json_a0ab7ff7f99788262d92d9ff3d924e065}
+\hypertarget{namespace_json_aaf777a6923bcb4cf63a2729973fe5315}{}\index{Json@{Json}!value\+To\+Quoted\+String@{value\+To\+Quoted\+String}}
+\index{value\+To\+Quoted\+String@{value\+To\+Quoted\+String}!Json@{Json}}
+\subsubsection[{value\+To\+Quoted\+String}]{\setlength{\rightskip}{0pt plus 5cm}J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G Json\+::value\+To\+Quoted\+String (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{value}
+\end{DoxyParamCaption}
+)}\label{namespace_json_aaf777a6923bcb4cf63a2729973fe5315}
+\hypertarget{namespace_json_a4732517cb28d203cfd4354d05952a81b}{}\index{Json@{Json}!value\+To\+String@{value\+To\+String}}
+\index{value\+To\+String@{value\+To\+String}!Json@{Json}}
+\subsubsection[{value\+To\+String}]{\setlength{\rightskip}{0pt plus 5cm}J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G Json\+::value\+To\+String (
+\begin{DoxyParamCaption}
+\item[{Largest\+Int}]{value}
+\end{DoxyParamCaption}
+)}\label{namespace_json_a4732517cb28d203cfd4354d05952a81b}
+\hypertarget{namespace_json_a6283ea3db02efe9104ae6baff698245a}{}\index{Json@{Json}!value\+To\+String@{value\+To\+String}}
+\index{value\+To\+String@{value\+To\+String}!Json@{Json}}
+\subsubsection[{value\+To\+String}]{\setlength{\rightskip}{0pt plus 5cm}J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G Json\+::value\+To\+String (
+\begin{DoxyParamCaption}
+\item[{Largest\+U\+Int}]{value}
+\end{DoxyParamCaption}
+)}\label{namespace_json_a6283ea3db02efe9104ae6baff698245a}
+\hypertarget{namespace_json_a41f0a9fca69a534a8646ce0123683a8b}{}\index{Json@{Json}!value\+To\+String@{value\+To\+String}}
+\index{value\+To\+String@{value\+To\+String}!Json@{Json}}
+\subsubsection[{value\+To\+String}]{\setlength{\rightskip}{0pt plus 5cm}J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G Json\+::value\+To\+String (
+\begin{DoxyParamCaption}
+\item[{double}]{value, }
+\item[{bool}]{use\+Special\+Floats, }
+\item[{unsigned int}]{precision}
+\end{DoxyParamCaption}
+)}\label{namespace_json_a41f0a9fca69a534a8646ce0123683a8b}
+\hypertarget{namespace_json_a3cf0c8dbbdb898c4a6fad54670b34bd1}{}\index{Json@{Json}!value\+To\+String@{value\+To\+String}}
+\index{value\+To\+String@{value\+To\+String}!Json@{Json}}
+\subsubsection[{value\+To\+String}]{\setlength{\rightskip}{0pt plus 5cm}J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G Json\+::value\+To\+String (
+\begin{DoxyParamCaption}
+\item[{double}]{value}
+\end{DoxyParamCaption}
+)}\label{namespace_json_a3cf0c8dbbdb898c4a6fad54670b34bd1}
+\hypertarget{namespace_json_a0a706a1fffba4fe8a8c1ef75b2dbbfab}{}\index{Json@{Json}!value\+To\+String@{value\+To\+String}}
+\index{value\+To\+String@{value\+To\+String}!Json@{Json}}
+\subsubsection[{value\+To\+String}]{\setlength{\rightskip}{0pt plus 5cm}J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G Json\+::value\+To\+String (
+\begin{DoxyParamCaption}
+\item[{bool}]{value}
+\end{DoxyParamCaption}
+)}\label{namespace_json_a0a706a1fffba4fe8a8c1ef75b2dbbfab}
+\hypertarget{namespace_json_a2fedf74e669b85f356f2c00973172ce7}{}\index{Json@{Json}!write\+String@{write\+String}}
+\index{write\+String@{write\+String}!Json@{Json}}
+\subsubsection[{write\+String}]{\setlength{\rightskip}{0pt plus 5cm}J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G Json\+::write\+String (
+\begin{DoxyParamCaption}
+\item[{Stream\+Writer\+::\+Factory const \&}]{builder, }
+\item[{Value const \&}]{root}
+\end{DoxyParamCaption}
+)}\label{namespace_json_a2fedf74e669b85f356f2c00973172ce7}
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespace_json_ab30055b4bbd82aecaca57ccecd63bbe6}{}\index{Json@{Json}!k\+Null\+Ref@{k\+Null\+Ref}}
+\index{k\+Null\+Ref@{k\+Null\+Ref}!Json@{Json}}
+\subsubsection[{k\+Null\+Ref}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned char\& Json\+::k\+Null\+Ref = k\+Null\mbox{[}0\mbox{]}}\label{namespace_json_ab30055b4bbd82aecaca57ccecd63bbe6}

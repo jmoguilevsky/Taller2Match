@@ -11,6 +11,7 @@
 
 typedef std::vector<std::string> InterestList;
 
+//! Representa el perfil de un usuario y métodos para consulta de distintos campos del mismo.
 class UserProfile {
 
 
@@ -23,6 +24,7 @@ class UserProfile {
 public:
 	UserProfile(const UserProfile &user);
 
+	//! Crea un perfil de usuario a partir de un objeto Json.
 	UserProfile(Json::Value &user);
 
 	std::string getName() const;

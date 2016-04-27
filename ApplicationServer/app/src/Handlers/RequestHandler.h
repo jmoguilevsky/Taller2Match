@@ -9,6 +9,7 @@
 #include "../DB/DBManager.h"
 #include "../HTTPResponse.h"
 
+//! Handler genérico para un request de un usuario.
 class RequestHandler {
 private:
 	HTTPRequest request;
@@ -16,12 +17,7 @@ private:
 
 public:
 
-	/*HTTPRequest request(hm);
-	HTTPRequest reqToShared = server.getRequestToShared(request);
-	ConnectionToShared connectionToShared(server.sharedAddress);
-	HTTPRequest responseShared = connectionToShared.sendRequest(
-			reqToShared);
-	std::cout << "Response:\n" << responseShared.toString() << std::endl;*/
+	//! Los handlers específicos para cada request implementan el handle() correspondiente. Devuelve un HTTPResponse que se enviará al usuario que envió el request.
 	virtual HTTPResponse handle() = 0;
 };
 

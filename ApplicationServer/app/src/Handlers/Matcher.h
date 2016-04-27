@@ -7,6 +7,7 @@
 
 #include "RequestHandler.h"
 
+//! Handler para los requests relacionados con likes y matches.
 class Matcher : public RequestHandler {
 	// Se encarga de todo lo relacionado con los matches
 private:

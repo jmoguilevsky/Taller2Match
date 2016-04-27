@@ -18,6 +18,7 @@ void DB::save(const std::string &key, const std::string &value) {
 	//TODO return status y ver qué pasa
 }
 
+
 bool DB::get(const std::string &key, std::string &value) {
 	// TODO : if (db == NULL) return ERROR;
 	rocksdb::Status s;

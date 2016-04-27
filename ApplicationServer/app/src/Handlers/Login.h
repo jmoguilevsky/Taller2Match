@@ -10,6 +10,7 @@
 #include "../DB/LoginDB.h"
 #include "../HTTPResponse.h"
 
+//! Handler para los requests relacionados con el login.
 class Login : public RequestHandler {
 private:
 	HTTPRequest request;

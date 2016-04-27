@@ -1,0 +1,101 @@
+\hypertarget{jsoncpp_8cpp}{}\section{jsoncpp.\+cpp File Reference}
+\label{jsoncpp_8cpp}\index{jsoncpp.\+cpp@{jsoncpp.\+cpp}}
+{\ttfamily \#include \char`\"{}json/json.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$json/assertions.\+h$>$}\\*
+{\ttfamily \#include $<$json/reader.\+h$>$}\\*
+{\ttfamily \#include $<$json/value.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}json\+\_\+tool.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$cassert$>$}\\*
+{\ttfamily \#include $<$set$>$}\\*
+{\ttfamily \#include $<$limits$>$}\\*
+{\ttfamily \#include $<$json/writer.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+{\ttfamily \#include $<$cstddef$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include \char`\"{}json\+\_\+valueiterator.\+inl\char`\"{}}\\*
+{\ttfamily \#include $<$iomanip$>$}\\*
+Include dependency graph for jsoncpp.\+cpp\+:
+% FIG 0
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespace_json}{Json}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{jsoncpp_8cpp_abc5174d762d996e7d77cfcb90ca94834}{L\+I\+B\+\_\+\+J\+S\+O\+N\+C\+P\+P\+\_\+\+J\+S\+O\+N\+\_\+\+T\+O\+O\+L\+\_\+\+H\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D}
+\item 
+\#define \hyperlink{jsoncpp_8cpp_aa5e619e3e9388f6376a344dd8462c9cc}{J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+U\+N\+R\+E\+A\+C\+H\+A\+B\+L\+E}~assert(false)
+\item 
+\#define \hyperlink{jsoncpp_8cpp_a08a0024ebd1cc16ccc4a208e1e817f6e}{A\+L\+I\+G\+N\+A\+S}(byte\+\_\+alignment)
+\item 
+\#define \hyperlink{jsoncpp_8cpp_aab49fbe39624f083e45ef2d85e7e0705}{isfinite}~std\+::isfinite
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef char \hyperlink{namespace_json_a602bcf69c2042fb61c3b243cb16f04ca}{Json\+::\+U\+Int\+To\+String\+Buffer}\mbox{[}uint\+To\+String\+Buffer\+Size\mbox{]}
+\item 
+typedef std\+::auto\+\_\+ptr$<$ Char\+Reader $>$ \hyperlink{namespace_json_a4724efb8d41614b47036cb8b54233837}{Json\+::\+Char\+Reader\+Ptr}
+\item 
+typedef std\+::auto\+\_\+ptr$<$ Stream\+Writer $>$ \hyperlink{namespace_json_a7132404aeebfc96d7c6ad2c66260afb5}{Json\+::\+Stream\+Writer\+Ptr}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \hyperlink{namespace_json_a0c5f614b019f20b4598dcaec09d9e820ae4f2008c7919f20d81286121d1374424}{Json\+::uint\+To\+String\+Buffer\+Size} = 3 $\ast$ sizeof(Largest\+U\+Int) + 1
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{namespace_json_a38f903cfdb57a6c4e86a7dcc42f3712c}{Json\+::parse\+From\+Stream} (Char\+Reader\+::\+Factory const \&fact, J\+S\+O\+N\+C\+P\+P\+\_\+\+I\+S\+T\+R\+E\+A\+M \&sin, Value $\ast$root, J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G $\ast$errs)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+I\+S\+T\+R\+E\+A\+M \& \hyperlink{namespace_json_a52b40333cc8aa17c82ac359462ce691b}{Json\+::operator$>$$>$} (J\+S\+O\+N\+C\+P\+P\+\_\+\+I\+S\+T\+R\+E\+A\+M \&sin, Value \&root)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+N\+O\+R\+E\+T\+U\+R\+N void \hyperlink{namespace_json_a0ab7ff7f99788262d92d9ff3d924e065}{Json\+::throw\+Runtime\+Error} (J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G const \&msg)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+N\+O\+R\+E\+T\+U\+R\+N void \hyperlink{namespace_json_a27790f21f17922fac81e7cd72a5659a5}{Json\+::throw\+Logic\+Error} (J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G const \&msg)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G \hyperlink{namespace_json_a4732517cb28d203cfd4354d05952a81b}{Json\+::value\+To\+String} (Largest\+Int value)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G \hyperlink{namespace_json_a6283ea3db02efe9104ae6baff698245a}{Json\+::value\+To\+String} (Largest\+U\+Int value)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G \hyperlink{namespace_json_a41f0a9fca69a534a8646ce0123683a8b}{Json\+::value\+To\+String} (double value, bool use\+Special\+Floats, unsigned int precision)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G \hyperlink{namespace_json_a3cf0c8dbbdb898c4a6fad54670b34bd1}{Json\+::value\+To\+String} (double value)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G \hyperlink{namespace_json_a0a706a1fffba4fe8a8c1ef75b2dbbfab}{Json\+::value\+To\+String} (bool value)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G \hyperlink{namespace_json_aaf777a6923bcb4cf63a2729973fe5315}{Json\+::value\+To\+Quoted\+String} (const char $\ast$value)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+N\+G \hyperlink{namespace_json_a2fedf74e669b85f356f2c00973172ce7}{Json\+::write\+String} (Stream\+Writer\+::\+Factory const \&builder, Value const \&root)
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+O\+S\+T\+R\+E\+A\+M \& \hyperlink{namespace_json_a0f440d134f8bab9725aa31cb9704d6af}{Json\+::operator$<$$<$} (J\+S\+O\+N\+C\+P\+P\+\_\+\+O\+S\+T\+R\+E\+A\+M \&sout, Value const \&root)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const unsigned char \& \hyperlink{namespace_json_ab30055b4bbd82aecaca57ccecd63bbe6}{Json\+::k\+Null\+Ref} = k\+Null\mbox{[}0\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{jsoncpp_8cpp_a08a0024ebd1cc16ccc4a208e1e817f6e}{}\index{jsoncpp.\+cpp@{jsoncpp.\+cpp}!A\+L\+I\+G\+N\+A\+S@{A\+L\+I\+G\+N\+A\+S}}
+\index{A\+L\+I\+G\+N\+A\+S@{A\+L\+I\+G\+N\+A\+S}!jsoncpp.\+cpp@{jsoncpp.\+cpp}}
+\subsubsection[{A\+L\+I\+G\+N\+A\+S}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+I\+G\+N\+A\+S(
+\begin{DoxyParamCaption}
+\item[{}]{byte\+\_\+alignment}
+\end{DoxyParamCaption}
+)}\label{jsoncpp_8cpp_a08a0024ebd1cc16ccc4a208e1e817f6e}
+\hypertarget{jsoncpp_8cpp_aab49fbe39624f083e45ef2d85e7e0705}{}\index{jsoncpp.\+cpp@{jsoncpp.\+cpp}!isfinite@{isfinite}}
+\index{isfinite@{isfinite}!jsoncpp.\+cpp@{jsoncpp.\+cpp}}
+\subsubsection[{isfinite}]{\setlength{\rightskip}{0pt plus 5cm}\#define isfinite~std\+::isfinite}\label{jsoncpp_8cpp_aab49fbe39624f083e45ef2d85e7e0705}
+\hypertarget{jsoncpp_8cpp_aa5e619e3e9388f6376a344dd8462c9cc}{}\index{jsoncpp.\+cpp@{jsoncpp.\+cpp}!J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+U\+N\+R\+E\+A\+C\+H\+A\+B\+L\+E@{J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+U\+N\+R\+E\+A\+C\+H\+A\+B\+L\+E}}
+\index{J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+U\+N\+R\+E\+A\+C\+H\+A\+B\+L\+E@{J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+U\+N\+R\+E\+A\+C\+H\+A\+B\+L\+E}!jsoncpp.\+cpp@{jsoncpp.\+cpp}}
+\subsubsection[{J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+U\+N\+R\+E\+A\+C\+H\+A\+B\+L\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+U\+N\+R\+E\+A\+C\+H\+A\+B\+L\+E~assert(false)}\label{jsoncpp_8cpp_aa5e619e3e9388f6376a344dd8462c9cc}
+\hypertarget{jsoncpp_8cpp_abc5174d762d996e7d77cfcb90ca94834}{}\index{jsoncpp.\+cpp@{jsoncpp.\+cpp}!L\+I\+B\+\_\+\+J\+S\+O\+N\+C\+P\+P\+\_\+\+J\+S\+O\+N\+\_\+\+T\+O\+O\+L\+\_\+\+H\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D@{L\+I\+B\+\_\+\+J\+S\+O\+N\+C\+P\+P\+\_\+\+J\+S\+O\+N\+\_\+\+T\+O\+O\+L\+\_\+\+H\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D}}
+\index{L\+I\+B\+\_\+\+J\+S\+O\+N\+C\+P\+P\+\_\+\+J\+S\+O\+N\+\_\+\+T\+O\+O\+L\+\_\+\+H\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D@{L\+I\+B\+\_\+\+J\+S\+O\+N\+C\+P\+P\+\_\+\+J\+S\+O\+N\+\_\+\+T\+O\+O\+L\+\_\+\+H\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D}!jsoncpp.\+cpp@{jsoncpp.\+cpp}}
+\subsubsection[{L\+I\+B\+\_\+\+J\+S\+O\+N\+C\+P\+P\+\_\+\+J\+S\+O\+N\+\_\+\+T\+O\+O\+L\+\_\+\+H\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\+I\+B\+\_\+\+J\+S\+O\+N\+C\+P\+P\+\_\+\+J\+S\+O\+N\+\_\+\+T\+O\+O\+L\+\_\+\+H\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D}\label{jsoncpp_8cpp_abc5174d762d996e7d77cfcb90ca94834}
+Json-\/cpp amalgated source (\href{http://jsoncpp.sourceforge.net/}{\tt http\+://jsoncpp.\+sourceforge.\+net/}). It is intended to be used with \#include \char`\"{}json/json.\+h\char`\"{} 

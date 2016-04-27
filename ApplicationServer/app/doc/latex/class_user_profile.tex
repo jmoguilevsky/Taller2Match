@@ -1,0 +1,114 @@
+\hypertarget{class_user_profile}{}\section{User\+Profile Class Reference}
+\label{class_user_profile}\index{User\+Profile@{User\+Profile}}
+
+
+Representa el perfil de un usuario y métodos para consulta de distintos campos del mismo.  
+
+
+
+
+{\ttfamily \#include $<$User\+Profile.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_user_profile_ab76951c7e88e70c50013705fcfacfbba}{User\+Profile} (const \hyperlink{class_user_profile}{User\+Profile} \&user)
+\item 
+\hyperlink{class_user_profile_adce414cd8095dd3613d6b0c2ee9d7222}{User\+Profile} (Json\+::\+Value \&user)
+\begin{DoxyCompactList}\small\item\em Crea un perfil de usuario a partir de un objeto \hyperlink{namespace_json}{Json}. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_user_profile_a822835419b623e643362ba3d1eb73651}{get\+Name} () const 
+\item 
+\hyperlink{_user_profile_8h_a760a9aa8b4a0e703ef8f23404e88b06c}{Interest\+List} \hyperlink{class_user_profile_a883804f04b7aae98d6c609a0bde8c7a3}{get\+Music\+Band\+Interests} () const 
+\item 
+\hyperlink{_user_profile_8h_a760a9aa8b4a0e703ef8f23404e88b06c}{Interest\+List} \hyperlink{class_user_profile_a502ce9c46cb22ed131f547ab4c1dbcac}{get\+Sport\+Interests} () const 
+\item 
+\hyperlink{_user_profile_8h_a760a9aa8b4a0e703ef8f23404e88b06c}{Interest\+List} \hyperlink{class_user_profile_a4cc3b5c10b0bb24478f2ceecb7e1c965}{get\+Food\+Interests} () const 
+\item 
+std\+::string \hyperlink{class_user_profile_ab8957cb38de37ba628a75745c13df4b7}{get\+Id} () const 
+\item 
+double \hyperlink{class_user_profile_a3663e006f1044dffc943f31861f56550}{get\+Latitude} () const 
+\item 
+double \hyperlink{class_user_profile_aa804f7c9381824b398b4eff9fa716313}{get\+Longitude} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Representa el perfil de un usuario y métodos para consulta de distintos campos del mismo. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_user_profile_ab76951c7e88e70c50013705fcfacfbba}{}\index{User\+Profile@{User\+Profile}!User\+Profile@{User\+Profile}}
+\index{User\+Profile@{User\+Profile}!User\+Profile@{User\+Profile}}
+\subsubsection[{User\+Profile}]{\setlength{\rightskip}{0pt plus 5cm}User\+Profile\+::\+User\+Profile (
+\begin{DoxyParamCaption}
+\item[{const {\bf User\+Profile} \&}]{user}
+\end{DoxyParamCaption}
+)}\label{class_user_profile_ab76951c7e88e70c50013705fcfacfbba}
+\hypertarget{class_user_profile_adce414cd8095dd3613d6b0c2ee9d7222}{}\index{User\+Profile@{User\+Profile}!User\+Profile@{User\+Profile}}
+\index{User\+Profile@{User\+Profile}!User\+Profile@{User\+Profile}}
+\subsubsection[{User\+Profile}]{\setlength{\rightskip}{0pt plus 5cm}User\+Profile\+::\+User\+Profile (
+\begin{DoxyParamCaption}
+\item[{Json\+::\+Value \&}]{user}
+\end{DoxyParamCaption}
+)}\label{class_user_profile_adce414cd8095dd3613d6b0c2ee9d7222}
+
+
+Crea un perfil de usuario a partir de un objeto \hyperlink{namespace_json}{Json}. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_user_profile_a4cc3b5c10b0bb24478f2ceecb7e1c965}{}\index{User\+Profile@{User\+Profile}!get\+Food\+Interests@{get\+Food\+Interests}}
+\index{get\+Food\+Interests@{get\+Food\+Interests}!User\+Profile@{User\+Profile}}
+\subsubsection[{get\+Food\+Interests}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::string $>$ User\+Profile\+::get\+Food\+Interests (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{class_user_profile_a4cc3b5c10b0bb24478f2ceecb7e1c965}
+\hypertarget{class_user_profile_ab8957cb38de37ba628a75745c13df4b7}{}\index{User\+Profile@{User\+Profile}!get\+Id@{get\+Id}}
+\index{get\+Id@{get\+Id}!User\+Profile@{User\+Profile}}
+\subsubsection[{get\+Id}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string User\+Profile\+::get\+Id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{class_user_profile_ab8957cb38de37ba628a75745c13df4b7}
+\hypertarget{class_user_profile_a3663e006f1044dffc943f31861f56550}{}\index{User\+Profile@{User\+Profile}!get\+Latitude@{get\+Latitude}}
+\index{get\+Latitude@{get\+Latitude}!User\+Profile@{User\+Profile}}
+\subsubsection[{get\+Latitude}]{\setlength{\rightskip}{0pt plus 5cm}double User\+Profile\+::get\+Latitude (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{class_user_profile_a3663e006f1044dffc943f31861f56550}
+\hypertarget{class_user_profile_aa804f7c9381824b398b4eff9fa716313}{}\index{User\+Profile@{User\+Profile}!get\+Longitude@{get\+Longitude}}
+\index{get\+Longitude@{get\+Longitude}!User\+Profile@{User\+Profile}}
+\subsubsection[{get\+Longitude}]{\setlength{\rightskip}{0pt plus 5cm}double User\+Profile\+::get\+Longitude (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{class_user_profile_aa804f7c9381824b398b4eff9fa716313}
+\hypertarget{class_user_profile_a883804f04b7aae98d6c609a0bde8c7a3}{}\index{User\+Profile@{User\+Profile}!get\+Music\+Band\+Interests@{get\+Music\+Band\+Interests}}
+\index{get\+Music\+Band\+Interests@{get\+Music\+Band\+Interests}!User\+Profile@{User\+Profile}}
+\subsubsection[{get\+Music\+Band\+Interests}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::string $>$ User\+Profile\+::get\+Music\+Band\+Interests (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{class_user_profile_a883804f04b7aae98d6c609a0bde8c7a3}
+\hypertarget{class_user_profile_a822835419b623e643362ba3d1eb73651}{}\index{User\+Profile@{User\+Profile}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!User\+Profile@{User\+Profile}}
+\subsubsection[{get\+Name}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string User\+Profile\+::get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{class_user_profile_a822835419b623e643362ba3d1eb73651}
+\hypertarget{class_user_profile_a502ce9c46cb22ed131f547ab4c1dbcac}{}\index{User\+Profile@{User\+Profile}!get\+Sport\+Interests@{get\+Sport\+Interests}}
+\index{get\+Sport\+Interests@{get\+Sport\+Interests}!User\+Profile@{User\+Profile}}
+\subsubsection[{get\+Sport\+Interests}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::string $>$ User\+Profile\+::get\+Sport\+Interests (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{class_user_profile_a502ce9c46cb22ed131f547ab4c1dbcac}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_user_profile_8h}{User\+Profile.\+h}\item 
+\hyperlink{_user_profile_8cpp}{User\+Profile.\+cpp}\end{DoxyCompactItemize}
