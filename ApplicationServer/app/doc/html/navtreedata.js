@@ -35,7 +35,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
     [
-        "_chat_d_b_8cpp.html"
+        "_authentication_error_8cpp.html"
     ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

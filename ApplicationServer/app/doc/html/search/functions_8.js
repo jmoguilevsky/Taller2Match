@@ -1,5 +1,6 @@
 var searchData =
     [
-        ['main', ['main', ['../main_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe', 1, 'main.cpp']]],
-        ['matcher', ['Matcher', ['../class_matcher.html#a09a946e99ca5fb4919719e9a47357cfa', 1, 'Matcher']]]
+        ['invalidatetoken', ['invalidateToken', ['../class_token_manager.html#aeb2d1b869353b46212663eb5c01481ad', 1, 'TokenManager']]],
+        ['isempty', ['isEmpty', ['../class_h_t_t_p_request.html#ab9cbbd29971d2773d8d5dbeff9eb27d8', 1, 'HTTPRequest']]],
+        ['isvalid', ['isValid', ['../class_token_manager.html#ae344c71cc42679abd8b190d3542da090', 1, 'TokenManager']]]
     ];

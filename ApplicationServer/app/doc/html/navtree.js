@@ -178,7 +178,7 @@ function newNode(o, po, text, link, childrenData, lastNode) {
             link = url;
     } else {
             url = node.relpath + link;
-        }
+    }
         a.className = stripPath(link.replace('#', ':'));
         if (link.indexOf('#') != -1) {
             var aname = '#' + link.split('#')[1];
@@ -360,9 +360,9 @@ function removeToInsertLater(element) {
     return function () {
         if (nextSibling) {
             parentNode.insertBefore(element, nextSibling);
-        } else {
+    } else {
             parentNode.appendChild(element);
-        }
+    }
     };
 }
 
@@ -467,11 +467,11 @@ function initNavTree(toroot, relpath) {
     o.node.plus_img.height = 22;
 
     if (localStorageSupported()) {
-        var navSync = $('#nav-sync');
+    var navSync = $('#nav-sync');
         if (cachedLink()) {
             showSyncOff(navSync, relpath);
             navSync.removeClass('sync');
-        } else {
+    } else {
             showSyncOn(navSync, relpath);
     }
         navSync.click(function () {

@@ -177,10 +177,13 @@
                 matches;
             </div>
             <div class="line"><a name="l00018"></a><span
-                    class="lineno">   18</span>&#160;</div>
-            <div class="line"><a name="l00019"></a><span
-                    class="lineno">   19</span>&#160; <a class="code"
-                                                         href="class_matches_d_b.html">MatchesDB</a>()
+                    class="lineno">   18</span>&#160;<span class="keyword">public</span>:
+            </div>
+            <div class="line"><a name="l00019"></a><span class="lineno"><a
+                    class="line"
+                    href="class_matches_d_b.html#a2bcb24303e9378da37ec38885659e240">   19</a></span>&#160;
+                <a class="code"
+                   href="class_matches_d_b.html#a2bcb24303e9378da37ec38885659e240">MatchesDB</a>()
                 : noMatches(<span
                         class="stringliteral">&quot;noMatches&quot;</span>),
                 likes(<span class="stringliteral">&quot;likes&quot;</span>),
@@ -191,40 +194,50 @@
                     class="lineno">   20</span>&#160;</div>
             <div class="line"><a name="l00021"></a><span
                     class="lineno">   21</span>&#160; <span class="keywordtype">int</span>
-                likeUser(<span class="keyword">const</span> std::string &amp;user1,
+                <a class="code"
+                   href="class_matches_d_b.html#a6dd41bbaff26ea76b66e0f5a4eab3208">likeUser</a>(<span
+                        class="keyword">const</span> std::string &amp;user1,
                 <span class="keyword">const</span> std::string &amp;user2);
             </div>
             <div class="line"><a name="l00022"></a><span
                     class="lineno">   22</span>&#160;</div>
             <div class="line"><a name="l00023"></a><span
                     class="lineno">   23</span>&#160; std::vector&lt;std::string&gt;
-                getLikes(<span class="keyword">const</span> std::string &amp;user);
+                <a class="code"
+                   href="class_matches_d_b.html#a2aa9287c26719b26b64cd9c176839449">getLikes</a>(<span
+                        class="keyword">const</span> std::string &amp;user);
             </div>
             <div class="line"><a name="l00024"></a><span
                     class="lineno">   24</span>&#160;</div>
             <div class="line"><a name="l00025"></a><span
                     class="lineno">   25</span>&#160; std::vector&lt;std::string&gt;
-                getMatches(<span class="keyword">const</span> std::string &amp;user);
+                <a class="code"
+                   href="class_matches_d_b.html#aba61ab3a46032aa986e63a812ec40d46">getMatches</a>(<span
+                        class="keyword">const</span> std::string &amp;user);
             </div>
             <div class="line"><a name="l00026"></a><span
                     class="lineno">   26</span>&#160;</div>
             <div class="line"><a name="l00027"></a><span
                     class="lineno">   27</span>&#160; std::vector&lt;std::string&gt;
-                getNoMatches(<span class="keyword">const</span> std::string
-                &amp;user);
+                <a class="code"
+                   href="class_matches_d_b.html#abd8a7493c1f0e0b98e067532f2242700">getNoMatches</a>(<span
+                        class="keyword">const</span> std::string &amp;user);
             </div>
             <div class="line"><a name="l00028"></a><span
                     class="lineno">   28</span>&#160;</div>
             <div class="line"><a name="l00029"></a><span
                     class="lineno">   29</span>&#160; <span class="keywordtype">int</span>
-                getLikesReceived(<span class="keyword">const</span> std::string
-                &amp;user);
+                <a class="code"
+                   href="class_matches_d_b.html#a97e41ad65c1bd382aaae23bca882352b">getLikesReceived</a>(<span
+                        class="keyword">const</span> std::string &amp;user);
             </div>
             <div class="line"><a name="l00030"></a><span
                     class="lineno">   30</span>&#160;</div>
             <div class="line"><a name="l00031"></a><span
                     class="lineno">   31</span>&#160; <span class="keywordtype">int</span>
-                rejectUser(<span class="keyword">const</span> std::string &amp;user1,
+                <a class="code"
+                   href="class_matches_d_b.html#a0dd73fba21bba1441b8aac3fa09c280e">rejectUser</a>(<span
+                        class="keyword">const</span> std::string &amp;user1,
                 <span class="keyword">const</span> std::string &amp;user2);
             </div>
             <div class="line"><a name="l00032"></a><span
@@ -237,10 +250,66 @@
             <div class="line"><a name="l00035"></a><span
                     class="lineno">   35</span>&#160;<span class="preprocessor">#endif //APPSERVER_MATCHESDB_H</span>
             </div>
+            <div class="ttc"
+                 id="class_matches_d_b_html_a2aa9287c26719b26b64cd9c176839449">
+                <div class="ttname"><a
+                        href="class_matches_d_b.html#a2aa9287c26719b26b64cd9c176839449">MatchesDB::getLikes</a>
+                </div>
+                <div class="ttdeci">std::vector&lt; std::string &gt;
+                    getLikes(const std::string &amp;user)
+                </div>
+                <div class="ttdef"><b>Definition:</b> MatchesDB.cpp:63</div>
+            </div>
+            <div class="ttc"
+                 id="class_matches_d_b_html_a6dd41bbaff26ea76b66e0f5a4eab3208">
+                <div class="ttname"><a
+                        href="class_matches_d_b.html#a6dd41bbaff26ea76b66e0f5a4eab3208">MatchesDB::likeUser</a>
+                </div>
+                <div class="ttdeci">int likeUser(const std::string &amp;user1,
+                    const std::string &amp;user2)
+                </div>
+                <div class="ttdef"><b>Definition:</b> MatchesDB.cpp:11</div>
+            </div>
             <div class="ttc" id="class_d_b_html">
                 <div class="ttname"><a href="class_d_b.html">DB</a></div>
                 <div class="ttdoc">Wrapper para una Base de datos RocksDB.</div>
                 <div class="ttdef"><b>Definition:</b> DB.h:11</div>
+            </div>
+            <div class="ttc"
+                 id="class_matches_d_b_html_a0dd73fba21bba1441b8aac3fa09c280e">
+                <div class="ttname"><a
+                        href="class_matches_d_b.html#a0dd73fba21bba1441b8aac3fa09c280e">MatchesDB::rejectUser</a>
+                </div>
+                <div class="ttdeci">int rejectUser(const std::string &amp;user1,
+                    const std::string &amp;user2)
+                </div>
+                <div class="ttdef"><b>Definition:</b> MatchesDB.cpp:49</div>
+            </div>
+            <div class="ttc"
+                 id="class_matches_d_b_html_a97e41ad65c1bd382aaae23bca882352b">
+                <div class="ttname"><a
+                        href="class_matches_d_b.html#a97e41ad65c1bd382aaae23bca882352b">MatchesDB::getLikesReceived</a>
+                </div>
+                <div class="ttdeci">int getLikesReceived(const std::string &amp;user)</div>
+                <div class="ttdef"><b>Definition:</b> MatchesDB.cpp:58</div>
+            </div>
+            <div class="ttc"
+                 id="class_matches_d_b_html_aba61ab3a46032aa986e63a812ec40d46">
+                <div class="ttname"><a
+                        href="class_matches_d_b.html#aba61ab3a46032aa986e63a812ec40d46">MatchesDB::getMatches</a>
+                </div>
+                <div class="ttdeci">std::vector&lt; std::string &gt;
+                    getMatches(const std::string &amp;user)
+                </div>
+                <div class="ttdef"><b>Definition:</b> MatchesDB.cpp:68</div>
+            </div>
+            <div class="ttc"
+                 id="class_matches_d_b_html_a2bcb24303e9378da37ec38885659e240">
+                <div class="ttname"><a
+                        href="class_matches_d_b.html#a2bcb24303e9378da37ec38885659e240">MatchesDB::MatchesDB</a>
+                </div>
+                <div class="ttdeci">MatchesDB()</div>
+                <div class="ttdef"><b>Definition:</b> MatchesDB.h:19</div>
             </div>
             <div class="ttc" id="class_matches_d_b_html">
                 <div class="ttname"><a
@@ -249,6 +318,16 @@
                     los likes y los matches.
                 </div>
                 <div class="ttdef"><b>Definition:</b> MatchesDB.h:14</div>
+            </div>
+            <div class="ttc"
+                 id="class_matches_d_b_html_abd8a7493c1f0e0b98e067532f2242700">
+                <div class="ttname"><a
+                        href="class_matches_d_b.html#abd8a7493c1f0e0b98e067532f2242700">MatchesDB::getNoMatches</a>
+                </div>
+                <div class="ttdeci">std::vector&lt; std::string &gt;
+                    getNoMatches(const std::string &amp;user)
+                </div>
+                <div class="ttdef"><b>Definition:</b> MatchesDB.cpp:74</div>
             </div>
             <div class="ttc" id="_d_b_8h_html">
                 <div class="ttname"><a href="_d_b_8h.html">DB.h</a></div>

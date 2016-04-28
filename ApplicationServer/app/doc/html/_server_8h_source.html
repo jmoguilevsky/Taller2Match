@@ -154,7 +154,7 @@
             </div>
             <div class="line"><a name="l00011"></a><span
                     class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a
-                    class="code" href="_connection_to_shared_8h.html">HTTPRequestSender.h</a>&quot;</span>
+                    class="code" href="_h_t_t_p_request_sender_8h.html">HTTPRequestSender.h</a>&quot;</span>
             </div>
             <div class="line"><a name="l00012"></a><span
                     class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a
@@ -165,40 +165,43 @@
                     class="code" href="_login_d_b_8h.html">DB/LoginDB.h</a>&quot;</span>
             </div>
             <div class="line"><a name="l00014"></a><span
-                    class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span>
+                    class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a
+                    class="code"
+                    href="_token_manager_8h.html">TokenManager.h</a>&quot;</span>
             </div>
             <div class="line"><a name="l00015"></a><span
-                    class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span>
+                    class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a
+                    class="code" href="_shared_server_connection_8h.html">SharedServerConnection.h</a>&quot;</span>
             </div>
             <div class="line"><a name="l00016"></a><span
-                    class="lineno">   16</span>&#160;</div>
-            <div class="line"><a name="l00018"></a><span class="lineno"><a
-                    class="line" href="class_server.html">   18</a></span>&#160;<span
+                    class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a
+                    class="code" href="_matches_d_b_8h.html">DB/MatchesDB.h</a>&quot;</span>
+            </div>
+            <div class="line"><a name="l00017"></a><span
+                    class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span>
+            </div>
+            <div class="line"><a name="l00018"></a><span
+                    class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span>
+            </div>
+            <div class="line"><a name="l00019"></a><span
+                    class="lineno">   19</span>&#160;</div>
+            <div class="line"><a name="l00021"></a><span class="lineno"><a
+                    class="line" href="class_server.html">   21</a></span>&#160;<span
                     class="keyword">class </span><a class="code"
                                                     href="class_server.html">Server</a>
                 {
             </div>
-            <div class="line"><a name="l00019"></a><span
-                    class="lineno">   19</span>&#160; <span class="keyword">struct </span>mg_mgr
+            <div class="line"><a name="l00022"></a><span
+                    class="lineno">   22</span>&#160; <span class="keyword">struct </span>mg_mgr
                 mgr;
             </div>
-            <div class="line"><a name="l00020"></a><span
-                    class="lineno">   20</span>&#160; <span class="keyword">struct </span>mg_connection
+            <div class="line"><a name="l00023"></a><span
+                    class="lineno">   23</span>&#160; <span class="keyword">struct </span>mg_connection
                 *listeningConnection;
             </div>
-            <div class="line"><a name="l00021"></a><span
-                    class="lineno">   21</span>&#160; <span class="keywordtype">bool</span>
-                CONTINUE;
-            </div>
-            <div class="line"><a name="l00022"></a><span
-                    class="lineno">   22</span>&#160; std::string port;
-            </div>
-            <div class="line"><a name="l00023"></a><span
-                    class="lineno">   23</span>&#160; std::string address;
-            </div>
             <div class="line"><a name="l00024"></a><span
-                    class="lineno">   24</span>&#160; std::map&lt;std::string,
-                std::string&gt; userPass;
+                    class="lineno">   24</span>&#160; <span class="keywordtype">bool</span>
+                CONTINUE;
             </div>
             <div class="line"><a name="l00025"></a><span
                     class="lineno">   25</span>&#160; <a class="code"
@@ -206,64 +209,79 @@
                 db;
             </div>
             <div class="line"><a name="l00026"></a><span
-                    class="lineno">   26</span>&#160;</div>
+                    class="lineno">   26</span>&#160; <a class="code"
+                                                         href="class_matches_d_b.html">MatchesDB</a>
+                matchesDB;
+            </div>
             <div class="line"><a name="l00027"></a><span
                     class="lineno">   27</span>&#160; <a class="code"
+                                                         href="class_token_manager.html">TokenManager</a>
+                tokenManager;
+            </div>
+            <div class="line"><a name="l00028"></a><span
+                    class="lineno">   28</span>&#160; <a class="code"
                                                          href="class_request_handler.html">RequestHandler</a>
                 *getRequestHandler(<a class="code"
                                       href="class_h_t_t_p_request.html">HTTPRequest</a>
                 request);
             </div>
-            <div class="line"><a name="l00028"></a><span
-                    class="lineno">   28</span>&#160;<span class="keyword">public</span>:
-            </div>
+            <div class="line"><a name="l00029"></a><span
+                    class="lineno">   29</span>&#160;</div>
             <div class="line"><a name="l00030"></a><span
-                    class="lineno">   30</span>&#160; <span class="keywordtype">void</span>
-                <a class="code"
-                   href="class_server.html#a7eac07d2582fa01c2671362efa955b31">start</a>();
+                    class="lineno">   30</span>&#160; <a class="code"
+                                                         href="class_shared_server_connection.html">SharedServerConnection</a>
+                sharedServer;
             </div>
             <div class="line"><a name="l00031"></a><span
-                    class="lineno">   31</span>&#160;</div>
+                    class="lineno">   31</span>&#160;<span class="keyword">public</span>:
+            </div>
             <div class="line"><a name="l00033"></a><span
                     class="lineno">   33</span>&#160; <span class="keywordtype">void</span>
                 <a class="code"
-                   href="class_server.html#a07c45a7e101a3926d8f9685c3c5d14e4">stop</a>();
+                   href="class_server.html#a7eac07d2582fa01c2671362efa955b31">start</a>();
             </div>
             <div class="line"><a name="l00034"></a><span
                     class="lineno">   34</span>&#160;</div>
             <div class="line"><a name="l00036"></a><span
-                    class="lineno">   36</span>&#160; <span class="keyword">static</span>
+                    class="lineno">   36</span>&#160; <span class="keywordtype">void</span>
+                <a class="code"
+                   href="class_server.html#a07c45a7e101a3926d8f9685c3c5d14e4">stop</a>();
+            </div>
+            <div class="line"><a name="l00037"></a><span
+                    class="lineno">   37</span>&#160;</div>
+            <div class="line"><a name="l00039"></a><span
+                    class="lineno">   39</span>&#160; <span class="keyword">static</span>
                 <span class="keywordtype">void</span> <a class="code"
                                                          href="class_server.html#ac3f610990e6c5d339cf38cbf495f598e">clientHandler</a>(mg_connection
                 *c, <span class="keywordtype">int</span> ev,
             </div>
-            <div class="line"><a name="l00037"></a><span
-                    class="lineno">   37</span>&#160; <span class="keywordtype">void</span>
-                *p);
-            </div>
-            <div class="line"><a name="l00038"></a><span
-                    class="lineno">   38</span>&#160;</div>
             <div class="line"><a name="l00040"></a><span
-                    class="lineno">   40</span>&#160; <a class="code"
-                                                         href="class_server.html#ab304cb02833b94847e8655bbf929224d">Server</a>(std::string
-                port, std::string address);
+                    class="lineno">   40</span>&#160; <span class="keywordtype">void</span>
+                *p);
             </div>
             <div class="line"><a name="l00041"></a><span
                     class="lineno">   41</span>&#160;</div>
-            <div class="line"><a name="l00042"></a><span
-                    class="lineno">   42</span>&#160; <a class="code"
-                                                         href="class_server.html#a4b3aa2579cb1c8cd1d069582c14d0fa6">~Server</a>();
-            </div>
             <div class="line"><a name="l00043"></a><span
-                    class="lineno">   43</span>&#160;};
+                    class="lineno">   43</span>&#160; <a class="code"
+                                                         href="class_server.html#ab304cb02833b94847e8655bbf929224d">Server</a>(std::string
+                port, std::string sharedAddress);
             </div>
             <div class="line"><a name="l00044"></a><span
                     class="lineno">   44</span>&#160;</div>
             <div class="line"><a name="l00045"></a><span
-                    class="lineno">   45</span>&#160;<span class="preprocessor">#endif //MULTITHREADMULTICONNECTION_SERVER_H</span>
+                    class="lineno">   45</span>&#160; <a class="code"
+                                                         href="class_server.html#a4b3aa2579cb1c8cd1d069582c14d0fa6">~Server</a>();
             </div>
             <div class="line"><a name="l00046"></a><span
-                    class="lineno">   46</span>&#160;</div>
+                    class="lineno">   46</span>&#160;};
+            </div>
+            <div class="line"><a name="l00047"></a><span
+                    class="lineno">   47</span>&#160;</div>
+            <div class="line"><a name="l00048"></a><span
+                    class="lineno">   48</span>&#160;<span class="preprocessor">#endif //MULTITHREADMULTICONNECTION_SERVER_H</span>
+            </div>
+            <div class="line"><a name="l00049"></a><span
+                    class="lineno">   49</span>&#160;</div>
             <div class="ttc" id="_login_d_b_8h_html">
                 <div class="ttname"><a href="_login_d_b_8h.html">LoginDB.h</a>
                 </div>
@@ -271,7 +289,7 @@
             <div class="ttc" id="class_server_html">
                 <div class="ttname"><a href="class_server.html">Server</a></div>
                 <div class="ttdoc">Clase principal, el Server. (?)</div>
-                <div class="ttdef"><b>Definition:</b> Server.h:18</div>
+                <div class="ttdef"><b>Definition:</b> Server.h:21</div>
             </div>
             <div class="ttc" id="class_login_d_b_html">
                 <div class="ttname"><a href="class_login_d_b.html">LoginDB</a>
@@ -288,7 +306,28 @@
                 </div>
                 <div class="ttdeci">void start()</div>
                 <div class="ttdoc">Inicia el server.</div>
-                <div class="ttdef"><b>Definition:</b> Server.cpp:53</div>
+                <div class="ttdef"><b>Definition:</b> Server.cpp:77</div>
+            </div>
+            <div class="ttc" id="class_shared_server_connection_html">
+                <div class="ttname"><a
+                        href="class_shared_server_connection.html">SharedServerConnection</a>
+                </div>
+                <div class="ttdoc">Una conexión hacia el Shared Server.</div>
+                <div class="ttdef"><b>Definition:</b>
+                    SharedServerConnection.h:14
+                </div>
+            </div>
+            <div class="ttc" id="_h_t_t_p_request_sender_8h_html">
+                <div class="ttname"><a href="_h_t_t_p_request_sender_8h.html">HTTPRequestSender.h</a>
+                </div>
+            </div>
+            <div class="ttc" id="class_token_manager_html">
+                <div class="ttname"><a href="class_token_manager.html">TokenManager</a>
+                </div>
+                <div class="ttdoc">Para manejar el tema de los tokenManager,
+                    crearlos, chequearlos, borrarlos, etc.
+                </div>
+                <div class="ttdef"><b>Definition:</b> TokenManager.h:13</div>
             </div>
             <div class="ttc"
                  id="class_server_html_ac3f610990e6c5d339cf38cbf495f598e">
@@ -301,7 +340,19 @@
                 <div class="ttdoc">Event handler para las conexiones con los
                     clientes.
                 </div>
-                <div class="ttdef"><b>Definition:</b> Server.cpp:24</div>
+                <div class="ttdef"><b>Definition:</b> Server.cpp:48</div>
+            </div>
+            <div class="ttc" id="_matches_d_b_8h_html">
+                <div class="ttname"><a
+                        href="_matches_d_b_8h.html">MatchesDB.h</a></div>
+            </div>
+            <div class="ttc" id="class_matches_d_b_html">
+                <div class="ttname"><a
+                        href="class_matches_d_b.html">MatchesDB</a></div>
+                <div class="ttdoc">Manejo de las bases de datos relacionadas con
+                    los likes y los matches.
+                </div>
+                <div class="ttdef"><b>Definition:</b> MatchesDB.h:14</div>
             </div>
             <div class="ttc" id="_request_handler_8h_html">
                 <div class="ttname"><a href="_request_handler_8h.html">RequestHandler.h</a>
@@ -313,13 +364,13 @@
                         href="class_server.html#ab304cb02833b94847e8655bbf929224d">Server::Server</a>
                 </div>
                 <div class="ttdeci">Server(std::string port, std::string
-                    address)
+                    sharedAddress)
                 </div>
                 <div class="ttdoc">Crea el server con un port donde escucha
                     conexiones entrantes, y una URL (URL:port) del Shared
                     Server...
                 </div>
-                <div class="ttdef"><b>Definition:</b> Server.cpp:41</div>
+                <div class="ttdef"><b>Definition:</b> Server.cpp:66</div>
             </div>
             <div class="ttc"
                  id="class_server_html_a07c45a7e101a3926d8f9685c3c5d14e4">
@@ -328,7 +379,7 @@
                 </div>
                 <div class="ttdeci">void stop()</div>
                 <div class="ttdoc">Detiene el server.</div>
-                <div class="ttdef"><b>Definition:</b> Server.cpp:37</div>
+                <div class="ttdef"><b>Definition:</b> Server.cpp:62</div>
             </div>
             <div class="ttc" id="class_request_handler_html">
                 <div class="ttname"><a href="class_request_handler.html">RequestHandler</a>
@@ -344,8 +395,12 @@
                 <div class="ttdoc">Un request HTTP.</div>
                 <div class="ttdef"><b>Definition:</b> HTTPRequest.h:12</div>
             </div>
-            <div class="ttc" id="_connection_to_shared_8h_html">
-                <div class="ttname"><a href="_connection_to_shared_8h.html">HTTPRequestSender.h</a>
+            <div class="ttc" id="_shared_server_connection_8h_html">
+                <div class="ttname"><a href="_shared_server_connection_8h.html">SharedServerConnection.h</a>
+                </div>
+            </div>
+            <div class="ttc" id="_token_manager_8h_html">
+                <div class="ttname"><a href="_token_manager_8h.html">TokenManager.h</a>
                 </div>
             </div>
             <div class="ttc"
@@ -354,7 +409,7 @@
                         href="class_server.html#a4b3aa2579cb1c8cd1d069582c14d0fa6">Server::~Server</a>
                 </div>
                 <div class="ttdeci">~Server()</div>
-                <div class="ttdef"><b>Definition:</b> Server.cpp:61</div>
+                <div class="ttdef"><b>Definition:</b> Server.cpp:85</div>
             </div>
             <div class="ttc" id="_h_t_t_p_request_8h_html">
                 <div class="ttname"><a href="_h_t_t_p_request_8h.html">HTTPRequest.h</a>

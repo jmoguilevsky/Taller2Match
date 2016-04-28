@@ -1,4 +1,4 @@
 var searchData =
     [
-        ['buftostring', ['bufToString', ['../namespaceutils.html#a5ef5cbcc69b59b61b15c39755c450922', 1, 'utils']]]
+        ['authenticationerror', ['AuthenticationError', ['../class_authentication_error.html#a9fe3fb41a6277171ccbdad0889488952', 1, 'AuthenticationError']]]
     ];

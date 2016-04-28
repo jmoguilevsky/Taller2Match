@@ -120,6 +120,7 @@
     <div class="header">
         <div class="summary">
             <a href="#pub-methods">Public Member Functions</a> &#124;
+            <a href="#pub-attribs">Public Attributes</a> &#124;
             <a href="class_login-members.html">List of all members</a></div>
         <div class="headertitle">
             <div class="title">Login Class Reference</div>
@@ -159,11 +160,13 @@
             <map name="_login_coll__map" id="_login_coll__map">
                 <area shape="rect" id="node2" href="class_request_handler.html"
                       title="Handler genérico para un request de un usuario. "
-                      alt="" coords="73,95,189,121"/>
-                <area shape="rect" id="node3" href="class_h_t_t_p_response.html"
-                      title="Una respuesta HTTP. " alt="" coords="5,5,121,32"/>
-                <area shape="rect" id="node4" href="class_h_t_t_p_request.html"
-                      title="Un request HTTP. " alt="" coords="146,5,253,32"/>
+                      alt="" coords="5,95,121,121"/>
+                <area shape="rect" id="node3" href="class_h_t_t_p_request.html"
+                      title="Un request HTTP. " alt="" coords="10,5,117,32"/>
+                <area shape="rect" id="node4"
+                      href="class_shared_server_connection.html"
+                      title="Una conexión hacia el Shared Server. " alt=""
+                      coords="145,95,312,121"/>
             </map>
             <center><span class="legend">[<a target="top"
                                              href="graph_legend.html">legend</a>]</span>
@@ -175,17 +178,23 @@
                         name="pub-methods"></a>
                     Public Member Functions</h2></td>
             </tr>
-            <tr class="memitem:a0cc689ed6645fb6cf8b526e59598fd0d">
+            <tr class="memitem:a1f04a36bf1e175cf0e7ed66c47cae2c3">
                 <td class="memItemLeft" align="right" valign="top">&#160;</td>
                 <td class="memItemRight" valign="bottom"><a class="el"
-                                                            href="class_login.html#a0cc689ed6645fb6cf8b526e59598fd0d">Login</a>
+                                                            href="class_login.html#a1f04a36bf1e175cf0e7ed66c47cae2c3">Login</a>
                     (<a class="el"
-                        href="class_h_t_t_p_request.html">HTTPRequest</a>
-                    request, <a class="el"
-                                href="class_login_d_b.html">LoginDB</a> &amp;db)
+                        href="class_h_t_t_p_request.html">HTTPRequest</a> <a
+                            class="el"
+                            href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>,
+                    <a class="el" href="class_login_d_b.html">LoginDB</a> &amp;db,
+                    <a class="el"
+                       href="class_token_manager.html">TokenManager</a> &amp;tokenManager,
+                    <a class="el" href="class_shared_server_connection.html">SharedServerConnection</a>
+                    &amp;<a class="el"
+                            href="class_login.html#a002522e5d2170bbfe0e8f2c9cbf4e779">sharedServer</a>)
                 </td>
             </tr>
-            <tr class="separator:a0cc689ed6645fb6cf8b526e59598fd0d">
+            <tr class="separator:a1f04a36bf1e175cf0e7ed66c47cae2c3">
                 <td class="memSeparator" colspan="2">&#160;</td>
             </tr>
             <tr class="memitem:a911fa05b2b1b8f53cad4286012a7810d">
@@ -237,6 +246,24 @@
         </table>
         <table class="memberdecls">
             <tr class="heading">
+                <td colspan="2"><h2 class="groupheader"><a
+                        name="pub-attribs"></a>
+                    Public Attributes</h2></td>
+            </tr>
+            <tr class="memitem:a002522e5d2170bbfe0e8f2c9cbf4e779">
+                <td class="memItemLeft" align="right" valign="top"><a class="el"
+                                                                      href="class_shared_server_connection.html">SharedServerConnection</a>
+                    &amp;&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="class_login.html#a002522e5d2170bbfe0e8f2c9cbf4e779">sharedServer</a>
+                </td>
+            </tr>
+            <tr class="separator:a002522e5d2170bbfe0e8f2c9cbf4e779">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+        </table>
+        <table class="memberdecls">
+            <tr class="heading">
                 <td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
                     Additional Inherited Members</h2></td>
             </tr>
@@ -259,17 +286,6 @@
             <tr class="separator:a95913fcd2f05853ba9532b7bacd3a044 inherit pro_attribs_class_request_handler">
                 <td class="memSeparator" colspan="2">&#160;</td>
             </tr>
-            <tr class="memitem:aa56594238825cf7e1254001cb8f536ec inherit pro_attribs_class_request_handler">
-                <td class="memItemLeft" align="right" valign="top"><a class="el"
-                                                                      href="class_h_t_t_p_response.html">HTTPResponse</a>
-                    *&#160;</td>
-                <td class="memItemRight" valign="bottom"><a class="el"
-                                                            href="class_request_handler.html#aa56594238825cf7e1254001cb8f536ec">response</a>
-                </td>
-            </tr>
-            <tr class="separator:aa56594238825cf7e1254001cb8f536ec inherit pro_attribs_class_request_handler">
-                <td class="memSeparator" colspan="2">&#160;</td>
-            </tr>
         </table>
         <a name="details" id="details"></a>
         <h2 class="groupheader">Detailed Description</h2>
@@ -277,7 +293,7 @@
             login. </p>
         </div>
         <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-        <a class="anchor" id="a0cc689ed6645fb6cf8b526e59598fd0d"></a>
+        <a class="anchor" id="a1f04a36bf1e175cf0e7ed66c47cae2c3"></a>
         <div class="memitem">
             <div class="memproto">
                 <table class="memname">
@@ -295,7 +311,23 @@
                         <td class="paramtype"><a class="el"
                                                  href="class_login_d_b.html">LoginDB</a>
                             &amp;&#160;</td>
-                        <td class="paramname"><em>db</em>&#160;</td>
+                        <td class="paramname"><em>db</em>,</td>
+                    </tr>
+                    <tr>
+                        <td class="paramkey"></td>
+                        <td></td>
+                        <td class="paramtype"><a class="el"
+                                                 href="class_token_manager.html">TokenManager</a>
+                            &amp;&#160;</td>
+                        <td class="paramname"><em>tokenManager</em>,</td>
+                    </tr>
+                    <tr>
+                        <td class="paramkey"></td>
+                        <td></td>
+                        <td class="paramtype"><a class="el"
+                                                 href="class_shared_server_connection.html">SharedServerConnection</a>
+                            &amp;&#160;</td>
+                        <td class="paramname"><em>sharedServer</em>&#160;</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -350,33 +382,22 @@
                                  href="class_request_handler.html#ada5c3c1669e6c2e4b46923a42b1fdab6">RequestHandler</a>.
                 </p>
 
-                <p>
-                <div class="dynheader">
-                    Here is the call graph for this function:
-                </div>
-                <div class="dyncontent">
-                    <div class="center"><img
-                            src="class_login_a911fa05b2b1b8f53cad4286012a7810d_cgraph.png"
-                            border="0"
-                            usemap="#class_login_a911fa05b2b1b8f53cad4286012a7810d_cgraph"
-                            alt=""/></div>
-                    <map name="class_login_a911fa05b2b1b8f53cad4286012a7810d_cgraph"
-                         id="class_login_a911fa05b2b1b8f53cad4286012a7810d_cgraph">
-                        <area shape="rect" id="node2"
-                              href="class_h_t_t_p_request.html#a205e7dbafc6888087b742f7de91d421d"
-                              title="Devuelve el body del request HTTP. " alt=""
-                              coords="152,5,315,32"/>
-                        <area shape="rect" id="node3"
-                              href="class_login_d_b.html#aa7880fdec33f72f6aaf84101871c7800"
-                              title="Loguea al user con la pass. Devuelve USER_DOESNT_EXIST, WRONG_PASSWORD, o LOGIN_OK según el caso..."
-                              alt="" coords="180,56,287,83"/>
-                        <area shape="rect" id="node4"
-                              href="class_d_b.html#a50aa8411937cda0573b1d5f738588168"
-                              title="Si key existe en la DB, devuelve true y asigna a value el valor asociado. Si no existe, devuelve false, y no modifica value. "
-                              alt="" coords="363,56,429,83"/>
-                    </map>
-                </div>
-                </p>
+            </div>
+        </div>
+        <h2 class="groupheader">Member Data Documentation</h2>
+        <a class="anchor" id="a002522e5d2170bbfe0e8f2c9cbf4e779"></a>
+        <div class="memitem">
+            <div class="memproto">
+                <table class="memname">
+                    <tr>
+                        <td class="memname"><a class="el"
+                                               href="class_shared_server_connection.html">SharedServerConnection</a>&amp;
+                            Login::sharedServer
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
 
             </div>
         </div>

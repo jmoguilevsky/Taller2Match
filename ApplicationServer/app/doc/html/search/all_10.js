@@ -1,8 +1,7 @@
 var searchData =
     [
-        ['throwlogicerror', ['throwLogicError', ['../namespace_json.html#a27790f21f17922fac81e7cd72a5659a5', 1, 'Json']]],
-        ['throwruntimeerror', ['throwRuntimeError', ['../namespace_json.html#a0ab7ff7f99788262d92d9ff3d924e065', 1, 'Json']]],
-        ['timetostring', ['timeToString', ['../namespaceutils.html#ae7cd5168f725959266c89799622485bf', 1, 'utils']]],
-        ['tocstring', ['toCString', ['../class_h_t_t_p_request.html#acaf1b7dfb647339812e92d14d8921cfd', 1, 'HTTPRequest::toCString()'], ['../class_h_t_t_p_response.html#acf3cc435114cf49b8531afa7c1fc5d4a', 1, 'HTTPResponse::toCString()']]],
-        ['tostring', ['toString', ['../class_h_t_t_p_request.html#a0905012de141cce7785b33c8d10623c8', 1, 'HTTPRequest::toString()'], ['../class_h_t_t_p_response.html#a64720f0ed87399652cdef947dc6877ac', 1, 'HTTPResponse::toString()']]]
+        ['rejectuser', ['rejectUser', ['../class_matches_d_b.html#a0dd73fba21bba1441b8aac3fa09c280e', 1, 'MatchesDB']]],
+        ['request', ['request', ['../class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044', 1, 'RequestHandler']]],
+        ['requesthandler', ['RequestHandler', ['../class_request_handler.html', 1, 'RequestHandler'], ['../class_request_handler.html#ad33af675073689c2218049195503f65b', 1, 'RequestHandler::RequestHandler()']]],
+        ['requesthandler_2eh', ['RequestHandler.h', ['../_request_handler_8h.html', 1, '']]]
     ];

@@ -1,6 +1,11 @@
 var searchData =
     [
-        ['valuetoquotedstring', ['valueToQuotedString', ['../namespace_json.html#aaf777a6923bcb4cf63a2729973fe5315', 1, 'Json']]],
-        ['valuetostring', ['valueToString', ['../namespace_json.html#a4732517cb28d203cfd4354d05952a81b', 1, 'Json::valueToString(LargestInt value)'], ['../namespace_json.html#a6283ea3db02efe9104ae6baff698245a', 1, 'Json::valueToString(LargestUInt value)'], ['../namespace_json.html#a41f0a9fca69a534a8646ce0123683a8b', 1, 'Json::valueToString(double value, bool useSpecialFloats, unsigned int precision)'], ['../namespace_json.html#a3cf0c8dbbdb898c4a6fad54670b34bd1', 1, 'Json::valueToString(double value)'], ['../namespace_json.html#a0a706a1fffba4fe8a8c1ef75b2dbbfab', 1, 'Json::valueToString(bool value)']]],
-        ['vectorintersection', ['vectorIntersection', ['../namespaceutils.html#a92b7eaee29ec3ec5c8c9e834b6fc7acc', 1, 'utils']]]
+        ['throwlogicerror', ['throwLogicError', ['../namespace_json.html#a27790f21f17922fac81e7cd72a5659a5', 1, 'Json']]],
+        ['throwruntimeerror', ['throwRuntimeError', ['../namespace_json.html#a0ab7ff7f99788262d92d9ff3d924e065', 1, 'Json']]],
+        ['timetostring', ['timeToString', ['../namespaceutils.html#ae7cd5168f725959266c89799622485bf', 1, 'utils']]],
+        ['tocstring', ['toCString', ['../class_h_t_t_p_request.html#acaf1b7dfb647339812e92d14d8921cfd', 1, 'HTTPRequest::toCString()'], ['../class_h_t_t_p_response.html#acf3cc435114cf49b8531afa7c1fc5d4a', 1, 'HTTPResponse::toCString()']]],
+        ['tokenmanager', ['TokenManager', ['../class_token_manager.html', 1, '']]],
+        ['tokenmanager_2ecpp', ['TokenManager.cpp', ['../_token_manager_8cpp.html', 1, '']]],
+        ['tokenmanager_2eh', ['TokenManager.h', ['../_token_manager_8h.html', 1, '']]],
+        ['tostring', ['toString', ['../class_h_t_t_p_request.html#a0905012de141cce7785b33c8d10623c8', 1, 'HTTPRequest::toString()'], ['../class_h_t_t_p_response.html#a64720f0ed87399652cdef947dc6877ac', 1, 'HTTPResponse::toString()']]]
     ];

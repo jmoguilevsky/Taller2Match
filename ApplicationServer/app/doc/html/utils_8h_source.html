@@ -145,99 +145,137 @@
                     class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;mongoose-master/mongoose.h&quot;</span>
             </div>
             <div class="line"><a name="l00009"></a><span
-                    class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span>
+                    class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;json/json.h&quot;</span>
             </div>
             <div class="line"><a name="l00010"></a><span
-                    class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span>
+                    class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span>
             </div>
             <div class="line"><a name="l00011"></a><span
-                    class="lineno">   11</span>&#160;</div>
-            <div class="line"><a name="l00012"></a><span class="lineno"><a
-                    class="line" href="namespaceutils.html">   12</a></span>&#160;<span
+                    class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span>
+            </div>
+            <div class="line"><a name="l00012"></a><span
+                    class="lineno">   12</span>&#160;</div>
+            <div class="line"><a name="l00013"></a><span class="lineno"><a
+                    class="line" href="namespaceutils.html">   13</a></span>&#160;<span
                     class="keyword">namespace </span><a class="code"
                                                         href="namespaceutils.html">utils</a>
                 {
             </div>
-            <div class="line"><a name="l00013"></a><span
-                    class="lineno">   13</span>&#160; std::string <a
+            <div class="line"><a name="l00014"></a><span
+                    class="lineno">   14</span>&#160; std::string <a
                     class="code"
                     href="namespaceutils.html#a5ef5cbcc69b59b61b15c39755c450922">bufToString</a>(<span
                     class="keyword">struct</span> mg_connection *connection);
             </div>
-            <div class="line"><a name="l00014"></a><span
-                    class="lineno">   14</span>&#160;</div>
             <div class="line"><a name="l00015"></a><span
-                    class="lineno">   15</span>&#160; std::vector&lt;std::string&gt;
+                    class="lineno">   15</span>&#160;</div>
+            <div class="line"><a name="l00016"></a><span
+                    class="lineno">   16</span>&#160; std::vector&lt;std::string&gt;
                 &amp;<a class="code"
                         href="namespaceutils.html#a96c1735fb3fb359ed4f6970f18dfbed7">split</a>(<span
                         class="keyword">const</span> std::string &amp;s, <span
                         class="keywordtype">char</span> delim,
             </div>
-            <div class="line"><a name="l00016"></a><span
-                    class="lineno">   16</span>&#160; std::vector&lt;std::string&gt;
+            <div class="line"><a name="l00017"></a><span
+                    class="lineno">   17</span>&#160; std::vector&lt;std::string&gt;
                 &amp;elems);
             </div>
-            <div class="line"><a name="l00017"></a><span
-                    class="lineno">   17</span>&#160;</div>
             <div class="line"><a name="l00018"></a><span
-                    class="lineno">   18</span>&#160; std::vector&lt;std::string&gt;
+                    class="lineno">   18</span>&#160;</div>
+            <div class="line"><a name="l00019"></a><span
+                    class="lineno">   19</span>&#160; std::vector&lt;std::string&gt;
                 <a class="code"
                    href="namespaceutils.html#a92b7eaee29ec3ec5c8c9e834b6fc7acc">vectorIntersection</a>(std::vector&lt;std::string&gt;
                 &amp;v1,
             </div>
-            <div class="line"><a name="l00019"></a><span
-                    class="lineno">   19</span>&#160; std::vector&lt;std::string&gt;
+            <div class="line"><a name="l00020"></a><span
+                    class="lineno">   20</span>&#160; std::vector&lt;std::string&gt;
                 &amp;v2);
             </div>
-            <div class="line"><a name="l00020"></a><span
-                    class="lineno">   20</span>&#160;</div>
             <div class="line"><a name="l00021"></a><span
-                    class="lineno">   21</span>&#160; tm <a class="code"
-                                                            href="namespaceutils.html#abbeec5961db7bae10118274ab727d414">currentDateTime</a>();
-            </div>
+                    class="lineno">   21</span>&#160;</div>
             <div class="line"><a name="l00022"></a><span
-                    class="lineno">   22</span>&#160;</div>
+                    class="lineno">   22</span>&#160; std::string <a
+                    class="code"
+                    href="namespaceutils.html#a6a52693dba2b97d28a6591f5ac6d5e53">mgStrToString</a>(<span
+                    class="keyword">const</span> <span
+                    class="keyword">struct</span> mg_str &amp;str);
+            </div>
             <div class="line"><a name="l00023"></a><span
-                    class="lineno">   23</span>&#160; tm <a class="code"
+                    class="lineno">   23</span>&#160;</div>
+            <div class="line"><a name="l00024"></a><span
+                    class="lineno">   24</span>&#160; tm <a class="code"
                                                             href="namespaceutils.html#abbeec5961db7bae10118274ab727d414">currentDateTime</a>();
             </div>
-            <div class="line"><a name="l00024"></a><span
-                    class="lineno">   24</span>&#160;</div>
             <div class="line"><a name="l00025"></a><span
-                    class="lineno">   25</span>&#160; std::string <a
+                    class="lineno">   25</span>&#160;</div>
+            <div class="line"><a name="l00026"></a><span
+                    class="lineno">   26</span>&#160; tm <a class="code"
+                                                            href="namespaceutils.html#abbeec5961db7bae10118274ab727d414">currentDateTime</a>();
+            </div>
+            <div class="line"><a name="l00027"></a><span
+                    class="lineno">   27</span>&#160;</div>
+            <div class="line"><a name="l00028"></a><span
+                    class="lineno">   28</span>&#160; std::string <a
                     class="code"
                     href="namespaceutils.html#ae7cd5168f725959266c89799622485bf">timeToString</a>(tm
                 tstruct);
             </div>
-            <div class="line"><a name="l00026"></a><span
-                    class="lineno">   26</span>&#160;</div>
-            <div class="line"><a name="l00027"></a><span
-                    class="lineno">   27</span>&#160; tm <a class="code"
-                                                            href="namespaceutils.html#ae27c0a0080eadded5b4de30421436aa8">stringToTime</a>(std::string
-                c);
-            </div>
-            <div class="line"><a name="l00028"></a><span
-                    class="lineno">   28</span>&#160;</div>
             <div class="line"><a name="l00029"></a><span
-                    class="lineno">   29</span>&#160; tm <a class="code"
+                    class="lineno">   29</span>&#160;</div>
+            <div class="line"><a name="l00030"></a><span
+                    class="lineno">   30</span>&#160; tm <a class="code"
                                                             href="namespaceutils.html#ae27c0a0080eadded5b4de30421436aa8">stringToTime</a>(std::string
                 c);
             </div>
-            <div class="line"><a name="l00030"></a><span
-                    class="lineno">   30</span>&#160;</div>
             <div class="line"><a name="l00031"></a><span
-                    class="lineno">   31</span>&#160; <span class="keywordtype">int</span>
+                    class="lineno">   31</span>&#160;</div>
+            <div class="line"><a name="l00032"></a><span
+                    class="lineno">   32</span>&#160; tm <a class="code"
+                                                            href="namespaceutils.html#ae27c0a0080eadded5b4de30421436aa8">stringToTime</a>(std::string
+                c);
+            </div>
+            <div class="line"><a name="l00033"></a><span
+                    class="lineno">   33</span>&#160;</div>
+            <div class="line"><a name="l00034"></a><span
+                    class="lineno">   34</span>&#160; <span class="keywordtype">int</span>
                 <a class="code"
                    href="namespaceutils.html#a46140d3278a856f4b42f2e75c1505634">diffTimeInSeconds</a>(tm
                 t0, tm t1);
             </div>
-            <div class="line"><a name="l00032"></a><span
-                    class="lineno">   32</span>&#160;</div>
-            <div class="line"><a name="l00033"></a><span
-                    class="lineno">   33</span>&#160;}
+            <div class="line"><a name="l00035"></a><span
+                    class="lineno">   35</span>&#160;</div>
+            <div class="line"><a name="l00036"></a><span
+                    class="lineno">   36</span>&#160; Json::Value <a
+                    class="code"
+                    href="namespaceutils.html#a9c9c7a91ada0cc58adaf2a2d8768d7f5">stringToJson</a>(<span
+                    class="keyword">const</span> std::string &amp;str);
             </div>
-            <div class="line"><a name="l00034"></a><span
-                    class="lineno">   34</span>&#160;<span class="preprocessor">#endif //MULTITHREADMULTICONNECTION_UTILS_H</span>
+            <div class="line"><a name="l00037"></a><span
+                    class="lineno">   37</span>&#160;</div>
+            <div class="line"><a name="l00038"></a><span
+                    class="lineno">   38</span>&#160; std::string <a
+                    class="code"
+                    href="namespaceutils.html#a7318bdb4d8739cb532dd53bb45475f0d">JsonToString</a>(<span
+                    class="keyword">const</span> Json::Value &amp;value);
+            </div>
+            <div class="line"><a name="l00039"></a><span
+                    class="lineno">   39</span>&#160;</div>
+            <div class="line"><a name="l00040"></a><span
+                    class="lineno">   40</span>&#160;}
+            </div>
+            <div class="line"><a name="l00041"></a><span
+                    class="lineno">   41</span>&#160;<span class="preprocessor">#endif //MULTITHREADMULTICONNECTION_UTILS_H</span>
+            </div>
+            <div class="ttc"
+                 id="namespaceutils_html_a9c9c7a91ada0cc58adaf2a2d8768d7f5">
+                <div class="ttname"><a
+                        href="namespaceutils.html#a9c9c7a91ada0cc58adaf2a2d8768d7f5">utils::stringToJson</a>
+                </div>
+                <div class="ttdeci">Json::Value stringToJson(const std::string
+                    &amp;str)
+                </div>
+                <div class="ttdef"><b>Definition:</b> utils.cpp:51</div>
             </div>
             <div class="ttc"
                  id="namespaceutils_html_ae27c0a0080eadded5b4de30421436aa8">
@@ -245,7 +283,27 @@
                         href="namespaceutils.html#ae27c0a0080eadded5b4de30421436aa8">utils::stringToTime</a>
                 </div>
                 <div class="ttdeci">tm stringToTime(std::string c)</div>
-                <div class="ttdef"><b>Definition:</b> utils.cpp:27</div>
+                <div class="ttdef"><b>Definition:</b> utils.cpp:26</div>
+            </div>
+            <div class="ttc"
+                 id="namespaceutils_html_a6a52693dba2b97d28a6591f5ac6d5e53">
+                <div class="ttname"><a
+                        href="namespaceutils.html#a6a52693dba2b97d28a6591f5ac6d5e53">utils::mgStrToString</a>
+                </div>
+                <div class="ttdeci">std::string mgStrToString(const struct
+                    mg_str &amp;str)
+                </div>
+                <div class="ttdef"><b>Definition:</b> utils.cpp:63</div>
+            </div>
+            <div class="ttc"
+                 id="namespaceutils_html_a7318bdb4d8739cb532dd53bb45475f0d">
+                <div class="ttname"><a
+                        href="namespaceutils.html#a7318bdb4d8739cb532dd53bb45475f0d">utils::JsonToString</a>
+                </div>
+                <div class="ttdeci">std::string JsonToString(const Json::Value
+                    &amp;value)
+                </div>
+                <div class="ttdef"><b>Definition:</b> utils.cpp:58</div>
             </div>
             <div class="ttc"
                  id="namespaceutils_html_abbeec5961db7bae10118274ab727d414">
@@ -253,12 +311,12 @@
                         href="namespaceutils.html#abbeec5961db7bae10118274ab727d414">utils::currentDateTime</a>
                 </div>
                 <div class="ttdeci">tm currentDateTime()</div>
-                <div class="ttdef"><b>Definition:</b> utils.cpp:13</div>
+                <div class="ttdef"><b>Definition:</b> utils.cpp:12</div>
             </div>
             <div class="ttc" id="namespaceutils_html">
                 <div class="ttname"><a href="namespaceutils.html">utils</a>
                 </div>
-                <div class="ttdef"><b>Definition:</b> utils.h:12</div>
+                <div class="ttdef"><b>Definition:</b> utils.h:13</div>
             </div>
             <div class="ttc"
                  id="namespaceutils_html_a5ef5cbcc69b59b61b15c39755c450922">
@@ -288,7 +346,7 @@
                     split(const std::string &amp;s, char delim, std::vector&lt;
                     std::string &gt; &amp;elems)
                 </div>
-                <div class="ttdef"><b>Definition:</b> utils.cpp:40</div>
+                <div class="ttdef"><b>Definition:</b> utils.cpp:39</div>
             </div>
             <div class="ttc"
                  id="namespaceutils_html_a46140d3278a856f4b42f2e75c1505634">
@@ -296,7 +354,7 @@
                         href="namespaceutils.html#a46140d3278a856f4b42f2e75c1505634">utils::diffTimeInSeconds</a>
                 </div>
                 <div class="ttdeci">int diffTimeInSeconds(tm t0, tm t1)</div>
-                <div class="ttdef"><b>Definition:</b> utils.cpp:34</div>
+                <div class="ttdef"><b>Definition:</b> utils.cpp:33</div>
             </div>
             <div class="ttc"
                  id="namespaceutils_html_ae7cd5168f725959266c89799622485bf">
@@ -304,7 +362,7 @@
                         href="namespaceutils.html#ae7cd5168f725959266c89799622485bf">utils::timeToString</a>
                 </div>
                 <div class="ttdeci">std::string timeToString(tm tstruct)</div>
-                <div class="ttdef"><b>Definition:</b> utils.cpp:21</div>
+                <div class="ttdef"><b>Definition:</b> utils.cpp:20</div>
             </div>
         </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

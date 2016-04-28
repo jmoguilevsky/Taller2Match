@@ -1,4 +1,4 @@
 var searchData =
     [
-        ['isempty', ['isEmpty', ['../class_h_t_t_p_request.html#ab9cbbd29971d2773d8d5dbeff9eb27d8', 1, 'HTTPRequest']]]
+        ['fechahora', ['fechaHora', ['../logger_8cpp.html#a249a8cb489e57e3467e539699a1b4dcc', 1, 'logger.cpp']]]
     ];

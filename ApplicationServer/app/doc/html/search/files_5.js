@@ -1,8 +1,9 @@
 var searchData =
     [
-        ['main_2ecpp', ['main.cpp', ['../main_8cpp.html', 1, '']]],
-        ['matcher_2ecpp', ['Matcher.cpp', ['../_matcher_8cpp.html', 1, '']]],
-        ['matcher_2eh', ['Matcher.h', ['../_matcher_8h.html', 1, '']]],
-        ['matchesdb_2ecpp', ['MatchesDB.cpp', ['../_matches_d_b_8cpp.html', 1, '']]],
-        ['matchesdb_2eh', ['MatchesDB.h', ['../_matches_d_b_8h.html', 1, '']]]
+        ['logger_2ecpp', ['logger.cpp', ['../logger_8cpp.html', 1, '']]],
+        ['logger_2eh', ['logger.h', ['../logger_8h.html', 1, '']]],
+        ['login_2ecpp', ['Login.cpp', ['../_login_8cpp.html', 1, '']]],
+        ['login_2eh', ['Login.h', ['../_login_8h.html', 1, '']]],
+        ['logindb_2ecpp', ['LoginDB.cpp', ['../_login_d_b_8cpp.html', 1, '']]],
+        ['logindb_2eh', ['LoginDB.h', ['../_login_d_b_8h.html', 1, '']]]
     ];

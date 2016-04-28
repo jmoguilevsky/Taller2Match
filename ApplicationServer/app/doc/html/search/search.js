@@ -8,7 +8,7 @@ function convertToId(search) {
     }
         else if (cn < 16) {
             result += "_0" + cn.toString(16);
-        }
+    }
         else {
             result += "_" + cn.toString(16);
         }
@@ -126,7 +126,7 @@ function SearchBox(name, resultsPath, inFrame, label) {
             searchSelectWindow.style.display = 'block';
             searchSelectWindow.style.left = left + 'px';
             searchSelectWindow.style.top = top + 'px';
-        }
+    }
 
         // stop selection hide timer
         if (this.hideTimeout) {
@@ -254,12 +254,12 @@ function SearchBox(name, resultsPath, inFrame, label) {
         {
             this.searchIndex--;
             this.OnSelectItem(this.searchIndex);
-        }
+    }
         else if (e.keyCode == 13 || e.keyCode == 27) {
             this.OnSelectItem(this.searchIndex);
             this.CloseSelectionWindow();
             this.DOMSearchField().focus();
-        }
+    }
         return false;
     }
 
@@ -288,7 +288,7 @@ function SearchBox(name, resultsPath, inFrame, label) {
         if (0xD800 <= code && code <= 0xDBFF && searchValue > 1) // surrogate pair
         {
             idxChar = searchValue.substr(0, 2);
-        }
+    }
 
         var resultsPage;
         var resultsPageWithSearch;
@@ -300,7 +300,7 @@ function SearchBox(name, resultsPath, inFrame, label) {
             resultsPage = this.resultsPath + '/' + indexSectionNames[this.searchIndex] + '_' + hexCode + '.html';
             resultsPageWithSearch = resultsPage + '?' + escape(searchValue);
             hasResultsPage = true;
-    }
+        }
         else // nothing available for this search term
         {
             resultsPage = this.resultsPath + '/nomatches.html';
@@ -331,7 +331,7 @@ function SearchBox(name, resultsPath, inFrame, label) {
                 domPopupSearchResultsWindow.style.top = top + 'px';
                 domPopupSearchResultsWindow.style.left = left + 'px';
             }
-        }
+    }
 
         this.lastSearchValue = searchValue;
         this.lastResultsPage = resultsPage;
@@ -362,7 +362,7 @@ function SearchBox(name, resultsPath, inFrame, label) {
             this.searchActive = false;
             this.lastSearchValue = ''
             this.lastResultsPage = '';
-        }
+    }
     }
 }
 
@@ -387,10 +387,10 @@ function SearchResults(name) {
 
             if (element.nodeName == 'DIV' && element.hasChildNodes()) {
                 element = element.firstChild;
-            }
+        }
             else if (element.nextSibling) {
                 element = element.nextSibling;
-            }
+        }
             else {
                 do
                 {
@@ -401,7 +401,7 @@ function SearchResults(name) {
                 if (element && element != parentElement) {
                     element = element.nextSibling;
                 }
-        }
+            }
         }
     }
 
@@ -413,7 +413,7 @@ function SearchResults(name) {
         }
             else {
                 element.style.display = 'block';
-            }
+        }
         }
     }
 
