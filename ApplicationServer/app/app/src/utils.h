@@ -37,5 +37,6 @@ namespace utils {
 
 	std::string JsonToString(const Json::Value &value);
 
+	int sum(int a, int b);
 }
 #endif //MULTITHREADMULTICONNECTION_UTILS_H

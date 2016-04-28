@@ -1,6 +1,6 @@
 #include "mongoose.h"
 #ifdef MG_MODULE_LINES
-#line 1 "./src/internal.h"
+#line 1 "./app/internal.h"
 #endif
 /*
  * Copyright (c) 2014 Cesanta Software Limited
@@ -62,8 +62,8 @@
 #define MG_DISABLE_PFS
 #endif
 
-/* Amalgamated: #include "mongoose/src/net.h" */
-/* Amalgamated: #include "mongoose/src/http.h" */
+/* Amalgamated: #include "mongoose/app/net.h" */
+/* Amalgamated: #include "mongoose/app/http.h" */
 
 #define MG_CTL_MSG_MESSAGE_SIZE 8192
 
@@ -129,7 +129,7 @@ extern void *(*test_calloc)(size_t count, size_t size);
 
 #endif /* CS_MONGOOSE_SRC_INTERNAL_H_ */
 #ifdef MG_MODULE_LINES
-#line 1 "./src/../../common/base64.c"
+#line 1 "./app/../../common/base64.c"
 #endif
 /*
  * Copyright (c) 2014 Cesanta Software Limited
@@ -332,7 +332,7 @@ int cs_base64_decode(const unsigned char *s, int len, char *dst) {
 
 #endif /* EXCLUDE_COMMON */
 #ifdef MG_MODULE_LINES
-#line 1 "./src/../../common/cs_dbg.c"
+#line 1 "./app/../../common/cs_dbg.c"
 #endif
 /*
  * Copyright (c) 2014-2016 Cesanta Software Limited
@@ -382,7 +382,7 @@ void cs_log_set_level(enum cs_log_level level) {
 #endif
 }
 #ifdef MG_MODULE_LINES
-#line 1 "./src/../../common/cs_dirent.c"
+#line 1 "./app/../../common/cs_dirent.c"
 #endif
 /*
  * Copyright (c) 2015 Cesanta Software Limited
@@ -520,7 +520,7 @@ int mkdir(const char *path, mode_t mode) {
 /* ISO C requires a translation unit to contain at least one declaration */
 typedef int cs_dirent_dummy;
 #ifdef MG_MODULE_LINES
-#line 1 "./src/../../common/cs_time.c"
+#line 1 "./app/../../common/cs_time.c"
 #endif
 /*
  * Copyright (c) 2014-2016 Cesanta Software Limited
@@ -548,7 +548,7 @@ double cs_time() {
   return now;
 }
 #ifdef MG_MODULE_LINES
-#line 1 "./src/../deps/frozen/frozen.c"
+#line 1 "./app/../deps/frozen/frozen.c"
 #endif
 /*
  * Copyright (c) 2004-2013 Sergey Lyubka <valenok@gmail.com>
@@ -1145,7 +1145,7 @@ int json_emit(char *buf, int buf_len, const char *fmt, ...) {
   return len;
 }
 #ifdef MG_MODULE_LINES
-#line 1 "./src/../../common/md5.c"
+#line 1 "./app/../../common/md5.c"
 #endif
 /*
  * This code implements the MD5 message-digest algorithm.
@@ -1392,7 +1392,7 @@ char *cs_md5(char buf[33], ...) {
 
 #endif /* EXCLUDE_COMMON */
 #ifdef MG_MODULE_LINES
-#line 1 "./src/../../common/mbuf.c"
+#line 1 "./app/../../common/mbuf.c"
 #endif
 /*
  * Copyright (c) 2014 Cesanta Software Limited
@@ -1490,7 +1490,7 @@ void mbuf_remove(struct mbuf *mb, size_t n) {
 
 #endif /* EXCLUDE_COMMON */
 #ifdef MG_MODULE_LINES
-#line 1 "./src/../../common/sha1.c"
+#line 1 "./app/../../common/sha1.c"
 #endif
 /* Copyright(c) By Steve Reid <steve@edmweb.com> */
 /* 100% Public Domain */
@@ -1744,7 +1744,7 @@ void cs_hmac_sha1(const unsigned char *key, size_t keylen,
 
 #endif /* EXCLUDE_COMMON */
 #ifdef MG_MODULE_LINES
-#line 1 "./src/../../common/str_util.c"
+#line 1 "./app/../../common/str_util.c"
 #endif
 /*
  * Copyright (c) 2015 Cesanta Software Limited
@@ -2013,7 +2013,7 @@ const char *c_strnstr(const char *s, const char *find, size_t slen) {
 
 #endif /* EXCLUDE_COMMON */
 #ifdef MG_MODULE_LINES
-#line 1 "./src/net.c"
+#line 1 "./app/net.c"
 #endif
 /*
  * Copyright (c) 2014 Cesanta Software Limited
@@ -2033,10 +2033,10 @@ const char *c_strnstr(const char *s, const char *find, size_t slen) {
  * license, as set out in <https://www.cesanta.com/license>.
  */
 
-/* Amalgamated: #include "mongoose/src/internal.h" */
-/* Amalgamated: #include "mongoose/src/util.h" */
-/* Amalgamated: #include "mongoose/src/dns.h" */
-/* Amalgamated: #include "mongoose/src/resolv.h" */
+/* Amalgamated: #include "mongoose/app/internal.h" */
+/* Amalgamated: #include "mongoose/app/util.h" */
+/* Amalgamated: #include "mongoose/app/dns.h" */
+/* Amalgamated: #include "mongoose/app/resolv.h" */
 /* Amalgamated: #include "common/cs_time.h" */
 
 #if MG_MGR_EV_MGR == 1 /* epoll() */
@@ -3045,7 +3045,7 @@ double mg_time() {
   return cs_time();
 }
 #ifdef MG_MODULE_LINES
-#line 1 "./src/net_if_socket.c"
+#line 1 "./app/net_if_socket.c"
 #endif
 /*
  * Copyright (c) 2014-2016 Cesanta Software Limited
@@ -3054,8 +3054,8 @@ double mg_time() {
 
 #ifndef MG_DISABLE_SOCKET_IF
 
-/* Amalgamated: #include "mongoose/src/internal.h" */
-/* Amalgamated: #include "mongoose/src/util.h" */
+/* Amalgamated: #include "mongoose/app/internal.h" */
+/* Amalgamated: #include "mongoose/app/util.h" */
 
 #define MG_TCP_RECV_BUFFER_SIZE 1024
 #define MG_UDP_RECV_BUFFER_SIZE 1500
@@ -3889,15 +3889,15 @@ void mg_if_get_conn_addr(struct mg_connection *nc, int remote,
 
 #endif /* !MG_DISABLE_SOCKET_IF */
 #ifdef MG_MODULE_LINES
-#line 1 "./src/multithreading.c"
+#line 1 "./app/multithreading.c"
 #endif
 /*
  * Copyright (c) 2014 Cesanta Software Limited
  * All rights reserved
  */
 
-/* Amalgamated: #include "mongoose/src/internal.h" */
-/* Amalgamated: #include "mongoose/src/util.h" */
+/* Amalgamated: #include "mongoose/app/internal.h" */
+/* Amalgamated: #include "mongoose/app/util.h" */
 
 #ifdef MG_ENABLE_THREADS
 
@@ -3996,15 +3996,15 @@ void mg_enable_multithreading(struct mg_connection *nc) {
 }
 #endif
 #ifdef MG_MODULE_LINES
-#line 1 "./src/uri.c"
+#line 1 "./app/uri.c"
 #endif
 /*
  * Copyright (c) 2014 Cesanta Software Limited
  * All rights reserved
  */
 
-/* Amalgamated: #include "mongoose/src/internal.h" */
-/* Amalgamated: #include "mongoose/src/uri.h" */
+/* Amalgamated: #include "mongoose/app/internal.h" */
+/* Amalgamated: #include "mongoose/app/uri.h" */
 
 /*
  * scan string until `sep`, keeping track of component boundaries in `res`.
@@ -4173,7 +4173,7 @@ int mg_normalize_uri_path(const struct mg_str *in, struct mg_str *out) {
   return 1;
 }
 #ifdef MG_MODULE_LINES
-#line 1 "./src/http.c"
+#line 1 "./app/http.c"
 #endif
 /*
  * Copyright (c) 2014 Cesanta Software Limited
@@ -4182,8 +4182,8 @@ int mg_normalize_uri_path(const struct mg_str *in, struct mg_str *out) {
 
 #ifndef MG_DISABLE_HTTP
 
-/* Amalgamated: #include "mongoose/src/internal.h" */
-/* Amalgamated: #include "mongoose/src/util.h" */
+/* Amalgamated: #include "mongoose/app/internal.h" */
+/* Amalgamated: #include "mongoose/app/util.h" */
 /* Amalgamated: #include "common/sha1.h" */
 /* Amalgamated: #include "common/md5.h" */
 
@@ -7705,7 +7705,7 @@ void mg_register_http_endpoint(struct mg_connection *nc, const char *uri_path,
 
 #endif /* MG_DISABLE_HTTP */
 #ifdef MG_MODULE_LINES
-#line 1 "./src/util.c"
+#line 1 "./app/util.c"
 #endif
 /*
  * Copyright (c) 2014 Cesanta Software Limited
@@ -7713,8 +7713,8 @@ void mg_register_http_endpoint(struct mg_connection *nc, const char *uri_path,
  */
 
 /* Amalgamated: #include "common/base64.h" */
-/* Amalgamated: #include "mongoose/src/internal.h" */
-/* Amalgamated: #include "mongoose/src/util.h" */
+/* Amalgamated: #include "mongoose/app/internal.h" */
+/* Amalgamated: #include "mongoose/app/util.h" */
 
 const char *mg_skip(const char *s, const char *end, const char *delims,
                     struct mg_str *v) {
@@ -8084,15 +8084,15 @@ struct mg_str mg_mk_str(const char *s) {
   return ret;
 }
 #ifdef MG_MODULE_LINES
-#line 1 "./src/json-rpc.c"
+#line 1 "./app/json-rpc.c"
 #endif
 /* Copyright (c) 2014 Cesanta Software Limited */
 /* All rights reserved */
 
 #ifndef MG_DISABLE_JSON_RPC
 
-/* Amalgamated: #include "mongoose/src/internal.h" */
-/* Amalgamated: #include "mongoose/src/json-rpc.h" */
+/* Amalgamated: #include "mongoose/app/internal.h" */
+/* Amalgamated: #include "mongoose/app/json-rpc.h" */
 /* Amalgamated: #include "mongoose/deps/frozen/frozen.h" */
 
 int mg_rpc_create_reply(char *buf, int len, const struct mg_rpc_request *req,
@@ -8245,7 +8245,7 @@ int mg_rpc_parse_reply(const char *buf, int len, struct json_token *toks,
 
 #endif /* MG_DISABLE_JSON_RPC */
 #ifdef MG_MODULE_LINES
-#line 1 "./src/mqtt.c"
+#line 1 "./app/mqtt.c"
 #endif
 /*
  * Copyright (c) 2014 Cesanta Software Limited
@@ -8254,8 +8254,8 @@ int mg_rpc_parse_reply(const char *buf, int len, struct json_token *toks,
 
 #ifndef MG_DISABLE_MQTT
 
-/* Amalgamated: #include "mongoose/src/internal.h" */
-/* Amalgamated: #include "mongoose/src/mqtt.h" */
+/* Amalgamated: #include "mongoose/app/internal.h" */
+/* Amalgamated: #include "mongoose/app/mqtt.h" */
 
 MG_INTERNAL int parse_mqtt(struct mbuf *io, struct mg_mqtt_message *mm) {
   uint8_t header;
@@ -8546,15 +8546,15 @@ void mg_mqtt_disconnect(struct mg_connection *nc) {
 
 #endif /* MG_DISABLE_MQTT */
 #ifdef MG_MODULE_LINES
-#line 1 "./src/mqtt-broker.c"
+#line 1 "./app/mqtt-broker.c"
 #endif
 /*
  * Copyright (c) 2014 Cesanta Software Limited
  * All rights reserved
  */
 
-/* Amalgamated: #include "mongoose/src/internal.h" */
-/* Amalgamated: #include "mongoose/src/mqtt-broker.h" */
+/* Amalgamated: #include "mongoose/app/internal.h" */
+/* Amalgamated: #include "mongoose/app/mqtt-broker.h" */
 
 #ifdef MG_ENABLE_MQTT_BROKER
 
@@ -8719,7 +8719,7 @@ struct mg_mqtt_session *mg_mqtt_next(struct mg_mqtt_broker *brk,
 
 #endif /* MG_ENABLE_MQTT_BROKER */
 #ifdef MG_MODULE_LINES
-#line 1 "./src/dns.c"
+#line 1 "./app/dns.c"
 #endif
 /*
  * Copyright (c) 2014 Cesanta Software Limited
@@ -8728,8 +8728,8 @@ struct mg_mqtt_session *mg_mqtt_next(struct mg_mqtt_broker *brk,
 
 #ifndef MG_DISABLE_DNS
 
-/* Amalgamated: #include "mongoose/src/internal.h" */
-/* Amalgamated: #include "mongoose/src/dns.h" */
+/* Amalgamated: #include "mongoose/app/internal.h" */
+/* Amalgamated: #include "mongoose/app/dns.h" */
 
 static int mg_dns_tid = 0xa0;
 
@@ -9079,7 +9079,7 @@ void mg_set_protocol_dns(struct mg_connection *nc) {
 
 #endif /* MG_DISABLE_DNS */
 #ifdef MG_MODULE_LINES
-#line 1 "./src/dns-server.c"
+#line 1 "./app/dns-server.c"
 #endif
 /*
  * Copyright (c) 2014 Cesanta Software Limited
@@ -9088,8 +9088,8 @@ void mg_set_protocol_dns(struct mg_connection *nc) {
 
 #ifdef MG_ENABLE_DNS_SERVER
 
-/* Amalgamated: #include "mongoose/src/internal.h" */
-/* Amalgamated: #include "mongoose/src/dns-server.h" */
+/* Amalgamated: #include "mongoose/app/internal.h" */
+/* Amalgamated: #include "mongoose/app/dns-server.h" */
 
 struct mg_dns_reply mg_dns_create_reply(struct mbuf *io,
                                         struct mg_dns_message *msg) {
@@ -9153,7 +9153,7 @@ int mg_dns_reply_record(struct mg_dns_reply *reply,
 
 #endif /* MG_ENABLE_DNS_SERVER */
 #ifdef MG_MODULE_LINES
-#line 1 "./src/resolv.c"
+#line 1 "./app/resolv.c"
 #endif
 /*
  * Copyright (c) 2014 Cesanta Software Limited
@@ -9162,8 +9162,8 @@ int mg_dns_reply_record(struct mg_dns_reply *reply,
 
 #ifndef MG_DISABLE_RESOLVER
 
-/* Amalgamated: #include "mongoose/src/internal.h" */
-/* Amalgamated: #include "mongoose/src/resolv.h" */
+/* Amalgamated: #include "mongoose/app/internal.h" */
+/* Amalgamated: #include "mongoose/app/resolv.h" */
 
 #ifndef MG_DEFAULT_NAMESERVER
 #define MG_DEFAULT_NAMESERVER "8.8.8.8"
@@ -9412,7 +9412,7 @@ int mg_resolve_async_opt(struct mg_mgr *mgr, const char *name, int query,
 
 #endif /* MG_DISABLE_RESOLVE */
 #ifdef MG_MODULE_LINES
-#line 1 "./src/coap.c"
+#line 1 "./app/coap.c"
 #endif
 /*
  * Copyright (c) 2015 Cesanta Software Limited
@@ -9431,8 +9431,8 @@ int mg_resolve_async_opt(struct mg_mgr *mgr, const char *name, int query,
  * license, as set out in <https://www.cesanta.com/license>.
  */
 
-/* Amalgamated: #include "mongoose/src/internal.h" */
-/* Amalgamated: #include "mongoose/src/coap.h" */
+/* Amalgamated: #include "mongoose/app/internal.h" */
+/* Amalgamated: #include "mongoose/app/coap.h" */
 
 #ifdef MG_ENABLE_COAP
 

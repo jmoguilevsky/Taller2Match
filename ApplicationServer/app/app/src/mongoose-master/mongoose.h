@@ -538,9 +538,9 @@ typedef struct stat cs_stat_t;
 
 /* Some functions we implement for Mongoose. */
 
-const char *inet_ntop(int af, const void *src, char *dst, socklen_t size);
+const char *inet_ntop(int af, const void *app, char *dst, socklen_t size);
 char *inet_ntoa(struct in_addr in);
-int inet_pton(int af, const char *src, void *dst);
+int inet_pton(int af, const char *app, void *dst);
 
 void cc3200_set_non_blocking_mode(int fd);
 
@@ -1695,7 +1695,7 @@ int mg_vcasecmp(const struct mg_str *str2, const char *str1);
 int mg_base64_decode(const unsigned char *s, int len, char *dst);
 
 /*
- * Base64-encode chunk of memory `src`, `src_len` into the destination `dst`.
+ * Base64-encode chunk of memory `app`, `src_len` into the destination `dst`.
  * Destination has to have enough space to hold encoded buffer.
  * Destination is '\0'-terminated.
  */
@@ -2288,7 +2288,7 @@ int mg_get_http_var(const struct mg_str *buf, const char *name, char *dst,
 /*
  * Decode URL-encoded string.
  *
- * Source string is specified by (`src`, `src_len`), and destination is
+ * Source string is specified by (`app`, `src_len`), and destination is
  * (`dst`, `dst_len`). If `is_form_url_encoded` is non-zero, then
  * `+` character is decoded as a blank space character. This function
  * guarantees to `\0`-terminate the destination. If destination is too small,
