@@ -1,0 +1,3 @@
+ApplicationServer/app/src/json/* linguist-vendored
+ApplicationServer/app/src/mongoose-master/* linguist-vendored
+ApplicationServer/app/doc/html/* linguist-documentation
