@@ -109,7 +109,13 @@ public class RegisterActivity extends AppCompatActivity {
         pDialog.setMessage("Registering ...");
         showDialog();
 
-        StringRequest strReq = new StringRequest(Request.Method.POST,
+        String uid = "placeholder id 000";
+        String fecha = "ahora";
+        db.addUser(name, email, uid, fecha);
+        Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
+        hideDialog();
+
+        /*StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_REGISTER, new Response.Listener<String>() {
 
             @Override
@@ -180,7 +186,7 @@ public class RegisterActivity extends AppCompatActivity {
         };
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);*/
     }
 
     private void showDialog() {
