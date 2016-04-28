@@ -5,7 +5,9 @@
     <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=9"/>
     <meta name="generator" content="Doxygen 1.8.9.1"/>
-    <title>Match - Application Server: Handlers/Matcher.h Source File</title>
+    <title>Match - Application Server:
+        /home/chris/Escritorio/Taller2Match/ApplicationServer/app/src/Handlers/Matcher.h
+        Source File</title>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -86,7 +88,7 @@
     <div id="nav-tree">
         <div id="nav-tree-contents">
             <div id="nav-sync" class="sync"></div>
-        </div>
+    </div>
     </div>
     <div id="splitbar" style="-moz-user-select:none;"
          class="ui-resizable-handle">
@@ -143,43 +145,86 @@
                     class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a
                     class="code" href="_request_handler_8h.html">RequestHandler.h</a>&quot;</span>
             </div>
-            <div class="line"><a name="l00010"></a><span class="lineno"><a
-                    class="line" href="class_matcher.html">   10</a></span>&#160;<span
+            <div class="line"><a name="l00009"></a><span
+                    class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;../DB/MatchesDB.h&quot;</span>
+            </div>
+            <div class="line"><a name="l00010"></a><span
+                    class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;../SharedServerConnection.h&quot;</span>
+            </div>
+            <div class="line"><a name="l00011"></a><span
+                    class="lineno">   11</span>&#160;</div>
+            <div class="line"><a name="l00013"></a><span class="lineno"><a
+                    class="line" href="class_matcher.html">   13</a></span>&#160;<span
                     class="keyword">class </span><a class="code"
                                                     href="class_matcher.html">Matcher</a>
                 : <span class="keyword">public</span> <a class="code"
                                                          href="class_request_handler.html">RequestHandler</a>
                 {
             </div>
-            <div class="line"><a name="l00011"></a><span
-                    class="lineno">   11</span>&#160; <span class="comment">// Se encarga de todo lo relacionado con los matches</span>
-            </div>
-            <div class="line"><a name="l00012"></a><span
-                    class="lineno">   12</span>&#160;<span class="keyword">private</span>:
-            </div>
-            <div class="line"><a name="l00013"></a><span
-                    class="lineno">   13</span>&#160; <a class="code"
-                                                         href="class_h_t_t_p_request.html">HTTPRequest</a>
-                getDataFromShared();
-            </div>
             <div class="line"><a name="l00014"></a><span
-                    class="lineno">   14</span>&#160;</div>
+                    class="lineno">   14</span>&#160; <span class="comment">// Se encarga de todo lo relacionado con los matches</span>
+            </div>
             <div class="line"><a name="l00015"></a><span
-                    class="lineno">   15</span>&#160;<span class="keyword">public</span>:
+                    class="lineno">   15</span>&#160;<span class="keyword">private</span>:
             </div>
             <div class="line"><a name="l00016"></a><span
                     class="lineno">   16</span>&#160; <a class="code"
+                                                         href="class_matches_d_b.html">MatchesDB</a>
+                &amp;db;
+            </div>
+            <div class="line"><a name="l00017"></a><span
+                    class="lineno">   17</span>&#160; <a class="code"
+                                                         href="class_shared_server_connection.html">SharedServerConnection</a>
+                &amp;sharedServer;
+            </div>
+            <div class="line"><a name="l00018"></a><span
+                    class="lineno">   18</span>&#160;<span class="keyword">public</span>:
+            </div>
+            <div class="line"><a name="l00019"></a><span
+                    class="lineno">   19</span>&#160; <a class="code"
+                                                         href="class_matcher.html#afafae9a0476c9091929be187484f55b2">Matcher</a>(<a
+                    class="code"
+                    href="class_h_t_t_p_request.html">HTTPRequest</a> <a
+                    class="code"
+                    href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>,
+                <a class="code" href="class_matches_d_b.html">MatchesDB</a>
+                &amp;db,
+            </div>
+            <div class="line"><a name="l00020"></a><span
+                    class="lineno">   20</span>&#160; <a class="code"
+                                                         href="class_shared_server_connection.html">SharedServerConnection</a>
+                &amp;sharedServer);
+            </div>
+            <div class="line"><a name="l00021"></a><span
+                    class="lineno">   21</span>&#160; <a class="code"
                                                          href="class_h_t_t_p_response.html">HTTPResponse</a>
                 <a class="code"
                    href="class_matcher.html#aa88fa5bbb00fe8a0a4b6405f8c22ffa3">handle</a>();
             </div>
-            <div class="line"><a name="l00017"></a><span
-                    class="lineno">   17</span>&#160;};
+            <div class="line"><a name="l00022"></a><span
+                    class="lineno">   22</span>&#160;</div>
+            <div class="line"><a name="l00023"></a><span
+                    class="lineno">   23</span>&#160; <a class="code"
+                                                         href="class_h_t_t_p_response.html">HTTPResponse</a>
+                <a class="code"
+                   href="class_matcher.html#a2d5e1e1705808fcd68d272dc65c12e92">getCandidates</a>();
             </div>
-            <div class="line"><a name="l00018"></a><span
-                    class="lineno">   18</span>&#160;</div>
-            <div class="line"><a name="l00019"></a><span
-                    class="lineno">   19</span>&#160;<span class="preprocessor">#endif //APPSERVER_MATCHER_H</span>
+            <div class="line"><a name="l00024"></a><span
+                    class="lineno">   24</span>&#160;};
+            </div>
+            <div class="line"><a name="l00025"></a><span
+                    class="lineno">   25</span>&#160;</div>
+            <div class="line"><a name="l00026"></a><span
+                    class="lineno">   26</span>&#160;<span class="preprocessor">#endif //APPSERVER_MATCHER_H</span>
+            </div>
+            <div class="ttc" id="class_shared_server_connection_html">
+                <div class="ttname"><a
+                        href="class_shared_server_connection.html">SharedServerConnection</a>
+                </div>
+                <div class="ttdoc">Una conexión hacia el Shared Server.</div>
+                <div class="ttdef"><b>Definition:</b>
+                    SharedServerConnection.h:14
+                </div>
             </div>
             <div class="ttc"
                  id="class_matcher_html_aa88fa5bbb00fe8a0a4b6405f8c22ffa3">
@@ -191,13 +236,29 @@
                     implementan el handle() correspondiente. Devuelve un
                     HTTPResponse que se enviará al usuario que envió el request.
                 </div>
-                <div class="ttdef"><b>Definition:</b> Matcher.cpp:7</div>
+                <div class="ttdef"><b>Definition:</b> Matcher.cpp:8</div>
             </div>
             <div class="ttc" id="class_h_t_t_p_response_html">
                 <div class="ttname"><a href="class_h_t_t_p_response.html">HTTPResponse</a>
                 </div>
                 <div class="ttdoc">Una respuesta HTTP.</div>
-                <div class="ttdef"><b>Definition:</b> HTTPResponse.h:13</div>
+                <div class="ttdef"><b>Definition:</b> HTTPResponse.h:14</div>
+            </div>
+            <div class="ttc"
+                 id="class_request_handler_html_a95913fcd2f05853ba9532b7bacd3a044">
+                <div class="ttname"><a
+                        href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">RequestHandler::request</a>
+                </div>
+                <div class="ttdeci">HTTPRequest request</div>
+                <div class="ttdef"><b>Definition:</b> RequestHandler.h:14</div>
+            </div>
+            <div class="ttc" id="class_matches_d_b_html">
+                <div class="ttname"><a
+                        href="class_matches_d_b.html">MatchesDB</a></div>
+                <div class="ttdoc">Manejo de las bases de datos relacionadas con
+                    los likes y los matches.
+                </div>
+                <div class="ttdef"><b>Definition:</b> MatchesDB.h:14</div>
             </div>
             <div class="ttc" id="_request_handler_8h_html">
                 <div class="ttname"><a href="_request_handler_8h.html">RequestHandler.h</a>
@@ -209,13 +270,31 @@
                 <div class="ttdoc">Handler genérico para un request de un
                     usuario.
                 </div>
-                <div class="ttdef"><b>Definition:</b> RequestHandler.h:13</div>
+                <div class="ttdef"><b>Definition:</b> RequestHandler.h:12</div>
             </div>
             <div class="ttc" id="class_h_t_t_p_request_html">
                 <div class="ttname"><a href="class_h_t_t_p_request.html">HTTPRequest</a>
                 </div>
                 <div class="ttdoc">Un request HTTP.</div>
-                <div class="ttdef"><b>Definition:</b> HTTPRequest.h:11</div>
+                <div class="ttdef"><b>Definition:</b> HTTPRequest.h:12</div>
+            </div>
+            <div class="ttc"
+                 id="class_matcher_html_afafae9a0476c9091929be187484f55b2">
+                <div class="ttname"><a
+                        href="class_matcher.html#afafae9a0476c9091929be187484f55b2">Matcher::Matcher</a>
+                </div>
+                <div class="ttdeci">Matcher(HTTPRequest request, MatchesDB &amp;db,
+                    SharedServerConnection &amp;sharedServer)
+                </div>
+                <div class="ttdef"><b>Definition:</b> Matcher.cpp:31</div>
+            </div>
+            <div class="ttc"
+                 id="class_matcher_html_a2d5e1e1705808fcd68d272dc65c12e92">
+                <div class="ttname"><a
+                        href="class_matcher.html#a2d5e1e1705808fcd68d272dc65c12e92">Matcher::getCandidates</a>
+                </div>
+                <div class="ttdeci">HTTPResponse getCandidates()</div>
+                <div class="ttdef"><b>Definition:</b> Matcher.cpp:16</div>
             </div>
             <div class="ttc" id="class_matcher_html">
                 <div class="ttname"><a href="class_matcher.html">Matcher</a>
@@ -223,7 +302,7 @@
                 <div class="ttdoc">Handler para los requests relacionados con
                     likes y matches.
                 </div>
-                <div class="ttdef"><b>Definition:</b> Matcher.h:10</div>
+                <div class="ttdef"><b>Definition:</b> Matcher.h:13</div>
             </div>
         </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -231,7 +310,10 @@
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
     <ul>
         <li class="navelem"><a class="el"
-                               href="dir_f65cd03095c68c40acdbdbd5ccca35f8.html">Handlers</a>
+                               href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>
+        </li>
+        <li class="navelem"><a class="el"
+                               href="dir_34bc7fed7530c3406809d532e1032b85.html">Handlers</a>
         </li>
         <li class="navelem"><a class="el" href="_matcher_8h.html">Matcher.h</a>
         </li>

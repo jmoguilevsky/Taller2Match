@@ -23,6 +23,9 @@ public:
 	HTTPRequest(std::string verb, std::string uri,
 	            std::map<std::string, std::string> headers, std::string body);
 
+	HTTPRequest(std::string verb, std::string uri, std::string body);
+
+
 	//! Crea un HTTPRequest dado un http_message de Mongoose.
 	HTTPRequest(struct http_message *hm);
 

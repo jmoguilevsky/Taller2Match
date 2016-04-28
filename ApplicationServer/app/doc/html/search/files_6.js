@@ -1,5 +1,8 @@
 var searchData =
     [
-        ['requesthandler_2ecpp', ['RequestHandler.cpp', ['../_request_handler_8cpp.html', 1, '']]],
-        ['requesthandler_2eh', ['RequestHandler.h', ['../_request_handler_8h.html', 1, '']]]
+        ['main_2ecpp', ['main.cpp', ['../main_8cpp.html', 1, '']]],
+        ['matcher_2ecpp', ['Matcher.cpp', ['../_matcher_8cpp.html', 1, '']]],
+        ['matcher_2eh', ['Matcher.h', ['../_matcher_8h.html', 1, '']]],
+        ['matchesdb_2ecpp', ['MatchesDB.cpp', ['../_matches_d_b_8cpp.html', 1, '']]],
+        ['matchesdb_2eh', ['MatchesDB.h', ['../_matches_d_b_8h.html', 1, '']]]
     ];

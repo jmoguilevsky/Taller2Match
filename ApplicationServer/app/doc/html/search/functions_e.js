@@ -1,4 +1,5 @@
 var searchData =
     [
-        ['userprofile', ['UserProfile', ['../class_user_profile.html#ab76951c7e88e70c50013705fcfacfbba', 1, 'UserProfile::UserProfile(const UserProfile &amp;user)'], ['../class_user_profile.html#adce414cd8095dd3613d6b0c2ee9d7222', 1, 'UserProfile::UserProfile(Json::Value &amp;user)']]]
+        ['operator_3c_3c', ['operator&lt;&lt;', ['../namespace_json.html#a0f440d134f8bab9725aa31cb9704d6af', 1, 'Json']]],
+        ['operator_3e_3e', ['operator&gt;&gt;', ['../namespace_json.html#a52b40333cc8aa17c82ac359462ce691b', 1, 'Json']]]
     ];

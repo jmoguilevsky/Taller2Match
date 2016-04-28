@@ -5,7 +5,9 @@
     <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=9"/>
     <meta name="generator" content="Doxygen 1.8.9.1"/>
-    <title>Match - Application Server: HTTPResponse.h Source File</title>
+    <title>Match - Application Server:
+        /home/chris/Escritorio/Taller2Match/ApplicationServer/app/src/HTTPResponse.h
+        Source File</title>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -86,7 +88,7 @@
     <div id="nav-tree">
         <div id="nav-tree-contents">
             <div id="nav-sync" class="sync"></div>
-        </div>
+    </div>
     </div>
     <div id="splitbar" style="-moz-user-select:none;"
          class="ui-resizable-handle">
@@ -154,40 +156,73 @@
                     class="preprocessor">#define HTTP_VERSION &quot;HTTP/1.1&quot;</span>
             </div>
             <div class="line"><a name="l00012"></a><span
-                    class="lineno">   12</span>&#160;<span
+                    class="lineno">   12</span>&#160;</div>
+            <div class="line"><a name="l00014"></a><span class="lineno"><a
+                    class="line"
+                    href="class_h_t_t_p_response.html">   14</a></span>&#160;<span
                     class="keyword">class </span><a class="code"
                                                     href="class_h_t_t_p_response.html">HTTPResponse</a>
                 {
             </div>
-            <div class="line"><a name="l00014"></a><span
-                    class="lineno">   14</span>&#160; std::string message;
-            </div>
             <div class="line"><a name="l00015"></a><span
-                    class="lineno">   15</span>&#160;<span class="keyword">public</span>:
+                    class="lineno">   15</span>&#160; std::string message;
+            </div>
+            <div class="line"><a name="l00016"></a><span
+                    class="lineno">   16</span>&#160; std::string body;
             </div>
             <div class="line"><a name="l00017"></a><span
-                    class="lineno">   17</span>&#160; <a class="code"
-                                                         href="class_h_t_t_p_response.html#a80cb475ed37530e4005dc1a2b1849fe3">HTTPResponse</a>(std::string
+                    class="lineno">   17</span>&#160;<span class="keyword">public</span>:
+            </div>
+            <div class="line"><a name="l00019"></a><span
+                    class="lineno">   19</span>&#160; <a class="code"
+                                                         href="class_h_t_t_p_response.html#ac5a0ae54aa75da2db7fcdc69751128ba">HTTPResponse</a>(std::string
                 code, std::string phrase,
             </div>
-            <div class="line"><a name="l00018"></a><span
-                    class="lineno">   18</span>&#160; std::map&lt;std::string,
+            <div class="line"><a name="l00020"></a><span
+                    class="lineno">   20</span>&#160; std::map&lt;std::string,
                 std::string&gt; headers, std::string body);
             </div>
-            <div class="line"><a name="l00020"></a><span
-                    class="lineno">   20</span>&#160; <span class="keyword">const</span>
+            <div class="line"><a name="l00021"></a><span
+                    class="lineno">   21</span>&#160;</div>
+            <div class="line"><a name="l00023"></a><span
+                    class="lineno">   23</span>&#160; <a class="code"
+                                                         href="class_h_t_t_p_response.html#ac5a0ae54aa75da2db7fcdc69751128ba">HTTPResponse</a>();
+            </div>
+            <div class="line"><a name="l00024"></a><span
+                    class="lineno">   24</span>&#160;</div>
+            <div class="line"><a name="l00025"></a><span
+                    class="lineno">   25</span>&#160; <a class="code"
+                                                         href="class_h_t_t_p_response.html#ac5a0ae54aa75da2db7fcdc69751128ba">HTTPResponse</a>(<span
+                    class="keyword">struct</span> http_message *hm);
+            </div>
+            <div class="line"><a name="l00026"></a><span
+                    class="lineno">   26</span>&#160; <span class="keyword">const</span>
                 <span class="keywordtype">char</span> *<a class="code"
                                                           href="class_h_t_t_p_response.html#acf3cc435114cf49b8531afa7c1fc5d4a">toCString</a>();
             </div>
-            <div class="line"><a name="l00021"></a><span
-                    class="lineno">   21</span>&#160;};
+            <div class="line"><a name="l00027"></a><span
+                    class="lineno">   27</span>&#160;</div>
+            <div class="line"><a name="l00028"></a><span
+                    class="lineno">   28</span>&#160; std::string <a
+                    class="code"
+                    href="class_h_t_t_p_response.html#a64720f0ed87399652cdef947dc6877ac">toString</a>();
             </div>
-            <div class="line"><a name="l00022"></a><span
-                    class="lineno">   22</span>&#160;</div>
-            <div class="line"><a name="l00023"></a><span
-                    class="lineno">   23</span>&#160;</div>
-            <div class="line"><a name="l00024"></a><span
-                    class="lineno">   24</span>&#160;<span class="preprocessor">#endif //APPSERVER_HTTPRESPONSE_H</span>
+            <div class="line"><a name="l00029"></a><span
+                    class="lineno">   29</span>&#160;</div>
+            <div class="line"><a name="l00030"></a><span
+                    class="lineno">   30</span>&#160; std::string <a
+                    class="code"
+                    href="class_h_t_t_p_response.html#a078da8ff0997baf237f6502376684083">getBody</a>();
+            </div>
+            <div class="line"><a name="l00031"></a><span
+                    class="lineno">   31</span>&#160;};
+            </div>
+            <div class="line"><a name="l00032"></a><span
+                    class="lineno">   32</span>&#160;</div>
+            <div class="line"><a name="l00033"></a><span
+                    class="lineno">   33</span>&#160;</div>
+            <div class="line"><a name="l00034"></a><span
+                    class="lineno">   34</span>&#160;<span class="preprocessor">#endif //APPSERVER_HTTPRESPONSE_H</span>
             </div>
             <div class="ttc"
                  id="class_h_t_t_p_response_html_acf3cc435114cf49b8531afa7c1fc5d4a">
@@ -195,36 +230,49 @@
                         href="class_h_t_t_p_response.html#acf3cc435114cf49b8531afa7c1fc5d4a">HTTPResponse::toCString</a>
                 </div>
                 <div class="ttdeci">const char * toCString()</div>
-                <div class="ttdoc">Devuelve el HTTPResponse completo como un
-                    char* de C.
+                <div class="ttdef"><b>Definition:</b> HTTPResponse.cpp:26</div>
+            </div>
+            <div class="ttc"
+                 id="class_h_t_t_p_response_html_a64720f0ed87399652cdef947dc6877ac">
+                <div class="ttname"><a
+                        href="class_h_t_t_p_response.html#a64720f0ed87399652cdef947dc6877ac">HTTPResponse::toString</a>
                 </div>
-                <div class="ttdef"><b>Definition:</b> HTTPResponse.cpp:23</div>
+                <div class="ttdeci">std::string toString()</div>
+                <div class="ttdef"><b>Definition:</b> HTTPResponse.cpp:34</div>
             </div>
             <div class="ttc" id="class_h_t_t_p_response_html">
                 <div class="ttname"><a href="class_h_t_t_p_response.html">HTTPResponse</a>
                 </div>
                 <div class="ttdoc">Una respuesta HTTP.</div>
-                <div class="ttdef"><b>Definition:</b> HTTPResponse.h:13</div>
+                <div class="ttdef"><b>Definition:</b> HTTPResponse.h:14</div>
             </div>
             <div class="ttc"
-                 id="class_h_t_t_p_response_html_a80cb475ed37530e4005dc1a2b1849fe3">
+                 id="class_h_t_t_p_response_html_ac5a0ae54aa75da2db7fcdc69751128ba">
                 <div class="ttname"><a
-                        href="class_h_t_t_p_response.html#a80cb475ed37530e4005dc1a2b1849fe3">HTTPResponse::HTTPResponse</a>
+                        href="class_h_t_t_p_response.html#ac5a0ae54aa75da2db7fcdc69751128ba">HTTPResponse::HTTPResponse</a>
                 </div>
-                <div class="ttdeci">HTTPResponse(std::string code, std::string
-                    phrase, std::map&lt; std::string, std::string &gt; headers,
-                    std::string body)
+                <div class="ttdeci">HTTPResponse()</div>
+                <div class="ttdoc">Devuelve el HTTPResponse completo como un
+                    char* de C.
                 </div>
-                <div class="ttdoc">Crea un HTTPResponse a partir de un código,
-                    la phrase HTTP (OK, Error, etc.), un map de headers (como...
+                <div class="ttdef"><b>Definition:</b> HTTPResponse.cpp:30</div>
+            </div>
+            <div class="ttc"
+                 id="class_h_t_t_p_response_html_a078da8ff0997baf237f6502376684083">
+                <div class="ttname"><a
+                        href="class_h_t_t_p_response.html#a078da8ff0997baf237f6502376684083">HTTPResponse::getBody</a>
                 </div>
-                <div class="ttdef"><b>Definition:</b> HTTPResponse.cpp:11</div>
+                <div class="ttdeci">std::string getBody()</div>
+                <div class="ttdef"><b>Definition:</b> HTTPResponse.cpp:43</div>
             </div>
         </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
     <ul>
+        <li class="navelem"><a class="el"
+                               href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>
+        </li>
         <li class="navelem"><a class="el" href="_h_t_t_p_response_8h.html">HTTPResponse.h</a>
         </li>
         <li class="footer">Generated by

@@ -12,7 +12,6 @@
 //! Handler para la creación de un nuevo usuario.
 class SignUp : public RequestHandler {
 private:
-	HTTPRequest request;
 	LoginDB &db;
 public:
 	SignUp(HTTPRequest request, LoginDB &db);

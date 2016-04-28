@@ -22,6 +22,8 @@ class UserProfile {
 	std::string id;
 
 public:
+
+	UserProfile();
 	UserProfile(const UserProfile &user);
 
 	//! Crea un perfil de usuario a partir de un objeto Json.

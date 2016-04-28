@@ -91,7 +91,7 @@
     <div id="nav-tree">
         <div id="nav-tree-contents">
             <div id="nav-sync" class="sync"></div>
-        </div>
+    </div>
     </div>
     <div id="splitbar" style="-moz-user-select:none;"
          class="ui-resizable-handle">
@@ -139,7 +139,11 @@
             <div class="center"><img src="class_sign_up__inherit__graph.png"
                                      border="0" usemap="#_sign_up_inherit__map"
                                      alt="Inheritance graph"/></div>
-            <!-- MAP 0 -->
+            <map name="_sign_up_inherit__map" id="_sign_up_inherit__map">
+                <area shape="rect" id="node2" href="class_request_handler.html"
+                      title="Handler genérico para un request de un usuario. "
+                      alt="" coords="5,5,121,32"/>
+            </map>
             <center><span class="legend">[<a target="top"
                                              href="graph_legend.html">legend</a>]</span>
             </center>
@@ -151,7 +155,13 @@
             <div class="center"><img src="class_sign_up__coll__graph.png"
                                      border="0" usemap="#_sign_up_coll__map"
                                      alt="Collaboration graph"/></div>
-            <!-- MAP 1 -->
+            <map name="_sign_up_coll__map" id="_sign_up_coll__map">
+                <area shape="rect" id="node2" href="class_request_handler.html"
+                      title="Handler genérico para un request de un usuario. "
+                      alt="" coords="5,95,121,121"/>
+                <area shape="rect" id="node3" href="class_h_t_t_p_request.html"
+                      title="Un request HTTP. " alt="" coords="10,5,117,32"/>
+            </map>
             <center><span class="legend">[<a target="top"
                                              href="graph_legend.html">legend</a>]</span>
             </center>
@@ -167,9 +177,10 @@
                 <td class="memItemRight" valign="bottom"><a class="el"
                                                             href="class_sign_up.html#af454d1ebdbe622c45dbb3efd8fa7179a">SignUp</a>
                     (<a class="el"
-                        href="class_h_t_t_p_request.html">HTTPRequest</a>
-                    request, <a class="el"
-                                href="class_login_d_b.html">LoginDB</a> &amp;db)
+                        href="class_h_t_t_p_request.html">HTTPRequest</a> <a
+                            class="el"
+                            href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>,
+                    <a class="el" href="class_login_d_b.html">LoginDB</a> &amp;db)
                 </td>
             </tr>
             <tr class="separator:af454d1ebdbe622c45dbb3efd8fa7179a">
@@ -198,6 +209,52 @@
                 </td>
             </tr>
             <tr class="separator:a3d34e2bcdce1556d4a44bb589ed64ddf">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+            <tr class="inherit_header pub_methods_class_request_handler">
+                <td colspan="2"
+                    onclick="javascript:toggleInherit('pub_methods_class_request_handler')">
+                    <img src="closed.png" alt="-"/>&#160;Public Member Functions
+                    inherited from <a class="el"
+                                      href="class_request_handler.html">RequestHandler</a>
+                </td>
+            </tr>
+            <tr class="memitem:ad33af675073689c2218049195503f65b inherit pub_methods_class_request_handler">
+                <td class="memItemLeft" align="right" valign="top">&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="class_request_handler.html#ad33af675073689c2218049195503f65b">RequestHandler</a>
+                    (<a class="el"
+                        href="class_h_t_t_p_request.html">HTTPRequest</a> <a
+                            class="el"
+                            href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>)
+                </td>
+            </tr>
+            <tr class="separator:ad33af675073689c2218049195503f65b inherit pub_methods_class_request_handler">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+        </table>
+        <table class="memberdecls">
+            <tr class="heading">
+                <td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+                    Additional Inherited Members</h2></td>
+            </tr>
+            <tr class="inherit_header pro_attribs_class_request_handler">
+                <td colspan="2"
+                    onclick="javascript:toggleInherit('pro_attribs_class_request_handler')">
+                    <img src="closed.png" alt="-"/>&#160;Protected Attributes
+                    inherited from <a class="el"
+                                      href="class_request_handler.html">RequestHandler</a>
+                </td>
+            </tr>
+            <tr class="memitem:a95913fcd2f05853ba9532b7bacd3a044 inherit pro_attribs_class_request_handler">
+                <td class="memItemLeft" align="right" valign="top"><a class="el"
+                                                                      href="class_h_t_t_p_request.html">HTTPRequest</a>&#160;
+                </td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>
+                </td>
+            </tr>
+            <tr class="separator:a95913fcd2f05853ba9532b7bacd3a044 inherit pro_attribs_class_request_handler">
                 <td class="memSeparator" colspan="2">&#160;</td>
             </tr>
         </table>
@@ -285,10 +342,12 @@
         <hr/>
         The documentation for this class was generated from the following files:
         <ul>
-            <li>Handlers/<a class="el"
-                            href="_sign_up_8h_source.html">SignUp.h</a></li>
-            <li>Handlers/<a class="el" href="_sign_up_8cpp.html">SignUp.cpp</a>
-            </li>
+            <li>
+                /home/chris/Escritorio/Taller2Match/ApplicationServer/app/src/Handlers/<a
+                    class="el" href="_sign_up_8h_source.html">SignUp.h</a></li>
+            <li>
+                /home/chris/Escritorio/Taller2Match/ApplicationServer/app/src/Handlers/<a
+                    class="el" href="_sign_up_8cpp.html">SignUp.cpp</a></li>
         </ul>
     </div><!-- contents -->
 </div><!-- doc-content -->

@@ -91,7 +91,7 @@
     <div id="nav-tree">
         <div id="nav-tree-contents">
             <div id="nav-sync" class="sync"></div>
-        </div>
+    </div>
     </div>
     <div id="splitbar" style="-moz-user-select:none;"
          class="ui-resizable-handle">
@@ -120,6 +120,7 @@
     <div class="header">
         <div class="summary">
             <a href="#pub-methods">Public Member Functions</a> &#124;
+            <a href="#pub-attribs">Public Attributes</a> &#124;
             <a href="class_login-members.html">List of all members</a></div>
         <div class="headertitle">
             <div class="title">Login Class Reference</div>
@@ -140,7 +141,11 @@
             <div class="center"><img src="class_login__inherit__graph.png"
                                      border="0" usemap="#_login_inherit__map"
                                      alt="Inheritance graph"/></div>
-            <!-- MAP 0 -->
+            <map name="_login_inherit__map" id="_login_inherit__map">
+                <area shape="rect" id="node2" href="class_request_handler.html"
+                      title="Handler genérico para un request de un usuario. "
+                      alt="" coords="5,5,121,32"/>
+            </map>
             <center><span class="legend">[<a target="top"
                                              href="graph_legend.html">legend</a>]</span>
             </center>
@@ -152,7 +157,17 @@
             <div class="center"><img src="class_login__coll__graph.png"
                                      border="0" usemap="#_login_coll__map"
                                      alt="Collaboration graph"/></div>
-            <!-- MAP 1 -->
+            <map name="_login_coll__map" id="_login_coll__map">
+                <area shape="rect" id="node2" href="class_request_handler.html"
+                      title="Handler genérico para un request de un usuario. "
+                      alt="" coords="5,95,121,121"/>
+                <area shape="rect" id="node3" href="class_h_t_t_p_request.html"
+                      title="Un request HTTP. " alt="" coords="10,5,117,32"/>
+                <area shape="rect" id="node4"
+                      href="class_shared_server_connection.html"
+                      title="Una conexión hacia el Shared Server. " alt=""
+                      coords="145,95,312,121"/>
+            </map>
             <center><span class="legend">[<a target="top"
                                              href="graph_legend.html">legend</a>]</span>
             </center>
@@ -163,17 +178,23 @@
                         name="pub-methods"></a>
                     Public Member Functions</h2></td>
             </tr>
-            <tr class="memitem:a0cc689ed6645fb6cf8b526e59598fd0d">
+            <tr class="memitem:a1f04a36bf1e175cf0e7ed66c47cae2c3">
                 <td class="memItemLeft" align="right" valign="top">&#160;</td>
                 <td class="memItemRight" valign="bottom"><a class="el"
-                                                            href="class_login.html#a0cc689ed6645fb6cf8b526e59598fd0d">Login</a>
+                                                            href="class_login.html#a1f04a36bf1e175cf0e7ed66c47cae2c3">Login</a>
                     (<a class="el"
-                        href="class_h_t_t_p_request.html">HTTPRequest</a>
-                    request, <a class="el"
-                                href="class_login_d_b.html">LoginDB</a> &amp;db)
+                        href="class_h_t_t_p_request.html">HTTPRequest</a> <a
+                            class="el"
+                            href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>,
+                    <a class="el" href="class_login_d_b.html">LoginDB</a> &amp;db,
+                    <a class="el"
+                       href="class_token_manager.html">TokenManager</a> &amp;tokenManager,
+                    <a class="el" href="class_shared_server_connection.html">SharedServerConnection</a>
+                    &amp;<a class="el"
+                            href="class_login.html#a002522e5d2170bbfe0e8f2c9cbf4e779">sharedServer</a>)
                 </td>
             </tr>
-            <tr class="separator:a0cc689ed6645fb6cf8b526e59598fd0d">
+            <tr class="separator:a1f04a36bf1e175cf0e7ed66c47cae2c3">
                 <td class="memSeparator" colspan="2">&#160;</td>
             </tr>
             <tr class="memitem:a911fa05b2b1b8f53cad4286012a7810d">
@@ -201,6 +222,70 @@
             <tr class="separator:a911fa05b2b1b8f53cad4286012a7810d">
                 <td class="memSeparator" colspan="2">&#160;</td>
             </tr>
+            <tr class="inherit_header pub_methods_class_request_handler">
+                <td colspan="2"
+                    onclick="javascript:toggleInherit('pub_methods_class_request_handler')">
+                    <img src="closed.png" alt="-"/>&#160;Public Member Functions
+                    inherited from <a class="el"
+                                      href="class_request_handler.html">RequestHandler</a>
+                </td>
+            </tr>
+            <tr class="memitem:ad33af675073689c2218049195503f65b inherit pub_methods_class_request_handler">
+                <td class="memItemLeft" align="right" valign="top">&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="class_request_handler.html#ad33af675073689c2218049195503f65b">RequestHandler</a>
+                    (<a class="el"
+                        href="class_h_t_t_p_request.html">HTTPRequest</a> <a
+                            class="el"
+                            href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>)
+                </td>
+            </tr>
+            <tr class="separator:ad33af675073689c2218049195503f65b inherit pub_methods_class_request_handler">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+        </table>
+        <table class="memberdecls">
+            <tr class="heading">
+                <td colspan="2"><h2 class="groupheader"><a
+                        name="pub-attribs"></a>
+                    Public Attributes</h2></td>
+            </tr>
+            <tr class="memitem:a002522e5d2170bbfe0e8f2c9cbf4e779">
+                <td class="memItemLeft" align="right" valign="top"><a class="el"
+                                                                      href="class_shared_server_connection.html">SharedServerConnection</a>
+                    &amp;&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="class_login.html#a002522e5d2170bbfe0e8f2c9cbf4e779">sharedServer</a>
+                </td>
+            </tr>
+            <tr class="separator:a002522e5d2170bbfe0e8f2c9cbf4e779">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+        </table>
+        <table class="memberdecls">
+            <tr class="heading">
+                <td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+                    Additional Inherited Members</h2></td>
+            </tr>
+            <tr class="inherit_header pro_attribs_class_request_handler">
+                <td colspan="2"
+                    onclick="javascript:toggleInherit('pro_attribs_class_request_handler')">
+                    <img src="closed.png" alt="-"/>&#160;Protected Attributes
+                    inherited from <a class="el"
+                                      href="class_request_handler.html">RequestHandler</a>
+                </td>
+            </tr>
+            <tr class="memitem:a95913fcd2f05853ba9532b7bacd3a044 inherit pro_attribs_class_request_handler">
+                <td class="memItemLeft" align="right" valign="top"><a class="el"
+                                                                      href="class_h_t_t_p_request.html">HTTPRequest</a>&#160;
+                </td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>
+                </td>
+            </tr>
+            <tr class="separator:a95913fcd2f05853ba9532b7bacd3a044 inherit pro_attribs_class_request_handler">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
         </table>
         <a name="details" id="details"></a>
         <h2 class="groupheader">Detailed Description</h2>
@@ -208,7 +293,7 @@
             login. </p>
         </div>
         <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-        <a class="anchor" id="a0cc689ed6645fb6cf8b526e59598fd0d"></a>
+        <a class="anchor" id="a1f04a36bf1e175cf0e7ed66c47cae2c3"></a>
         <div class="memitem">
             <div class="memproto">
                 <table class="memname">
@@ -226,7 +311,23 @@
                         <td class="paramtype"><a class="el"
                                                  href="class_login_d_b.html">LoginDB</a>
                             &amp;&#160;</td>
-                        <td class="paramname"><em>db</em>&#160;</td>
+                        <td class="paramname"><em>db</em>,</td>
+                    </tr>
+                    <tr>
+                        <td class="paramkey"></td>
+                        <td></td>
+                        <td class="paramtype"><a class="el"
+                                                 href="class_token_manager.html">TokenManager</a>
+                            &amp;&#160;</td>
+                        <td class="paramname"><em>tokenManager</em>,</td>
+                    </tr>
+                    <tr>
+                        <td class="paramkey"></td>
+                        <td></td>
+                        <td class="paramtype"><a class="el"
+                                                 href="class_shared_server_connection.html">SharedServerConnection</a>
+                            &amp;&#160;</td>
+                        <td class="paramname"><em>sharedServer</em>&#160;</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -283,13 +384,32 @@
 
             </div>
         </div>
+        <h2 class="groupheader">Member Data Documentation</h2>
+        <a class="anchor" id="a002522e5d2170bbfe0e8f2c9cbf4e779"></a>
+        <div class="memitem">
+            <div class="memproto">
+                <table class="memname">
+                    <tr>
+                        <td class="memname"><a class="el"
+                                               href="class_shared_server_connection.html">SharedServerConnection</a>&amp;
+                            Login::sharedServer
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
+
+            </div>
+        </div>
         <hr/>
         The documentation for this class was generated from the following files:
         <ul>
-            <li>Handlers/<a class="el" href="_login_8h_source.html">Login.h</a>
-            </li>
-            <li>Handlers/<a class="el" href="_login_8cpp.html">Login.cpp</a>
-            </li>
+            <li>
+                /home/chris/Escritorio/Taller2Match/ApplicationServer/app/src/Handlers/<a
+                    class="el" href="_login_8h_source.html">Login.h</a></li>
+            <li>
+                /home/chris/Escritorio/Taller2Match/ApplicationServer/app/src/Handlers/<a
+                    class="el" href="_login_8cpp.html">Login.cpp</a></li>
         </ul>
     </div><!-- contents -->
 </div><!-- doc-content -->

@@ -4,7 +4,6 @@
 
 #include "utils.h"
 #include <iostream>
-#include <sstream>
 #include <algorithm>
 
 #define STR_TO_INT(x) atoi(x.c_str())
@@ -39,7 +38,7 @@ int utils::diffTimeInSeconds(struct tm t0, struct tm t1) {
 
 std::vector<std::string> &utils::split(const std::string &s, char delim,
                                        std::vector<std::string> &elems) {
-	// Split para un string por un char. Devuelve un vector con los tokens
+	// Split para un string por un char. Devuelve un vector con los tokenManager
 
 	std::stringstream ss(s);
 	std::string item;
@@ -47,4 +46,20 @@ std::vector<std::string> &utils::split(const std::string &s, char delim,
 		elems.push_back(item);
 	}
 	return elems;
+}
+
+Json::Value utils::stringToJson(const std::string &str) {
+	Json::Value value;
+	Json::Reader reader;
+	reader.parse(str, value);
+	return value;
+}
+
+std::string utils::JsonToString(const Json::Value &value) {
+	Json::StyledWriter writer;
+	return writer.write(value);
+}
+
+std::string utils::mgStrToString(const struct mg_str &str) {
+	return std::string(str.p, str.len);
 }

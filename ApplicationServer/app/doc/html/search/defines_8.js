@@ -1,5 +1,8 @@
 var searchData =
     [
+        ['uri_5fcandidates', ['URI_CANDIDATES', ['../_server_8cpp.html#a4fc79d32dffa155bbd6da2e57068daee', 1, 'Server.cpp']]],
+        ['uri_5flogin', ['URI_LOGIN', ['../_server_8cpp.html#a5cca3956b465dad6e52b544af37873f9', 1, 'Server.cpp']]],
+        ['uri_5fsignup', ['URI_SIGNUP', ['../_server_8cpp.html#a894f66dff35239677c35d3c5c688deb0', 1, 'Server.cpp']]],
         ['user_5falready_5fexists', ['USER_ALREADY_EXISTS', ['../_login_d_b_8h.html#a72d6fba4ea08d8506dbe2506928be4c1', 1, 'LoginDB.h']]],
         ['user_5falready_5fexists_5fphrase', ['USER_ALREADY_EXISTS_PHRASE', ['../_sign_up_8cpp.html#a12d7326a5e658acbd61f6cbc32ea8316', 1, 'SignUp.cpp']]],
         ['user_5fcreated_5fok', ['USER_CREATED_OK', ['../_login_d_b_8h.html#a4a4c4e2ea145bc0d0b25793fd390ec4d', 1, 'LoginDB.h']]],

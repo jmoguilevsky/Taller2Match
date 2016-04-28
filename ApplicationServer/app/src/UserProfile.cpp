@@ -18,6 +18,7 @@ UserProfile::UserProfile(Json::Value &user) {
 	longitude = std::stod(jsonLongitude.asString());
 }
 
+UserProfile::UserProfile() { }
 UserProfile::UserProfile(const UserProfile &user) {
 	id = user.id;
 	name = user.name;

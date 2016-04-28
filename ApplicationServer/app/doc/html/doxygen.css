@@ -18,8 +18,8 @@ h1.groupheader {
 }
 
 h2.groupheader {
-    border-bottom: 1px solid #879ECB;
-    color: #354C7B;
+    border-bottom: 1px solid #E44141;
+    color: #6B0E0E;
     font-size: 150%;
     font-weight: normal;
     margin-top: 1.75em;
@@ -93,8 +93,8 @@ h3.version {
 }
 
 div.qindex, div.navtab {
-    background-color: #EBEFF6;
-    border: 1px solid #A3B4D7;
+    background-color: #FADEDE;
+    border: 1px solid #EA6B6B;
     text-align: center;
 }
 
@@ -110,13 +110,13 @@ div.navtab {
 /* @group Link Styling */
 
 a {
-    color: #3D578C;
+    color: #801111;
     font-weight: normal;
     text-decoration: none;
 }
 
 .contents a:visited {
-    color: #4665A2;
+    color: #9B1515;
 }
 
 a:hover {
@@ -129,9 +129,9 @@ a.qindex {
 
 a.qindexHL {
     font-weight: bold;
-    background-color: #9CAFD4;
+    background-color: #E96060;
     color: #ffffff;
-    border: 1px double #869DCA;
+    border: 1px double #E43F3F;
 }
 
 .contents a.qindexHL:visited {
@@ -175,8 +175,8 @@ pre.fragment {
 div.fragment {
     padding: 4px 6px;
     margin: 4px 8px 4px 2px;
-    background-color: #FBFCFD;
-    border: 1px solid #C4CFE5;
+    background-color: #FEF9F9;
+    border: 1px solid #F19F9F;
 }
 
 div.line {
@@ -211,6 +211,7 @@ div.line.glow {
     box-shadow: 0 0 10px cyan;
 }
 
+
 span.lineno {
     padding-right: 4px;
     text-align: right;
@@ -218,7 +219,6 @@ span.lineno {
     background-color: #E8E8E8;
     white-space: pre;
 }
-
 span.lineno a {
     background-color: #D8D8D8;
 }
@@ -278,9 +278,9 @@ div.contents {
 }
 
 td.indexkey {
-    background-color: #EBEFF6;
+    background-color: #FADEDE;
     font-weight: bold;
-    border: 1px solid #C4CFE5;
+    border: 1px solid #F19F9F;
     margin: 2px 0px 2px 0;
     padding: 2px 10px;
     white-space: nowrap;
@@ -288,14 +288,14 @@ td.indexkey {
 }
 
 td.indexvalue {
-    background-color: #EBEFF6;
-    border: 1px solid #C4CFE5;
+    background-color: #FADEDE;
+    border: 1px solid #F19F9F;
     padding: 2px 10px;
     margin: 2px 0px;
 }
 
 tr.memlist {
-    background-color: #EEF1F7;
+    background-color: #FBE2E2;
 }
 
 p.formulaDsp {
@@ -378,8 +378,8 @@ span.vhdllogic {
 }
 
 blockquote {
-    background-color: #F7F8FB;
-    border-left: 2px solid #9CAFD4;
+    background-color: #FDF1F1;
+    border-left: 2px solid #E96060;
     margin: 0 24px 0 4px;
     padding: 0 12px 0 16px;
 }
@@ -412,18 +412,18 @@ td.tiny {
 .dirtab {
     padding: 4px;
     border-collapse: collapse;
-    border: 1px solid #A3B4D7;
+    border: 1px solid #EA6B6B;
 }
 
 th.dirtab {
-    background: #EBEFF6;
+    background: #FADEDE;
     font-weight: bold;
 }
 
 hr {
     height: 0px;
     border: none;
-    border-top: 1px solid #4A6AAA;
+    border-top: 1px solid #A61717;
 }
 
 hr.footer {
@@ -458,7 +458,7 @@ table.memberdecls {
 .mdescLeft, .mdescRight,
 .memItemLeft, .memItemRight,
 .memTemplItemLeft, .memTemplItemRight, .memTemplParams {
-    background-color: #F9FAFC;
+    background-color: #FDF5F5;
     border: none;
     margin: 4px;
     padding: 1px 0 0 8px;
@@ -485,7 +485,7 @@ table.memberdecls {
 }
 
 .memTemplParams {
-    color: #4665A2;
+    color: #9B1515;
     white-space: nowrap;
     font-size: 80%;
 }
@@ -498,14 +498,14 @@ table.memberdecls {
 
 .memtemplate {
     font-size: 80%;
-    color: #4665A2;
+    color: #9B1515;
     font-weight: normal;
     margin-left: 9px;
 }
 
 .memnav {
-    background-color: #EBEFF6;
-    border: 1px solid #A3B4D7;
+    background-color: #FADEDE;
+    border: 1px solid #EA6B6B;
     text-align: center;
     margin: 2px;
     margin-right: 15px;
@@ -543,16 +543,16 @@ table.memberdecls {
 }
 
 .memproto, dl.reflist dt {
-    border-top: 1px solid #A8B8D9;
-    border-left: 1px solid #A8B8D9;
-    border-right: 1px solid #A8B8D9;
+    border-top: 1px solid #EB7272;
+    border-left: 1px solid #EB7272;
+    border-right: 1px solid #EB7272;
     padding: 6px 0px 6px 0px;
-    color: #253555;
+    color: #410909;
     font-weight: bold;
     text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.9);
     background-image: url('nav_f.png');
     background-repeat: repeat-x;
-    background-color: #E2E8F2;
+    background-color: #F8CFCF;
     /* opera specific markup */
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
     border-top-right-radius: 4px;
@@ -569,11 +569,11 @@ table.memberdecls {
 }
 
 .memdoc, dl.reflist dd {
-    border-bottom: 1px solid #A8B8D9;
-    border-left: 1px solid #A8B8D9;
-    border-right: 1px solid #A8B8D9;
+    border-bottom: 1px solid #EB7272;
+    border-left: 1px solid #EB7272;
+    border-right: 1px solid #EB7272;
     padding: 6px 10px 2px 10px;
-    background-color: #FBFCFD;
+    background-color: #FEF9F9;
     border-top-width: 0;
     background-image: url('nav_g.png');
     background-repeat: repeat-x;
@@ -613,11 +613,9 @@ dl.reflist dd {
     color: #602020;
     white-space: nowrap;
 }
-
 .paramname em {
     font-style: normal;
 }
-
 .paramname code {
     line-height: 14px;
 }
@@ -625,7 +623,7 @@ dl.reflist dd {
 .params, .retval, .exception, .tparams {
     margin-left: 0px;
     padding-left: 0px;
-}
+}       
 
 .params .paramname, .retval .paramname {
     font-weight: bold;
@@ -635,8 +633,8 @@ dl.reflist dd {
 .params .paramtype {
     font-style: italic;
     vertical-align: top;
-}
-
+}       
+        
 .params .paramdir {
     font-family: "courier new", courier, monospace;
     vertical-align: top;
@@ -662,11 +660,11 @@ span.mlabels {
 }
 
 span.mlabel {
-    background-color: #728DC1;
-    border-top: 1px solid #5373B4;
-    border-left: 1px solid #5373B4;
-    border-right: 1px solid #C4CFE5;
-    border-bottom: 1px solid #C4CFE5;
+    background-color: #E02222;
+    border-top: 1px solid #B81919;
+    border-left: 1px solid #B81919;
+    border-right: 1px solid #F19F9F;
+    border-bottom: 1px solid #F19F9F;
     text-shadow: none;
     color: white;
     margin-right: 4px;
@@ -683,8 +681,8 @@ span.mlabel {
 
 div.directory {
     margin: 10px 0px;
-    border-top: 1px solid #9CAFD4;
-    border-bottom: 1px solid #9CAFD4;
+    border-top: 1px solid #E96060;
+    border-bottom: 1px solid #E96060;
     width: 100%;
 }
 
@@ -722,7 +720,7 @@ div.directory {
 
 .directory tr.even {
     padding-left: 6px;
-    background-color: #F7F8FB;
+    background-color: #FDF1F1;
 }
 
 .directory img {
@@ -740,11 +738,11 @@ div.directory {
     cursor: pointer;
     padding-left: 2px;
     padding-right: 2px;
-    color: #3D578C;
+    color: #801111;
 }
 
 .arrow {
-    color: #9CAFD4;
+    color: #E96060;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -764,7 +762,7 @@ div.directory {
     height: 14px;
     width: 16px;
     display: inline-block;
-    background-color: #728DC1;
+    background-color: #E02222;
     color: white;
     text-align: center;
     border-radius: 4px;
@@ -829,7 +827,7 @@ div.dynheader {
 
 address {
     font-style: normal;
-    color: #2A3D61;
+    color: #4E0A0A;
 }
 
 table.doxtable {
@@ -839,12 +837,12 @@ table.doxtable {
 }
 
 table.doxtable td, table.doxtable th {
-    border: 1px solid #2D4068;
+    border: 1px solid #550B0B;
     padding: 3px 7px 2px;
 }
 
 table.doxtable th {
-    background-color: #374F7F;
+    background-color: #700F0F;
     color: #FFFFFF;
     font-size: 110%;
     padding-bottom: 4px;
@@ -854,7 +852,7 @@ table.doxtable th {
 table.fieldtable {
     /*width: 100%;*/
     margin-bottom: 10px;
-    border: 1px solid #A8B8D9;
+    border: 1px solid #EB7272;
     border-spacing: 0px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -870,8 +868,8 @@ table.fieldtable {
 
 .fieldtable td.fieldtype, .fieldtable td.fieldname {
     white-space: nowrap;
-    border-right: 1px solid #A8B8D9;
-    border-bottom: 1px solid #A8B8D9;
+    border-right: 1px solid #EB7272;
+    border-bottom: 1px solid #EB7272;
     vertical-align: top;
 }
 
@@ -880,14 +878,14 @@ table.fieldtable {
 }
 
 .fieldtable td.fielddoc {
-    border-bottom: 1px solid #A8B8D9;
+    border-bottom: 1px solid #EB7272;
     /*width: 100%;*/
 }
 
 .fieldtable td.fielddoc p:first-child {
     margin-top: 0px;
-}
-
+}       
+        
 .fieldtable td.fielddoc p:last-child {
     margin-bottom: 2px;
 }
@@ -899,9 +897,9 @@ table.fieldtable {
 .fieldtable th {
     background-image: url('nav_f.png');
     background-repeat: repeat-x;
-    background-color: #E2E8F2;
+    background-color: #F8CFCF;
     font-size: 90%;
-    color: #253555;
+    color: #410909;
     padding-bottom: 4px;
     padding-top: 5px;
     text-align: left;
@@ -911,8 +909,9 @@ table.fieldtable {
     -webkit-border-top-right-radius: 4px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    border-bottom: 1px solid #A8B8D9;
+    border-bottom: 1px solid #EB7272;
 }
+
 
 .tabsearch {
     top: 0px;
@@ -931,8 +930,8 @@ table.fieldtable {
     background-position: 0 -5px;
     height: 30px;
     line-height: 30px;
-    color: #8AA0CC;
-    border: solid 1px #C2CDE4;
+    color: #E54444;
+    border: solid 1px #F19B9B;
     overflow: hidden;
     margin: 0px;
     padding: 0px;
@@ -946,7 +945,7 @@ table.fieldtable {
     background-image: url('bc_s.png');
     background-repeat: no-repeat;
     background-position: right;
-    color: #364D7C;
+    color: #6D0F0F;
 }
 
 .navpath li.navelem a {
@@ -954,14 +953,14 @@ table.fieldtable {
     display: block;
     text-decoration: none;
     outline: none;
-    color: #283A5D;
+    color: #490A0A;
     font-family: 'Lucida Grande', Geneva, Helvetica, Arial, sans-serif;
     text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.9);
     text-decoration: none;
 }
 
 .navpath li.navelem a:hover {
-    color: #6884BD;
+    color: #D41D1D;
 }
 
 .navpath li.footer {
@@ -972,7 +971,7 @@ table.fieldtable {
     background-image: none;
     background-repeat: no-repeat;
     background-position: right;
-    color: #364D7C;
+    color: #6D0F0F;
     font-size: 8pt;
 }
 
@@ -1001,9 +1000,9 @@ div.ingroups a {
 div.header {
     background-image: url('nav_h.png');
     background-repeat: repeat-x;
-    background-color: #F9FAFC;
+    background-color: #FDF5F5;
     margin: 0px;
-    border-bottom: 1px solid #C4CFE5;
+    border-bottom: 1px solid #F19F9F;
 }
 
 div.headertitle {
@@ -1105,7 +1104,7 @@ dl.section dd {
     padding: 0px;
     margin: 0px;
     width: 100%;
-    border-bottom: 1px solid #5373B4;
+    border-bottom: 1px solid #B81919;
 }
 
 .image {
@@ -1129,7 +1128,7 @@ dl.section dd {
 }
 
 div.zoom {
-    border: 1px solid #90A5CE;
+    border: 1px solid #E64D4D;
 }
 
 dl.citelist {
@@ -1137,7 +1136,7 @@ dl.citelist {
 }
 
 dl.citelist dt {
-    color: #334975;
+    color: #640D0D;
     float: left;
     font-weight: bold;
     margin-right: 10px;
@@ -1151,8 +1150,8 @@ dl.citelist dd {
 
 div.toc {
     padding: 14px 25px;
-    background-color: #F4F6FA;
-    border: 1px solid #D8DFEE;
+    background-color: #FCEDED;
+    border: 1px solid #F6BEBE;
     border-radius: 7px 7px 7px 7px;
     float: right;
     height: auto;
@@ -1170,7 +1169,7 @@ div.toc li {
 
 div.toc h3 {
     font: bold 12px/1.2 Arial, FreeSans, sans-serif;
-    color: #4665A2;
+    color: #9B1515;
     border-bottom: 0 none;
     margin: 0;
 }
@@ -1179,7 +1178,7 @@ div.toc ul {
     list-style: none outside none;
     border: medium none;
     padding: 0px;
-}
+}       
 
 div.toc li.level1 {
     margin-left: 0px;
@@ -1314,13 +1313,11 @@ tr.heading h2 {
     border-width: 10px;
     margin: 0px -10px;
 }
-
 #powerTip.n:before {
     border-top-color: #808080;
     border-width: 11px;
     margin: 0px -11px;
 }
-
 #powerTip.n:after, #powerTip.n:before {
     left: 50%;
 }
@@ -1366,14 +1363,12 @@ tr.heading h2 {
 #powerTip.e:after, #powerTip.e:before {
     left: 100%;
 }
-
 #powerTip.e:after {
     border-left-color: #ffffff;
     border-width: 10px;
     top: 50%;
     margin-top: -10px;
 }
-
 #powerTip.e:before {
     border-left-color: #808080;
     border-width: 11px;
@@ -1384,14 +1379,12 @@ tr.heading h2 {
 #powerTip.w:after, #powerTip.w:before {
     right: 100%;
 }
-
 #powerTip.w:after {
     border-right-color: #ffffff;
     border-width: 10px;
     top: 50%;
     margin-top: -10px;
 }
-
 #powerTip.w:before {
     border-right-color: #808080;
     border-width: 11px;

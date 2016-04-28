@@ -1,7 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  rankdir="LR";
-  Node1 [label="MatchesDB",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_matches_d_b.html",tooltip="Manejo de las bases de datos relacionadas con los likes y los matches. "];
-}

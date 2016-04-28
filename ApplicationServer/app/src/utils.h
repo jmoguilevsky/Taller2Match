@@ -6,6 +6,7 @@
 #define MULTITHREADMULTICONNECTION_UTILS_H
 
 #include "mongoose-master/mongoose.h"
+#include "json/json.h"
 #include <string>
 #include <vector>
 
@@ -18,6 +19,8 @@ namespace utils {
 	std::vector<std::string> vectorIntersection(std::vector<std::string> &v1,
 	                                            std::vector<std::string> &v2);
 
+	std::string mgStrToString(const struct mg_str &str);
+
 	tm currentDateTime();
 
 	tm currentDateTime();
@@ -29,6 +32,10 @@ namespace utils {
 	tm stringToTime(std::string c);
 
 	int diffTimeInSeconds(tm t0, tm t1);
+
+	Json::Value stringToJson(const std::string &str);
+
+	std::string JsonToString(const Json::Value &value);
 
 }
 #endif //MULTITHREADMULTICONNECTION_UTILS_H

@@ -1,5 +1,6 @@
 var class_user_profile =
     [
+        ["UserProfile", "class_user_profile.html#a8c758187bde95bab1d0829007c71e857", null],
         ["UserProfile", "class_user_profile.html#ab76951c7e88e70c50013705fcfacfbba", null],
         ["UserProfile", "class_user_profile.html#adce414cd8095dd3613d6b0c2ee9d7222", null],
         ["getFoodInterests", "class_user_profile.html#a4cc3b5c10b0bb24478f2ceecb7e1c965", null],

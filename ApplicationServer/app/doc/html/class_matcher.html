@@ -91,7 +91,7 @@
     <div id="nav-tree">
         <div id="nav-tree-contents">
             <div id="nav-sync" class="sync"></div>
-        </div>
+    </div>
     </div>
     <div id="splitbar" style="-moz-user-select:none;"
          class="ui-resizable-handle">
@@ -139,7 +139,11 @@
             <div class="center"><img src="class_matcher__inherit__graph.png"
                                      border="0" usemap="#_matcher_inherit__map"
                                      alt="Inheritance graph"/></div>
-            <!-- MAP 0 -->
+            <map name="_matcher_inherit__map" id="_matcher_inherit__map">
+                <area shape="rect" id="node2" href="class_request_handler.html"
+                      title="Handler genérico para un request de un usuario. "
+                      alt="" coords="5,5,121,32"/>
+            </map>
             <center><span class="legend">[<a target="top"
                                              href="graph_legend.html">legend</a>]</span>
             </center>
@@ -151,7 +155,13 @@
             <div class="center"><img src="class_matcher__coll__graph.png"
                                      border="0" usemap="#_matcher_coll__map"
                                      alt="Collaboration graph"/></div>
-            <!-- MAP 1 -->
+            <map name="_matcher_coll__map" id="_matcher_coll__map">
+                <area shape="rect" id="node2" href="class_request_handler.html"
+                      title="Handler genérico para un request de un usuario. "
+                      alt="" coords="5,95,121,121"/>
+                <area shape="rect" id="node3" href="class_h_t_t_p_request.html"
+                      title="Un request HTTP. " alt="" coords="10,5,117,32"/>
+            </map>
             <center><span class="legend">[<a target="top"
                                              href="graph_legend.html">legend</a>]</span>
             </center>
@@ -161,6 +171,23 @@
                 <td colspan="2"><h2 class="groupheader"><a
                         name="pub-methods"></a>
                     Public Member Functions</h2></td>
+            </tr>
+            <tr class="memitem:afafae9a0476c9091929be187484f55b2">
+                <td class="memItemLeft" align="right" valign="top">&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="class_matcher.html#afafae9a0476c9091929be187484f55b2">Matcher</a>
+                    (<a class="el"
+                        href="class_h_t_t_p_request.html">HTTPRequest</a> <a
+                            class="el"
+                            href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>,
+                    <a class="el" href="class_matches_d_b.html">MatchesDB</a>
+                    &amp;db, <a class="el"
+                                href="class_shared_server_connection.html">SharedServerConnection</a>
+                    &amp;sharedServer)
+                </td>
+            </tr>
+            <tr class="separator:afafae9a0476c9091929be187484f55b2">
+                <td class="memSeparator" colspan="2">&#160;</td>
             </tr>
             <tr class="memitem:aa88fa5bbb00fe8a0a4b6405f8c22ffa3">
                 <td class="memItemLeft" align="right" valign="top"><a class="el"
@@ -187,13 +214,132 @@
             <tr class="separator:aa88fa5bbb00fe8a0a4b6405f8c22ffa3">
                 <td class="memSeparator" colspan="2">&#160;</td>
             </tr>
+            <tr class="memitem:a2d5e1e1705808fcd68d272dc65c12e92">
+                <td class="memItemLeft" align="right" valign="top"><a class="el"
+                                                                      href="class_h_t_t_p_response.html">HTTPResponse</a>&#160;
+                </td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="class_matcher.html#a2d5e1e1705808fcd68d272dc65c12e92">getCandidates</a>
+                    ()
+                </td>
+            </tr>
+            <tr class="separator:a2d5e1e1705808fcd68d272dc65c12e92">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+            <tr class="inherit_header pub_methods_class_request_handler">
+                <td colspan="2"
+                    onclick="javascript:toggleInherit('pub_methods_class_request_handler')">
+                    <img src="closed.png" alt="-"/>&#160;Public Member Functions
+                    inherited from <a class="el"
+                                      href="class_request_handler.html">RequestHandler</a>
+                </td>
+            </tr>
+            <tr class="memitem:ad33af675073689c2218049195503f65b inherit pub_methods_class_request_handler">
+                <td class="memItemLeft" align="right" valign="top">&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="class_request_handler.html#ad33af675073689c2218049195503f65b">RequestHandler</a>
+                    (<a class="el"
+                        href="class_h_t_t_p_request.html">HTTPRequest</a> <a
+                            class="el"
+                            href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>)
+                </td>
+            </tr>
+            <tr class="separator:ad33af675073689c2218049195503f65b inherit pub_methods_class_request_handler">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+        </table>
+        <table class="memberdecls">
+            <tr class="heading">
+                <td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+                    Additional Inherited Members</h2></td>
+            </tr>
+            <tr class="inherit_header pro_attribs_class_request_handler">
+                <td colspan="2"
+                    onclick="javascript:toggleInherit('pro_attribs_class_request_handler')">
+                    <img src="closed.png" alt="-"/>&#160;Protected Attributes
+                    inherited from <a class="el"
+                                      href="class_request_handler.html">RequestHandler</a>
+                </td>
+            </tr>
+            <tr class="memitem:a95913fcd2f05853ba9532b7bacd3a044 inherit pro_attribs_class_request_handler">
+                <td class="memItemLeft" align="right" valign="top"><a class="el"
+                                                                      href="class_h_t_t_p_request.html">HTTPRequest</a>&#160;
+                </td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>
+                </td>
+            </tr>
+            <tr class="separator:a95913fcd2f05853ba9532b7bacd3a044 inherit pro_attribs_class_request_handler">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
         </table>
         <a name="details" id="details"></a>
         <h2 class="groupheader">Detailed Description</h2>
         <div class="textblock"><p>Handler para los requests relacionados con
             likes y matches. </p>
         </div>
+        <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+        <a class="anchor" id="afafae9a0476c9091929be187484f55b2"></a>
+        <div class="memitem">
+            <div class="memproto">
+                <table class="memname">
+                    <tr>
+                        <td class="memname">Matcher::Matcher</td>
+                        <td>(</td>
+                        <td class="paramtype"><a class="el"
+                                                 href="class_h_t_t_p_request.html">HTTPRequest</a>&#160;
+                        </td>
+                        <td class="paramname"><em>request</em>,</td>
+                    </tr>
+                    <tr>
+                        <td class="paramkey"></td>
+                        <td></td>
+                        <td class="paramtype"><a class="el"
+                                                 href="class_matches_d_b.html">MatchesDB</a>
+                            &amp;&#160;</td>
+                        <td class="paramname"><em>db</em>,</td>
+                    </tr>
+                    <tr>
+                        <td class="paramkey"></td>
+                        <td></td>
+                        <td class="paramtype"><a class="el"
+                                                 href="class_shared_server_connection.html">SharedServerConnection</a>
+                            &amp;&#160;</td>
+                        <td class="paramname"><em>sharedServer</em>&#160;</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>)</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
+
+            </div>
+        </div>
         <h2 class="groupheader">Member Function Documentation</h2>
+        <a class="anchor" id="a2d5e1e1705808fcd68d272dc65c12e92"></a>
+        <div class="memitem">
+            <div class="memproto">
+                <table class="memname">
+                    <tr>
+                        <td class="memname"><a class="el"
+                                               href="class_h_t_t_p_response.html">HTTPResponse</a>
+                            Matcher::getCandidates
+                        </td>
+                        <td>(</td>
+                        <td class="paramname"></td>
+                        <td>)</td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
+
+            </div>
+        </div>
         <a class="anchor" id="aa88fa5bbb00fe8a0a4b6405f8c22ffa3"></a>
         <div class="memitem">
             <div class="memproto">
@@ -239,10 +385,12 @@
         <hr/>
         The documentation for this class was generated from the following files:
         <ul>
-            <li>Handlers/<a class="el"
-                            href="_matcher_8h_source.html">Matcher.h</a></li>
-            <li>Handlers/<a class="el" href="_matcher_8cpp.html">Matcher.cpp</a>
-            </li>
+            <li>
+                /home/chris/Escritorio/Taller2Match/ApplicationServer/app/src/Handlers/<a
+                    class="el" href="_matcher_8h_source.html">Matcher.h</a></li>
+            <li>
+                /home/chris/Escritorio/Taller2Match/ApplicationServer/app/src/Handlers/<a
+                    class="el" href="_matcher_8cpp.html">Matcher.cpp</a></li>
         </ul>
     </div><!-- contents -->
 </div><!-- doc-content -->

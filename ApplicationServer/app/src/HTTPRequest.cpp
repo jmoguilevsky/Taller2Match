@@ -2,7 +2,7 @@
 // Created by chris on 23/04/16.
 //
 
-#include "ConnectionToShared.h"
+#include "HTTPRequestSender.h"
 #include "Server.h"
 
 #define CRLF "\r\n"
@@ -30,7 +30,13 @@ HTTPRequest::HTTPRequest(struct http_message *hm) {
 	verb = std::string(hm->method.p, hm->method.len);
 	uri = std::string(hm->uri.p, hm->uri.len);
 	body = std::string(hm->body.p, hm->body.len);
+	for (int i = 0; i < MG_MAX_HTTP_HEADERS; i++) {
+		headers[utils::mgStrToString(
+				hm->header_names[i])] = utils::mgStrToString(
+				hm->header_values[i]);
+	}
 	message = std::string(hm->message.p, hm->message.len);
+
 }
 
 std::string HTTPRequest::toString() {
@@ -66,6 +72,17 @@ HTTPRequest::HTTPRequest() {
 std::string HTTPRequest::getHeader(std::string header) {
 	return headers.count(header) ? headers[header] : "";
 }
+
+HTTPRequest::HTTPRequest(std::string verb, std::string uri, std::string body) {
+	this->verb = verb;
+	this->uri = uri;
+	this->body = body;
+	this->message = verb + " " + uri + " " + HTTP_VERSION + CRLF;
+	if (body != "")this->message += CRLF + body + CRLF;
+	this->message += CRLF;
+}
+
+
 
 
 

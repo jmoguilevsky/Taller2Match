@@ -5,13 +5,16 @@
 
 #include <map>
 #include "HTTPResponse.h"
+#include "mongoose-master/mongoose.h"
+#include "utils.h"
 
 #define CRLF "\r\n"
 
 HTTPResponse::HTTPResponse(std::string code, std::string phrase,
                            std::map<std::string, std::string> headers,
                            std::string body) {
-	message = code + " " + HTTP_VERSION + " " + phrase + CRLF;
+	message = HTTP_VERSION;
+	message += " " + code + " " + phrase + CRLF;
 	for (std::map<std::string, std::string>::iterator it = headers.begin();
 	     it != headers.end(); ++it) {
 		message += it->first + ":" + it->second + CRLF;
@@ -23,6 +26,28 @@ HTTPResponse::HTTPResponse(std::string code, std::string phrase,
 const char *HTTPResponse::toCString() {
 	return message.c_str();
 }
+
+HTTPResponse::HTTPResponse() {
+
+}
+
+std::string HTTPResponse::toString() {
+	return "";
+}
+
+HTTPResponse::HTTPResponse(struct http_message *hm) {
+	// Parsear el mensaje
+	this->body = utils::mgStrToString(hm->body);
+}
+
+std::string HTTPResponse::getBody() {
+	return body;
+}
+
+
+
+
+
 
 
 

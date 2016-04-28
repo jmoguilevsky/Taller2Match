@@ -1,4 +1,5 @@
 var searchData =
     [
-        ['requesthandler', ['RequestHandler', ['../class_request_handler.html', 1, '']]]
+        ['matcher', ['Matcher', ['../class_matcher.html', 1, '']]],
+        ['matchesdb', ['MatchesDB', ['../class_matches_d_b.html', 1, '']]]
     ];

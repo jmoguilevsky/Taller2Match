@@ -5,18 +5,42 @@
 #include "Server.h"
 #include "Handlers/Login.h"
 #include "Handlers/SignUp.h"
+#include "Handlers/Matcher.h"
+#include "Handlers/AuthenticationError.h"
 
-//std::string Server::sharedAddress;
+#define HTTP_GET "GET"
+#define HTTP_POST "POST"
+#define URI_LOGIN "/login"
+#define URI_SIGNUP "/signup"
+#define URI_CANDIDATES "/candidates"
+#define ID_TOKEN "token"
+#define ID_EMAIL "email"
 
 RequestHandler *Server::getRequestHandler(HTTPRequest request) {
 	// TODO esto puede/debe estar fuera de la clase Server
 	// Recibe un mensaje del cliente, y devuelve el request handler para eso.
 	// return RequestHandler(request,dbManager);
-	if (request.getVerb() == "POST" && request.getUri() == "/login") {
-		return new Login(request, db);
+	if (request.getVerb() == HTTP_POST && request.getUri() == URI_LOGIN) {
+		// Acá como es login, no hay que verificar el token y la autenticación.
+		return new Login(request, db, tokenManager, sharedServer);
 	}
-	if (request.getVerb() == "POST" && request.getUri() == "/signup") {
+	//TODO En el resto de los requests, hay que verificar que el token sea válido.
+	//TODO Si es inválido -> ERROR!. Si es válido, sigo.
+
+	if (request.getVerb() == HTTP_POST && request.getUri() == URI_SIGNUP) {
 		return new SignUp(request, db);
+	}
+
+	Json::Value authorization = utils::stringToJson(
+			request.getHeader("Authorization"));
+	std::string username = authorization[ID_EMAIL].asString();
+	std::string token = authorization[ID_TOKEN].asString();
+	if (!tokenManager.isValid(username, token)) {
+		return new AuthenticationError(request);
+	}
+
+	if (request.getVerb() == HTTP_GET && request.getUri() == URI_CANDIDATES) {
+		return new Matcher(request, matchesDB, sharedServer);
 	}
 
 }
@@ -24,12 +48,13 @@ RequestHandler *Server::getRequestHandler(HTTPRequest request) {
 void Server::clientHandler(struct mg_connection *c, int ev, void *p) {
 	if (ev == MG_EV_HTTP_REQUEST) {
 		HTTPRequest request((struct http_message *) p);
-		Server *server = (Server *) c->user_data;
-		RequestHandler *handler = server->getRequestHandler(request);
+		Server *thisServer = (Server *) c->user_data;
+		RequestHandler *handler = thisServer->getRequestHandler(request);
 		HTTPResponse response = handler->handle();
-		std::cout << "Response:\n" << response.toCString() << std::endl;
+		std::cout << "\nResponse:\n" << response.toCString() << std::endl;
 		mg_printf(c, "%s\r\n", response.toCString());
 		c->flags |= MG_F_SEND_AND_CLOSE;
+		delete handler;
 	}
 }
 
@@ -38,10 +63,9 @@ void Server::stop() {
 	CONTINUE = false;
 }
 
-Server::Server(std::string port, std::string sharedAddress) : db("login") {
-	// TODO
-	this->sharedAddress = sharedAddress;
-	this->port = port;
+Server::Server(std::string port, std::string sharedAddress) : db("login"),
+                                                              sharedServer(
+		                                                              sharedAddress) {
 	mg_mgr_init(&mgr, NULL);
 	struct mg_bind_opts opts;
 	opts.user_data = (void *) this;
