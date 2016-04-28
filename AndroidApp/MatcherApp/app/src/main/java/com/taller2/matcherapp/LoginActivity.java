@@ -108,7 +108,18 @@ public class LoginActivity extends AppCompatActivity {
         pDialog.setMessage("Logging in ...");
         showDialog();
 
-        StringRequest strReq = new StringRequest(Request.Method.POST,
+        session.setLogin(true);
+        String name = "usuario";
+        String uid = "000";
+        String fecha = "ahora";
+        db.addUser(name, email,uid,fecha);
+        hideDialog();
+        Intent intent = new Intent(LoginActivity.this,
+                MainActivity.class);
+        startActivity(intent);
+        finish();
+
+        /*StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_LOGIN, new Response.Listener<String>() {
 
             @Override
@@ -180,7 +191,7 @@ public class LoginActivity extends AppCompatActivity {
         };
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);*/
     }
 
     private void showDialog() {
