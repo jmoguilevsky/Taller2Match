@@ -13,7 +13,7 @@ function readCookie(cookie) {
             }
             var val = document.cookie.substring(valStart, valEnd);
             return val;
-        }
+    }
     }
     return 0;
 }
@@ -87,12 +87,12 @@ function initResizable() {
                 while (target) {
                     if ($(target).css('-webkit-overflow-scrolling') == 'touch') return;
                     target = target.parentNode;
-                }
+        }
                 e.preventDefault();
             } catch (err) {
                 e.preventDefault();
             }
-        }
+    }
     });
 }
 

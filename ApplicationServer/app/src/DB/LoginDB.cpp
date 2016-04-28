@@ -4,19 +4,13 @@
 #include "LoginDB.h"
 
 int LoginDB::newUser(std::string user, std::string pass) {
-	std::cout << "before:" << std::endl;
 	std::string value;
 	bool exists = db.get(user, value);
-	std::cout << "value: " << value << " exists: " <<
-	(exists ? "USER_EXISTS" : "DOESNT_EXIST") << std::endl;
 	if (db.get(user, value)) {
-		std::cout << "key exists" << std::endl;
 		return USER_ALREADY_EXISTS;
 	}
 	db.save(user, pass);
-	std::cout << "after: " << std::endl;
 	exists = db.get(user, value);
-	std::cout << "value: " << value << " exists: " << exists << std::endl;
 	return USER_CREATED_OK;
 }
 

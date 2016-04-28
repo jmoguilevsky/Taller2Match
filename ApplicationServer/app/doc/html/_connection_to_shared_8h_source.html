@@ -5,7 +5,9 @@
     <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=9"/>
     <meta name="generator" content="Doxygen 1.8.9.1"/>
-    <title>Match - Application Server: ConnectionToShared.h Source File</title>
+    <title>Match - Application Server:
+        /home/chris/Escritorio/Taller2Match/ApplicationServer/app/src/HTTPRequestSender.h
+        Source File</title>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -86,7 +88,7 @@
     <div id="nav-tree">
         <div id="nav-tree-contents">
             <div id="nav-sync" class="sync"></div>
-        </div>
+    </div>
     </div>
     <div id="splitbar" style="-moz-user-select:none;"
          class="ui-resizable-handle">
@@ -114,7 +116,7 @@
 
     <div class="header">
         <div class="headertitle">
-            <div class="title">ConnectionToShared.h</div>
+            <div class="title">HTTPRequestSender.h</div>
         </div>
     </div><!--header-->
     <div class="contents">
@@ -148,121 +150,132 @@
             <div class="line"><a name="l00009"></a><span
                     class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;mongoose-master/mongoose.h&quot;</span>
             </div>
-            <div class="line"><a name="l00011"></a><span class="lineno"><a
+            <div class="line"><a name="l00010"></a><span
+                    class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a
+                    class="code"
+                    href="_h_t_t_p_response_8h.html">HTTPResponse.h</a>&quot;</span>
+            </div>
+            <div class="line"><a name="l00011"></a><span
+                    class="lineno">   11</span>&#160;</div>
+            <div class="line"><a name="l00013"></a><span class="lineno"><a
                     class="line"
-                    href="class_connection_to_shared.html">   11</a></span>&#160;<span
+                    href="class_connection_to_shared.html">   13</a></span>&#160;<span
                     class="keyword">class </span><a class="code"
-                                                    href="class_connection_to_shared.html">ConnectionToShared</a>
+                                                    href="class_connection_to_shared.html">HTTPRequestSender</a>
                 {
             </div>
-            <div class="line"><a name="l00012"></a><span
-                    class="lineno">   12</span>&#160;</div>
-            <div class="line"><a name="l00013"></a><span
-                    class="lineno">   13</span>&#160; <span class="keyword">struct </span>mg_mgr
+            <div class="line"><a name="l00014"></a><span
+                    class="lineno">   14</span>&#160;</div>
+            <div class="line"><a name="l00015"></a><span
+                    class="lineno">   15</span>&#160; <span class="keyword">struct </span>mg_mgr
                 mgr;
             </div>
-            <div class="line"><a name="l00014"></a><span
-                    class="lineno">   14</span>&#160; <span class="keyword">struct </span>mg_connection
+            <div class="line"><a name="l00016"></a><span
+                    class="lineno">   16</span>&#160; <span class="keyword">struct </span>mg_connection
                 *c;
             </div>
-            <div class="line"><a name="l00015"></a><span
-                    class="lineno">   15</span>&#160; <a class="code"
-                                                         href="class_h_t_t_p_request.html">HTTPRequest</a>
+            <div class="line"><a name="l00017"></a><span
+                    class="lineno">   17</span>&#160; <a class="code"
+                                                         href="class_h_t_t_p_response.html">HTTPResponse</a>
                 response;
             </div>
-            <div class="line"><a name="l00016"></a><span
-                    class="lineno">   16</span>&#160; <span class="keywordtype">bool</span>
+            <div class="line"><a name="l00018"></a><span
+                    class="lineno">   18</span>&#160; <span class="keywordtype">bool</span>
                 waiting;
             </div>
-            <div class="line"><a name="l00017"></a><span
-                    class="lineno">   17</span>&#160; std::string sharedAddress;
-            </div>
-            <div class="line"><a name="l00018"></a><span
-                    class="lineno">   18</span>&#160;<span class="keyword">public</span>:
+            <div class="line"><a name="l00019"></a><span
+                    class="lineno">   19</span>&#160; std::string address;
             </div>
             <div class="line"><a name="l00020"></a><span
-                    class="lineno">   20</span>&#160; <a class="code"
-                                                         href="class_connection_to_shared.html#a4dfe5a7bd4837a5d3f016c253f7c506a">ConnectionToShared</a>(std::string
-                sharedAddress);
+                    class="lineno">   20</span>&#160;<span class="keyword">public</span>:
             </div>
-            <div class="line"><a name="l00021"></a><span
-                    class="lineno">   21</span>&#160;</div>
+            <div class="line"><a name="l00022"></a><span
+                    class="lineno">   22</span>&#160; <a class="code"
+                                                         href="class_connection_to_shared.html#a4dfe5a7bd4837a5d3f016c253f7c506a">HTTPRequestSender</a>(std::string
+                address);
+            </div>
             <div class="line"><a name="l00023"></a><span
-                    class="lineno">   23</span>&#160; <a class="code"
-                                                         href="class_h_t_t_p_request.html">HTTPRequest</a>
+                    class="lineno">   23</span>&#160;</div>
+            <div class="line"><a name="l00025"></a><span
+                    class="lineno">   25</span>&#160; <a class="code"
+                                                         href="class_h_t_t_p_response.html">HTTPResponse</a>
                 <a class="code"
-                   href="class_connection_to_shared.html#aaab61972c747214b9693c730093dc6ba">sendRequest</a>(<a
+                   href="class_connection_to_shared.html#a8850352af79ff3ad0f27736f73536857">sendRequest</a>(<a
                         class="code" href="class_h_t_t_p_request.html">HTTPRequest</a>
                 request);
             </div>
-            <div class="line"><a name="l00024"></a><span
-                    class="lineno">   24</span>&#160;</div>
             <div class="line"><a name="l00026"></a><span
-                    class="lineno">   26</span>&#160; <span class="keywordtype">void</span>
+                    class="lineno">   26</span>&#160;</div>
+            <div class="line"><a name="l00028"></a><span
+                    class="lineno">   28</span>&#160; <span class="keywordtype">void</span>
                 <a class="code"
                    href="class_connection_to_shared.html#a24e08608ac219d2bac62e47b90bbc1d7">handle</a>(mg_connection
                 *pConnection, <span class="keywordtype">int</span> ev, <span
                         class="keywordtype">void</span> *p);
             </div>
-            <div class="line"><a name="l00027"></a><span
-                    class="lineno">   27</span>&#160;</div>
             <div class="line"><a name="l00029"></a><span
-                    class="lineno">   29</span>&#160; <span class="keyword">static</span>
+                    class="lineno">   29</span>&#160;</div>
+            <div class="line"><a name="l00031"></a><span
+                    class="lineno">   31</span>&#160; <span class="keyword">static</span>
                 <span class="keywordtype">void</span> <a class="code"
-                                                         href="class_connection_to_shared.html#aee4a17324d2f712dc2ade7bf31ab6e75">sharedHandler</a>(<span
+                                                         href="class_connection_to_shared.html#aee4a17324d2f712dc2ade7bf31ab6e75">eventHandler</a>(<span
                         class="keyword">struct</span> mg_connection *c, <span
                         class="keywordtype">int</span> ev, <span
                         class="keywordtype">void</span> *p);
             </div>
-            <div class="line"><a name="l00030"></a><span
-                    class="lineno">   30</span>&#160;};
-            </div>
-            <div class="line"><a name="l00031"></a><span
-                    class="lineno">   31</span>&#160;</div>
             <div class="line"><a name="l00032"></a><span
-                    class="lineno">   32</span>&#160;<span class="preprocessor">#endif //APPSERVER_CONNECTIONTOSHARED_H</span>
+                    class="lineno">   32</span>&#160;};
+            </div>
+            <div class="line"><a name="l00033"></a><span
+                    class="lineno">   33</span>&#160;</div>
+            <div class="line"><a name="l00034"></a><span
+                    class="lineno">   34</span>&#160;<span class="preprocessor">#endif //APPSERVER_CONNECTIONTOSHARED_H</span>
             </div>
             <div class="ttc"
-                 id="class_connection_to_shared_html_aaab61972c747214b9693c730093dc6ba">
+                 id="class_connection_to_shared_html_aee4a17324d2f712dc2ade7bf31ab6e75">
                 <div class="ttname"><a
-                        href="class_connection_to_shared.html#aaab61972c747214b9693c730093dc6ba">ConnectionToShared::sendRequest</a>
+                        href="class_connection_to_shared.html#aee4a17324d2f712dc2ade7bf31ab6e75">HTTPRequestSender::eventHandler</a>
                 </div>
-                <div class="ttdeci">HTTPRequest sendRequest(HTTPRequest
+                <div class="ttdeci">static void eventHandler(struct
+                    mg_connection *c, int ev, void *p)
+                </div>
+                <div class="ttdoc">Handler que deriva el evento hacia el
+                    HTTPRequestSender particular de cada conexión.
+                </div>
+                <div class="ttdef"><b>Definition:</b> HTTPRequestSender.cpp:40
+                </div>
+            </div>
+            <div class="ttc" id="class_connection_to_shared_html">
+                <div class="ttname"><a href="class_connection_to_shared.html">HTTPRequestSender</a>
+                </div>
+                <div class="ttdoc">Una conexión al Shared Server, para hacer un
+                    request y esperar por la respuesta.
+                </div>
+                <div class="ttdef"><b>Definition:</b> HTTPRequestSender.h:13
+                </div>
+            </div>
+            <div class="ttc"
+                 id="class_connection_to_shared_html_a8850352af79ff3ad0f27736f73536857">
+                <div class="ttname"><a
+                        href="class_connection_to_shared.html#a8850352af79ff3ad0f27736f73536857">HTTPRequestSender::sendRequest</a>
+                </div>
+                <div class="ttdeci">HTTPResponse sendRequest(HTTPRequest
                     request)
                 </div>
                 <div class="ttdoc">Envia un request HTTP al Shared Server,
                     espera por la respuesta, y la devuelve como HTTPResponse...
                 </div>
-                <div class="ttdef"><b>Definition:</b> ConnectionToShared.cpp:12
+                <div class="ttdef"><b>Definition:</b> HTTPRequestSender.cpp:13
                 </div>
             </div>
-            <div class="ttc"
-                 id="class_connection_to_shared_html_aee4a17324d2f712dc2ade7bf31ab6e75">
-                <div class="ttname"><a
-                        href="class_connection_to_shared.html#aee4a17324d2f712dc2ade7bf31ab6e75">ConnectionToShared::sharedHandler</a>
-                </div>
-                <div class="ttdeci">static void sharedHandler(struct
-                    mg_connection *c, int ev, void *p)
-                </div>
-                <div class="ttdoc">Handler que deriva el evento hacia el
-                    ConnectionToShared particular de cada conexión.
-                </div>
-                <div class="ttdef"><b>Definition:</b> ConnectionToShared.cpp:39
-                </div>
-            </div>
-            <div class="ttc" id="class_connection_to_shared_html">
-                <div class="ttname"><a href="class_connection_to_shared.html">ConnectionToShared</a>
-                </div>
-                <div class="ttdoc">Una conexión al Shared Server, para hacer un
-                    request y esperar por la respuesta.
-                </div>
-                <div class="ttdef"><b>Definition:</b> ConnectionToShared.h:11
+            <div class="ttc" id="_h_t_t_p_response_8h_html">
+                <div class="ttname"><a href="_h_t_t_p_response_8h.html">HTTPResponse.h</a>
                 </div>
             </div>
             <div class="ttc"
                  id="class_connection_to_shared_html_a24e08608ac219d2bac62e47b90bbc1d7">
                 <div class="ttname"><a
-                        href="class_connection_to_shared.html#a24e08608ac219d2bac62e47b90bbc1d7">ConnectionToShared::handle</a>
+                        href="class_connection_to_shared.html#a24e08608ac219d2bac62e47b90bbc1d7">HTTPRequestSender::handle</a>
                 </div>
                 <div class="ttdeci">void handle(mg_connection *pConnection, int
                     ev, void *p)
@@ -270,28 +283,32 @@
                 <div class="ttdoc">Handler para los eventos relacionados con la
                     conexión al Shared Server.
                 </div>
-                <div class="ttdef"><b>Definition:</b> ConnectionToShared.cpp:30
+                <div class="ttdef"><b>Definition:</b> HTTPRequestSender.cpp:31
                 </div>
             </div>
             <div class="ttc"
                  id="class_connection_to_shared_html_a4dfe5a7bd4837a5d3f016c253f7c506a">
                 <div class="ttname"><a
-                        href="class_connection_to_shared.html#a4dfe5a7bd4837a5d3f016c253f7c506a">ConnectionToShared::ConnectionToShared</a>
+                        href="class_connection_to_shared.html#a4dfe5a7bd4837a5d3f016c253f7c506a">HTTPRequestSender::HTTPRequestSender</a>
                 </div>
-                <div class="ttdeci">ConnectionToShared(std::string
-                    sharedAddress)
-                </div>
+                <div class="ttdeci">HTTPRequestSender(std::string address)</div>
                 <div class="ttdoc">Crea la conexión al Shared Server, recibiendo
                     su URL como parámetro.
                 </div>
-                <div class="ttdef"><b>Definition:</b> ConnectionToShared.cpp:8
+                <div class="ttdef"><b>Definition:</b> HTTPRequestSender.cpp:9
                 </div>
+            </div>
+            <div class="ttc" id="class_h_t_t_p_response_html">
+                <div class="ttname"><a href="class_h_t_t_p_response.html">HTTPResponse</a>
+                </div>
+                <div class="ttdoc">Una respuesta HTTP.</div>
+                <div class="ttdef"><b>Definition:</b> HTTPResponse.h:14</div>
             </div>
             <div class="ttc" id="class_h_t_t_p_request_html">
                 <div class="ttname"><a href="class_h_t_t_p_request.html">HTTPRequest</a>
                 </div>
                 <div class="ttdoc">Un request HTTP.</div>
-                <div class="ttdef"><b>Definition:</b> HTTPRequest.h:11</div>
+                <div class="ttdef"><b>Definition:</b> HTTPRequest.h:12</div>
             </div>
             <div class="ttc" id="_h_t_t_p_request_8h_html">
                 <div class="ttname"><a href="_h_t_t_p_request_8h.html">HTTPRequest.h</a>
@@ -302,7 +319,10 @@
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
     <ul>
-        <li class="navelem"><a class="el" href="_connection_to_shared_8h.html">ConnectionToShared.h</a>
+        <li class="navelem"><a class="el"
+                               href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>
+        </li>
+        <li class="navelem"><a class="el" href="_connection_to_shared_8h.html">HTTPRequestSender.h</a>
         </li>
         <li class="footer">Generated by
             <a href="http://www.doxygen.org/index.html">

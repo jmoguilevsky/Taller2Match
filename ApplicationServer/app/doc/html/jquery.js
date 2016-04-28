@@ -2324,12 +2324,12 @@
             b.event.fixHooks[e] = b.event.mouseHooks
         }
     });
-    /*
-     * Sizzle CSS Selector Engine
-     *  Copyright 2011, The Dojo Foundation
-     *  Released under the MIT, BSD, and GPL Licenses.
-     *  More information: http://sizzlejs.com/
-     */
+/*
+ * Sizzle CSS Selector Engine
+ *  Copyright 2011, The Dojo Foundation
+ *  Released under the MIT, BSD, and GPL Licenses.
+ *  More information: http://sizzlejs.com/
+ */
     (function () {
         var bH = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^\[\]]*\]|['"][^'"]*['"]|[^\[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g, bC = "sizcache" + (Math.random() + "").replace(".", ""), bI = 0, bL = Object.prototype.toString, bB = false, bA = true, bK = /\\/g, bO = /\r\n/g, bQ = /\W/;
         [0, 0].sort(function () {

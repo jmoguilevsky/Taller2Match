@@ -2,6 +2,7 @@ var class_h_t_t_p_request =
     [
         ["HTTPRequest", "class_h_t_t_p_request.html#a7c53a92689eb5cee6b069a3db3c327ae", null],
         ["HTTPRequest", "class_h_t_t_p_request.html#ae5880bda328e95165a150d5403a3cd22", null],
+        ["HTTPRequest", "class_h_t_t_p_request.html#a8c872a6924151283710eeed82eb22478", null],
         ["HTTPRequest", "class_h_t_t_p_request.html#af30941e3edf4dd0534ccee922b80d214", null],
         ["getBody", "class_h_t_t_p_request.html#a205e7dbafc6888087b742f7de91d421d", null],
         ["getHeader", "class_h_t_t_p_request.html#a1d399357b19166c7b4c624bbd73365c6", null],

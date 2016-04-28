@@ -91,7 +91,7 @@
     <div id="nav-tree">
         <div id="nav-tree-contents">
             <div id="nav-sync" class="sync"></div>
-        </div>
+    </div>
     </div>
     <div id="splitbar" style="-moz-user-select:none;"
          class="ui-resizable-handle">
@@ -180,7 +180,7 @@
                 <td class="memItemLeft" align="right" valign="top">&#160;</td>
                 <td class="memItemRight" valign="bottom"><a class="el"
                                                             href="class_server.html#ab304cb02833b94847e8655bbf929224d">Server</a>
-                    (std::string port, std::string sharedAddress)
+                    (std::string port, std::string address)
                 </td>
             </tr>
             <tr class="memdesc:ab304cb02833b94847e8655bbf929224d">
@@ -251,7 +251,7 @@
                         <td class="paramkey"></td>
                         <td></td>
                         <td class="paramtype">std::string&#160;</td>
-                        <td class="paramname"><em>sharedAddress</em>&#160;</td>
+                        <td class="paramname"><em>address</em>&#160;</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -267,6 +267,30 @@
                     entrantes, y una URL (URL:port) del Shared <a class="el"
                                                                   href="class_server.html"
                                                                   title="Clase principal, el Server. (?) ">Server</a>.
+                </p>
+
+                <p>
+                <div class="dynheader">
+                    Here is the call graph for this function:
+                </div>
+                <div class="dyncontent">
+                    <div class="center"><img
+                            src="class_server_ab304cb02833b94847e8655bbf929224d_cgraph.png"
+                            border="0"
+                            usemap="#class_server_ab304cb02833b94847e8655bbf929224d_cgraph"
+                            alt=""/></div>
+                    <map name="class_server_ab304cb02833b94847e8655bbf929224d_cgraph"
+                         id="class_server_ab304cb02833b94847e8655bbf929224d_cgraph">
+                        <area shape="rect" id="node2"
+                              href="class_server.html#ac3f610990e6c5d339cf38cbf495f598e"
+                              title="Event handler para las conexiones con los clientes. "
+                              alt="" coords="160,5,304,32"/>
+                        <area shape="rect" id="node3"
+                              href="class_h_t_t_p_response.html#acf3cc435114cf49b8531afa7c1fc5d4a"
+                              title="HTTPResponse::toCString" alt=""
+                              coords="352,5,531,32"/>
+                    </map>
+                </div>
                 </p>
 
             </div>
@@ -335,6 +359,46 @@
 
                 <p>Event handler para las conexiones con los clientes. </p>
 
+                <p>
+                <div class="dynheader">
+                    Here is the call graph for this function:
+                </div>
+                <div class="dyncontent">
+                    <div class="center"><img
+                            src="class_server_ac3f610990e6c5d339cf38cbf495f598e_cgraph.png"
+                            border="0"
+                            usemap="#class_server_ac3f610990e6c5d339cf38cbf495f598e_cgraph"
+                            alt=""/></div>
+                    <map name="class_server_ac3f610990e6c5d339cf38cbf495f598e_cgraph"
+                         id="class_server_ac3f610990e6c5d339cf38cbf495f598e_cgraph">
+                        <area shape="rect" id="node2"
+                              href="class_h_t_t_p_response.html#acf3cc435114cf49b8531afa7c1fc5d4a"
+                              title="HTTPResponse::toCString" alt=""
+                              coords="197,5,376,32"/>
+                    </map>
+                </div>
+                </p>
+
+                <p>
+                <div class="dynheader">
+                    Here is the caller graph for this function:
+                </div>
+                <div class="dyncontent">
+                    <div class="center"><img
+                            src="class_server_ac3f610990e6c5d339cf38cbf495f598e_icgraph.png"
+                            border="0"
+                            usemap="#class_server_ac3f610990e6c5d339cf38cbf495f598e_icgraph"
+                            alt=""/></div>
+                    <map name="class_server_ac3f610990e6c5d339cf38cbf495f598e_icgraph"
+                         id="class_server_ac3f610990e6c5d339cf38cbf495f598e_icgraph">
+                        <area shape="rect" id="node2"
+                              href="class_server.html#ab304cb02833b94847e8655bbf929224d"
+                              title="Crea el server con un port donde escucha conexiones entrantes, y una URL (URL:port) del Shared Server..."
+                              alt="" coords="197,5,304,32"/>
+                    </map>
+                </div>
+                </p>
+
             </div>
         </div>
         <a class="anchor" id="a7eac07d2582fa01c2671362efa955b31"></a>
@@ -353,6 +417,25 @@
             <div class="memdoc">
 
                 <p>Inicia el server. </p>
+
+                <p>
+                <div class="dynheader">
+                    Here is the caller graph for this function:
+                </div>
+                <div class="dyncontent">
+                    <div class="center"><img
+                            src="class_server_a7eac07d2582fa01c2671362efa955b31_icgraph.png"
+                            border="0"
+                            usemap="#class_server_a7eac07d2582fa01c2671362efa955b31_icgraph"
+                            alt=""/></div>
+                    <map name="class_server_a7eac07d2582fa01c2671362efa955b31_icgraph"
+                         id="class_server_a7eac07d2582fa01c2671362efa955b31_icgraph">
+                        <area shape="rect" id="node2"
+                              href="main_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe"
+                              title="main" alt="" coords="148,5,199,32"/>
+                    </map>
+                </div>
+                </p>
 
             </div>
         </div>
@@ -378,8 +461,10 @@
         <hr/>
         The documentation for this class was generated from the following files:
         <ul>
-            <li><a class="el" href="_server_8h_source.html">Server.h</a></li>
-            <li><a class="el" href="_server_8cpp.html">Server.cpp</a></li>
+            <li>/home/chris/Escritorio/Taller2Match/ApplicationServer/app/src/<a
+                    class="el" href="_server_8h_source.html">Server.h</a></li>
+            <li>/home/chris/Escritorio/Taller2Match/ApplicationServer/app/src/<a
+                    class="el" href="_server_8cpp.html">Server.cpp</a></li>
         </ul>
     </div><!-- contents -->
 </div><!-- doc-content -->

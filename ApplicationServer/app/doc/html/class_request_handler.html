@@ -91,7 +91,7 @@
     <div id="nav-tree">
         <div id="nav-tree-contents">
             <div id="nav-sync" class="sync"></div>
-        </div>
+    </div>
     </div>
     <div id="splitbar" style="-moz-user-select:none;"
          class="ui-resizable-handle">
@@ -120,6 +120,7 @@
     <div class="header">
         <div class="summary">
             <a href="#pub-methods">Public Member Functions</a> &#124;
+            <a href="#pro-attribs">Protected Attributes</a> &#124;
             <a href="class_request_handler-members.html">List of all members</a>
         </div>
         <div class="headertitle">
@@ -144,7 +145,37 @@
                     src="class_request_handler__inherit__graph.png" border="0"
                     usemap="#_request_handler_inherit__map"
                     alt="Inheritance graph"/></div>
-            <!-- MAP 0 -->
+            <map name="_request_handler_inherit__map"
+                 id="_request_handler_inherit__map">
+                <area shape="rect" id="node2" href="class_login.html"
+                      title="Handler para los requests relacionados con el login. "
+                      alt="" coords="5,80,59,107"/>
+                <area shape="rect" id="node3" href="class_matcher.html"
+                      title="Handler para los requests relacionados con likes y matches. "
+                      alt="" coords="83,80,152,107"/>
+                <area shape="rect" id="node4" href="class_sign_up.html"
+                      title="Handler para la creación de un nuevo usuario. "
+                      alt="" coords="177,80,242,107"/>
+            </map>
+            <center><span class="legend">[<a target="top"
+                                             href="graph_legend.html">legend</a>]</span>
+            </center>
+        </div>
+        <div class="dynheader">
+            Collaboration diagram for RequestHandler:
+        </div>
+        <div class="dyncontent">
+            <div class="center"><img
+                    src="class_request_handler__coll__graph.png" border="0"
+                    usemap="#_request_handler_coll__map"
+                    alt="Collaboration graph"/></div>
+            <map name="_request_handler_coll__map"
+                 id="_request_handler_coll__map">
+                <area shape="rect" id="node2" href="class_h_t_t_p_response.html"
+                      title="Una respuesta HTTP. " alt="" coords="5,5,121,32"/>
+                <area shape="rect" id="node3" href="class_h_t_t_p_request.html"
+                      title="Un request HTTP. " alt="" coords="146,5,253,32"/>
+            </map>
             <center><span class="legend">[<a target="top"
                                              href="graph_legend.html">legend</a>]</span>
             </center>
@@ -154,6 +185,19 @@
                 <td colspan="2"><h2 class="groupheader"><a
                         name="pub-methods"></a>
                     Public Member Functions</h2></td>
+            </tr>
+            <tr class="memitem:ad33af675073689c2218049195503f65b">
+                <td class="memItemLeft" align="right" valign="top">&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="class_request_handler.html#ad33af675073689c2218049195503f65b">RequestHandler</a>
+                    (<a class="el"
+                        href="class_h_t_t_p_request.html">HTTPRequest</a> <a
+                            class="el"
+                            href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>)
+                </td>
+            </tr>
+            <tr class="separator:ad33af675073689c2218049195503f65b">
+                <td class="memSeparator" colspan="2">&#160;</td>
             </tr>
             <tr class="memitem:ada5c3c1669e6c2e4b46923a42b1fdab6">
                 <td class="memItemLeft" align="right" valign="top">virtual <a
@@ -181,10 +225,71 @@
                 <td class="memSeparator" colspan="2">&#160;</td>
             </tr>
         </table>
+        <table class="memberdecls">
+            <tr class="heading">
+                <td colspan="2"><h2 class="groupheader"><a
+                        name="pro-attribs"></a>
+                    Protected Attributes</h2></td>
+            </tr>
+            <tr class="memitem:a95913fcd2f05853ba9532b7bacd3a044">
+                <td class="memItemLeft" align="right" valign="top"><a class="el"
+                                                                      href="class_h_t_t_p_request.html">HTTPRequest</a>&#160;
+                </td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>
+                </td>
+            </tr>
+            <tr class="separator:a95913fcd2f05853ba9532b7bacd3a044">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+            <tr class="memitem:aa56594238825cf7e1254001cb8f536ec">
+                <td class="memItemLeft" align="right" valign="top"><a class="el"
+                                                                      href="class_h_t_t_p_response.html">HTTPResponse</a>
+                    *&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="class_request_handler.html#aa56594238825cf7e1254001cb8f536ec">response</a>
+                </td>
+            </tr>
+            <tr class="separator:aa56594238825cf7e1254001cb8f536ec">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+        </table>
         <a name="details" id="details"></a>
         <h2 class="groupheader">Detailed Description</h2>
         <div class="textblock"><p>Handler genérico para un request de un
             usuario. </p>
+        </div>
+        <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+        <a class="anchor" id="ad33af675073689c2218049195503f65b"></a>
+        <div class="memitem">
+            <div class="memproto">
+                <table class="mlabels">
+                    <tr>
+                        <td class="mlabels-left">
+                            <table class="memname">
+                                <tr>
+                                    <td class="memname">
+                                        RequestHandler::RequestHandler
+                                    </td>
+                                    <td>(</td>
+                                    <td class="paramtype"><a class="el"
+                                                             href="class_h_t_t_p_request.html">HTTPRequest</a>&#160;
+                                    </td>
+                                    <td class="paramname"><em>request</em></td>
+                                    <td>)</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="mlabels-right">
+                            <span class="mlabels"><span
+                                    class="mlabel">inline</span></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
+
+            </div>
         </div>
         <h2 class="groupheader">Member Function Documentation</h2>
         <a class="anchor" id="ada5c3c1669e6c2e4b46923a42b1fdab6"></a>
@@ -233,10 +338,63 @@
 
             </div>
         </div>
+        <h2 class="groupheader">Member Data Documentation</h2>
+        <a class="anchor" id="a95913fcd2f05853ba9532b7bacd3a044"></a>
+        <div class="memitem">
+            <div class="memproto">
+                <table class="mlabels">
+                    <tr>
+                        <td class="mlabels-left">
+                            <table class="memname">
+                                <tr>
+                                    <td class="memname"><a class="el"
+                                                           href="class_h_t_t_p_request.html">HTTPRequest</a>
+                                        RequestHandler::request
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="mlabels-right">
+                            <span class="mlabels"><span
+                                    class="mlabel">protected</span></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
+
+            </div>
+        </div>
+        <a class="anchor" id="aa56594238825cf7e1254001cb8f536ec"></a>
+        <div class="memitem">
+            <div class="memproto">
+                <table class="mlabels">
+                    <tr>
+                        <td class="mlabels-left">
+                            <table class="memname">
+                                <tr>
+                                    <td class="memname"><a class="el"
+                                                           href="class_h_t_t_p_response.html">HTTPResponse</a>*
+                                        RequestHandler::response
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="mlabels-right">
+                            <span class="mlabels"><span
+                                    class="mlabel">protected</span></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
+
+            </div>
+        </div>
         <hr/>
         The documentation for this class was generated from the following file:
         <ul>
-            <li>Handlers/<a class="el" href="_request_handler_8h_source.html">RequestHandler.h</a>
+            <li>
+                /home/chris/Escritorio/Taller2Match/ApplicationServer/app/src/Handlers/<a
+                    class="el" href="_request_handler_8h_source.html">RequestHandler.h</a>
             </li>
         </ul>
     </div><!-- contents -->

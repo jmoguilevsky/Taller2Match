@@ -73,9 +73,9 @@ function getScript(scriptName, func, show) {
                 func();
                 if (show) showRoot();
             }
-        }
     }
-    head.appendChild(script);
+    }
+    head.appendChild(script); 
 }
 
 function createIndent(o, domNode, node, level) {
@@ -102,7 +102,7 @@ function createIndent(o, domNode, node, level) {
             } else {
                 expandNode(o, node, false, false);
             }
-        }
+    }
         node.expandToggle.appendChild(imgNode);
         domNode.appendChild(node.expandToggle);
         imgNode.src = node.relpath + "arrowright.png";
@@ -113,7 +113,7 @@ function createIndent(o, domNode, node, level) {
         span.style.height = '22px';
         span.innerHTML = '&#160;';
         domNode.appendChild(span);
-    }
+    } 
 }
 
 var animationInProgress = false;
@@ -176,7 +176,7 @@ function newNode(o, po, text, link, childrenData, lastNode) {
         if (link.substring(0, 1) == '^') {
             url = link.substring(1);
             link = url;
-        } else {
+    } else {
             url = node.relpath + link;
         }
         a.className = stripPath(link.replace('#', ':'));
@@ -192,7 +192,7 @@ function newNode(o, po, text, link, childrenData, lastNode) {
                     $('.item').removeAttr('id');
                     $(a).parent().parent().addClass('selected');
                     $(a).parent().parent().attr('id', 'selected');
-                }
+        }
                 var anchor = $(aname);
                 gotoAnchor(anchor, aname, true);
             };
@@ -201,7 +201,7 @@ function newNode(o, po, text, link, childrenData, lastNode) {
             a.onclick = function () {
                 storeLink(link);
             }
-        }
+    }
     } else {
         if (childrenData != null) {
             a.className = "nolink";
@@ -262,7 +262,7 @@ function expandNode(o, node, imm, showRoot) {
                 node.plus_img.src = node.relpath + "arrowdown.png";
             }
             node.expanded = true;
-        }
+    }
     }
 }
 
@@ -339,15 +339,15 @@ function showNode(o, node, index, hash) {
                         node.expanded = false;
                         showNode(o, node, index, hash); // retry with child node expanded
                     }, true);
-                } else {
+        } else {
                     var rootBase = stripPath(o.toroot.replace(/\..+$/, ''));
                     if (rootBase == "index" || rootBase == "pages" || rootBase == "search") {
                         expandNode(o, n, true, true);
                     }
                     selectAndHighlight(hash, n);
-                }
-            }
         }
+            }
+    }
     } else {
         selectAndHighlight(hash);
     }
@@ -473,7 +473,7 @@ function initNavTree(toroot, relpath) {
             navSync.removeClass('sync');
         } else {
             showSyncOn(navSync, relpath);
-        }
+    }
         navSync.click(function () {
             toggleSyncButton(relpath);
         });

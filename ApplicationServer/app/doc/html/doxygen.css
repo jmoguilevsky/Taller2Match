@@ -211,6 +211,7 @@ div.line.glow {
     box-shadow: 0 0 10px cyan;
 }
 
+
 span.lineno {
     padding-right: 4px;
     text-align: right;
@@ -218,7 +219,6 @@ span.lineno {
     background-color: #E8E8E8;
     white-space: pre;
 }
-
 span.lineno a {
     background-color: #D8D8D8;
 }
@@ -613,11 +613,9 @@ dl.reflist dd {
     color: #602020;
     white-space: nowrap;
 }
-
 .paramname em {
     font-style: normal;
 }
-
 .paramname code {
     line-height: 14px;
 }
@@ -625,7 +623,7 @@ dl.reflist dd {
 .params, .retval, .exception, .tparams {
     margin-left: 0px;
     padding-left: 0px;
-}
+}       
 
 .params .paramname, .retval .paramname {
     font-weight: bold;
@@ -635,8 +633,8 @@ dl.reflist dd {
 .params .paramtype {
     font-style: italic;
     vertical-align: top;
-}
-
+}       
+        
 .params .paramdir {
     font-family: "courier new", courier, monospace;
     vertical-align: top;
@@ -886,8 +884,8 @@ table.fieldtable {
 
 .fieldtable td.fielddoc p:first-child {
     margin-top: 0px;
-}
-
+}       
+        
 .fieldtable td.fielddoc p:last-child {
     margin-bottom: 2px;
 }
@@ -913,6 +911,7 @@ table.fieldtable {
     border-top-right-radius: 4px;
     border-bottom: 1px solid #A8B8D9;
 }
+
 
 .tabsearch {
     top: 0px;
@@ -1179,7 +1178,7 @@ div.toc ul {
     list-style: none outside none;
     border: medium none;
     padding: 0px;
-}
+}       
 
 div.toc li.level1 {
     margin-left: 0px;
@@ -1314,13 +1313,11 @@ tr.heading h2 {
     border-width: 10px;
     margin: 0px -10px;
 }
-
 #powerTip.n:before {
     border-top-color: #808080;
     border-width: 11px;
     margin: 0px -11px;
 }
-
 #powerTip.n:after, #powerTip.n:before {
     left: 50%;
 }
@@ -1366,14 +1363,12 @@ tr.heading h2 {
 #powerTip.e:after, #powerTip.e:before {
     left: 100%;
 }
-
 #powerTip.e:after {
     border-left-color: #ffffff;
     border-width: 10px;
     top: 50%;
     margin-top: -10px;
 }
-
 #powerTip.e:before {
     border-left-color: #808080;
     border-width: 11px;
@@ -1384,14 +1379,12 @@ tr.heading h2 {
 #powerTip.w:after, #powerTip.w:before {
     right: 100%;
 }
-
 #powerTip.w:after {
     border-right-color: #ffffff;
     border-width: 10px;
     top: 50%;
     margin-top: -10px;
 }
-
 #powerTip.w:before {
     border-right-color: #808080;
     border-width: 11px;

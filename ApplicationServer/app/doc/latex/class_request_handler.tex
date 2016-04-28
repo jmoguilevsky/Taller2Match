@@ -12,16 +12,51 @@ Handler genérico para un request de un usuario.
 
 
 Inheritance diagram for Request\+Handler\+:
-% FIG 0
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{class_request_handler__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Request\+Handler\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{class_request_handler__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hyperlink{class_request_handler_ad33af675073689c2218049195503f65b}{Request\+Handler} (\hyperlink{class_h_t_t_p_request}{H\+T\+T\+P\+Request} \hyperlink{class_request_handler_a95913fcd2f05853ba9532b7bacd3a044}{request})
+\item 
 virtual \hyperlink{class_h_t_t_p_response}{H\+T\+T\+P\+Response} \hyperlink{class_request_handler_ada5c3c1669e6c2e4b46923a42b1fdab6}{handle} ()=0
 \begin{DoxyCompactList}\small\item\em Los handlers específicos para cada request implementan el \hyperlink{class_request_handler_ada5c3c1669e6c2e4b46923a42b1fdab6}{handle()} correspondiente. Devuelve un \hyperlink{class_h_t_t_p_response}{H\+T\+T\+P\+Response} que se enviará al usuario que envió el request. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_h_t_t_p_request}{H\+T\+T\+P\+Request} \hyperlink{class_request_handler_a95913fcd2f05853ba9532b7bacd3a044}{request}
+\item 
+\hyperlink{class_h_t_t_p_response}{H\+T\+T\+P\+Response} $\ast$ \hyperlink{class_request_handler_aa56594238825cf7e1254001cb8f536ec}{response}
+\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Handler genérico para un request de un usuario. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_request_handler_ad33af675073689c2218049195503f65b}{}\index{Request\+Handler@{Request\+Handler}!Request\+Handler@{Request\+Handler}}
+\index{Request\+Handler@{Request\+Handler}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{Request\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}Request\+Handler\+::\+Request\+Handler (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Request}}]{request}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{class_request_handler_ad33af675073689c2218049195503f65b}
+
 
 \subsection{Member Function Documentation}
 \hypertarget{class_request_handler_ada5c3c1669e6c2e4b46923a42b1fdab6}{}\index{Request\+Handler@{Request\+Handler}!handle@{handle}}
@@ -41,6 +76,15 @@ Implemented in \hyperlink{class_login_a911fa05b2b1b8f53cad4286012a7810d}{Login},
 
 
 
+\subsection{Member Data Documentation}
+\hypertarget{class_request_handler_a95913fcd2f05853ba9532b7bacd3a044}{}\index{Request\+Handler@{Request\+Handler}!request@{request}}
+\index{request@{request}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{request}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Request} Request\+Handler\+::request\hspace{0.3cm}{\ttfamily [protected]}}\label{class_request_handler_a95913fcd2f05853ba9532b7bacd3a044}
+\hypertarget{class_request_handler_aa56594238825cf7e1254001cb8f536ec}{}\index{Request\+Handler@{Request\+Handler}!response@{response}}
+\index{response@{response}!Request\+Handler@{Request\+Handler}}
+\subsubsection[{response}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Response}$\ast$ Request\+Handler\+::response\hspace{0.3cm}{\ttfamily [protected]}}\label{class_request_handler_aa56594238825cf7e1254001cb8f536ec}
+
+
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Handlers/\hyperlink{_request_handler_8h}{Request\+Handler.\+h}\end{DoxyCompactItemize}
+/home/chris/\+Escritorio/\+Taller2\+Match/\+Application\+Server/app/src/\+Handlers/\hyperlink{_request_handler_8h}{Request\+Handler.\+h}\end{DoxyCompactItemize}

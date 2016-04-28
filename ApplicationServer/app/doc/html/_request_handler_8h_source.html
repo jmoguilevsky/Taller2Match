@@ -5,8 +5,9 @@
     <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=9"/>
     <meta name="generator" content="Doxygen 1.8.9.1"/>
-    <title>Match - Application Server: Handlers/RequestHandler.h Source
-        File</title>
+    <title>Match - Application Server:
+        /home/chris/Escritorio/Taller2Match/ApplicationServer/app/src/Handlers/RequestHandler.h
+        Source File</title>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -87,7 +88,7 @@
     <div id="nav-tree">
         <div id="nav-tree-contents">
             <div id="nav-sync" class="sync"></div>
-        </div>
+    </div>
     </div>
     <div id="splitbar" style="-moz-user-select:none;"
          class="ui-resizable-handle">
@@ -145,55 +146,74 @@
                     class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;../HTTPRequest.h&quot;</span>
             </div>
             <div class="line"><a name="l00009"></a><span
-                    class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;../DB/DBManager.h&quot;</span>
+                    class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;../HTTPResponse.h&quot;</span>
             </div>
             <div class="line"><a name="l00010"></a><span
-                    class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;../HTTPResponse.h&quot;</span>
-            </div>
-            <div class="line"><a name="l00011"></a><span
-                    class="lineno">   11</span>&#160;</div>
-            <div class="line"><a name="l00013"></a><span class="lineno"><a
+                    class="lineno">   10</span>&#160;</div>
+            <div class="line"><a name="l00012"></a><span class="lineno"><a
                     class="line"
-                    href="class_request_handler.html">   13</a></span>&#160;<span
+                    href="class_request_handler.html">   12</a></span>&#160;<span
                     class="keyword">class </span><a class="code"
                                                     href="class_request_handler.html">RequestHandler</a>
                 {
             </div>
-            <div class="line"><a name="l00014"></a><span
-                    class="lineno">   14</span>&#160;<span class="keyword">private</span>:
+            <div class="line"><a name="l00013"></a><span
+                    class="lineno">   13</span>&#160;<span class="keyword">protected</span>:
             </div>
-            <div class="line"><a name="l00015"></a><span
-                    class="lineno">   15</span>&#160; <a class="code"
-                                                         href="class_h_t_t_p_request.html">HTTPRequest</a>
-                request;
+            <div class="line"><a name="l00014"></a><span class="lineno"><a
+                    class="line"
+                    href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">   14</a></span>&#160;
+                <a class="code"
+                   href="class_h_t_t_p_request.html">HTTPRequest</a> <a
+                        class="code"
+                        href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>;
+            </div>
+            <div class="line"><a name="l00015"></a><span class="lineno"><a
+                    class="line"
+                    href="class_request_handler.html#aa56594238825cf7e1254001cb8f536ec">   15</a></span>&#160;
+                <a class="code"
+                   href="class_h_t_t_p_response.html">HTTPResponse</a> *<a
+                        class="code"
+                        href="class_request_handler.html#aa56594238825cf7e1254001cb8f536ec">response</a>;
             </div>
             <div class="line"><a name="l00016"></a><span
-                    class="lineno">   16</span>&#160; <a class="code"
-                                                         href="class_h_t_t_p_response.html">HTTPResponse</a>
-                *response;
-            </div>
+                    class="lineno">   16</span>&#160;</div>
             <div class="line"><a name="l00017"></a><span
-                    class="lineno">   17</span>&#160;</div>
-            <div class="line"><a name="l00018"></a><span
-                    class="lineno">   18</span>&#160;<span class="keyword">public</span>:
+                    class="lineno">   17</span>&#160;<span class="keyword">public</span>:
             </div>
-            <div class="line"><a name="l00019"></a><span
-                    class="lineno">   19</span>&#160;</div>
-            <div class="line"><a name="l00021"></a><span
-                    class="lineno">   21</span>&#160; <span class="keyword">virtual</span>
+            <div class="line"><a name="l00018"></a><span class="lineno"><a
+                    class="line"
+                    href="class_request_handler.html#ad33af675073689c2218049195503f65b">   18</a></span>&#160;
+                <a class="code"
+                   href="class_request_handler.html#ad33af675073689c2218049195503f65b">RequestHandler</a>(<a
+                        class="code" href="class_h_t_t_p_request.html">HTTPRequest</a>
+                request){<span class="keyword">this</span> -&gt; request = <a
+                        class="code"
+                        href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">request</a>;}
+            </div>
+            <div class="line"><a name="l00020"></a><span
+                    class="lineno">   20</span>&#160; <span class="keyword">virtual</span>
                 <a class="code"
                    href="class_h_t_t_p_response.html">HTTPResponse</a> <a
                         class="code"
                         href="class_request_handler.html#ada5c3c1669e6c2e4b46923a42b1fdab6">handle</a>()
                 = 0;
             </div>
-            <div class="line"><a name="l00022"></a><span
-                    class="lineno">   22</span>&#160;};
+            <div class="line"><a name="l00021"></a><span
+                    class="lineno">   21</span>&#160;};
             </div>
+            <div class="line"><a name="l00022"></a><span
+                    class="lineno">   22</span>&#160;</div>
             <div class="line"><a name="l00023"></a><span
-                    class="lineno">   23</span>&#160;</div>
-            <div class="line"><a name="l00024"></a><span
-                    class="lineno">   24</span>&#160;<span class="preprocessor">#endif //APPSERVER_REQUESTHANDLER_H</span>
+                    class="lineno">   23</span>&#160;<span class="preprocessor">#endif //APPSERVER_REQUESTHANDLER_H</span>
+            </div>
+            <div class="ttc"
+                 id="class_request_handler_html_aa56594238825cf7e1254001cb8f536ec">
+                <div class="ttname"><a
+                        href="class_request_handler.html#aa56594238825cf7e1254001cb8f536ec">RequestHandler::response</a>
+                </div>
+                <div class="ttdeci">HTTPResponse * response</div>
+                <div class="ttdef"><b>Definition:</b> RequestHandler.h:15</div>
             </div>
             <div class="ttc"
                  id="class_request_handler_html_ada5c3c1669e6c2e4b46923a42b1fdab6">
@@ -210,7 +230,15 @@
                 <div class="ttname"><a href="class_h_t_t_p_response.html">HTTPResponse</a>
                 </div>
                 <div class="ttdoc">Una respuesta HTTP.</div>
-                <div class="ttdef"><b>Definition:</b> HTTPResponse.h:13</div>
+                <div class="ttdef"><b>Definition:</b> HTTPResponse.h:14</div>
+            </div>
+            <div class="ttc"
+                 id="class_request_handler_html_a95913fcd2f05853ba9532b7bacd3a044">
+                <div class="ttname"><a
+                        href="class_request_handler.html#a95913fcd2f05853ba9532b7bacd3a044">RequestHandler::request</a>
+                </div>
+                <div class="ttdeci">HTTPRequest request</div>
+                <div class="ttdef"><b>Definition:</b> RequestHandler.h:14</div>
             </div>
             <div class="ttc" id="class_request_handler_html">
                 <div class="ttname"><a href="class_request_handler.html">RequestHandler</a>
@@ -218,13 +246,21 @@
                 <div class="ttdoc">Handler genérico para un request de un
                     usuario.
                 </div>
-                <div class="ttdef"><b>Definition:</b> RequestHandler.h:13</div>
+                <div class="ttdef"><b>Definition:</b> RequestHandler.h:12</div>
             </div>
             <div class="ttc" id="class_h_t_t_p_request_html">
                 <div class="ttname"><a href="class_h_t_t_p_request.html">HTTPRequest</a>
                 </div>
                 <div class="ttdoc">Un request HTTP.</div>
-                <div class="ttdef"><b>Definition:</b> HTTPRequest.h:11</div>
+                <div class="ttdef"><b>Definition:</b> HTTPRequest.h:12</div>
+            </div>
+            <div class="ttc"
+                 id="class_request_handler_html_ad33af675073689c2218049195503f65b">
+                <div class="ttname"><a
+                        href="class_request_handler.html#ad33af675073689c2218049195503f65b">RequestHandler::RequestHandler</a>
+                </div>
+                <div class="ttdeci">RequestHandler(HTTPRequest request)</div>
+                <div class="ttdef"><b>Definition:</b> RequestHandler.h:18</div>
             </div>
         </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -232,7 +268,10 @@
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
     <ul>
         <li class="navelem"><a class="el"
-                               href="dir_f65cd03095c68c40acdbdbd5ccca35f8.html">Handlers</a>
+                               href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>
+        </li>
+        <li class="navelem"><a class="el"
+                               href="dir_34bc7fed7530c3406809d532e1032b85.html">Handlers</a>
         </li>
         <li class="navelem"><a class="el" href="_request_handler_8h.html">RequestHandler.h</a>
         </li>

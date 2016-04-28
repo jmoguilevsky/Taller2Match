@@ -1,7 +1,7 @@
 var searchData =
     [
         ['save', ['save', ['../class_d_b.html#a050e986b62a71a5004a93e3885dfe14c', 1, 'DB']]],
-        ['sendrequest', ['sendRequest', ['../class_connection_to_shared.html#aaab61972c747214b9693c730093dc6ba', 1, 'ConnectionToShared']]],
+        ['sendrequest', ['sendRequest', ['../class_connection_to_shared.html#a8850352af79ff3ad0f27736f73536857', 1, 'ConnectionToShared']]],
         ['server', ['Server', ['../class_server.html', 1, 'Server'], ['../class_server.html#ab304cb02833b94847e8655bbf929224d', 1, 'Server::Server()']]],
         ['server_2ecpp', ['Server.cpp', ['../_server_8cpp.html', 1, '']]],
         ['server_2eh', ['Server.h', ['../_server_8h.html', 1, '']]],

@@ -9,16 +9,21 @@
 #include "RequestHandler.h"
 #include "../DB/LoginDB.h"
 #include "../HTTPResponse.h"
+#include "../TokenManager.h"
+#include "../SharedServerConnection.h"
 
 //! Handler para los requests relacionados con el login.
 class Login : public RequestHandler {
 private:
-	HTTPRequest request;
+	TokenManager &tokenManager;
 	LoginDB &db;
 public:
-	Login(HTTPRequest request, LoginDB &db);
+	Login(HTTPRequest request, LoginDB &db, TokenManager &tokenManager,
+	      SharedServerConnection &sharedServer);
 
 	HTTPResponse handle();
+
+	SharedServerConnection &sharedServer;
 };
 
 

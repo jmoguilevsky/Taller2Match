@@ -14,8 +14,14 @@ Una respuesta H\+T\+T\+P.
 \item 
 \hyperlink{class_h_t_t_p_response_a80cb475ed37530e4005dc1a2b1849fe3}{H\+T\+T\+P\+Response} (std\+::string code, std\+::string phrase, std\+::map$<$ std\+::string, std\+::string $>$ headers, std\+::string body)
 \begin{DoxyCompactList}\small\item\em Crea un \hyperlink{class_h_t_t_p_response}{H\+T\+T\+P\+Response} a partir de un código, la phrase H\+T\+T\+P (O\+K, Error, etc.), un map de headers (como en el \hyperlink{class_h_t_t_p_request}{H\+T\+T\+P\+Request}), y un body. \end{DoxyCompactList}\item 
+\hyperlink{class_h_t_t_p_response_ac5a0ae54aa75da2db7fcdc69751128ba}{H\+T\+T\+P\+Response} ()
+\begin{DoxyCompactList}\small\item\em Devuelve el \hyperlink{class_h_t_t_p_response}{H\+T\+T\+P\+Response} completo como un char$\ast$ de C. \end{DoxyCompactList}\item 
+\hyperlink{class_h_t_t_p_response_a9f5334bb8540b212198e35f63eb0c6a7}{H\+T\+T\+P\+Response} (struct http\+\_\+message $\ast$hm)
+\item 
 const char $\ast$ \hyperlink{class_h_t_t_p_response_acf3cc435114cf49b8531afa7c1fc5d4a}{to\+C\+String} ()
-\begin{DoxyCompactList}\small\item\em Devuelve el \hyperlink{class_h_t_t_p_response}{H\+T\+T\+P\+Response} completo como un char$\ast$ de C. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{class_h_t_t_p_response_a64720f0ed87399652cdef947dc6877ac}{to\+String} ()
+\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -36,6 +42,24 @@ Una respuesta H\+T\+T\+P.
 
 Crea un \hyperlink{class_h_t_t_p_response}{H\+T\+T\+P\+Response} a partir de un código, la phrase H\+T\+T\+P (O\+K, Error, etc.), un map de headers (como en el \hyperlink{class_h_t_t_p_request}{H\+T\+T\+P\+Request}), y un body. 
 
+\hypertarget{class_h_t_t_p_response_ac5a0ae54aa75da2db7fcdc69751128ba}{}\index{H\+T\+T\+P\+Response@{H\+T\+T\+P\+Response}!H\+T\+T\+P\+Response@{H\+T\+T\+P\+Response}}
+\index{H\+T\+T\+P\+Response@{H\+T\+T\+P\+Response}!H\+T\+T\+P\+Response@{H\+T\+T\+P\+Response}}
+\subsubsection[{H\+T\+T\+P\+Response}]{\setlength{\rightskip}{0pt plus 5cm}H\+T\+T\+P\+Response\+::\+H\+T\+T\+P\+Response (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_h_t_t_p_response_ac5a0ae54aa75da2db7fcdc69751128ba}
+
+
+Devuelve el \hyperlink{class_h_t_t_p_response}{H\+T\+T\+P\+Response} completo como un char$\ast$ de C. 
+
+\hypertarget{class_h_t_t_p_response_a9f5334bb8540b212198e35f63eb0c6a7}{}\index{H\+T\+T\+P\+Response@{H\+T\+T\+P\+Response}!H\+T\+T\+P\+Response@{H\+T\+T\+P\+Response}}
+\index{H\+T\+T\+P\+Response@{H\+T\+T\+P\+Response}!H\+T\+T\+P\+Response@{H\+T\+T\+P\+Response}}
+\subsubsection[{H\+T\+T\+P\+Response}]{\setlength{\rightskip}{0pt plus 5cm}H\+T\+T\+P\+Response\+::\+H\+T\+T\+P\+Response (
+\begin{DoxyParamCaption}
+\item[{struct http\+\_\+message $\ast$}]{hm}
+\end{DoxyParamCaption}
+)}\label{class_h_t_t_p_response_a9f5334bb8540b212198e35f63eb0c6a7}
 
 
 \subsection{Member Function Documentation}
@@ -48,11 +72,38 @@ Crea un \hyperlink{class_h_t_t_p_response}{H\+T\+T\+P\+Response} a partir de un 
 )}\label{class_h_t_t_p_response_acf3cc435114cf49b8531afa7c1fc5d4a}
 
 
-Devuelve el \hyperlink{class_h_t_t_p_response}{H\+T\+T\+P\+Response} completo como un char$\ast$ de C. 
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_h_t_t_p_response_acf3cc435114cf49b8531afa7c1fc5d4a_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_h_t_t_p_response_a64720f0ed87399652cdef947dc6877ac}{}\index{H\+T\+T\+P\+Response@{H\+T\+T\+P\+Response}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!H\+T\+T\+P\+Response@{H\+T\+T\+P\+Response}}
+\subsubsection[{to\+String}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string H\+T\+T\+P\+Response\+::to\+String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_h_t_t_p_response_a64720f0ed87399652cdef947dc6877ac}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_h_t_t_p_response_a64720f0ed87399652cdef947dc6877ac_icgraph}
+\end{center}
+\end{figure}
+
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\hyperlink{_h_t_t_p_response_8h}{H\+T\+T\+P\+Response.\+h}\item 
-\hyperlink{_h_t_t_p_response_8cpp}{H\+T\+T\+P\+Response.\+cpp}\end{DoxyCompactItemize}
+/home/chris/\+Escritorio/\+Taller2\+Match/\+Application\+Server/app/src/\hyperlink{_h_t_t_p_response_8h}{H\+T\+T\+P\+Response.\+h}\item 
+/home/chris/\+Escritorio/\+Taller2\+Match/\+Application\+Server/app/src/\hyperlink{_h_t_t_p_response_8cpp}{H\+T\+T\+P\+Response.\+cpp}\end{DoxyCompactItemize}

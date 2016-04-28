@@ -5,7 +5,9 @@
     <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=9"/>
     <meta name="generator" content="Doxygen 1.8.9.1"/>
-    <title>Match - Application Server: HTTPRequest.h Source File</title>
+    <title>Match - Application Server:
+        /home/chris/Escritorio/Taller2Match/ApplicationServer/app/src/HTTPRequest.h
+        Source File</title>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -86,7 +88,7 @@
     <div id="nav-tree">
         <div id="nav-tree-contents">
             <div id="nav-sync" class="sync"></div>
-        </div>
+    </div>
     </div>
     <div id="splitbar" style="-moz-user-select:none;"
          class="ui-resizable-handle">
@@ -146,109 +148,124 @@
             <div class="line"><a name="l00009"></a><span
                     class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span>
             </div>
-            <div class="line"><a name="l00011"></a><span class="lineno"><a
+            <div class="line"><a name="l00010"></a><span
+                    class="lineno">   10</span>&#160;</div>
+            <div class="line"><a name="l00012"></a><span class="lineno"><a
                     class="line"
-                    href="class_h_t_t_p_request.html">   11</a></span>&#160;<span
+                    href="class_h_t_t_p_request.html">   12</a></span>&#160;<span
                     class="keyword">class </span><a class="code"
                                                     href="class_h_t_t_p_request.html">HTTPRequest</a>
                 {
             </div>
-            <div class="line"><a name="l00012"></a><span
-                    class="lineno">   12</span>&#160;</div>
             <div class="line"><a name="l00013"></a><span
-                    class="lineno">   13</span>&#160; std::map&lt;std::string,
+                    class="lineno">   13</span>&#160;</div>
+            <div class="line"><a name="l00014"></a><span
+                    class="lineno">   14</span>&#160; std::map&lt;std::string,
                 std::string&gt; headers;
             </div>
-            <div class="line"><a name="l00014"></a><span
-                    class="lineno">   14</span>&#160; std::string verb;
-            </div>
             <div class="line"><a name="l00015"></a><span
-                    class="lineno">   15</span>&#160; std::string uri;
+                    class="lineno">   15</span>&#160; std::string verb;
             </div>
             <div class="line"><a name="l00016"></a><span
-                    class="lineno">   16</span>&#160; std::string body;
+                    class="lineno">   16</span>&#160; std::string uri;
             </div>
             <div class="line"><a name="l00017"></a><span
-                    class="lineno">   17</span>&#160; std::string message;
+                    class="lineno">   17</span>&#160; std::string body;
             </div>
             <div class="line"><a name="l00018"></a><span
-                    class="lineno">   18</span>&#160;<span class="keyword">public</span>:
+                    class="lineno">   18</span>&#160; std::string message;
             </div>
             <div class="line"><a name="l00019"></a><span
-                    class="lineno">   19</span>&#160; <a class="code"
+                    class="lineno">   19</span>&#160;<span class="keyword">public</span>:
+            </div>
+            <div class="line"><a name="l00020"></a><span
+                    class="lineno">   20</span>&#160; <a class="code"
                                                          href="class_h_t_t_p_request.html#a7c53a92689eb5cee6b069a3db3c327ae">HTTPRequest</a>();
             </div>
             <div class="line"><a name="l00021"></a><span
-                    class="lineno">   21</span>&#160; <a class="code"
+                    class="lineno">   21</span>&#160;</div>
+            <div class="line"><a name="l00023"></a><span
+                    class="lineno">   23</span>&#160; <a class="code"
                                                          href="class_h_t_t_p_request.html#a7c53a92689eb5cee6b069a3db3c327ae">HTTPRequest</a>(std::string
                 verb, std::string uri,
             </div>
-            <div class="line"><a name="l00022"></a><span
-                    class="lineno">   22</span>&#160; std::map&lt;std::string,
-                std::string&gt; headers, std::string body);
-            </div>
             <div class="line"><a name="l00024"></a><span
-                    class="lineno">   24</span>&#160; <a class="code"
-                                                         href="class_h_t_t_p_request.html#a7c53a92689eb5cee6b069a3db3c327ae">HTTPRequest</a>(<span
-                    class="keyword">struct</span> http_message *hm);
+                    class="lineno">   24</span>&#160; std::map&lt;std::string,
+                std::string&gt; headers, std::string body);
             </div>
             <div class="line"><a name="l00025"></a><span
                     class="lineno">   25</span>&#160;</div>
-            <div class="line"><a name="l00027"></a><span
-                    class="lineno">   27</span>&#160; std::string <a
-                    class="code"
-                    href="class_h_t_t_p_request.html#a1d399357b19166c7b4c624bbd73365c6">getHeader</a>(std::string
-                header);
+            <div class="line"><a name="l00026"></a><span
+                    class="lineno">   26</span>&#160; <a class="code"
+                                                         href="class_h_t_t_p_request.html#a7c53a92689eb5cee6b069a3db3c327ae">HTTPRequest</a>(std::string
+                verb, std::string uri, std::string body);
             </div>
+            <div class="line"><a name="l00027"></a><span
+                    class="lineno">   27</span>&#160;</div>
             <div class="line"><a name="l00028"></a><span
                     class="lineno">   28</span>&#160;</div>
             <div class="line"><a name="l00030"></a><span
-                    class="lineno">   30</span>&#160; std::string <a
-                    class="code"
-                    href="class_h_t_t_p_request.html#a0905012de141cce7785b33c8d10623c8">toString</a>();
+                    class="lineno">   30</span>&#160; <a class="code"
+                                                         href="class_h_t_t_p_request.html#a7c53a92689eb5cee6b069a3db3c327ae">HTTPRequest</a>(<span
+                    class="keyword">struct</span> http_message *hm);
             </div>
             <div class="line"><a name="l00031"></a><span
                     class="lineno">   31</span>&#160;</div>
             <div class="line"><a name="l00033"></a><span
                     class="lineno">   33</span>&#160; std::string <a
                     class="code"
-                    href="class_h_t_t_p_request.html#a61c8ac8a58c99264eba833d60c2f6bed">getVerb</a>();;
+                    href="class_h_t_t_p_request.html#a1d399357b19166c7b4c624bbd73365c6">getHeader</a>(std::string
+                header);
             </div>
             <div class="line"><a name="l00034"></a><span
                     class="lineno">   34</span>&#160;</div>
             <div class="line"><a name="l00036"></a><span
                     class="lineno">   36</span>&#160; std::string <a
                     class="code"
-                    href="class_h_t_t_p_request.html#a8c16faf7c470e4b000782391b4978079">getUri</a>();;
+                    href="class_h_t_t_p_request.html#a0905012de141cce7785b33c8d10623c8">toString</a>();
             </div>
             <div class="line"><a name="l00037"></a><span
                     class="lineno">   37</span>&#160;</div>
             <div class="line"><a name="l00039"></a><span
                     class="lineno">   39</span>&#160; std::string <a
                     class="code"
-                    href="class_h_t_t_p_request.html#a205e7dbafc6888087b742f7de91d421d">getBody</a>();;
+                    href="class_h_t_t_p_request.html#a61c8ac8a58c99264eba833d60c2f6bed">getVerb</a>();;
             </div>
             <div class="line"><a name="l00040"></a><span
                     class="lineno">   40</span>&#160;</div>
             <div class="line"><a name="l00042"></a><span
-                    class="lineno">   42</span>&#160; <span class="keywordtype">bool</span>
-                <a class="code"
-                   href="class_h_t_t_p_request.html#ab9cbbd29971d2773d8d5dbeff9eb27d8">isEmpty</a>();
+                    class="lineno">   42</span>&#160; std::string <a
+                    class="code"
+                    href="class_h_t_t_p_request.html#a8c16faf7c470e4b000782391b4978079">getUri</a>();;
             </div>
             <div class="line"><a name="l00043"></a><span
                     class="lineno">   43</span>&#160;</div>
             <div class="line"><a name="l00045"></a><span
-                    class="lineno">   45</span>&#160; <span class="keyword">const</span>
+                    class="lineno">   45</span>&#160; std::string <a
+                    class="code"
+                    href="class_h_t_t_p_request.html#a205e7dbafc6888087b742f7de91d421d">getBody</a>();;
+            </div>
+            <div class="line"><a name="l00046"></a><span
+                    class="lineno">   46</span>&#160;</div>
+            <div class="line"><a name="l00048"></a><span
+                    class="lineno">   48</span>&#160; <span class="keywordtype">bool</span>
+                <a class="code"
+                   href="class_h_t_t_p_request.html#ab9cbbd29971d2773d8d5dbeff9eb27d8">isEmpty</a>();
+            </div>
+            <div class="line"><a name="l00049"></a><span
+                    class="lineno">   49</span>&#160;</div>
+            <div class="line"><a name="l00051"></a><span
+                    class="lineno">   51</span>&#160; <span class="keyword">const</span>
                 <span class="keywordtype">char</span> *<a class="code"
                                                           href="class_h_t_t_p_request.html#acaf1b7dfb647339812e92d14d8921cfd">toCString</a>();
             </div>
-            <div class="line"><a name="l00046"></a><span
-                    class="lineno">   46</span>&#160;};
+            <div class="line"><a name="l00052"></a><span
+                    class="lineno">   52</span>&#160;};
             </div>
-            <div class="line"><a name="l00047"></a><span
-                    class="lineno">   47</span>&#160;</div>
-            <div class="line"><a name="l00048"></a><span
-                    class="lineno">   48</span>&#160;<span class="preprocessor">#endif //APPSERVER_HTTPMESSAGE_H</span>
+            <div class="line"><a name="l00053"></a><span
+                    class="lineno">   53</span>&#160;</div>
+            <div class="line"><a name="l00054"></a><span
+                    class="lineno">   54</span>&#160;<span class="preprocessor">#endif //APPSERVER_HTTPMESSAGE_H</span>
             </div>
             <div class="ttc"
                  id="class_h_t_t_p_request_html_a0905012de141cce7785b33c8d10623c8">
@@ -325,7 +342,7 @@
                 <div class="ttname"><a href="class_h_t_t_p_request.html">HTTPRequest</a>
                 </div>
                 <div class="ttdoc">Un request HTTP.</div>
-                <div class="ttdef"><b>Definition:</b> HTTPRequest.h:11</div>
+                <div class="ttdef"><b>Definition:</b> HTTPRequest.h:12</div>
             </div>
             <div class="ttc"
                  id="class_h_t_t_p_request_html_a8c16faf7c470e4b000782391b4978079">
@@ -341,6 +358,9 @@
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
     <ul>
+        <li class="navelem"><a class="el"
+                               href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>
+        </li>
         <li class="navelem"><a class="el" href="_h_t_t_p_request_8h.html">HTTPRequest.h</a>
         </li>
         <li class="footer">Generated by

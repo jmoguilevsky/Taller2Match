@@ -15,7 +15,7 @@ class MatchesDB {
 	DB noMatches;
 	DB likes;
 	DB matches;
-
+public:
 	MatchesDB() : noMatches("noMatches"), likes("likes"), matches("matches") { }
 
 	int likeUser(const std::string &user1, const std::string &user2);
