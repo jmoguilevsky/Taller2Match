@@ -1,7 +1,3 @@
-//
-// Created by chris on 16/04/16.
-//
-
 #include "Server.h"
 #include "Handlers/Login.h"
 #include "Handlers/SignUp.h"
@@ -60,28 +56,24 @@ void Server::clientHandler(struct mg_connection *c, int ev, void *p) {
 
 
 void Server::stop() {
-	CONTINUE = false;
+	isServerUP = false;
 }
 
 Server::Server(std::string port, std::string sharedAddress) : db("login"),
                                                               sharedServer(
 		                                                              sharedAddress) {
-	mg_mgr_init(&mgr, NULL);
-	struct mg_bind_opts opts;
-	opts.user_data = (void *) this;
-	listeningConnection = mg_bind_opt(&mgr, port.c_str(), clientHandler, opts);
-	mg_enable_multithreading(listeningConnection);
-	mg_set_protocol_http_websocket(listeningConnection);
+	mongooseConnectionManager.initManager();
+	mongooseConnectionManager.configureConnection(port);
 }
 
 void Server::start() {
 
-	CONTINUE = true;
-	while (CONTINUE) {
-		mg_mgr_poll(&mgr, 1000);
+	isServerUP = true;
+	while (isServerUP) {
+		mongooseConnectionManager.checkForRequests(1000);
 	}
 }
 
 Server::~Server() {
-	mg_mgr_free(&mgr);
+	mongooseConnectionManager.deleteManager();
 }

@@ -1,11 +1,8 @@
-//
-// Created by chris on 16/04/16.
-//
-
 #ifndef MULTITHREADMULTICONNECTION_SERVER_H
 #define MULTITHREADMULTICONNECTION_SERVER_H
 
 #include <iostream>
+#include "mongoose-master/MongooseConnectionManager.h"
 #include "mongoose-master/mongoose.h"
 #include "HTTPRequest.h"
 #include "HTTPRequestSender.h"
@@ -17,11 +14,11 @@
 #include <map>
 #include <vector>
 
-//! Clase principal, el Server. (?)
+
 class Server {
-	struct mg_mgr mgr;
-	struct mg_connection *listeningConnection;
-	bool CONTINUE;
+	MongooseConnectionManager mongooseConnectionManager;
+
+    bool isServerUp;
 	LoginDB db;
 	MatchesDB matchesDB;
 	TokenManager tokenManager;
