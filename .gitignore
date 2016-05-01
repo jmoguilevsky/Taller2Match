@@ -5,3 +5,10 @@
 .env
 Dockerfile
 docker-compose.yml
+.gradle
+*.iml
+*.a
+CMakeFiles
+build
+local.properties
+Makefile
