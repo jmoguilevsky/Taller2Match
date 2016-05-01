@@ -36,6 +36,7 @@ public:
 	void stop();
 
 	//! Event handler para las conexiones con los clientes.
+	// TODO: Explicar que es cada argumento al menos.
 	static void clientHandler(mg_connection *c, int ev,
 	                          void *p);
 
