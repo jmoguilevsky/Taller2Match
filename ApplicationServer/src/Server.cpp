@@ -60,10 +60,9 @@ void Server::stop() {
 }
 
 Server::Server(std::string port, std::string sharedAddress) : db("login"),
-                                                              sharedServer(
-		                                                              sharedAddress) {
+                                                              sharedServer(sharedAddress) {
 	mongooseConnectionManager.initManager();
-	mongooseConnectionManager.configureConnection(port);
+	mongooseConnectionManager.configureConnection(port, this);
 }
 
 void Server::start() {

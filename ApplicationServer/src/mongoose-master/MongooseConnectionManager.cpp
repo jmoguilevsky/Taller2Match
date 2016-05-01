@@ -4,7 +4,7 @@ void MongooseConnectionManager::initManager() {
     mg_mgr_init(&mgr, NULL);
 }
 
-void MongooseConnectionManager::configureConnection(std::string port, Server& server) {
+void MongooseConnectionManager::configureConnection(std::string port, Server* server) {
     struct mg_bind_opts opts;
     opts.user_data = (void *) server;
     listeningConnection = mg_bind_opt(&mgr, port.c_str(), server.clientHandler, opts);
