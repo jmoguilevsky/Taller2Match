@@ -1,6 +1,6 @@
 .idea
-*.txt
-*.cmake
+*Cache.txt
+#*.cmake
 *~
 .env
 Dockerfile
@@ -12,3 +12,6 @@ CMakeFiles
 build
 local.properties
 Makefile
+_sources
+googletest*
+cmake_install.cmake
