@@ -14,11 +14,11 @@
 #include <map>
 #include <vector>
 
-
 class Server {
-	MongooseConnectionManager mongooseConnectionManager;
+private:
+    MongooseConnectionManager mongooseConnectionManager;
 
-    bool isServerUp;
+    bool isServerUP;
 	LoginDB db;
 	MatchesDB matchesDB;
 	TokenManager tokenManager;

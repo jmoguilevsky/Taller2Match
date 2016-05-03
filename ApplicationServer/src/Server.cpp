@@ -56,7 +56,7 @@ void Server::clientHandler(struct mg_connection *c, int ev, void *p) {
 
 
 void Server::stop() {
-	isServerUP = false;
+	this->isServerUP = false;
 }
 
 Server::Server(std::string port, std::string sharedAddress) : db("login"),
@@ -67,7 +67,7 @@ Server::Server(std::string port, std::string sharedAddress) : db("login"),
 
 void Server::start() {
 
-	isServerUP = true;
+	this->isServerUP = true;
 	while (isServerUP) {
 		mongooseConnectionManager.checkForRequests(1000);
 	}
