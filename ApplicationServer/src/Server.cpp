@@ -1,14 +1,8 @@
 #include "Server.h"
-#include "Handlers/Login.h"
-#include "Handlers/SignUp.h"
-#include "Handlers/Matcher.h"
-#include "Handlers/AuthenticationError.h"
-
 
 RequestHandler *Server::getRequestHandler(HTTPRequest request) {
 	return handlerSelector.getRequestHandler(request);
 }
-
 
 // TODO: Eliminar este handler, que sea un método de un objeto que se dedique a manejar requests
 void Server::clientHandler(struct mg_connection *c, int ev, void *p) {
@@ -23,7 +17,6 @@ void Server::clientHandler(struct mg_connection *c, int ev, void *p) {
 		delete handler;
 	}
 }
-
 
 void Server::stop() {
 	this->isServerUP = false;

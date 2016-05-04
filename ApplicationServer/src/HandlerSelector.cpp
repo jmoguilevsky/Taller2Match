@@ -12,6 +12,8 @@
 #define ID_TOKEN "token"
 #define ID_EMAIL "email"
 
+// TODO: Para cada una de estas funciones, chequear los casos de error.
+
 RequestHandler* createLoginHandler(HTTPRequest &request, HandlerSelector *handlerSelector){
     return new Login(request, handlerSelector->db, handlerSelector->tokenManager, handlerSelector->sharedServer);
 }
@@ -36,6 +38,9 @@ HandlerSelector::HandlerSelector(std::string sharedAddress) : db("login"), share
 
 HandlerSelector::~HandlerSelector() { }
 
+
+// TODO: Agregar distintos handlers.
+// TODO: Chequear las excepciones que podrian darse.
 RequestHandler* HandlerSelector::getRequestHandler(HTTPRequest& request) {
 
     try {
