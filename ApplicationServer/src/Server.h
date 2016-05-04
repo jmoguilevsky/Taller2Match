@@ -7,6 +7,7 @@
 #include "HTTPRequest.h"
 #include "HTTPRequestSender.h"
 #include "Handlers/RequestHandler.h"
+#include "HandlerSelector.h"
 #include "DB/LoginDB.h"
 #include "TokenManager.h"
 #include "SharedServerConnection.h"
@@ -17,14 +18,13 @@
 class Server {
 private:
     MongooseConnectionManager mongooseConnectionManager;
-
+    HandlerSelector handlerSelector;
     bool isServerUP;
 	LoginDB db;
 	MatchesDB matchesDB;
 	TokenManager tokenManager;
-	RequestHandler *getRequestHandler(HTTPRequest request);
-
 	SharedServerConnection sharedServer;
+    RequestHandler* getRequestHandler(HTTPRequest request);
 public:
 	//! Inicia el server.
 	void start();

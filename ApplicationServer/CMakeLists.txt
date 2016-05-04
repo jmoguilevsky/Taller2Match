@@ -15,7 +15,7 @@ file(GLOB app_src
         "src/mongoose-master/*.c"
         )
 
-set(SOURCE_FILES ${app_src} src/mongoose-master/MongooseConnectionManager.cpp src/mongoose-master/MongooseConnectionManager.h)
+set(SOURCE_FILES ${app_src} src/mongoose-master/MongooseConnectionManager.cpp src/mongoose-master/MongooseConnectionManager.h src/HandlerSelector.cpp src/HandlerSelector.h)
 
 add_library(core ${SOURCE_FILES})
 
