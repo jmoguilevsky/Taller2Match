@@ -14,17 +14,19 @@
 #include "TokenManager.h"
 #include "SharedServerConnection.h"
 
-typedef RequestHandler*(*HandlerConstructor)(HTTPRequest&);
+class HandlerSelector;
+
+typedef RequestHandler*(*HandlerConstructor)(HTTPRequest&, HandlerSelector*);
 
 class HandlerSelector {
-private:
+// TODO: Mandar cosas a private !
+public:    
     std::map<std::string, std::map<std::string, HandlerConstructor>> constructorSelector;
     LoginDB db;
     MatchesDB matchesDB;
     TokenManager tokenManager;
     SharedServerConnection sharedServer;
 
-public:
     HandlerSelector(std::string sharedConnectionString);
     ~HandlerSelector();
     RequestHandler* getRequestHandler(HTTPRequest& request);
