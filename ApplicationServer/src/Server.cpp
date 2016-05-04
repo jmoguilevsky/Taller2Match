@@ -9,6 +9,8 @@ RequestHandler *Server::getRequestHandler(HTTPRequest request) {
 	return handlerSelector.getRequestHandler(request);
 }
 
+
+// TODO: Eliminar este handler, que sea un método de un objeto que se dedique a manejar requests
 void Server::clientHandler(struct mg_connection *c, int ev, void *p) {
 	if (ev == MG_EV_HTTP_REQUEST) {
 		HTTPRequest request((struct http_message *) p);

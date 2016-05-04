@@ -20,7 +20,7 @@ typedef RequestHandler*(*HandlerConstructor)(HTTPRequest&, HandlerSelector*);
 
 class HandlerSelector {
 // TODO: Mandar cosas a private !
-public:    
+public:
     std::map<std::string, std::map<std::string, HandlerConstructor>> constructorSelector;
     LoginDB db;
     MatchesDB matchesDB;
