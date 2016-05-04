@@ -9,6 +9,10 @@
 #define STR_TO_INT(x) atoi(x.c_str())
 #define INT_TO_STR(x) std::to_string(x)
 
+int utils::sum(int a, int b) {
+	return a + b;
+}
+
 struct tm utils::currentDateTime() {
 	time_t now = time(0);
 	struct tm tstruct;

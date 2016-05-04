@@ -23,8 +23,10 @@ HTTPResponse Login::handle() {
 	if (ret == LOGIN_OK) {
 		code = "200";
 		phrase = LOGIN_OK_PHRASE;
-		Json::Value userProfileJson = sharedServer.getUserProfile(username);
-		std::string userProfile = utils::JsonToString(userProfileJson);
+		//Json::Value userProfileJson = sharedServer.getUserProfile(username);
+		//std::string userProfile = utils::JsonToString(userProfileJson);
+		
+		std::string userProfile = "";
 		body = "{\"token\":\"" + tokenManager.getNewToken(username) + "\"\n" +
 		       userProfile + "\n}";
 	} else if (ret == USER_DOESNT_EXIST) {
