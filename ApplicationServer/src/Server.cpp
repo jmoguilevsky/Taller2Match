@@ -28,7 +28,6 @@ void Server::stop() {
 }
 
 Server::Server(std::string port, std::string sharedAddress) : 	handlerSelector(sharedAddress),
-																db("login"),
                                                               	sharedServer(sharedAddress) {
 	mongooseConnectionManager.initManager();
 	mongooseConnectionManager.configureConnection(port, this);

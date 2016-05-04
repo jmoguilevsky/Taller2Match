@@ -8,10 +8,7 @@
 #include "HTTPRequestSender.h"
 #include "Handlers/RequestHandler.h"
 #include "HandlerSelector.h"
-#include "DB/LoginDB.h"
-#include "TokenManager.h"
 #include "SharedServerConnection.h"
-#include "DB/MatchesDB.h"
 #include <map>
 #include <vector>
 
@@ -20,9 +17,6 @@ private:
     MongooseConnectionManager mongooseConnectionManager;
     HandlerSelector handlerSelector;
     bool isServerUP;
-	LoginDB db;
-	MatchesDB matchesDB;
-	TokenManager tokenManager;
 	SharedServerConnection sharedServer;
     RequestHandler* getRequestHandler(HTTPRequest request);
 public:
