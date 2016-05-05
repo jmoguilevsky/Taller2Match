@@ -2,9 +2,9 @@
 // Created by chris on 23/04/16.
 //
 
-#include "HTTPRequestSender.h"
-#include "Server.h"
-#include "utils.h"
+#include "../mongoose-master/MgHTTPClient.h"
+#include "../mongoose-master/MgServer.h"
+#include "../utils.h"
 
 #define CRLF "\r\n"
 #define HTTP_VERSION "HTTP/1.1"

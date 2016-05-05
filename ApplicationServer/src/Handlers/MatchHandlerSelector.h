@@ -6,15 +6,15 @@
 #define APPLICATIONSERVER_HANDLERSELECTOR_H
 
 #include <map>
-#include "Handlers/Handler.h"
+#include "Handler.h"
 
 // TODO: Eliminar estas dependencias agregando objetos que colaboren a abstraerse.
-#include "DB/LoginDB.h"
-#include "DB/MatchesDB.h"
-#include "TokenManager.h"
-#include "SharedData.h"
+#include "../DB/LoginDB.h"
+#include "../DB/MatchesDB.h"
+#include "../TokenManager.h"
+#include "../SharedData.h"
 #include "HandlerSelector.h"
-#include "DB/DBManager.h"
+#include "../DB/DBManager.h"
 
 class MatchHandlerSelector : public HandlerSelector {
 // TODO: Mandar cosas a private !

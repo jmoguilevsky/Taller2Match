@@ -8,6 +8,8 @@
 
 #include "json/json.h"
 
+//Se puede "simular" la conexión al shared
+
 class SharedData {
 
 public:

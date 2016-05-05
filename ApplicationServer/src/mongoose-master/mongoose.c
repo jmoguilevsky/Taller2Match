@@ -7019,7 +7019,7 @@ static pid_t mg_start_process(const char *interp, const char *cmd,
     }
     snprintf(buf, sizeof(buf),
              "Status: 500\r\n\r\n"
-             "500 Server Error: %s%s%s: %s",
+		             "500 MgServer Error: %s%s%s: %s",
              interp == NULL ? "" : interp, interp == NULL ? "" : " ", cmd,
              strerror(errno));
     send(1, buf, strlen(buf), 0);

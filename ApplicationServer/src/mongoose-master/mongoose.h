@@ -1243,7 +1243,7 @@ struct mg_bind_opts {
   const char **error_string; /* Placeholder for the error string */
 #ifdef MG_ENABLE_SSL
   /* SSL settings. */
-  const char *ssl_cert;    /* Server certificate to present to clients */
+  const char *ssl_cert;    /* MgServer certificate to present to clients */
   const char *ssl_ca_cert; /* Verify client certificates with this CA bundle */
 #endif
 };
@@ -1287,7 +1287,7 @@ struct mg_connect_opts {
   const char *ssl_ca_cert; /* Verify server certificate using this CA bundle */
 
   /*
-   * Server name verification. If ssl_ca_cert is set and the certificate has
+   * MgServer name verification. If ssl_ca_cert is set and the certificate has
    * passed verification, its subject will be verified against this string.
    * By default (if ssl_server_name is NULL) hostname part of the address will
    * be used. Wildcard matching is supported. A special value of "*" disables
@@ -1361,7 +1361,7 @@ struct mg_connection *mg_connect_opt(struct mg_mgr *mgr, const char *address,
  * Enable SSL for a given connection.
  * `cert` is a server certificate file name for a listening connection,
  * or a client certificate file name for an outgoing connection.
- * Certificate files must be in PEM format. Server certificate file
+ * Certificate files must be in PEM format. MgServer certificate file
  * must contain a certificate, concatenated with a private key, optionally
  * concatenated with parameters.
  * `ca_cert` is a CA certificate, or NULL if peer verification is not

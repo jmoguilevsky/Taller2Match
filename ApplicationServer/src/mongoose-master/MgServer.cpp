@@ -1,11 +1,12 @@
-#include "Server.h"
+#include "MgServer.h"
 
 
 // TODO: Eliminar este handler, que sea un método de un objeto que se dedique a manejar requests
-void Server::clientHandler(struct mg_connection *c, int ev, void *p) {
+
+void MgServer::clientHandler(struct mg_connection *c, int ev, void *p) {
 	if (ev == MG_EV_HTTP_REQUEST) {
 		HTTPRequest request((struct http_message *) p);
-		Server *thisServer = (Server *) c->user_data;
+		MgServer *thisServer = (MgServer *) c->user_data;
 		Handler *handler = thisServer->handlerSelector.getRequestHandler(
 				request);
 		HTTPResponse response = handler->handle();
@@ -16,24 +17,24 @@ void Server::clientHandler(struct mg_connection *c, int ev, void *p) {
 	}
 }
 
-void Server::stop() {
+void MgServer::stop() {
 	this->isServerUP = false;
 }
 
-Server::Server(std::string port, HandlerSelector &handlerSelector)
+MgServer::MgServer(std::string port, HandlerSelector &handlerSelector)
 		: handlerSelector(handlerSelector) {
-	mongooseConnectionManager.initManager();
-	mongooseConnectionManager.configureConnection(port, this);
+
+	// TODO Poner esto en un método "init", para poder devolver OK o ERROR si falla la conexión.
+	mongooseConnectionManager.configureListeningConnection(port, this, this->clientHandler);
 }
 
-void Server::start() {
+void MgServer::start() {
 
 	this->isServerUP = true;
 	while (isServerUP) {
-		mongooseConnectionManager.checkForRequests(1000);
+		mongooseConnectionManager.poll(1000);
 	}
 }
 
-Server::~Server() {
-	mongooseConnectionManager.deleteManager();
+MgServer::~MgServer() {
 }

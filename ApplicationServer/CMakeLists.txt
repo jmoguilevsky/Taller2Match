@@ -12,6 +12,7 @@ file(GLOB app_src
         "src/*.cpp"
         "src/DB/*.cpp"
         "src/Handlers/*.cpp"
+        "src/HTTP/*.cpp"
         "src/mongoose-master/*.c*"
         )
 
@@ -19,7 +20,7 @@ set(SOURCE_FILES ${app_src})
 
 add_library(core ${SOURCE_FILES})
 
-add_executable(app main.cpp src/MatchHandlerSelector.cpp src/MatchHandlerSelector.h)
+add_executable(app main.cpp src/Handlers/MatchHandlerSelector.cpp src/Handlers/MatchHandlerSelector.h)
 
 target_link_libraries(app core)
 

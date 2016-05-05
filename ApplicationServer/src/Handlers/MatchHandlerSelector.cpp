@@ -1,8 +1,8 @@
 #include "MatchHandlerSelector.h"
-#include "Handlers/Login.h"
-#include "Handlers/SignUp.h"
-#include "Handlers/Matcher.h"
-#include "Handlers/AuthenticationError.h"
+#include "Login.h"
+#include "SignUp.h"
+#include "Matcher.h"
+#include "AuthenticationError.h"
 
 #define HTTP_GET "GET"
 #define HTTP_POST "POST"
@@ -42,7 +42,9 @@ MatchHandlerSelector::~MatchHandlerSelector() { }
 Handler* MatchHandlerSelector::getRequestHandler(HTTPRequest& request) {
 	try {
 		Handler* (MatchHandlerSelector::*handlerConstructor)(HTTPRequest &) = constructorSelector[request.getVerb()][request.getUri()];
+		// ↓↓↓↓↓↓ Clion lo subraya pero compila y anda!
 		Handler* handler = (this->*handlerConstructor)(request);
+		//
 		return handler;
 	} catch (std::exception ex) {
 		Json::Value authorization = utils::stringToJson(

@@ -8,7 +8,7 @@
 
 #include "Handler.h"
 #include "../DB/LoginDB.h"
-#include "../HTTPResponse.h"
+#include "../HTTP/HTTPResponse.h"
 #include "../TokenManager.h"
 #include "../SharedServerConnection.h"
 #include "../DB/DBManager.h"

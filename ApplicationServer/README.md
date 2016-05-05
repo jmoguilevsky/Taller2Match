@@ -1,4 +1,4 @@
-App Server
+App MgServer
 ==========
 
 (Estamos en /ApplicationServer/app)  

@@ -1,6 +1,6 @@
-#include "src/Server.h"
+#include "src/mongoose-master/MgServer.h"
 #include "src/DB/DBManager.h"
-#include "src/MatchHandlerSelector.h"
+#include "src/Handlers/MatchHandlerSelector.h"
 #include "src/SharedServerConnection.h"
 
 const static std::string SHARED_SERVER = "enigmatic-depths-58073.herokuapp.com:80";
@@ -15,7 +15,7 @@ void *checkForQuit(void *data) {
 		std::cin >> input;
 	} while (input != "quit");
 
-	((Server *) data)->stop();
+	((MgServer *) data)->stop();
 }
 
 int main(int argc, char** argv) {
@@ -35,9 +35,9 @@ int main(int argc, char** argv) {
 	DBManager dbManager("login","likes","matches","noMatches");
 	MatchHandlerSelector handlerSelector(dbManager,serverConnection);
 
-	Server server(port, handlerSelector);
+	MgServer server(port, handlerSelector);
 
-	std::cout << "Server started on port " << port << std::endl;
+	std::cout << "MgServer started on port " << port << std::endl;
 	std::cout << "Configuring shared server, trying to connect to " << sharedServer << std::endl;
 
 	mg_start_thread(checkForQuit, &server);

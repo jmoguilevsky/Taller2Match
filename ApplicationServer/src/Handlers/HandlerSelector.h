@@ -6,8 +6,9 @@
 #define APPSERVER_HANDLERSELECTOR_H
 
 
-#include "Handlers/Handler.h"
+#include "Handler.h"
 
+// Para que el MgServer pueda usarse para cualquier cosa.
 class HandlerSelector {
 
 public:

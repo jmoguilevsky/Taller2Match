@@ -6,7 +6,7 @@
 #define APPSERVER_AUTHENTICATIONERROR_H
 
 
-#include "../HTTPResponse.h"
+#include "../HTTP/HTTPResponse.h"
 #include "Handler.h"
 
 //! Este es el "handler" para cuando hay un error de autenticación, o sea, cuando la combinación

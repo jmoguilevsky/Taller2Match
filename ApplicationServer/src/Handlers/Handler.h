@@ -5,8 +5,8 @@
 #ifndef APPSERVER_REQUESTHANDLER_H
 #define APPSERVER_REQUESTHANDLER_H
 
-#include "../HTTPRequest.h"
-#include "../HTTPResponse.h"
+#include "../HTTP/HTTPRequest.h"
+#include "../HTTP/HTTPResponse.h"
 
 //! Handler genérico para un request de un usuario.
 class Handler {
