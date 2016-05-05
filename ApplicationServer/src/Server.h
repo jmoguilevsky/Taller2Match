@@ -6,19 +6,16 @@
 #include "mongoose-master/mongoose.h"
 #include "HTTPRequest.h"
 #include "HTTPRequestSender.h"
-#include "Handlers/RequestHandler.h"
+#include "Handlers/Handler.h"
 #include "HandlerSelector.h"
-#include "SharedServerConnection.h"
 #include <map>
 #include <vector>
 
 class Server {
 private:
     MongooseConnectionManager mongooseConnectionManager;
-    HandlerSelector handlerSelector;
+    HandlerSelector& handlerSelector;
     bool isServerUP;
-	SharedServerConnection sharedServer;
-    RequestHandler* getRequestHandler(HTTPRequest request);
 public:
 	//! Inicia el server.
 	void start();
@@ -32,7 +29,7 @@ public:
 	                          void *p);
 
 	//! Crea el server con un port donde escucha conexiones entrantes, y una URL (URL:port) del Shared Server.
-	Server(std::string port, std::string sharedAddress);
+	Server(std::string port, HandlerSelector& handlerSelector);
 
 	~Server();
 };

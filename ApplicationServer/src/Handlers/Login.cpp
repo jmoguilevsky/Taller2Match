@@ -23,7 +23,7 @@ HTTPResponse Login::handle() {
 	if (ret == LOGIN_OK) {
 		code = "200";
 		phrase = LOGIN_OK_PHRASE;
-		//Json::Value userProfileJson = sharedServer.getUserProfile(username);
+		//Json::Value userProfileJson = sharedData.getUserProfile(username);
 		//std::string userProfile = utils::JsonToString(userProfileJson);
 		
 		std::string userProfile = "";
@@ -43,10 +43,10 @@ HTTPResponse Login::handle() {
 }
 
 Login::Login(HTTPRequest request, LoginDB &db,
-             TokenManager &tokenManager, SharedServerConnection &sharedServer)
-		: RequestHandler(
+             TokenManager &tokenManager, SharedData &sharedData)
+		: Handler(
 		request), db(db),
-		  tokenManager(tokenManager), sharedServer(sharedServer) {
+		  tokenManager(tokenManager), sharedData(sharedData) {
 }
 
 

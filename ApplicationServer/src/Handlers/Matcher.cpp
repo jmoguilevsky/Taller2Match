@@ -14,7 +14,7 @@ HTTPResponse Matcher::handle() {
 }
 
 HTTPResponse Matcher::getCandidates() {
-	Json::Value usersList = sharedServer.getUsersList();
+	Json::Value usersList = sharedData.getUsersList();
 	std::map<std::string, UserProfile> candidates;
 	for (int i = 0; i < usersList.size(); i++) {
 		// Parseo los perfiles de todos los usuarios
@@ -29,8 +29,8 @@ HTTPResponse Matcher::getCandidates() {
 
 
 Matcher::Matcher(HTTPRequest request, MatchesDB &db,
-                 SharedServerConnection &sharedServer) : RequestHandler(
+                 SharedData &sharedData) : Handler(
 		request),
-                                                         db(db), sharedServer(
-				sharedServer) {
+                                                         db(db), sharedData(
+				sharedData) {
 }

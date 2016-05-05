@@ -4,6 +4,7 @@
 
 #include "HTTPRequestSender.h"
 #include "Server.h"
+#include "utils.h"
 
 #define CRLF "\r\n"
 #define HTTP_VERSION "HTTP/1.1"

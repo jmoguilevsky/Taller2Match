@@ -9,12 +9,12 @@
 #include "../HTTPResponse.h"
 
 //! Handler genérico para un request de un usuario.
-class RequestHandler {
+class Handler {
 protected:
 	HTTPRequest request;
 
 public:
-	RequestHandler(HTTPRequest request) { this->request = request; }
+	Handler(HTTPRequest request) { this->request = request; }
 	//! Los handlers específicos para cada request implementan el handle() correspondiente. Devuelve un HTTPResponse que se enviará al usuario que envió el request.
 	virtual HTTPResponse handle() = 0;
 };

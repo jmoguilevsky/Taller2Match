@@ -6,25 +6,29 @@
 #define APPSERVER_LOGIN_H
 
 
-#include "RequestHandler.h"
+#include "Handler.h"
 #include "../DB/LoginDB.h"
 #include "../HTTPResponse.h"
 #include "../TokenManager.h"
 #include "../SharedServerConnection.h"
+#include "../DB/DBManager.h"
 
 //! Handler para los requests relacionados con el login.
-class Login : public RequestHandler {
+
+class Login : public Handler {
+
 private:
+
 	TokenManager &tokenManager;
 	LoginDB &db;
+	SharedData &sharedData;
+
 public:
+
 	Login(HTTPRequest request, LoginDB &db, TokenManager &tokenManager,
-	      SharedServerConnection &sharedServer);
+	      SharedData &sharedData);
 
 	HTTPResponse handle();
-
-	SharedServerConnection &sharedServer;
 };
-
 
 #endif //APPSERVER_LOGIN_H

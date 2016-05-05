@@ -9,9 +9,11 @@
 #include "HTTPRequestSender.h"
 #include "HTTPRequest.h"
 #include "HTTPResponse.h"
+#include "SharedData.h"
 
 //! Una conexión hacia el Shared Server
-class SharedServerConnection {
+class SharedServerConnection : public SharedData {
+
 	std::string sharedAddress;
 
 public:
@@ -23,6 +25,7 @@ public:
 	Json::Value getUserProfile(std::string user);
 
 	Json::Value newUser(Json::Value &userProfile);
+
 };
 
 #endif //APPSERVER_SHAREDSERVERCONNECTION_H

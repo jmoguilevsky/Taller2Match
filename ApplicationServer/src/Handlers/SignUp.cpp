@@ -36,6 +36,6 @@ HTTPResponse SignUp::handle() {
 	return HTTPResponse(code, phrase, headers, body);
 }
 
-SignUp::SignUp(HTTPRequest request, LoginDB &db) : RequestHandler(request),
+SignUp::SignUp(HTTPRequest request, LoginDB &db) : Handler(request),
                                                    db(db) {
 }
