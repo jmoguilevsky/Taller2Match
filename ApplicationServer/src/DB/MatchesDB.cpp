@@ -79,3 +79,8 @@ std::vector<std::string> MatchesDB::getNoMatches(const std::string &user) {
 
 MatchesDB::MatchesDB(NoSQLDatabase& noMatches, NoSQLDatabase& likes, NoSQLDatabase& matches)
 		: noMatches(noMatches), likes(likes), matches(matches) { }
+
+bool MatchesDB::userMatch(std::string userA, std::string userB) {
+	return true;
+}
+

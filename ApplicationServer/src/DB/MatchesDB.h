@@ -26,6 +26,8 @@ public:
 
 	std::vector<std::string> getNoMatches(const std::string &user);
 
+	bool userMatch(std::string userA, std::string userB);
+
 	int getLikesReceived(const std::string &user);
 
 	int rejectUser(const std::string &user1, const std::string &user2);

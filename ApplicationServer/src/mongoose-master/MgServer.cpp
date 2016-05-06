@@ -10,7 +10,7 @@ void MgServer::clientHandler(struct mg_connection *c, int ev, void *p) {
 		Handler *handler = thisServer->handlerSelector.getRequestHandler(
 				request);
 		HTTPResponse response = handler->handle();
-		std::cout << "\nResponse:\n" << response.toCString() << std::endl;
+		//std::cout << "\nResponse:\n" << response.toCString() << std::endl;
 		mg_printf(c, "%s\r\n", response.toCString());
 		c->flags |= MG_F_SEND_AND_CLOSE;
 		delete handler;

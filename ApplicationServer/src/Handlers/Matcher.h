@@ -21,6 +21,8 @@ public:
 	HTTPResponse handle();
 
 	HTTPResponse getCandidates();
+
+	void filterCandidates(std::map<std::string, UserProfile> &candidates);
 };
 
 #endif //APPSERVER_MATCHER_H

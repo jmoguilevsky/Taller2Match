@@ -16,7 +16,7 @@ file(GLOB app_src
         "src/mongoose-master/*.c*"
         )
 
-set(SOURCE_FILES ${app_src})
+set(SOURCE_FILES ${app_src} src/Handlers/Chat.cpp src/Handlers/Chat.h src/Handlers/Notification.cpp src/Handlers/Notification.h)
 
 add_library(core ${SOURCE_FILES})
 

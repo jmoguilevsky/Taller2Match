@@ -28,6 +28,10 @@ private:
 	static void eventHandler(mg_connection *c, int ev, void *p);
 
 public:
+	MgHTTPClient() {
+		c = NULL;
+	}
+
 	//! Crea la conexión al Shared MgServer, recibiendo su URL como parámetro.
 	bool connectToUrl(std::string url);
 

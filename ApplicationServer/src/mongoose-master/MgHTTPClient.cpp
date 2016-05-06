@@ -24,6 +24,14 @@ void MgHTTPClient::handle(mg_connection *c, int ev, void *p) {
 		c->flags |= MG_F_CLOSE_IMMEDIATELY;
 		waiting = false;
 	}
+	if (ev == MG_EV_CONNECT) {
+		int connect_status = *(int *) p;
+		if (connect_status == 0) {
+			//std::cout << "Connected OK" << std::endl;
+		} else {
+			//std::cout << "Connection failed" << std::endl;
+		}
+	}
 }
 
 void MgHTTPClient::eventHandler(mg_connection *c, int ev,

@@ -6,10 +6,19 @@
 #define APPSERVER_CHATDB_H
 
 #include "../utils.h"
+#include "NoSQLDatabase.h"
 
 //! Base de datos para historial de chats.
 class ChatDB {
+	NoSQLDatabase &db;
+public:
+	ChatDB(NoSQLDatabase &db);
 
+	void save(std::string userA, std::string userB, std::string msg);
+
+	std::string buildKey(std::string userA, std::string userB);
+
+	std::string getUnreadMsgs(std::string userA, std::string userB);
 };
 
 
