@@ -5,22 +5,24 @@
 #ifndef APPSERVER_MATCHER_H
 #define APPSERVER_MATCHER_H
 
-#include "RequestHandler.h"
+#include "Handler.h"
 #include "../DB/MatchesDB.h"
 #include "../SharedServerConnection.h"
 
 //! Handler para los requests relacionados con likes y matches.
-class Matcher : public RequestHandler {
+class Matcher : public Handler {
 	// Se encarga de todo lo relacionado con los matches
 private:
 	MatchesDB &db;
-	SharedServerConnection &sharedServer;
+	SharedData &sharedData;
 public:
 	Matcher(HTTPRequest request, MatchesDB &db,
-	        SharedServerConnection &sharedServer);
+	        SharedData &data);
 	HTTPResponse handle();
 
 	HTTPResponse getCandidates();
+
+	void filterCandidates(std::map<std::string, UserProfile> &candidates);
 };
 
 #endif //APPSERVER_MATCHER_H

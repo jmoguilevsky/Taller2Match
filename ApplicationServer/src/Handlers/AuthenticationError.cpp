@@ -3,9 +3,10 @@
 //
 
 #include "AuthenticationError.h"
+#include "../DB/NoSQLDatabase.h"
 
 AuthenticationError::AuthenticationError(const HTTPRequest &request)
-		: RequestHandler(
+		: Handler(
 		request) { }
 
 HTTPResponse AuthenticationError::handle() {

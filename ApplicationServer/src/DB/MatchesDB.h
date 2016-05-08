@@ -7,16 +7,16 @@
 
 #include <string>
 #include <vector>
-#include "DB.h"
+#include "RocksDB.h"
 #include "../utils.h"
 
 //! Manejo de las bases de datos relacionadas con los likes y los matches.
 class MatchesDB {
-	DB noMatches;
-	DB likes;
-	DB matches;
+	NoSQLDatabase& noMatches;
+	NoSQLDatabase& likes;
+	NoSQLDatabase& matches;
 public:
-	MatchesDB() : noMatches("noMatches"), likes("likes"), matches("matches") { }
+	MatchesDB(NoSQLDatabase& noMatches, NoSQLDatabase& likes, NoSQLDatabase& matches);
 
 	int likeUser(const std::string &user1, const std::string &user2);
 
@@ -25,6 +25,8 @@ public:
 	std::vector<std::string> getMatches(const std::string &user);
 
 	std::vector<std::string> getNoMatches(const std::string &user);
+
+	bool userMatch(std::string userA, std::string userB);
 
 	int getLikesReceived(const std::string &user);
 

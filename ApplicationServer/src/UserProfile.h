@@ -9,19 +9,18 @@
 #include <string>
 #include "json/json.h"
 
-typedef std::vector<std::string> InterestList;
+typedef std::vector<std::string> InterstCategory;
+typedef std::map<std::string, InterstCategory> InterestMap;
 
 //! Representa el perfil de un usuario y métodos para consulta de distintos campos del mismo.
 class UserProfile {
-
-
-	InterestList musicBandInterests;
-	InterestList sportInterests;
-	InterestList foodInterests;
 	std::string name;
 	std::string id;
+	InterestMap interestsMap;
 
 public:
+
+	const InterestMap &getInterests() const;
 
 	UserProfile();
 	UserProfile(const UserProfile &user);
@@ -31,12 +30,6 @@ public:
 
 	std::string getName() const;
 
-	InterestList getMusicBandInterests() const;
-
-	InterestList getSportInterests() const;
-
-	InterestList getFoodInterests() const;
-
 	std::string getId() const;
 
 	double getLatitude() const;
@@ -45,12 +38,10 @@ public:
 
 private:
 
-	InterestList getInterestsForCategory(Json::Value &user,
-	                                     std::string category,
-	                                     std::vector<std::string> &interestsList);
-
 	double latitude;
 	double longitude;
+
+	void parseInterests(Json::Value &user);
 };
 
 

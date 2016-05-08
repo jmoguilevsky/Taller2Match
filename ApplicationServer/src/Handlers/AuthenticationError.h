@@ -6,13 +6,13 @@
 #define APPSERVER_AUTHENTICATIONERROR_H
 
 
-#include "../HTTPResponse.h"
-#include "RequestHandler.h"
+#include "../HTTP/HTTPResponse.h"
+#include "Handler.h"
 
 //! Este es el "handler" para cuando hay un error de autenticación, o sea, cuando la combinación
 //! username, token no es válida (NO tiene nada que ver con lo que pasa durante el login, esto es
 // después del login).
-class AuthenticationError : public RequestHandler {
+class AuthenticationError : public Handler {
 public:
 	AuthenticationError(const HTTPRequest &request);
 
