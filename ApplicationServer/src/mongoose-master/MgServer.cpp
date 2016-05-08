@@ -4,6 +4,9 @@
 // TODO: Eliminar este handler, que sea un método de un objeto que se dedique a manejar requests
 
 void MgServer::clientHandler(struct mg_connection *c, int ev, void *p) {
+	if(ev==MG_EV_RECV){
+		std::cout << "HOLA HOLA HOLA";
+	}
 	if (ev == MG_EV_HTTP_REQUEST) {
 		HTTPRequest request((struct http_message *) p);
 		MgServer *thisServer = (MgServer *) c->user_data;

@@ -8,6 +8,7 @@
 #include "Handler.h"
 #include "../DB/MatchesDB.h"
 #include "../SharedServerConnection.h"
+#include "../UserProfile.h"
 
 //! Handler para los requests relacionados con likes y matches.
 class Matcher : public Handler {

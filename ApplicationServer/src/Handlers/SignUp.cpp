@@ -27,7 +27,7 @@ HTTPResponse SignUp::handle() {
 		phrase = USER_ALREADY_EXISTS_PHRASE;
 		body = "{\"error\":\"User already exists\"}";
 	} else if (ret == USER_CREATED_OK) {
-		code = "XXX";
+		code = "200";
 		phrase = USER_CREATED_OK_PHRASE;
 		body = request.getBody();
 	}

@@ -8,5 +8,5 @@ public class AppConfig {
     public static String URL_LOGIN = "aca_va_url_del_server";
 
     // Server user register url
-    public static String URL_REGISTER = "aca_va_url_del_server";
+    public static String URL_REGISTER = "http://10.0.2.2:7000/signup";
 }
