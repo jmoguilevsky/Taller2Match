@@ -15,3 +15,4 @@ _sources
 googletest*
 cmake_install.cmake
 
+*.swp
