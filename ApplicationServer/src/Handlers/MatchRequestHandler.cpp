@@ -65,7 +65,9 @@ bool parseSignUpRequest(HTTPRequest request, std::string &email, std::string &pa
 	return true;
 }
 
-bool parseLikeRequest(HTTPRequest request, std::string &userA, std::string &userB) {
+bool parseLikeRequest(HTTPRequest request, std::string &userB) {
+	Json::Value userInfo = utils::stringToJson(request.getBody());
+	userB = userInfo["user"]["email"].asString();
 	return true;
 }
 
@@ -86,7 +88,20 @@ std::string makeError(std::string msg) {
 }
 
 HTTPResponse MatchRequestHandler::handleNoMatch(HTTPRequest &request) {
-	return HTTPResponse();
+	std::map<std::string, std::string> headers;
+	if (checkCredentials(request)) {
+		//std::string email;
+		//parseGetCandidatesRequest(request, email);
+		std::string email = utils::stringToJson(request.getHeader("Authorization"))["email"].asString();
+		std::string userB;
+		parseLikeRequest(request, userB);
+		std::cout << "USER B is " << userB << std::endl;
+		int code = matcher.postNoMatch(email, userB);
+		std::cout << "OK";
+		return HTTPResponse("200", "OK", headers, "");
+	} else {
+		return HTTPResponse("409", "Unauthorized", headers, makeError("Invalid credentials"));
+	}
 }
 
 HTTPResponse MatchRequestHandler::handleLogin(HTTPRequest request) {
@@ -173,7 +188,19 @@ HTTPResponse MatchRequestHandler::handleGetUnread(HTTPRequest request) {
 
 HTTPResponse MatchRequestHandler::handleLike(HTTPRequest request) {
 	std::map<std::string, std::string> headers;
-	return HTTPResponse("200", "OK", headers, "");
+	if (checkCredentials(request)) {
+		//std::string email;
+		//parseGetCandidatesRequest(request, email);
+		std::string email = utils::stringToJson(request.getHeader("Authorization"))["email"].asString();
+		std::string userB;
+		parseLikeRequest(request, userB);
+		std::cout << "USER B is " << userB << std::endl;
+		int code = matcher.postLike(email, userB);
+		std::cout << "OK";
+		return HTTPResponse("200", "OK", headers, "");
+	} else {
+		return HTTPResponse("409", "Unauthorized", headers, makeError("Invalid credentials"));
+	}
 }
 
 HTTPResponse MatchRequestHandler::handle(HTTPRequest &request) {
@@ -195,9 +222,11 @@ HTTPResponse MatchRequestHandler::handle(HTTPRequest &request) {
 			return handleGetCandidates(request);
 			break;
 		case REQ_LIKE:
+			std::cout << "<<< LIKE >>>" << std::endl;
 			return handleLike(request);
 			break;
 		case REQ_NO_MATCH:
+			std::cout << "<<< NO MATCH >>>" << std::endl;
 			return handleNoMatch(request);
 			break;
 		case REQ_SEND_CHAT:

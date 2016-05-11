@@ -21,6 +21,7 @@ void Matcher::buildUserProfiles(std::map<std::string, UserProfile> &candidates) 
 
 std::vector<UserProfile> Matcher::getCandidates(std::string email) {
 	std::vector<UserProfile> users = sharedData.getUsersList();
+	// Descartar los usuarios que no están registrados en este app server?
 	int numberOfCandidates = 3;
 	std::vector<UserProfile> returnUsers;
 	for (int i = 0; i < numberOfCandidates; i++) {
@@ -89,11 +90,11 @@ Matcher::Matcher(MatchesDB &db, SharedData &sharedData) : db(db), sharedData(sha
 
 
 int Matcher::postNoMatch(std::string emailA, std::string emailB) {
-	return 0;
+	db.rejectUser(emailA, emailB);
 }
 
 int Matcher::postLike(std::string emailA, std::string emailB) {
-	return 0;
+	db.likeUser(emailA, emailB);
 }
 
 

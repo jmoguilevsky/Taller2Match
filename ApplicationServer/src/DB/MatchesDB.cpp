@@ -9,31 +9,33 @@
 bool valueExists(NoSQLDatabase &db, std::string key, std::string value) {
 	std::string values;
 	db.get(key, values);
-	Json::Value list(values);
+	Json::Value list = utils::stringToJson(values);
 	for (int i = 0; i < list.size(); i++) {
-		if (list[i] == key) { return true; }
+		if (list[i] == value) { return true; }
 	}
 	return false;
 }
 
 void append(NoSQLDatabase &db, std::string key, std::string value) {
-	std::string values;
-	db.get(key, values);
-	Json::Value valueJson(value);
-	Json::Value list(values);
-	list.append(valueJson);
-	db.save(key, utils::JsonToString(list));
+	std::string oldList;
+	db.get(key, oldList);
+
+	Json::Value oldListJson = utils::stringToJson(oldList);
+
+	Json::Value newValueJson = value;
+
+	oldListJson.append(newValueJson);
+
+	db.save(key, utils::JsonToString(oldListJson));
 }
 
 int MatchesDB::likeUser(const std::string &user1, const std::string &user2) {
-
-	if (valueExists(noMatches, user1, user2)) {
-		std::cout << "Already in no matches! " << std::endl;
-		return 0;
-	}
-
 	if (valueExists(likes, user1, user2)) {
 		std::cout << "Already in likes! " << std::endl;
+		return 0;
+	}
+	if (valueExists(noMatches, user1, user2)) {
+		std::cout << "Already in no matches! " << std::endl;
 		return 0;
 	}
 
@@ -42,12 +44,25 @@ int MatchesDB::likeUser(const std::string &user1, const std::string &user2) {
 	append(likesReceived, user2, user1); // O solamente mantener la cantidad
 
 	if (valueExists(likes, user2, user1)) {
-		std::cout << "Match!" << std::endl;
-
 		append(matches, user1, user2);
 		append(matches, user2, user1);
-
 	}
+
+	std::string likesOfUser;
+	likes.get(user1, likesOfUser);
+	std::cout << "Liked by " << user1 << ": " << likesOfUser << std::endl;
+
+	std::string likesRecByUser;
+	likesReceived.get(user2, likesRecByUser);
+	std::cout << "Likes received by " << user2 << ": " << likesRecByUser << std::endl;
+
+	std::string matchesA;
+	matches.get(user1, matchesA);
+	std::cout << "Matches of " << user1 << ": " << matchesA << std::endl;
+
+	std::string matchesB;
+	matches.get(user2, matchesB);
+	std::cout << "Matches of " << user2 << ": " << matchesB << std::endl;
 
 	return 0;
 }
@@ -64,6 +79,11 @@ int MatchesDB::rejectUser(const std::string &user1, const std::string &user2) {
 	}
 
 	append(noMatches, user1, user2);
+
+	std::string noMatchesA;
+	noMatches.get(user1, noMatchesA);
+	std::cout << "No-Matches of " << user1 << ": " << noMatchesA << std::endl;
+
 
 	return 0;
 }

@@ -57,6 +57,7 @@ Json::Value utils::stringToJson(const std::string &str) {
 	Json::Value value;
 	Json::Reader reader;
 	reader.parse(str, value);
+	reader.parse(str.c_str(), value);
 	return value;
 }
 
