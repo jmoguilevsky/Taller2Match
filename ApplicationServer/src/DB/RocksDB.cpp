@@ -38,6 +38,19 @@ bool RocksDB::keyExists(std::string key) {
 	return value != "";
 }
 
+std::map<std::string, std::string> RocksDB::listAll() {
+	rocksdb::Iterator *iter = db->NewIterator(rocksdb::ReadOptions());
+	iter->SeekToFirst();
+	while (iter->Valid()) {
+		rocksdb::Slice key = iter->key();
+		rocksdb::Slice value = iter->value();
+		std::cout << key.ToString() << " : " << value.ToString() << std::endl;
+		iter->Next();
+	}
+}
+
+
+
 
 
 

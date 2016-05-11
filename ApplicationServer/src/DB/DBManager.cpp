@@ -29,3 +29,10 @@ DBManager::~DBManager() {
 	delete login;
 	delete matches;
 }
+
+ChatDB &DBManager::getChatDB() {
+	RocksDB r("pep");
+	ChatDB c(r);
+	return c;// TODO
+}
+

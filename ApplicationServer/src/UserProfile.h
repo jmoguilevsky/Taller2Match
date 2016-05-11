@@ -7,23 +7,25 @@
 
 #include <vector>
 #include <string>
+#include <set>
+#include <unordered_set>
 #include "json/json.h"
+#include "Interest.h"
 
-typedef std::vector<std::string> InterstCategory;
-typedef std::map<std::string, InterstCategory> InterestMap;
+typedef std::set<Interest> InterestList;
 
 //! Representa el perfil de un usuario y métodos para consulta de distintos campos del mismo.
 class UserProfile {
 	std::string name;
 	std::string id;
-	InterestMap interestsMap;
+	InterestList interestList;
 
 public:
 
-	const InterestMap &getInterests() const;
+	const InterestList &getInterests();
 
 	UserProfile();
-	UserProfile(const UserProfile &user);
+//	UserProfile(const UserProfile &user);
 
 	//! Crea un perfil de usuario a partir de un objeto Json.
 	UserProfile(Json::Value &user);
@@ -36,12 +38,22 @@ public:
 
 	double getLongitude() const;
 
+	std::string getEmail() const;
+
+	Json::Value getJson() const;
+
+	void fromJson(Json::Value user);
+
 private:
 
 	double latitude;
 	double longitude;
 
 	void parseInterests(Json::Value &user);
+
+	std::string email;
+
+	Json::Value user;
 };
 
 

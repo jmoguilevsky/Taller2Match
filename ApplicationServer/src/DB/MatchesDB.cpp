@@ -2,73 +2,89 @@
 // Created by chris on 24/04/16.
 //
 
+#include <iostream>
 #include "MatchesDB.h"
+#include "JsonList.h"
 
-#define ONE_DAY 86400 // En segundos
-#define LIKES_PER_DAY 10
+bool valueExists(NoSQLDatabase &db, std::string key, std::string value) {
+	std::string values;
+	db.get(key, values);
+	Json::Value list(values);
+	for (int i = 0; i < list.size(); i++) {
+		if (list[i] == key) { return true; }
+	}
+	return false;
+}
 
+void append(NoSQLDatabase &db, std::string key, std::string value) {
+	std::string values;
+	db.get(key, values);
+	Json::Value valueJson(value);
+	Json::Value list(values);
+	list.append(valueJson);
+	db.save(key, utils::JsonToString(list));
+}
 
 int MatchesDB::likeUser(const std::string &user1, const std::string &user2) {
-	// TODO return defines según cómo queda la cosa.
-	/*
-	std::vector<std::string> likesLimit = utils::valuesAsVector(likeLimit,
-	                                                            user1);
-	struct tm lastTime = utils::stringToTime(
-			likesLimit[0]); // Timestamp de la última vez que se reinició el límite de likes.
-	int likesLeft = utils::stringToInt(
-			likesLimit[1]); // Nro. de likes que quedan en este período de 24 hs.
-	struct tm currTime = utils::currentDateTime();
-	int diff = utils::diffTimeInSeconds(currTime, lastTime);
-	if (diff < ONE_DAY && likesLeft == 0) {
-		// Se acabaron los likes por hoy...
-		return -1;
+
+	if (valueExists(noMatches, user1, user2)) {
+		std::cout << "Already in no matches! " << std::endl;
+		return 0;
 	}
-	if (diff >= ONE_DAY) {
-		likesLeft = LIKES_PER_DAY;
-		lastTime = currTime; // Reinicio el límite de likes
+
+	if (valueExists(likes, user1, user2)) {
+		std::cout << "Already in likes! " << std::endl;
+		return 0;
 	}
-	if (!utils::valueInDBList(noMatches, user1, user2)) {
-		utils::appendValue(likes, user1, user2);
-		int currLikes = stringToInt(likesReceived->get(user2));
-		likesReceived->save(user2, utils::intToString(
-				currLikes++)); // Le sumo un like recibido al user2
-		likesLeft--; // Le queda un like menos al user1
-		likeLimit->save(user1, utils::timeToString(lastTime) + "," +
-		                       utils::intToString(likesLeft));
+
+	append(likes, user1, user2);
+
+	append(likesReceived, user2, user1); // O solamente mantener la cantidad
+
+	if (valueExists(likes, user2, user1)) {
+		std::cout << "Match!" << std::endl;
+
+		append(matches, user1, user2);
+		append(matches, user2, user1);
+
 	}
-	if (utils::valueInDBList(likes, user1, user2) &&
-	    utils::valueInDBList(likes, user2, user1)) {
-		// Si user1 like user2, y user2 like user1 -> MATCH
-		utils::appendValue(matches, user1, user2);
-		utils::appendValue(matches, user2, user1);
-	}
-	*/
+
 	return 0;
 }
 
 int MatchesDB::rejectUser(const std::string &user1, const std::string &user2) {
-	/*if (!utils::valueInDBList(likes, user1, user2) &&
-	    !utils::valueInDBList(matches, user1, user2)) {
-		utils::appendValue(noMatches, user1, user2);
+
+	if (valueExists(likes, user1, user2)) {
+		std::cout << "Already in likes! " << std::endl;
+		return 0;
 	}
-	// TODO valor de retorno?*/
+	if (valueExists(noMatches, user1, user2)) {
+		std::cout << "Already in no matches! " << std::endl;
+		return 0;
+	}
+
+	append(noMatches, user1, user2);
+
 	return 0;
 }
 
 int MatchesDB::getLikesReceived(const std::string &user) {
-	/*return utils::stringToInt(likesReceived->get(user));*/
-	return 0;
+	std::string num;
+	likesReceived.get(user, num);
+	int n = atoi(num.c_str());
+	return n;
 }
 
-std::vector<std::string> MatchesDB::getLikes(const std::string &user) {
-	/*return utils::valuesAsVector(likes, user);*/
-	return std::vector<std::string>();
+std::string MatchesDB::getLikes(const std::string &user) {
+	std::string sLikes;
+	likes.get(user, sLikes);
+	return sLikes;
 }
 
-std::vector<std::string> MatchesDB::getMatches(const std::string &user) {
-	// Devuelve los matches para el usuario.
-	/*return utils::valuesAsVector(matches, user);*/
-	return std::vector<std::string>();
+std::string MatchesDB::getMatches(const std::string &user) {
+	std::string myMatches;
+	matches.get(user, myMatches);
+	return myMatches;
 }
 
 std::vector<std::string> MatchesDB::getNoMatches(const std::string &user) {
@@ -78,7 +94,7 @@ std::vector<std::string> MatchesDB::getNoMatches(const std::string &user) {
 }
 
 MatchesDB::MatchesDB(NoSQLDatabase& noMatches, NoSQLDatabase& likes, NoSQLDatabase& matches)
-		: noMatches(noMatches), likes(likes), matches(matches) { }
+		: noMatches(noMatches), likes(likes), matches(matches), likesReceived("likesReceived") { }
 
 bool MatchesDB::userMatch(std::string userA, std::string userB) {
 	return true;

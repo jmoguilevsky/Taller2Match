@@ -3,24 +3,26 @@
 //
 #include "LoginDB.h"
 
-int LoginDB::newUser(std::string user, std::string pass) {
+bool LoginDB::newUser(std::string user, std::string pass) {
 	std::string value;
 	bool exists = db.get(user, value);
 	if (db.get(user, value)) {
-		return USER_ALREADY_EXISTS;
+		return false;
 	}
 	db.save(user, pass);
 	exists = db.get(user, value);
-	return USER_CREATED_OK;
+	return true;
 }
 
 int LoginDB::login(std::string user, std::string pass) {
 	std::string value;
 	bool exists = db.get(user, value);
-	if (!exists) {
-		return USER_DOESNT_EXIST;
-	} else if (pass != value) {
-		return WRONG_PASSWORD;
+	if (!exists || pass != value) {
+		return LOGIN_ERROR;
 	}
 	return LOGIN_OK;
 }
+
+std::map<std::string, std::string> LoginDB::listAll() {
+	return db.listAll();
+};

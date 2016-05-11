@@ -20,11 +20,11 @@ public:
 
 	SharedServerConnection(std::string sharedAddress);
 
-	Json::Value getUsersList();
+	std::vector<UserProfile> getUsersList();
 
-	Json::Value getUserProfile(std::string user);
+	UserProfile getUserProfile(std::string user);
 
-	Json::Value newUser(Json::Value &userProfile);
+	int newUser(UserProfile &userProfile);
 
 };
 

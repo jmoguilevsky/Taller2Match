@@ -5,24 +5,42 @@
 #ifndef APPSERVER_MATCHER_H
 #define APPSERVER_MATCHER_H
 
-#include "Handler.h"
 #include "../DB/MatchesDB.h"
-#include "../SharedServerConnection.h"
+#include "../SharedData.h"
+#include "../UserProfile.h"
 
 //! Handler para los requests relacionados con likes y matches.
-class Matcher : public Handler {
+class Matcher {
 	// Se encarga de todo lo relacionado con los matches
 private:
+
 	MatchesDB &db;
 	SharedData &sharedData;
+
 public:
-	Matcher(HTTPRequest request, MatchesDB &db,
-	        SharedData &data);
-	HTTPResponse handle();
+	Matcher(MatchesDB &db, SharedData &data);
 
-	HTTPResponse getCandidates();
+	std::vector<UserProfile> getCandidates(std::string email);
 
-	void filterCandidates(std::map<std::string, UserProfile> &candidates);
+	std::vector<UserProfile> getMatches(std::string email);
+
+	int postLike(std::string emailA, std::string emailB);
+
+	int postNoMatch(std::string emailA, std::string emailB);
+
+private:
+	int getInterestsInCommon(UserProfile &user1, UserProfile &user2);
+
+	void discardCandidates(std::map<std::string, UserProfile> &candidates);
+
+	int calculateScore(UserProfile &userA, UserProfile &userB);
+
+	int calculateDistance(UserProfile &userA, UserProfile &userB);
+
+	void buildUserProfiles(std::map<std::string, UserProfile> &candidates);
+
+	std::vector<std::pair<UserProfile, int>> filterCandidates(std::string email,
+	                                                          std::map<std::string, UserProfile> &candidates);
 };
 
 #endif //APPSERVER_MATCHER_H

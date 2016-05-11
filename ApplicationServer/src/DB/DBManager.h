@@ -8,6 +8,7 @@
 
 #include "LoginDB.h"
 #include "MatchesDB.h"
+#include "ChatDB.h"
 
 class DBManager {
 	RocksDB* loginDB;
@@ -22,6 +23,8 @@ public:
 	LoginDB & getLoginDB();
 
 	MatchesDB & getMatchesDB();
+
+	ChatDB &getChatDB();
 
 	~DBManager();
 };

@@ -37,12 +37,19 @@ std::string HTTPResponse::toString() {
 
 HTTPResponse::HTTPResponse(struct http_message *hm) {
 	// Parsear el mensaje
+	this->code = hm->resp_code;
 	this->body = utils::mgStrToString(hm->body);
 }
 
 std::string HTTPResponse::getBody() {
 	return body;
 }
+
+int HTTPResponse::getCode() {
+	return code;
+}
+
+
 
 
 

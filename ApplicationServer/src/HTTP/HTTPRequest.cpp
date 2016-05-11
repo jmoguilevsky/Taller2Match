@@ -2,6 +2,7 @@
 // Created by chris on 23/04/16.
 //
 
+#include <fstream>
 #include "../mongoose-master/MgHTTPClient.h"
 #include "../mongoose-master/MgServer.h"
 #include "../utils.h"
@@ -22,7 +23,14 @@ HTTPRequest::HTTPRequest(std::string verb, std::string uri,
 	     it != headers.end(); ++it) {
 		this->message += it->first + ":" + it->second + CRLF;
 	}
-	if (body != "")this->message += CRLF + body + CRLF;
+
+	std::stringstream s;
+	s << body.size();
+	std::string t;
+	s >> t;
+
+	this->message += "Content-Length:" + t + CRLF;
+	if (body != "")this->message += CRLF + body;
 	this->message += CRLF;
 }
 

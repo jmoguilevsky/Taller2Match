@@ -5,30 +5,22 @@
 #ifndef APPSERVER_LOGIN_H
 #define APPSERVER_LOGIN_H
 
-
-#include "Handler.h"
 #include "../DB/LoginDB.h"
-#include "../HTTP/HTTPResponse.h"
 #include "../TokenManager.h"
-#include "../SharedServerConnection.h"
-#include "../DB/DBManager.h"
+#include "../SharedData.h"
 
 //! Handler para los requests relacionados con el login.
 
-class Login : public Handler {
+class Login {
 
-private:
-
-	TokenManager &tokenManager;
+	TokenManager tokenManager;
 	LoginDB &db;
 	SharedData &sharedData;
 
 public:
+	Login(LoginDB &db, SharedData &sharedData) : db(db), sharedData(sharedData) { }
 
-	Login(HTTPRequest request, LoginDB &db, TokenManager &tokenManager,
-	      SharedData &sharedData);
-
-	HTTPResponse handle();
+	int login(std::string email, std::string password, std::string &token);
 };
 
 #endif //APPSERVER_LOGIN_H

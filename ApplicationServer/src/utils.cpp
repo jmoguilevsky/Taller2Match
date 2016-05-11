@@ -9,6 +9,7 @@
 #define STR_TO_INT(x) atoi(x.c_str())
 #define INT_TO_STR(x) std::to_string(x)
 
+
 int utils::sum(int a, int b) {
 	return a + b;
 }
@@ -59,8 +60,16 @@ Json::Value utils::stringToJson(const std::string &str) {
 	return value;
 }
 
+void utils::parseAuthorization(const std::string &authHeader, std::string &user, std::string &token) {
+	Json::Value auth = stringToJson(authHeader);
+	user = auth["email"].asString();
+	token = auth["token"].asString();
+}
+
 std::string utils::JsonToString(const Json::Value &value) {
-	Json::StyledWriter writer;
+	//Json::StyledWriter writer;
+	Json::FastWriter writer;
+	writer.omitEndingLineFeed();
 	return writer.write(value);
 }
 

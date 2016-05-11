@@ -5,9 +5,11 @@
 #include "MgHTTPClient.h"
 #include "MgConnectionManager.h"
 #include <iostream>
+#include <fstream>
 
 HTTPResponse MgHTTPClient::sendRequest(HTTPRequest request) {
 	if (!request.isEmpty()) {
+		std::cout << "\"" << request.toString() << "\"" << std::endl;
 		mg_printf(c, "%s", request.toCString());
 		waiting = true;
 		while (waiting) {
@@ -20,6 +22,7 @@ HTTPResponse MgHTTPClient::sendRequest(HTTPRequest request) {
 void MgHTTPClient::handle(mg_connection *c, int ev, void *p) {
 	if (ev == MG_EV_HTTP_REPLY) {
 		struct http_message *hm = (struct http_message *) p;
+		std::cout << "received: " << std::string(hm->message.p, hm->message.len) << std::endl;
 		response = HTTPResponse(hm); //TODO No queda bien esto.
 		c->flags |= MG_F_CLOSE_IMMEDIATELY;
 		waiting = false;

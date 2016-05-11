@@ -5,28 +5,18 @@
 #ifndef APPSERVER_CHAT_H
 #define APPSERVER_CHAT_H
 
-
-#include "Handler.h"
-#include "../DB/LoginDB.h"
-#include "../HTTP/HTTPResponse.h"
-#include "../TokenManager.h"
-#include "../DB/DBManager.h"
 #include "../DB/ChatDB.h"
 
 //! Handler para los requests relacionados con el login.
 
-class Chat : public Handler {
-
-private:
-
-	MatchesDB &matchesDB;
-	ChatDB &chatDB;
+class Chat {
 
 public:
+	Chat(ChatDB &chatDB) : chatDB(chatDB) { }
 
-	Chat(HTTPRequest request, ChatDB &chatDB, MatchesDB &matchesDb);
+private:
+	ChatDB &chatDB;
 
-	HTTPResponse handle();
 };
 
 

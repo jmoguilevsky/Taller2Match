@@ -14,15 +14,16 @@
 class MatchesDB {
 	NoSQLDatabase& noMatches;
 	NoSQLDatabase& likes;
+	RocksDB likesReceived;
 	NoSQLDatabase& matches;
 public:
 	MatchesDB(NoSQLDatabase& noMatches, NoSQLDatabase& likes, NoSQLDatabase& matches);
 
 	int likeUser(const std::string &user1, const std::string &user2);
 
-	std::vector<std::string> getLikes(const std::string &user);
+	std::string getLikes(const std::string &user);
 
-	std::vector<std::string> getMatches(const std::string &user);
+	std::string getMatches(const std::string &user);
 
 	std::vector<std::string> getNoMatches(const std::string &user);
 

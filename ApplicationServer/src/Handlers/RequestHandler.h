@@ -5,14 +5,14 @@
 #ifndef APPSERVER_HANDLERSELECTOR_H
 #define APPSERVER_HANDLERSELECTOR_H
 
-
-#include "Handler.h"
-
 // Para que el MgServer pueda usarse para cualquier cosa.
-class HandlerSelector {
+#include "../HTTP/HTTPResponse.h"
+#include "../HTTP/HTTPRequest.h"
+
+class RequestHandler {
 
 public:
-	virtual Handler* getRequestHandler(HTTPRequest& request) = 0;
+	virtual HTTPResponse handle(HTTPRequest &request) = 0;
 };
 
 

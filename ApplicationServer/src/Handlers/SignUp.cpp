@@ -3,39 +3,17 @@
 //
 
 #include "SignUp.h"
-#include "../json/json.h"
 #include "../utils.h"
 
-#define USER_ALREADY_EXISTS_PHRASE "Conflict"
-
-#define USER_CREATED_OK_PHRASE "OK"
-
-HTTPResponse SignUp::handle() {
-	Json::Value signUpData = utils::stringToJson(request.getBody());
-	std::string username = signUpData["email"].asString();
-	std::string password = signUpData["password"].asString();
-	int ret = db.newUser(username, password);
-	// TODO en realidad, acá debería ver si el shared ya le da un perfil de usuario con
-	// TODO ese username/mail. Entonces, el usuario ya existe y no se puede crear.
-	std::map<std::string, std::string> headers;
-	std::string code;
-	std::string phrase;
-	std::string body;
-	headers["Content-type"] = "application/json";
-	if (ret == USER_ALREADY_EXISTS) {
-		code = "409";
-		phrase = USER_ALREADY_EXISTS_PHRASE;
-		body = "{\"error\":\"User already exists\"}";
-	} else if (ret == USER_CREATED_OK) {
-		code = "XXX";
-		phrase = USER_CREATED_OK_PHRASE;
-		body = request.getBody();
+int SignUp::signUp(std::string email, std::string password, UserProfile userProfile) {
+	int code = sharedData.newUser(userProfile);
+	// Si se pudo crear en el shared, entonces lo creo en mi BD local.
+	if (code == 201) {
+		db.newUser(email, password);
+		std::cout << "**** USERS ****" << std::endl;
+		db.listAll();
+		std::cout << "****************" << std::endl;
 	}
-	std::cout << "Signed up OK " << std::endl;
-
-	return HTTPResponse(code, phrase, headers, body);
+	return code;
 }
 
-SignUp::SignUp(HTTPRequest request, LoginDB &db) : Handler(request),
-                                                   db(db) {
-}

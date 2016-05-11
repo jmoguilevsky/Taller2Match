@@ -6,17 +6,22 @@
 #define APPSERVER_SIGNUP_H
 
 
-#include "Handler.h"
 #include "../DB/LoginDB.h"
+#include "../UserProfile.h"
+#include "../SharedData.h"
 
+#define USER_CREATED 201
+
+//#define USER_ALREADY_EXISTS 400
 //! Handler para la creación de un nuevo usuario.
-class SignUp : public Handler {
+class SignUp {
 private:
 	LoginDB &db;
+	SharedData &sharedData;
 public:
-	SignUp(HTTPRequest request, LoginDB &db);
+	SignUp(LoginDB &db, SharedData &sharedData) : db(db), sharedData(sharedData) { }
 
-	HTTPResponse handle();
+	int signUp(std::string email, std::string password, UserProfile userProfile);
 };
 
 

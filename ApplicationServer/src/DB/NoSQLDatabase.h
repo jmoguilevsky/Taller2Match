@@ -18,6 +18,8 @@ public:
 
 	//! Si key existe en la DB, devuelve true y asigna a value el valor asociado. Si no existe, devuelve false, y no modifica value.
 	virtual bool get(const std::string &key, std::string &value) = 0;
+
+	virtual std::map<std::string, std::string> listAll() = 0;
 };
 
 #endif //APPSERVER_NOSQLDATABASE_H

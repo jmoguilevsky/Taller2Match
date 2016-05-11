@@ -6,8 +6,7 @@
 #include "mongoose.h"
 #include "../HTTP/HTTPRequest.h"
 #include "MgHTTPClient.h"
-#include "../Handlers/Handler.h"
-#include "../Handlers/HandlerSelector.h"
+#include "../Handlers/RequestHandler.h"
 #include <map>
 #include <vector>
 
@@ -16,7 +15,7 @@
 class MgServer {
 private:
 	MgConnectionManager mongooseConnectionManager;
-    HandlerSelector& handlerSelector;
+	RequestHandler &requestHandler;
     bool isServerUP;
 
 	//! Event handler para las conexiones con los clientes.
@@ -32,7 +31,7 @@ public:
 
 
 	//! Crea el server con un port donde escucha conexiones entrantes, y una URL (URL:port) del Shared MgServer.
-	MgServer(std::string port, HandlerSelector &handlerSelector);
+	MgServer(std::string port, RequestHandler &handlerSelector);
 
 	~MgServer();
 };

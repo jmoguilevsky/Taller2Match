@@ -28,6 +28,10 @@ public:
 	std::string toString();
 
 	std::string getBody();
+
+	int getCode();
+
+	int code;
 };
 
 

@@ -38,5 +38,8 @@ namespace utils {
 	std::string JsonToString(const Json::Value &value);
 
 	int sum(int a, int b);
+
+	void parseAuthorization(const std::string &authHeader, std::string &user, std::string &token);
+
 }
 #endif //MULTITHREADMULTICONNECTION_UTILS_H
