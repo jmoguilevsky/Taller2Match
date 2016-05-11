@@ -5,13 +5,13 @@
 #ifndef APPLICATIONSERVER_UTILSTESTS_H
 #define APPLICATIONSERVER_UTILSTESTS_H
 
-#include "../app/src/utils.h"
+#include "../../src/utils.h"
 #include <gtest/gtest.h>
 
 class UtilsTest : public ::testing::Test {
 protected:
-    HttpRequestTest() {}
-    virtual ~HttpRequestTest() {}
+    UtilsTest() {}
+    virtual ~UtilsTest() {}
     virtual void SetUp() {}
     virtual void TearDown() {}
 };
