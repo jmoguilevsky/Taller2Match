@@ -20,8 +20,18 @@ void Matcher::buildUserProfiles(std::map<std::string, UserProfile> &candidates) 
 }
 
 std::vector<UserProfile> Matcher::getCandidates(std::string email) {
-	std::vector<UserProfile> s;
-	return s;
+	std::vector<UserProfile> users = sharedData.getUsersList();
+	int numberOfCandidates = 3;
+	std::vector<UserProfile> returnUsers;
+	for (int i = 0; i < numberOfCandidates; i++) {
+		UserProfile user;
+		do {
+			user = users[rand() % users.size()];
+		}
+		while (user.getEmail() == email);
+		returnUsers.push_back(user);
+	}
+	return returnUsers;
 }
 
 bool comp(const std::pair<UserProfile, int> &a, const std::pair<UserProfile, int> &b) {

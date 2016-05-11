@@ -67,9 +67,9 @@ void utils::parseAuthorization(const std::string &authHeader, std::string &user,
 }
 
 std::string utils::JsonToString(const Json::Value &value) {
-	//Json::StyledWriter writer;
-	Json::FastWriter writer;
-	writer.omitEndingLineFeed();
+	Json::StyledWriter writer;
+	//Json::FastWriter writer;
+	//writer.omitEndingLineFeed();
 	return writer.write(value);
 }
 

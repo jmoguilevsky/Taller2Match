@@ -139,20 +139,26 @@ HTTPResponse MatchRequestHandler::handleSignUp(HTTPRequest request) {
 }
 
 HTTPResponse MatchRequestHandler::handleGetCandidates(HTTPRequest request) {
-	std::string email;
-	parseGetCandidatesRequest(request, email);
-	std::vector<UserProfile> candidates = matcher.getCandidates(email);
-	// Escribir los perfiles de usuario en un Json grande
-	Json::Value users;
-	Json::Value array;
-	for (int i = 0; i < candidates.size(); i++) {
-		const Json::Value &json = candidates[i].getJson();
-		array.append(json);
-	}
-	users["users"] = array;
 	std::map<std::string, std::string> headers;
-	std::string userList = utils::JsonToString(users);
-	return HTTPResponse("200", "OK", headers, userList);
+	if (checkCredentials(request)) {
+		//std::string email;
+		//parseGetCandidatesRequest(request, email);
+		std::string email = utils::stringToJson(request.getHeader("Authorization"))["email"].asString();
+		std::vector<UserProfile> candidates = matcher.getCandidates(email);
+		// Escribir los perfiles de usuario en un Json grande
+		Json::Value users;
+		Json::Value array;
+		for (int i = 0; i < candidates.size(); i++) {
+			const Json::Value &json = candidates[i].getJson();
+			array.append(json);
+		}
+		users["users"] = array;
+
+		std::string userList = utils::JsonToString(users);
+		return HTTPResponse("200", "OK", headers, userList);
+	} else {
+		return HTTPResponse("409", "Unauthorized", headers, makeError("Invalid credentials"));
+	}
 }
 
 HTTPResponse MatchRequestHandler::handleSendChat(HTTPRequest request) {
