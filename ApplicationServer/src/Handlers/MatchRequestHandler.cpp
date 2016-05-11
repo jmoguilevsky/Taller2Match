@@ -3,6 +3,7 @@
 #define HTTP_GET "GET"
 #define HTTP_POST "POST"
 #define URI_LOGIN "/login"
+#define URI_LOGOUT "/logout"
 #define URI_SIGNUP "/signup"
 #define URI_CANDIDATES "/candidates"
 #define URI_LIKE "/like"
@@ -31,6 +32,7 @@ MatchRequestHandler::MatchRequestHandler(DBManager &dbManager, SharedData &share
                                                                                          matcher(dbManager.getMatchesDB(),
                                                                                                  sharedData) {
 	handlers[HTTP_POST][URI_LOGIN] = REQ_LOGIN;
+	handlers[HTTP_POST][URI_LOGOUT] = REQ_LOGOUT;
 	handlers[HTTP_POST][URI_SIGNUP] = REQ_SIGN_UP;
 	handlers[HTTP_POST][URI_LIKE] = REQ_LIKE;
 	handlers[HTTP_POST][URI_NOMATCH] = REQ_NO_MATCH;
@@ -38,10 +40,18 @@ MatchRequestHandler::MatchRequestHandler(DBManager &dbManager, SharedData &share
 
 }
 
+bool MatchRequestHandler::checkCredentials(HTTPRequest request) {
+	std::string auth = request.getHeader("Authorization");
+	Json::Value authInfo = utils::stringToJson(auth);
+	std::string email = authInfo["email"].asString();
+	std::string tok = authInfo["token"].asString();
+	return login.checkToken(email, tok);
+}
+
 MatchRequestHandler::~MatchRequestHandler() { }
 
 bool parseLoginRequest(HTTPRequest request, std::string &user, std::string &pass) {
-	Json::Value userInfo(request.getBody());
+	Json::Value userInfo = utils::stringToJson(request.getBody());
 	user = userInfo["user"]["email"].asString();
 	pass = userInfo["user"]["password"].asString();
 	return true;
@@ -79,10 +89,6 @@ HTTPResponse MatchRequestHandler::handleNoMatch(HTTPRequest &request) {
 	return HTTPResponse();
 }
 
-HTTPResponse MatchRequestHandler::handleLogout(HTTPRequest &request) {
-	return HTTPResponse();
-}
-
 HTTPResponse MatchRequestHandler::handleLogin(HTTPRequest request) {
 	std::string email;
 	std::string password;
@@ -97,8 +103,21 @@ HTTPResponse MatchRequestHandler::handleLogin(HTTPRequest request) {
 			std::string tokenJson = "{\"token\":" + token + "\"}";
 			return HTTPResponse("200", "OK", headers, tokenJson);
 		}
+		case ALREADY_LOGGED_IN:
+			return HTTPResponse("400", "Error", headers, makeError("User already logged in"));
 		default:
 			return HTTPResponse("400", "Error", headers, makeError("Unknown Error"));
+	}
+}
+
+HTTPResponse MatchRequestHandler::handleLogout(HTTPRequest &request) {
+	std::map<std::string, std::string> headers;
+	if (checkCredentials(request)) {
+		std::string email = utils::stringToJson(request.getHeader("Authorization"))["email"].asString();
+		login.logout(email);
+		return HTTPResponse("200", "OK", headers, "");
+	} else {
+		return HTTPResponse("409", "Unauthorized", headers, makeError("Invalid credentials"));
 	}
 }
 
@@ -158,13 +177,15 @@ HTTPResponse MatchRequestHandler::handle(HTTPRequest &request) {
 	//try {
 	switch (requestType) {
 		case REQ_SIGN_UP:
-			std::cout << "SIGN UP" << std::endl;
+			std::cout << "<<< SIGN UP >>>" << std::endl;
 			return handleSignUp(request);
 			break;
 		case REQ_LOGIN:
+			std::cout << "<<< LOGIN >>>" << std::endl;
 			return handleLogin(request);
 			break;
 		case REQ_GET_CANDIDATES:
+			std::cout << "<<< GET CANDIDATES >>>" << std::endl;
 			return handleGetCandidates(request);
 			break;
 		case REQ_LIKE:
@@ -180,6 +201,7 @@ HTTPResponse MatchRequestHandler::handle(HTTPRequest &request) {
 			return handleGetUnread(request);
 			break;
 		case REQ_LOGOUT:
+			std::cout << "<<< LOGOUT >>>" << std::endl;
 			return handleLogout(request);
 			break;
 		default:
@@ -191,3 +213,4 @@ HTTPResponse MatchRequestHandler::handle(HTTPRequest &request) {
 	//	return HTTPResponse("404", "Bad Json", headers, "");
 	//}
 }
+

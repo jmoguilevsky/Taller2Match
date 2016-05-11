@@ -53,6 +53,8 @@ public:
 	~MatchRequestHandler();
 
 	HTTPResponse handle(HTTPRequest &request);
+
+	bool checkCredentials(HTTPRequest request);
 };
 
 #endif //APPLICATIONSERVER_HANDLERSELECTOR_H
