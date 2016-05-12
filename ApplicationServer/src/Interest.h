@@ -8,6 +8,8 @@
 
 #include "json/json.h"
 
+//! Un interés de un usuario, con categoría y valor.
+
 class Interest {
 private:
 	std::string value;

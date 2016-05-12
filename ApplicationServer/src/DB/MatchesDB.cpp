@@ -4,9 +4,6 @@
 
 #include <iostream>
 #include "MatchesDB.h"
-#include "JsonList.h"
-
-
 
 int MatchesDB::likeUser(const std::string &user1, const std::string &user2) {
 	if (valueExists(likes, user1, user2)) {
@@ -92,7 +89,7 @@ std::vector<std::string> MatchesDB::getNoMatches(const std::string &user) {
 	return std::vector<std::string>();
 }
 
-MatchesDB::MatchesDB(NoSQLDatabase& noMatches, NoSQLDatabase& likes, NoSQLDatabase& matches)
+MatchesDB::MatchesDB(KeyValueDB &noMatches, KeyValueDB &likes, KeyValueDB &matches)
 		: noMatches(noMatches), likes(likes), matches(matches), likesReceived("likesReceived") { }
 
 bool MatchesDB::userMatch(std::string userA, std::string userB) {

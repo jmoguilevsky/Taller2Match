@@ -35,6 +35,7 @@ void ChatDB::updateHistory(std::string userA, std::string userB, std::string his
 	std::string key = buildKey(userA, userB);
 	db.save(key, history);
 }
-ChatDB::ChatDB(NoSQLDatabase &db) : db(db) {
+
+ChatDB::ChatDB(KeyValueDB &db) : db(db) {
 
 }

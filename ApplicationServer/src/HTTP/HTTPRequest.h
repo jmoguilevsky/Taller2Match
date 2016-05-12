@@ -8,7 +8,8 @@
 #include <string>
 #include <map>
 
-//! Un request HTTP.
+//! Request HTTP.
+
 class HTTPRequest {
 
 	std::map<std::string, std::string> headers;

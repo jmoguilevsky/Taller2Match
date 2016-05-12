@@ -10,7 +10,8 @@
 #include "../HTTP/HTTPResponse.h"
 #include "MgConnectionManager.h"
 
-//! Una conexión al Shared MgServer, para hacer un request y esperar por la respuesta.
+//! Una conexión a un server HTTP, la conexión se cierra inmediatamnte después de obtener la respuesta al request.
+
 class MgHTTPClient {
 
 private:

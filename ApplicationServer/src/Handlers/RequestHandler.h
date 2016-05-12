@@ -5,7 +5,8 @@
 #ifndef APPSERVER_HANDLERSELECTOR_H
 #define APPSERVER_HANDLERSELECTOR_H
 
-// Para que el MgServer pueda usarse para cualquier cosa.
+//! Request Handler genérico
+
 #include "../HTTP/HTTPResponse.h"
 #include "../HTTP/HTTPRequest.h"
 

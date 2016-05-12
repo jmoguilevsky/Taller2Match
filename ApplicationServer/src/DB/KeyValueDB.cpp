@@ -2,9 +2,9 @@
 // Created by chris on 11/05/16.
 //
 
-#include "NoSQLDatabase.h"
+#include "KeyValueDB.h"
 
-bool valueExists(NoSQLDatabase &db, std::string key, std::string value) {
+bool valueExists(KeyValueDB &db, std::string key, std::string value) {
 	std::string values;
 	db.get(key, values);
 	Json::Value list = utils::stringToJson(values);
@@ -14,7 +14,7 @@ bool valueExists(NoSQLDatabase &db, std::string key, std::string value) {
 	return false;
 }
 
-void append(NoSQLDatabase &db, std::string key, Json::Value value) {
+void append(KeyValueDB &db, std::string key, Json::Value value) {
 	std::string oldList;
 	db.get(key, oldList);
 

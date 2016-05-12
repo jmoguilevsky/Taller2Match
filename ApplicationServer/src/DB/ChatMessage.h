@@ -10,6 +10,8 @@
 #include "../json/json.h"
 #include "../utils.h"
 
+//! Mensaje de chat, tiene emisor, receptor, contenido del mensaje, timestamp, y si fue o no leído.
+
 class ChatMessage {
 	std::string time; //TODO otro tipo que no sea string!
 	std::string userFrom;

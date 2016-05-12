@@ -3,10 +3,10 @@
 //
 
 #include <fstream>
-#include "Login.h"
+#include "Users.h"
 #include "../utils.h"
 
-int Login::login(std::string email, std::string password, std::string &token) {
+int Users::login(std::string email, std::string password, std::string &token) {
 	int emailPwdOK = db.login(email, password);
 	int status = 0;
 	if (emailPwdOK == LOGIN_OK) {
@@ -22,7 +22,7 @@ int Login::login(std::string email, std::string password, std::string &token) {
 	return status;
 }
 
-int Login::signUp(std::string email, std::string password, UserProfile userProfile) {
+int Users::signUp(std::string email, std::string password, UserProfile userProfile) {
 	int code = sharedData.newUser(userProfile);
 	// Si se pudo crear en el shared, entonces lo creo en mi BD local.
 	if (code == 201) {
@@ -35,25 +35,24 @@ int Login::signUp(std::string email, std::string password, UserProfile userProfi
 }
 
 
-
-bool Login::isConnected(std::string email) {
+bool Users::isConnected(std::string email) {
 	return connected.count(email);
 }
 
-void Login::invalidateToken(std::string email) {
+void Users::invalidateToken(std::string email) {
 	connected.erase(email);
 }
 
-std::string Login::newToken(std::string email) {
+std::string Users::newToken(std::string email) {
 	std::string token = email;
 	connected[email] = email;
 	return token;
 }
 
-void Login::logout(std::string email) {
+void Users::logout(std::string email) {
 	invalidateToken(email);
 }
 
-bool Login::checkToken(std::string email, std::string token) {
+bool Users::checkToken(std::string email, std::string token) {
 	return connected.count(email) == 1 && connected[email] == token;
 }

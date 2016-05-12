@@ -11,7 +11,8 @@
 #include "HTTP/HTTPResponse.h"
 #include "SharedData.h"
 
-//! Una conexión hacia el Shared MgServer
+//! Una conexión hacia el Shared Server
+
 class SharedServerConnection : public SharedData {
 
 	std::string sharedAddress;

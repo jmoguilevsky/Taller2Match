@@ -10,6 +10,8 @@
 #include <string>
 #include <vector>
 
+//! Utilidades varias
+
 namespace utils {
 	std::string bufToString(struct mg_connection *connection);
 

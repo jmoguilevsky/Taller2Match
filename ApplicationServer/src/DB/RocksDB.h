@@ -6,10 +6,11 @@
 #define APPLICATIONSERVER_DB_H
 
 #include <rocksdb/db.h>
-#include "NoSQLDatabase.h"
+#include "KeyValueDB.h"
 
 //! Wrapper para una Base de datos RocksDB.
-class RocksDB: public NoSQLDatabase{
+
+class RocksDB : public KeyValueDB {
 	rocksdb::DB *db;
 public:
 	//! Abre una base de datos RocksDB con el nombre dbName. Si no existe, la crea.

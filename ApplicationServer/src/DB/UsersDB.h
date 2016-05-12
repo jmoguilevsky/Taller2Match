@@ -15,12 +15,13 @@
 #define LOGIN_ERROR 1
 #define LOGIN_OK 0
 
-//! Manejo de login y altas de usuarios en la base de datos de usuarios.
-class LoginDB {
-	NoSQLDatabase& db;
+//! Manejo de login y altas y bajas de usuarios en la base de datos de usuarios.
+
+class UsersDB {
+	KeyValueDB &db;
 public:
 	//! Abre una DB para datos de login con el nombre name.
-	LoginDB(NoSQLDatabase& db) : db(db) {
+	UsersDB(KeyValueDB &db) : db(db) {
 	}
 
 	//! Crea un nuevo usuario con user y pass. Devuelve USER_ALREADY_EXISTS o USER_CREATED_OK.

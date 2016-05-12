@@ -11,6 +11,7 @@
 #define HTTP_VERSION "HTTP/1.1"
 
 //! Una respuesta HTTP.
+
 class HTTPResponse {
 	std::string message;
 	std::string body;

@@ -10,7 +10,7 @@
 #include "../DB/ChatMessage.h"
 #include "../DB/ChatHistory.h"
 
-//! Handler para los requests relacionados con el login.
+//! Handler para las cosas relacionadas con el chat.
 
 class Chat {
 

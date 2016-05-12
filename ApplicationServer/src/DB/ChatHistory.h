@@ -12,8 +12,7 @@
 #include "../json/json.h"
 #include "../utils.h"
 
-//! Tiene todo el historial de mensajes entre los users A y B, en formato Json:
-//!
+//! Tiene el historial de mensajes entre los users A y B, en formato Json
 
 class ChatHistory {
 	std::string userA;

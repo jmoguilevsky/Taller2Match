@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <time.h>
 
+//! Logger para errores, info, warning y debug
+
 class Logger{
 
     int level;

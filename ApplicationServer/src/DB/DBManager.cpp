@@ -10,12 +10,12 @@ DBManager::DBManager(std::string loginDBname, std::string likesDBname, std::stri
 	matchesDB = new RocksDB(matchesDBname);
 	noMatchesDB = new RocksDB(noMatchesDBname);
 	chatDB = new RocksDB("chat");
-	login = new LoginDB(*loginDB);
+	login = new UsersDB(*loginDB);
 	matches = new MatchesDB(*noMatchesDB,*likesDB,*matchesDB);
 	chat = new ChatDB(*chatDB);
 }
 
-LoginDB &DBManager::getLoginDB() {
+UsersDB &DBManager::getLoginDB() {
 	return *login;
 }
 

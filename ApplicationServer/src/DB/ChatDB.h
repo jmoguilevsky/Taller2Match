@@ -6,13 +6,14 @@
 #define APPSERVER_CHATDB_H
 
 #include "../utils.h"
-#include "NoSQLDatabase.h"
+#include "KeyValueDB.h"
 
 //! Base de datos para historial de chats.
+
 class ChatDB {
-	NoSQLDatabase &db;
+	KeyValueDB &db;
 public:
-	ChatDB(NoSQLDatabase &db);
+	ChatDB(KeyValueDB &db);
 
 	void save(std::string userA, std::string userB, std::string msg);
 

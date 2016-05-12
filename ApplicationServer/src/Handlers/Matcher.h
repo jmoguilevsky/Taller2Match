@@ -9,9 +9,10 @@
 #include "../SharedData.h"
 #include "../UserProfile.h"
 
-//! Handler para los requests relacionados con likes y matches.
+//! Handler para todo lo relacionado con likes, matches, etc.
+
 class Matcher {
-	// Se encarga de todo lo relacionado con los matches
+
 private:
 
 	MatchesDB &db;

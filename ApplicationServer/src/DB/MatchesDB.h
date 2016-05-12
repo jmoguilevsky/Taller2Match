@@ -11,13 +11,14 @@
 #include "../utils.h"
 
 //! Manejo de las bases de datos relacionadas con los likes y los matches.
+
 class MatchesDB {
-	NoSQLDatabase& noMatches;
-	NoSQLDatabase& likes;
+	KeyValueDB &noMatches;
+	KeyValueDB &likes;
 	RocksDB likesReceived;
-	NoSQLDatabase& matches;
+	KeyValueDB &matches;
 public:
-	MatchesDB(NoSQLDatabase& noMatches, NoSQLDatabase& likes, NoSQLDatabase& matches);
+	MatchesDB(KeyValueDB &noMatches, KeyValueDB &likes, KeyValueDB &matches);
 
 	int likeUser(const std::string &user1, const std::string &user2);
 

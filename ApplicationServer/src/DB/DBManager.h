@@ -6,21 +6,23 @@
 #define APPSERVER_MATCHDB_H
 
 
-#include "LoginDB.h"
+#include "UsersDB.h"
 #include "MatchesDB.h"
 #include "ChatDB.h"
+
+//! Para agrupar todas las bases de datos usadas por la aplicación.
 
 class DBManager {
 	RocksDB* loginDB;
 	RocksDB* likesDB;
 	RocksDB* matchesDB;
 	RocksDB* noMatchesDB;
-	LoginDB* login;
+	UsersDB *login;
 	MatchesDB* matches;
 public:
 	DBManager(std::string loginDBname, std::string likesDBname, std::string matchesDBname, std::string noMatchesDBname);
 
-	LoginDB & getLoginDB();
+	UsersDB &getLoginDB();
 
 	MatchesDB & getMatchesDB();
 

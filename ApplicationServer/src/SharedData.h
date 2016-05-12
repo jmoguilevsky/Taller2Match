@@ -9,7 +9,7 @@
 #include "json/json.h"
 #include "UserProfile.h"
 
-//Se puede "simular" la conexión al shared
+//! Se puede "simular" la conexión al shared con una clase que implemente estos métodos.
 
 class SharedData {
 

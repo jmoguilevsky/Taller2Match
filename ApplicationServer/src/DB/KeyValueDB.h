@@ -8,11 +8,10 @@
 #include <string>
 #include "../json/json.h"
 #include "../utils.h"
-// PARA PODER HACER MOCK DE BASE DE DATOS {key,value}, por ejemplo con un map
 
+//! Base de datos {clave, valor}, genérica.
 
-
-class NoSQLDatabase {
+class KeyValueDB {
 
 public:
 	//! Guarda en la DB el par {key,value}
@@ -29,7 +28,7 @@ public:
 	virtual std::vector<std::string> keys() = 0;
 };
 
-bool valueExists(NoSQLDatabase &db, std::string key, std::string value);
+bool valueExists(KeyValueDB &db, std::string key, std::string value);
 
-void append(NoSQLDatabase &db, std::string key, Json::Value value);
+void append(KeyValueDB &db, std::string key, Json::Value value);
 #endif //APPSERVER_NOSQLDATABASE_H
