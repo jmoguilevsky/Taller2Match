@@ -49,9 +49,14 @@ std::map<std::string, std::string> RocksDB::listAll() {
 	}
 }
 
-
-
-
-
-
-
+std::vector<std::string> RocksDB::keys() {
+	rocksdb::Iterator *iter = db->NewIterator(rocksdb::ReadOptions());
+	iter->SeekToFirst();
+	std::vector<std::string> v;
+	while (iter->Valid()) {
+		rocksdb::Slice key = iter->key();
+		v.push_back(key.ToString());
+		iter->Next();
+	}
+	return v;
+}

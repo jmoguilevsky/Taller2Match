@@ -28,6 +28,8 @@ public:
 	bool get(const std::string &key, std::string &value);
 
 	std::map<std::string, std::string> listAll();
+
+	std::vector<std::string> keys();
 };
 
 

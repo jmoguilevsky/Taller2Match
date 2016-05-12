@@ -16,7 +16,7 @@ file(GLOB app_src
         "src/mongoose-master/*.c*"
         )
 
-set(SOURCE_FILES ${app_src})
+set(SOURCE_FILES ${app_src} src/DB/NoSQLDatabase.cpp)
 
 add_library(core ${SOURCE_FILES})
 

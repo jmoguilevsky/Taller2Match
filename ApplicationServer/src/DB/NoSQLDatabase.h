@@ -6,7 +6,12 @@
 #define APPSERVER_NOSQLDATABASE_H
 
 #include <string>
+#include "../json/json.h"
+#include "../utils.h"
 // PARA PODER HACER MOCK DE BASE DE DATOS {key,value}, por ejemplo con un map
+
+
+
 class NoSQLDatabase {
 
 public:
@@ -20,6 +25,11 @@ public:
 	virtual bool get(const std::string &key, std::string &value) = 0;
 
 	virtual std::map<std::string, std::string> listAll() = 0;
+
+	virtual std::vector<std::string> keys() = 0;
 };
 
+bool valueExists(NoSQLDatabase &db, std::string key, std::string value);
+
+void append(NoSQLDatabase &db, std::string key, Json::Value value);
 #endif //APPSERVER_NOSQLDATABASE_H

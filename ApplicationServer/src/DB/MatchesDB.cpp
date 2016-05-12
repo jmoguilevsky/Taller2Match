@@ -6,28 +6,7 @@
 #include "MatchesDB.h"
 #include "JsonList.h"
 
-bool valueExists(NoSQLDatabase &db, std::string key, std::string value) {
-	std::string values;
-	db.get(key, values);
-	Json::Value list = utils::stringToJson(values);
-	for (int i = 0; i < list.size(); i++) {
-		if (list[i] == value) { return true; }
-	}
-	return false;
-}
 
-void append(NoSQLDatabase &db, std::string key, std::string value) {
-	std::string oldList;
-	db.get(key, oldList);
-
-	Json::Value oldListJson = utils::stringToJson(oldList);
-
-	Json::Value newValueJson = value;
-
-	oldListJson.append(newValueJson);
-
-	db.save(key, utils::JsonToString(oldListJson));
-}
 
 int MatchesDB::likeUser(const std::string &user1, const std::string &user2) {
 	if (valueExists(likes, user1, user2)) {
@@ -38,14 +17,14 @@ int MatchesDB::likeUser(const std::string &user1, const std::string &user2) {
 		std::cout << "Already in no matches! " << std::endl;
 		return 0;
 	}
-
-	append(likes, user1, user2);
-
-	append(likesReceived, user2, user1); // O solamente mantener la cantidad
+	Json::Value u2 = user2;
+	append(likes, user1, u2);
+	Json::Value u1 = user1;
+	append(likesReceived, user2, u1); // O solamente mantener la cantidad
 
 	if (valueExists(likes, user2, user1)) {
-		append(matches, user1, user2);
-		append(matches, user2, user1);
+		append(matches, user1, u2);
+		append(matches, user2, u1);
 	}
 
 	std::string likesOfUser;
@@ -78,7 +57,7 @@ int MatchesDB::rejectUser(const std::string &user1, const std::string &user2) {
 		return 0;
 	}
 
-	append(noMatches, user1, user2);
+	//append(noMatches, user1, user2);
 
 	std::string noMatchesA;
 	noMatches.get(user1, noMatchesA);

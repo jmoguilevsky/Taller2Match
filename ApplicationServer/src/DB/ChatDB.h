@@ -18,7 +18,7 @@ public:
 
 	std::string buildKey(std::string userA, std::string userB);
 
-	std::string getUnreadMsgs(std::string userA, std::string userB);
+	std::string getHistory(std::string userA, std::string userB);
 };
 
 

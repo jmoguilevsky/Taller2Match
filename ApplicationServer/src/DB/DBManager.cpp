@@ -9,8 +9,10 @@ DBManager::DBManager(std::string loginDBname, std::string likesDBname, std::stri
 	likesDB = new RocksDB(likesDBname);
 	matchesDB = new RocksDB(matchesDBname);
 	noMatchesDB = new RocksDB(noMatchesDBname);
+	chatDB = new RocksDB("chat");
 	login = new LoginDB(*loginDB);
 	matches = new MatchesDB(*noMatchesDB,*likesDB,*matchesDB);
+	chat = new ChatDB(*chatDB);
 }
 
 LoginDB &DBManager::getLoginDB() {
@@ -26,13 +28,13 @@ DBManager::~DBManager() {
 	delete likesDB;
 	delete matchesDB;
 	delete noMatchesDB;
+	delete chatDB;
+	delete chat;
 	delete login;
 	delete matches;
 }
 
 ChatDB &DBManager::getChatDB() {
-	RocksDB r("pep");
-	ChatDB c(r);
-	return c;// TODO
+	return *chat;
 }
 

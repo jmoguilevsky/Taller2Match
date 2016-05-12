@@ -27,6 +27,9 @@ public:
 	ChatDB &getChatDB();
 
 	~DBManager();
+
+	RocksDB *chatDB;
+	ChatDB *chat;
 };
 
 
