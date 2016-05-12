@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.taller2.matcherapp">
 
+    <!-- Permission to use internet services -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Permission to write to external storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".app.AppController"
@@ -32,8 +35,16 @@
         <activity
             android:name=".ChatActivity"
             android:label="@string/title_activity_chat"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.taller2.matcherapp.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_profile"
             android:parentActivityName=".MainActivity"
-            >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.taller2.matcherapp.MainActivity" />
