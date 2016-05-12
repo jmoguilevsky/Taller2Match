@@ -6,6 +6,7 @@
 #define APPSERVER_CHATMESSAGE_H
 
 #include <string>
+#include <iostream>
 #include "../json/json.h"
 #include "../utils.h"
 
@@ -43,7 +44,7 @@ public:
 	}
 
 	void setRead() {
-		read == "no";
+		read = "yes";
 	}
 
 	Json::Value toJson() {
@@ -58,6 +59,7 @@ public:
 	}
 
 	std::string toString() {
+		std::cout << "READ IS" << read;
 		return utils::JsonToString(toJson());
 	}
 

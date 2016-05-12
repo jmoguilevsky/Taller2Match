@@ -12,7 +12,6 @@
 #include "../SharedData.h"
 #include "RequestHandler.h"
 #include "../DB/DBManager.h"
-#include "SignUp.h"
 #include "Login.h"
 #include "Chat.h"
 #include "Matcher.h"
@@ -24,7 +23,6 @@ class MatchRequestHandler : public RequestHandler {
 	std::map<std::string, bool> connected;
 	std::map<std::string, std::map<std::string, int>> handlers;
 
-	SignUp signUp;
 	Login login;
 	Chat chat;
 	Matcher matcher;

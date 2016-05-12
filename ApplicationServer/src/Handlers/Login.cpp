@@ -22,6 +22,20 @@ int Login::login(std::string email, std::string password, std::string &token) {
 	return status;
 }
 
+int Login::signUp(std::string email, std::string password, UserProfile userProfile) {
+	int code = sharedData.newUser(userProfile);
+	// Si se pudo crear en el shared, entonces lo creo en mi BD local.
+	if (code == 201) {
+		db.newUser(email, password);
+		std::cout << "**** USERS ****" << std::endl;
+		db.listAll();
+		std::cout << "****************" << std::endl;
+	}
+	return code;
+}
+
+
+
 bool Login::isConnected(std::string email) {
 	return connected.count(email);
 }

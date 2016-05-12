@@ -33,6 +33,7 @@ public:
 	bool isConnected(std::string email);
 
 
+	int signUp(std::string email, std::string password, UserProfile userProfile);
 };
 
 #endif //APPSERVER_LOGIN_H

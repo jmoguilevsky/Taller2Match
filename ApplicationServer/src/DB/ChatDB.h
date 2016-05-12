@@ -19,6 +19,8 @@ public:
 	std::string buildKey(std::string userA, std::string userB);
 
 	std::string getHistory(std::string userA, std::string userB);
+
+	void updateHistory(std::string userA, std::string userB, std::string history);
 };
 
 

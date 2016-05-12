@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 #include "ChatMessage.h"
 #include "../json/json.h"
 #include "../utils.h"
@@ -18,18 +19,45 @@ class ChatHistory {
 	std::string userA;
 	std::string userB;
 	std::vector<ChatMessage> messages;
+	Json::Value history;
 public:
 	ChatHistory(std::string historyStr) {
-		Json::Value history = utils::stringToJson(historyStr);
+		history = utils::stringToJson(historyStr);
 		for (int i = 0; i < history.size(); i++) {
 			ChatMessage msg;
-			msg.fromJson(history[i]);
+			msg.fromJson(history["messages"][i]);
 			messages.push_back(msg);
 		}
 	}
 
 	std::vector<ChatMessage> getUnread(std::string user) {
-		return messages;
+		std::vector<ChatMessage> unread;
+		for (int i = 0; i < messages.size(); i++) {
+			if (!messages[i].isRead() && messages[i].getUserTo() == user) {
+				ChatMessage m = messages[i];
+				m.setRead();
+				messages[i] = m;
+				std::cout << m.toString() << std::endl;
+				unread.push_back(messages[i]);
+			}
+		}
+		return unread;
+	}
+
+	void updateRead() {
+		// Guardo el historial modificado con los mensajes ya leídos
+		Json::Value array;
+
+		for (int i = 0; i < messages.size(); i++) {
+			array.append(messages[i].toJson());
+		}
+		Json::Value empty;
+		history = empty;
+		history["messages"] = array;
+	}
+
+	Json::Value getJson() {
+		return history;
 	}
 };
 

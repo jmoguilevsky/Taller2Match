@@ -7,6 +7,7 @@
 #define URI_LOGOUT "/logout"
 #define URI_SIGNUP "/signup"
 #define URI_CANDIDATES "/candidates"
+#define URI_GET_UNREAD "/unread"
 #define URI_SEND_CHAT "/chat"
 #define URI_LIKE "/like"
 #define URI_MATCHES "/matches"
@@ -40,6 +41,7 @@ MatchRequestHandler::MatchRequestHandler(DBManager &dbManager, SharedData &share
 	handlers[HTTP_POST][URI_NOMATCH] = REQ_NO_MATCH;
 	handlers[HTTP_POST][URI_SEND_CHAT] = REQ_SEND_CHAT;
 	handlers[HTTP_GET][URI_CANDIDATES] = REQ_GET_CANDIDATES;
+	handlers[HTTP_GET][URI_GET_UNREAD] = REQ_GET_UNREAD;
 
 }
 
@@ -47,6 +49,7 @@ void parseSendChatRequest(HTTPRequest request, ChatMessage &msg) {
 	Json::Value msgJson = utils::stringToJson(request.getBody());
 	std::string userFrom = utils::stringToJson(request.getHeader("Authorization"))["email"].asString();
 	msgJson["message"]["from"] = userFrom;
+	msgJson["message"]["read"] = "no";
 	msg.fromJson(msgJson);
 }
 
@@ -85,8 +88,8 @@ bool parseNoMatchRequest(HTTPRequest request, std::string &userA, std::string &u
 	return true;
 }
 
-bool parseGetUnreadRequest(HTTPRequest request, std::string &userA, std::string &userB) {
-	return true;
+bool parseGetUnreadRequest(HTTPRequest request, std::string &userB) {
+	parseLikeRequest(request, userB);
 }
 
 bool parseGetCandidatesRequest(HTTPRequest request, std::string &userA) {
@@ -151,10 +154,10 @@ HTTPResponse MatchRequestHandler::handleSignUp(HTTPRequest request) {
 	std::string password;
 	UserProfile userProfile;
 	parseSignUpRequest(request, email, password, userProfile);
-	int code = signUp.signUp(email, password, userProfile);
+	int code = login.signUp(email, password, userProfile);
 	std::map<std::string, std::string> headers;
 	switch (code) {
-		case USER_CREATED:
+		case 201:
 			return HTTPResponse("200", "OK", headers, "");
 		case 400:
 			return HTTPResponse("400", "Error", headers, makeError("User already exists"));
@@ -201,17 +204,22 @@ HTTPResponse MatchRequestHandler::handleSendChat(HTTPRequest request) {
 
 HTTPResponse MatchRequestHandler::handleGetUnread(HTTPRequest request) {
 	std::map<std::string, std::string> headers;
-/*	if (checkCredentials(request)) {
-		std::string email = utils::stringToJson(request.getHeader("Authorization"))["email"].asString();
+	if (checkCredentials(request)) {
 		std::string userB;
-		parseSendChatRequest(request, userB);
-		std::cout << "USER B is " << userB << std::endl;
-		int code = matcher.postLike(email, userB);
-		std::cout << "OK";
-		return HTTPResponse("200", "OK", headers, "");
-	} else {*/
-	return HTTPResponse("409", "Unauthorized", headers, makeError("Invalid credentials"));
-
+		std::string email = utils::stringToJson(request.getHeader("Authorization"))["email"].asString();
+		parseGetUnreadRequest(request, userB);
+		std::vector<ChatMessage> unread = chat.getUnread(email, userB);
+		Json::Value messages;
+		Json::Value array;
+		for (int i = 0; i < unread.size(); i++) {
+			array.append(unread[i].toJson());
+		}
+		messages["messages"] = array;
+		std::string toSend = utils::JsonToString(messages);
+		return HTTPResponse("200", "OK", headers, toSend);
+	} else {
+		return HTTPResponse("409", "Unauthorized", headers, makeError("Invalid credentials"));
+	}
 }
 
 HTTPResponse MatchRequestHandler::handleLike(HTTPRequest request) {
@@ -262,7 +270,7 @@ HTTPResponse MatchRequestHandler::handle(HTTPRequest &request) {
 			return handleSendChat(request);
 			break;
 		case REQ_GET_UNREAD:
-			std::cout << "<<< GET UNREAD CHATS >>>" << std::endl;
+			std::cout << "<<< GET UNREAD >>>" << std::endl;
 			return handleGetUnread(request);
 			break;
 		case REQ_LOGOUT:

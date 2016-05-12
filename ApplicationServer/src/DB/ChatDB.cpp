@@ -31,6 +31,10 @@ std::string ChatDB::getHistory(std::string userA, std::string userB) {
 	return history;
 }
 
+void ChatDB::updateHistory(std::string userA, std::string userB, std::string history) {
+	std::string key = buildKey(userA, userB);
+	db.save(key, history);
+}
 ChatDB::ChatDB(NoSQLDatabase &db) : db(db) {
 
 }
