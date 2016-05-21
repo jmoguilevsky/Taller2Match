@@ -14,6 +14,7 @@ before_install:
 - sudo make
 - sudo make install
 - cd ..
+- cd .. 
 - rm -rf cmake-install
 script:
 - cd ApplicationServer/
