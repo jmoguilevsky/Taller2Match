@@ -8,6 +8,7 @@
 #include "../DB/MatchesDB.h"
 #include "../SharedData.h"
 #include "../UserProfile.h"
+#include "../SharedServerConnection.h"
 
 //! Handler para todo lo relacionado con likes, matches, etc.
 

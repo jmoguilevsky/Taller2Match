@@ -4,7 +4,9 @@ project(AppServer)
 
 add_subdirectory(test)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+add_subdirectory(ApiTest)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -fprofile-arcs -ftest-coverage" )
 
 add_definitions(-DMG_ENABLE_THREADS)
 
@@ -24,4 +26,4 @@ add_executable(app main.cpp)
 
 target_link_libraries(app core)
 
-target_link_libraries(app pthread rocksdb snappy z bz2)
+target_link_libraries(app pthread rocksdb snappy z bz2 gtest gtest_main)

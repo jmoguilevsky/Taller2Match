@@ -15,3 +15,5 @@ _sources
 googletest*
 cmake_install.cmake
 *.swp
+*.gcda
+app.info
