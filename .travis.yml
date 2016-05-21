@@ -1,13 +1,13 @@
 languaje: cpp
 compiler:
-	- g++
+- g++
 before_install:
-	- sudo apt-get update
-	- sudo apt-get install libgtest-dev
-	- ls
+- sudo apt-get update
+- sudo apt-get install libgtest-dev
+- ls
 script:
-	- cd ApplicationServer/
-	- cmake .
-	- make
-	- cd test
-	- ./unitTests
+- cd ApplicationServer/
+- cmake .
+- make
+- cd test
+- ./unitTests
