@@ -1,6 +1,8 @@
 Taller 2 - Match App
 ====================   
 
+master: [![Build Status](https://travis-ci.org/jmoguilevsky/Taller2Match.svg?branch=master)](https://travis-ci.org/jmoguilevsky/Taller2Match)
+
 **RocksDB**  
 1. Bajar el zip de la última versión (4.3.1) github.com/facebook/rocksdb/releases y extraerlo.  
 2. Hacer cd a esa carpeta.  
