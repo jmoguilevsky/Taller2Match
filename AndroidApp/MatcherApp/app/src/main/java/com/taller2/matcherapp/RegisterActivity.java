@@ -28,6 +28,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,10 +105,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * Function to store user in MySQL database will post params(tag, name,
-     * email, password) to register url
-     * */
+    // Function that creates POST request to register user with the parameters provided.
+    // If registration is successful, user is taken to Login activity,
     private void registerUser(final String name, final String email,
                               final String password) {
         // Tag used to cancel the request
@@ -115,17 +115,12 @@ public class RegisterActivity extends AppCompatActivity {
         pDialog.setMessage("Registering ...");
         showDialog();
 
-        /*String uid = "placeholder id 000";
-        String fecha = "ahora";
-        db.addUser(name, email, uid, fecha);
-        Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
-        hideDialog();*/
-
         // Post params to be sent to the server
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("email", email);
         params.put("password", password);
 
+        // Create the request for a JSONObject
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 AppConfig.URL_REGISTER, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
@@ -133,6 +128,16 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
+                        try {
+                            String email = response.getString("email");
+                            String password = response.getString("password");
+                            // Call the login activity.
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         pDialog.hide();
                     }
                 }, new Response.ErrorListener() {
@@ -145,10 +150,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
         });
-
-        int socketTimeout = 10000;//30 seconds - change to what you want
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        jsonObjReq.setRetryPolicy(policy);
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
