@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
 		close(pipe_fd[ESCRITURA]);
 		dup2(pipe_fd[LECTURA], STDIN_FILENO);
 		char* args;
-		execv("../app", &args);
+		execv("app", &args);
 		close(pipe_fd[LECTURA]);
 		exit(0);
 
@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
 		id = fork();
  
 		if (id == 0) {
-			system("./curlRequests.sh");
+			system("./ApiTest/curlRequests.sh");
 			exit(0);
 		} else {
 			dup2(pipe_fd[ESCRITURA], STDOUT_FILENO);
