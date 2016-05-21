@@ -4,7 +4,17 @@ compiler:
 before_install:
 - sudo apt-get update
 - sudo apt-get install libgtest-dev
-- ls
+- sudo apt-get install -y wget
+- mkdir cmake-install
+- cd cmake-install
+- wget https://cmake.org/files/v3.5/cmake-3.5.1.tar.gz
+- tar xf cmake-3.5.1.tar.gz
+- cd cmake-3.5.1
+- ./configure
+- sudo make
+- sudo make install
+- cd ..
+- rm -rf cmake-install
 script:
 - cd ApplicationServer/
 - cmake .
