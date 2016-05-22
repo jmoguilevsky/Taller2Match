@@ -4,8 +4,8 @@ compiler:
 before_install:
 - sudo apt-get install -y gcc
 - sudo apt-get install -y g++
-- sudo apt-get install -y g++-4.7
 - sudo apt-get update
+- sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
 - sudo apt-get install libgtest-dev
 - sudo apt-get install -y wget
 - mkdir cmake-install
