@@ -29,7 +29,7 @@ before_install:
 - sudo mv librocksdb.a /lib/x86_64-linux-gnu/librocksdb.a
 - sudo mv include/rocksdb/ /usr/include/rocksdb
 - sudo apt-get install -y apt-utils
-- sudo apt-get install -y libgflags-dev
+# - sudo apt-get install -y libgflags-dev
 - sudo apt-get install -y libsnappy-dev
 - sudo apt-get install -y zlib1g-dev
 - sudo apt-get install -y libbz2-dev
