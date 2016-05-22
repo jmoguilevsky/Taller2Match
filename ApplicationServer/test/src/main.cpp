@@ -8,7 +8,7 @@
 #include "../testsClasses/utilsTests.h"
 
 TEST(TestCase, MyTest1) {
-	ASSERT_EQ(utils::sum(1, 2), 5);
+	ASSERT_EQ(utils::sum(1, 2), 3);
 }
 
 TEST(TestCase, MyTest2) {

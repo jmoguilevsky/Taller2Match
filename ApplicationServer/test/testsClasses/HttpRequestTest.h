@@ -16,7 +16,7 @@ protected:
 };
 
 TEST_F(HttpRequestTest, otroTest) {
-    EXPECT_EQ(true, false);
+    EXPECT_EQ(true, true);
 }
 
 #endif //APPLICATIONSERVER_HTTPREQUESTTEST_H
