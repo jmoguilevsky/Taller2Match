@@ -2,6 +2,8 @@ languaje: cpp
 compiler:
 - g++
 before_install:
+- ls /
+- mv a a
 - sudo apt-get install -y gcc
 - sudo apt-get install -y g++
 - sudo apt-get update
