@@ -2,7 +2,8 @@ languaje: cpp
 compiler:
 - g++
 before_install:
-- sudo apt-get install -y g++-4.7
+- sudo apt-get install -y gcc
+- sudo apt-get install -y g++
 - sudo apt-get update
 - sudo apt-get install libgtest-dev
 - sudo apt-get install -y wget
@@ -17,6 +18,22 @@ before_install:
 - cd ..
 - cd .. 
 - rm -rf cmake-install
+- mkdir rocksdb-install
+- cd rocksdb-install
+- sudo wget --no-check-certificate https://github.com/facebook/rocksdb/archive/v4.5.1.tar.gz
+- tar xf v4.5.1.tar.gz
+- cd rocksdb-4.5.1
+- make static_lib
+- mv librocksdb.a /lib/x86-64-linux-gnu/librocksdb.a
+- mv include/rocksdb/ /usr/include/rocksdb
+- sudo apt-get install -y apt-utils
+- sudo apt-get install -y libgflags-dev
+- sudo apt-get install -y libsnappy-dev
+- sudo apt-get install -y zlib1g-dev
+- sudo apt-get install -y libbz2-dev
+- cd ..
+- cd ..
+- rm -rf rocksdb-install
 script:
 - cd ApplicationServer/
 - cmake .
