@@ -26,4 +26,4 @@ add_executable(app main.cpp)
 
 target_link_libraries(app core)
 
-target_link_libraries(app pthread rocksdb snappy z bz2 gtest gtest_main)
+target_link_libraries(app pthread rocksdb snappy z bz2 gtest gtest_main rt)
