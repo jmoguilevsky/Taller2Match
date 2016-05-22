@@ -2,9 +2,6 @@ languaje: cpp
 compiler:
 - g++
 before_install:
-- ls /
-- ls /lib
-- mv a a
 - sudo apt-get install -y gcc
 - sudo apt-get install -y g++
 - sudo apt-get update
@@ -29,7 +26,7 @@ before_install:
 - tar xf v4.5.1.tar.gz
 - cd rocksdb-4.5.1
 - make static_lib
-- mv librocksdb.a /lib/x86-64-linux-gnu/librocksdb.a
+- mv librocksdb.a /lib/x86_64-linux-gnu/librocksdb.a
 - mv include/rocksdb/ /usr/include/rocksdb
 - sudo apt-get install -y apt-utils
 - sudo apt-get install -y libgflags-dev
