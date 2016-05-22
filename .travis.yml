@@ -7,10 +7,14 @@ before_install:
 - sudo apt-get install -y gcc
 - sudo apt-get install -y g++
 - sudo apt-get update
+install: 
+# Instalar c++11
 - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
 - sudo unlink /usr/bin/g++ && sudo ln -s /usr/bin/g++-5 /usr/bin/g++
 - sudo apt-get install libgtest-dev
+# Instalar wget
 - sudo apt-get install -y wget
+# Instalar cmake
 - mkdir cmake-install
 - cd cmake-install
 - sudo wget --no-check-certificate https://cmake.org/files/v3.5/cmake-3.5.1.tar.gz
@@ -22,6 +26,7 @@ before_install:
 - cd ..
 - cd .. 
 - rm -rf cmake-install
+# Instalar RocksDB
 - mkdir rocksdb-install
 - cd rocksdb-install
 - sudo wget --no-check-certificate https://github.com/facebook/rocksdb/archive/v4.5.1.tar.gz
@@ -31,19 +36,38 @@ before_install:
 - sudo mv librocksdb.a /lib/x86_64-linux-gnu/librocksdb.a
 - sudo mv include/rocksdb/ /usr/include/rocksdb
 - sudo apt-get install -y apt-utils
-# - sudo apt-get install -y libgflags-dev
+## - sudo apt-get install -y libgflags-dev
 - sudo apt-get install -y libsnappy-dev
 - sudo apt-get install -y zlib1g-dev
 - sudo apt-get install -y libbz2-dev
 - cd ..
 - cd ..
 - rm -rf rocksdb-install
+# Instalar lcov
+- mkdir lcov-install
+- cd lcov-install
+- wget http://downloads.sourceforge.net/ltp/lcov-1.12.tar.gz
+- tar xf lcov-1.12.tar.gz
+- cd lcov-1.12
+- sudo make install
+- cd ..
+- cd ..
+- rm -rf lcov-install
+- sudo apt-get install rubygems
+- gem install lcoveralls
 script:
 - cd ApplicationServer/
 - cmake .
 - make
 - cd test
-- ./unitTests
+- mkdir html
+- cd html
+- lcov --directory .. --zerocounters
+- ../unitTests
+- lcov --directory .. --capture --output-file app.info
+- lcoveralls --retry-count 5 app.info
+- cd ..
+- rm -rf html
 addons:
   apt:
     sources:
