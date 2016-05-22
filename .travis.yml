@@ -7,7 +7,6 @@ before_install:
 - sudo apt-get install -y gcc
 - sudo apt-get install -y g++
 - sudo apt-get update
-- sudo apt-get install -y ggcov
 install: 
 # Instalar c++11
 - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
@@ -45,31 +44,13 @@ install:
 - cd ..
 - cd ..
 - rm -rf rocksdb-install
-# Instalar lcov
-- mkdir lcov-install
-- cd lcov-install
-- wget http://downloads.sourceforge.net/ltp/lcov-1.12.tar.gz
-- tar xf lcov-1.12.tar.gz
-- cd lcov-1.12
-- sudo make install
-- cd ..
-- cd ..
-- rm -rf lcov-install
-- sudo apt-get install rubygems
-- gem install lcoveralls
 script:
 - cd ApplicationServer/
 - cmake .
 - make
 - cd test
-- mkdir html
-- cd html
-- lcov --directory .. --zerocounters
-- ../unitTests
-- lcov --directory .. --capture --output-file app.info
-- lcoveralls --retry-count 5 app.info
+- ./unitTests
 - cd ..
-- rm -rf html
 addons:
   apt:
     sources:
