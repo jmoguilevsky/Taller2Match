@@ -22,10 +22,12 @@ import com.taller2.matcherapp.app.AppController;
 import com.taller2.matcherapp.helper.SQLiteHandler;
 import com.taller2.matcherapp.helper.SessionManager;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.jar.JarOutputStream;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -115,11 +117,11 @@ public class RegisterActivity extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.btn_male:
                 if (checked)
-                    user_gender = "Male";
+                    user_gender = "male";
                 break;
             case R.id.btn_female:
                 if (checked)
-                    user_gender = "Female";
+                    user_gender = "female";
                 break;
         }
     }
@@ -132,11 +134,13 @@ public class RegisterActivity extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.btn_men:
                 if (checked)
-                    sex_interest = "Male";
+                    // User wants to meet men
+                    sex_interest = "male";
                 break;
             case R.id.btn_women:
                 if (checked)
-                    sex_interest = "Female";
+                    // User wants to
+                    sex_interest = "female";
                 break;
         }
     }
@@ -151,33 +155,56 @@ public class RegisterActivity extends AppCompatActivity {
         pDialog.setMessage("Registering ...");
         showDialog();
 
-        // Post params to be sent to the server
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("name", name);
-        params.put("alias", alias);
-        params.put("email", email);
-        params.put("password", password);
-        params.put("sex_interest",sex_interest);
-        params.put("user_gender",user_gender);
+        // We create the JSONObject defined in the API (check documentation) to be POSTed to the server
+        JSONObject json_params = new JSONObject();
+        try{
+            JSONObject json_info = new JSONObject();
+            json_info.put("password",password);
+            json_info.put("email",email);
 
-        // Create the request for a JSONObject
+            JSONObject location = new JSONObject();
+            location.put("latitude", -121.34343);
+            location.put("longitude", 45.51119);
+
+            JSONObject json_sex_interest = new JSONObject();
+            json_sex_interest.put("category","sex");
+            json_sex_interest.put("value",sex_interest);
+
+            JSONArray json_array_interests = new JSONArray();
+            json_array_interests.put(json_sex_interest);
+
+            JSONObject json_user = new JSONObject();
+            json_user.put("name",name);
+            json_user.put("alias",alias);
+            json_user.put("email",email);
+            json_user.put("user_gender",user_gender);
+            json_user.put("interests",json_array_interests);
+            json_user.put("location",location);
+
+            json_params.put("info",json_info);
+            json_params.put("user",json_user);
+
+            Log.d(TAG,json_params.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Create a POST request, send JSONObject.
+        // On success expect an empty JSON
+        // On failute expect a JSON with an error field
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                AppConfig.URL_REGISTER, new JSONObject(params),
+                AppConfig.URL_REGISTER, json_params,
                 new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
-                        try {
-                            String response_email = response.getString("email");
-                            String password = response.getString("password");
-                            // Call the login activity.
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        Toast.makeText(getApplicationContext(),
+                                "Login successful!", Toast.LENGTH_LONG).show();
+                        // Call the login activity.
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
                         hideDialog();
                     }
                 }, new Response.ErrorListener() {

@@ -15,17 +15,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
 import com.taller2.matcherapp.helper.SQLiteHandler;
 import com.taller2.matcherapp.helper.SessionManager;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -109,17 +108,6 @@ public class LoginActivity extends AppCompatActivity {
         pDialog.setMessage("Logging in ...");
         showDialog();
 
-        session.setLogin(true);
-        String name = "usuario";
-        String tokenn = "0s00";
-        String fecha = "ahora";
-        db.addUser(name, email,tokenn,fecha);
-        hideDialog();
-        Intent intent = new Intent(LoginActivity.this,
-                MainActivity.class);
-        startActivity(intent);
-        finish();
-/*
         // Post params to be sent to the server
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("email", email);
@@ -140,12 +128,25 @@ public class LoginActivity extends AppCompatActivity {
 
                             // Add user and his data to SQLite local database.
                             String token = response.getString("token");
-                            // String name = response.getString("name");
+                            String name = response.getString("name");
+                            String alias = response.getString("alias");
+                            String user_gender = response.getString("user_gender");
+                            JSONArray interests = response.getJSONArray("interests");
+                            for (int i=0; i < interests.length(); i++){
+                                JSONObject interest = interests.getJSONObject(i);
+                                String category = interest.getString("category");
+                                String value = interest.getString("value");
+                            }
+                            String profile_photo = response.getString("profile_photo");
+                            JSONObject location = response.getJSONObject("location");
+                            String latitude = location.getString("latitude");
+                            String longitude = location.getString("longitude");
 
-                            String name = "usuario";
+                            String name_stud = "usuario";
                             String token_stud = "000";
+                            String email_stud = "seba@gmail.com";
                             String fecha = "ahora";
-                            db.addUser(name, email,token_stud,fecha);
+                            db.addUser(name_stud, email_stud,token_stud,fecha);
                             hideDialog();
                             Intent intent = new Intent(LoginActivity.this,
                                     MainActivity.class);
@@ -154,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        pDialog.hide();
+                        hideDialog();
                     }
                 }, new Response.ErrorListener() {
 
@@ -170,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
-        hideDialog();*/
+        hideDialog();
     }
 
     private void showDialog() {
