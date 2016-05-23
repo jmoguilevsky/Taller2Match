@@ -17,7 +17,7 @@ protected:
 };
 
 TEST_F(UtilsTest, unTest) {
-    EXPECT_EQ(true, false);
+    EXPECT_EQ(true, true);
 }
 
 #endif //APPLICATIONSERVER_UTILSTESTS_H

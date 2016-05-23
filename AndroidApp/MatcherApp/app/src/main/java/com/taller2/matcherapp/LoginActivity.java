@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
@@ -98,100 +100,77 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * function to verify login details in mysql db
-     * */
+    // Function to verify login details at the database specified in the login url.
+    // If login is successful, the session Login is set to true and user is taken to main activity.
     private void checkLogin(final String email, final String password) {
         // Tag used to cancel the request
-        String tag_string_req = "req_login";
+        String tag_json_req = "req_login";
 
         pDialog.setMessage("Logging in ...");
         showDialog();
 
         session.setLogin(true);
         String name = "usuario";
-        String uid = "000";
+        String tokenn = "0s00";
         String fecha = "ahora";
-        db.addUser(name, email,uid,fecha);
+        db.addUser(name, email,tokenn,fecha);
         hideDialog();
         Intent intent = new Intent(LoginActivity.this,
                 MainActivity.class);
         startActivity(intent);
         finish();
+/*
+        // Post params to be sent to the server
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("email", email);
+        params.put("password", password);
 
-        /*StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_LOGIN, new Response.Listener<String>() {
+        // Create the request for a JSONObject
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                AppConfig.URL_LOGIN, new JSONObject(params),
+                new Response.Listener<JSONObject>() {
 
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "Login Response: " + response.toString());
-                hideDialog();
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+                        try {
+                            // user successfully logged in
+                            // Create login session
+                            session.setLogin(true);
 
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
+                            // Add user and his data to SQLite local database.
+                            String token = response.getString("token");
+                            // String name = response.getString("name");
 
-                    // Check for error node in json
-                    if (!error) {
-                        // user successfully logged in
-                        // Create login session
-                        session.setLogin(true);
-
-                        // Now store the user in SQLite
-                        String uid = jObj.getString("uid");
-
-                        JSONObject user = jObj.getJSONObject("user");
-                        String name = user.getString("name");
-                        String email = user.getString("email");
-                        String created_at = user
-                                .getString("created_at");
-
-                        // Inserting row in users table
-                        db.addUser(name, email, uid, created_at);
-
-                        // Launch main activity
-                        Intent intent = new Intent(LoginActivity.this,
-                                MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        // Error in login. Get the error message
-                        String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
+                            String name = "usuario";
+                            String token_stud = "000";
+                            String fecha = "ahora";
+                            db.addUser(name, email,token_stud,fecha);
+                            hideDialog();
+                            Intent intent = new Intent(LoginActivity.this,
+                                    MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        pDialog.hide();
                     }
-                } catch (JSONException e) {
-                    // JSON error
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-
-            }
-        }, new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Log.e(TAG, "Login Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
                 hideDialog();
             }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("email", email);
-                params.put("password", password);
-
-                return params;
-            }
-
-        };
+        });
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);*/
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
+        hideDialog();*/
     }
 
     private void showDialog() {
