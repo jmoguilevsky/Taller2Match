@@ -29,6 +29,38 @@
             android:textColorHint="@color/input_register_hint" />
 
         <EditText
+            android:id="@+id/alias"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/input_register_bg"
+            android:hint="@string/hint_alias"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:inputType="textCapWords"
+            android:textColor="@color/input_register"
+            android:textColorHint="@color/input_register_hint" />
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/btn_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_male"
+                android:textColor="@color/input_register"
+                android:onClick="onRadioButtonClickedGender"/>
+            <RadioButton android:id="@+id/btn_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/input_register"
+                android:text="@string/btn_female"
+                android:onClick="onRadioButtonClickedGender"/>
+        </RadioGroup>
+
+        <EditText
             android:id="@+id/email"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -54,7 +86,34 @@
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
 
-        <!-- Login Button -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:padding="10dp"
+            android:textColor="@color/input_register"
+            android:text="@string/header_looking"/>
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/btn_men"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_men"
+                android:textColor="@color/input_register"
+                android:onClick="onRadioButtonClickedSexInterest"/>
+            <RadioButton android:id="@+id/btn_women"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/input_register"
+                android:text="@string/btn_women"
+                android:onClick="onRadioButtonClickedSexInterest"/>
+        </RadioGroup>
+
+        <!-- Register Button -->
 
         <Button
             android:id="@+id/btnRegister"

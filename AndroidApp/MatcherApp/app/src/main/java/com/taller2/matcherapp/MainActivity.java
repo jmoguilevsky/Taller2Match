@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnFind;
     private ImageView iconHeart;
     private ImageView iconCross;
+    private int LIKE_MATCH = 1;
+    private int DISLIKE_MATCH = 2;
 
     private SQLiteHandler db;
     private SessionManager session;
@@ -63,8 +65,7 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener match_clickListener = new View.OnClickListener() {
             public void onClick(View v) {
                 if (v.equals(imgMatch)) {
-                    // Set to like when the user clicks the image
-                    // TODO
+                    // Define what to do when user clicks image
                 }
                 else if (v.equals(iconHeart)){
                     // Accept (heart) button click event
@@ -149,5 +150,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void rejectMatch(){
         // TODO
+    }
+
+    private void react_to_match(int reaction){
+        if (reaction == LIKE_MATCH){
+
+        }
+        else if (reaction == DISLIKE_MATCH){
+
+        }
     }
 }

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/bg_login"
     tools:context="com.taller2.matcherapp.ProfileActivity">
 
     <android.support.v7.widget.Toolbar

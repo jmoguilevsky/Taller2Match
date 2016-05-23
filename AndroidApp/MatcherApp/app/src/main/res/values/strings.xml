@@ -3,9 +3,15 @@
     <string name="app_name">MatcherApp</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
+    <string name="hint_alias">Alias</string>
     <string name="hint_name">Fullname</string>
     <string name="btn_login">LOGIN</string>
+    <string name="btn_male">Male</string>
+    <string name="btn_female">Female</string>
     <string name="btn_register">REGISTER</string>
+    <string name="btn_men">Men</string>
+    <string name="header_looking">I want to meet:</string>
+    <string name="btn_women">Women</string>
     <string name="btn_link_to_register">Not a member? Sign up now.</string>
     <string name="btn_link_to_login">Already registred! Login Me.</string>
     <string name="btn_logout">LOGOUT</string>
@@ -18,8 +24,9 @@
     <string name="btn_find_match">Find Match!</string>
     <string name="action_profile">User Profile</string>
     <string name="your_interests">Your interests</string>
-    <string name="interest_category">Category</string>
-    <string name="interest_interest">Interest</string>
+    <string name="header_category">Category</string>
+    <string name="header_interest">Interest</string>
+    <string name="header_delete">Delete</string>
 
     <string name="match_image_desc">Profile image of the match</string>
     <string name="title_activity_profile">ProfileActivity</string>

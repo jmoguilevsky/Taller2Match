@@ -8,17 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
 import com.taller2.matcherapp.helper.SQLiteHandler;
@@ -27,11 +25,7 @@ import com.taller2.matcherapp.helper.SessionManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -40,9 +34,12 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnLinkToLogin;
     private EditText inputFullName;
     private EditText inputEmail;
+    private EditText inputAlias;
     private EditText inputPassword;
     private ProgressDialog pDialog;
     private SessionManager session;
+    private String sex_interest = "";
+    private String user_gender = "";
     private SQLiteHandler db;
 
     @Override
@@ -53,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         inputFullName = (EditText) findViewById(R.id.name);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
+        inputAlias= (EditText) findViewById(R.id.alias);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
 
@@ -81,13 +79,17 @@ public class RegisterActivity extends AppCompatActivity {
                 String name = inputFullName.getText().toString().trim();
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
+                String alias = inputAlias.getText().toString().trim();
 
-                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-                    registerUser(name, email, password);
+                sex_interest.trim();
+                user_gender.trim();
+
+                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty() &&
+                        !sex_interest.isEmpty() && !user_gender.isEmpty() && !alias.isEmpty()) {
+                    registerUser(name, alias, user_gender, email, password, sex_interest);
                 } else {
                     Toast.makeText(getApplicationContext(),
-                            "Please enter your details!", Toast.LENGTH_LONG)
-                            .show();
+                            "Please enter your details!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -105,10 +107,44 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    public void onRadioButtonClickedGender(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.btn_male:
+                if (checked)
+                    user_gender = "Male";
+                break;
+            case R.id.btn_female:
+                if (checked)
+                    user_gender = "Female";
+                break;
+        }
+    }
+
+    public void onRadioButtonClickedSexInterest(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.btn_men:
+                if (checked)
+                    sex_interest = "Male";
+                break;
+            case R.id.btn_women:
+                if (checked)
+                    sex_interest = "Female";
+                break;
+        }
+    }
+
     // Function that creates POST request to register user with the parameters provided.
     // If registration is successful, user is taken to Login activity,
-    private void registerUser(final String name, final String email,
-                              final String password) {
+    private void registerUser(final String name, final String alias, final String user_gender, final String email,
+                              final String password, final String sex_interest) {
         // Tag used to cancel the request
         String tag_json_req = "req_register";
 
@@ -117,8 +153,12 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Post params to be sent to the server
         HashMap<String, String> params = new HashMap<String, String>();
+        params.put("name", name);
+        params.put("alias", alias);
         params.put("email", email);
         params.put("password", password);
+        params.put("sex_interest",sex_interest);
+        params.put("user_gender",user_gender);
 
         // Create the request for a JSONObject
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
@@ -129,7 +169,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
                         try {
-                            String email = response.getString("email");
+                            String response_email = response.getString("email");
                             String password = response.getString("password");
                             // Call the login activity.
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -138,7 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        pDialog.hide();
+                        hideDialog();
                     }
                 }, new Response.ErrorListener() {
 
