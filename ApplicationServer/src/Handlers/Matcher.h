@@ -5,43 +5,65 @@
 #ifndef APPSERVER_MATCHER_H
 #define APPSERVER_MATCHER_H
 
-#include "../DB/MatchesDB.h"
 #include "../SharedData.h"
 #include "../UserProfile.h"
+#include "../DB/RocksDB.h"
 
 //! Handler para todo lo relacionado con likes, matches, etc.
 
 class Matcher {
 
-private:
+    RocksDB* likesReceived_db; // Guarda la cantidad de liks que recibió cada usuario.
+    RocksDB* likes_db; // Guarda todos los usuarios que likeo cada usuario.
+    RocksDB* dislikes_db; // Guarda todos los usuario que este usuario no likeo.
+    RocksDB* matches_db; // Guarda todos los matches de cada usuario.
+    RocksDB* limit_db; // Guarda la cantidad de candidatos entregados hoy, cuántos quedan, y cuándo se reinicia la cuenta.
 
-	MatchesDB &db;
-	SharedData &sharedData;
+    SharedData &sharedData;
+
+    int getInterestsInCommon(UserProfile &user1, UserProfile &user2);
+
+    void discardCandidates(std::string userId,std::vector<UserProfile> &candidates);
+
+    int calculateScore(UserProfile &userA, UserProfile &userB);
+
+    int calculateDistance(UserProfile &userA, UserProfile &userB);
 
 public:
-	Matcher(MatchesDB &db, SharedData &data);
 
-	std::vector<UserProfile> getCandidates(std::string email);
+    Matcher(SharedData &data):sharedData(data){
+        likesReceived_db = new RocksDB("likesReceived"); // Guarda la cantidad de liks que recibió cada usuario.
+        likes_db = new RocksDB("likes"); // Guarda todos los usuarios que likeo cada usuario.
+        dislikes_db =  new RocksDB("dislikes"); // Guarda todos los usuario que este usuario no likeo.
+        matches_db = new RocksDB("matches"); // Guarda todos los matches de cada usuario.
+        limit_db = new RocksDB("limit"); //
+    }
 
-	std::vector<UserProfile> getMatches(std::string email);
+    UserProfile getNextCandidate(std::string userId);
 
-	int postLike(std::string emailA, std::string emailB);
+    int postLikeLastCandidate(std::string userId);
 
-	int postNoMatch(std::string emailA, std::string emailB);
+    int postDislike(std::string emailA);
 
-private:
-	int getInterestsInCommon(UserProfile &user1, UserProfile &user2);
+    bool usersMatch(std::string userId, std::string otherUserId) const;
 
-	void discardCandidates(std::map<std::string, UserProfile> &candidates);
+    std::vector<UserProfile> getMatches(std::string email) const;
 
-	int calculateScore(UserProfile &userA, UserProfile &userB);
+    std::string getMatches(const std::string &user);
 
-	int calculateDistance(UserProfile &userA, UserProfile &userB);
+    std::string getLikes(const std::string &user);
 
-	void buildUserProfiles(std::map<std::string, UserProfile> &candidates);
+    int getLikesReceived(const std::string &user);
 
-	std::vector<std::pair<UserProfile, int>> filterCandidates(std::string email,
-	                                                          std::map<std::string, UserProfile> &candidates);
+    std::vector<std::string> getDislikes(const std::string &user);
+
+    std::vector<UserProfile> getMatches(std::string email);
+
+    std::vector<UserProfile> calculateCandidates(std::string userId);
+
+    std::vector<UserProfile> candidatesLeft(std::string userId);
+
+    RocksDB* candidates_db;
 };
 
 #endif //APPSERVER_MATCHER_H

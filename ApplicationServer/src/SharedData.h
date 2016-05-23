@@ -11,14 +11,17 @@
 
 //! Se puede "simular" la conexión al shared con una clase que implemente estos métodos.
 
+#include <vector>
+using namespace std;
+
 class SharedData {
 
 public:
-	virtual std::vector<UserProfile> getUsersList() = 0;
+    virtual bool getUsersList(vector<UserProfile>* users) = 0;
 
-	virtual UserProfile getUserProfile(std::string user) = 0;
+    virtual bool getUserProfile(std::string sharedId, UserProfile* userProfile) = 0;
 
-	virtual int newUser(UserProfile &userProfile) = 0;
+    virtual bool newUser(UserProfile userProfile, std::string* sharedId) = 0;
 };
 
 

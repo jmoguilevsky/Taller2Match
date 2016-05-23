@@ -5,7 +5,7 @@
 #ifndef APPLICATIONSERVER_UTILSTESTS_H
 #define APPLICATIONSERVER_UTILSTESTS_H
 
-#include "../../src/utils.h"
+#include "../../src/util.h"
 #include <gtest/gtest.h>
 
 class UtilsTest : public ::testing::Test {

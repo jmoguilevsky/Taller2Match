@@ -14,7 +14,7 @@
 
 //! Logger para errores, info, warning y debug
 
-class Logger{
+class Logger {
 
     int level;
     std::string path;

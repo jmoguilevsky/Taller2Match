@@ -5,7 +5,7 @@
 #include <fstream>
 #include "../mongoose-master/MgHTTPClient.h"
 #include "../mongoose-master/MgServer.h"
-#include "../utils.h"
+#include "../util.h"
 
 #define CRLF "\r\n"
 #define HTTP_VERSION "HTTP/1.1"
@@ -29,7 +29,7 @@ HTTPRequest::HTTPRequest(std::string verb, std::string uri,
 	std::string t;
 	s >> t;
 
-	this->message += "Content-Length:" + t + CRLF;
+	if(verb == "POST" || verb == "PUT")this->message += "Content-Length:" + t + CRLF;
 	if (body != "")this->message += CRLF + body;
 	this->message += CRLF;
 }
@@ -40,8 +40,8 @@ HTTPRequest::HTTPRequest(struct http_message *hm) {
 	uri = std::string(hm->uri.p, hm->uri.len);
 	body = std::string(hm->body.p, hm->body.len);
 	for (int i = 0; i < MG_MAX_HTTP_HEADERS; i++) {
-		headers[utils::mgStrToString(
-				hm->header_names[i])] = utils::mgStrToString(
+		headers[util::mgStrToString(
+				hm->header_names[i])] = util::mgStrToString(
 				hm->header_values[i]);
 	}
 	message = std::string(hm->message.p, hm->message.len);

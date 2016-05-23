@@ -12,11 +12,12 @@ file(GLOB app_src
         "src/*.cpp"
         "src/DB/*.cpp"
         "src/Handlers/*.cpp"
+        "src/HandlersHTTP/*.cpp"
         "src/HTTP/*.cpp"
         "src/mongoose-master/*.c*"
         )
 
-set(SOURCE_FILES ${app_src})
+set(SOURCE_FILES ${app_src} src/UsersProfiles.cpp src/UsersProfiles.h)
 
 add_library(core ${SOURCE_FILES})
 

@@ -5,7 +5,6 @@
 #ifndef APPSERVER_HTTP_H
 #define APPSERVER_HTTP_H
 
-
 #include "HTTPResponse.h"
 
 // Wrapper para obtener las HTTPResponse más fácilmente.
@@ -16,7 +15,9 @@ namespace HTTP {
 
 	HTTPResponse OKJson(std::string json);
 
-	HTTPResponse Error(std::string msg);
+	HTTPResponse NotFound();
+
+	HTTPResponse Error(std::string msg = "");
 
 	HTTPResponse BadRequest();
 

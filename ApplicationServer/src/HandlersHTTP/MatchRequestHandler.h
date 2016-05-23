@@ -6,16 +6,8 @@
 #define APPLICATIONSERVER_HANDLERSELECTOR_H
 
 #include <map>
-#include "../DB/UsersDB.h"
-#include "../DB/MatchesDB.h"
 #include "../SharedData.h"
 #include "RequestHandler.h"
-#include "../DB/DBManager.h"
-#include "Users.h"
-#include "Chat.h"
-#include "Matcher.h"
-#include "../HTTP/HTTPResponse.h"
-#include "../HTTP/HTTPRequest.h"
 #include "UsersHTTP.h"
 #include "ChatHTTP.h"
 #include "MatcherHTTP.h"
@@ -23,16 +15,20 @@
 //! Request handler para el app server.
 
 class MatchRequestHandler : public RequestHandler {
-// TODO: Mandar cosas a private !
+
 	std::map<std::string, int> handlers;
 
-	UsersHTTP *users;
-	ChatHTTP *chat;
-	MatcherHTTP *matcher;
+	Users* users;
+	Chat* chat;
+	Matcher* matches;
+
+	UsersHTTP *usersHttp;
+	ChatHTTP *chatHttp;
+	MatcherHTTP *matcherHttp;
 
 public:
 
-	MatchRequestHandler(DBManager &dbManager, SharedData &sharedData);
+	MatchRequestHandler(SharedData &sharedData);
 
 	HTTPResponse handle(HTTPRequest &request);
 };

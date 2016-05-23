@@ -2,11 +2,18 @@
 // Created by chris on 12/05/16.
 //
 
+
+
 #include "HTTP.h"
 
 HTTPResponse HTTP::BadRequest() {
 	std::map<std::string, std::string> headers;
 	return HTTPResponse("400", "Bad Request", headers, "");
+}
+
+HTTPResponse HTTP::NotFound() {
+	std::map<std::string, std::string> headers;
+	return HTTPResponse("404", "Not Found", headers, "");
 }
 
 HTTPResponse HTTP::Unauthorized() {

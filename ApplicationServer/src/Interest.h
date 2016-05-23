@@ -12,18 +12,18 @@
 
 class Interest {
 private:
-	std::string value;
-	std::string category;
+    std::string value;
+    std::string category;
 public:
-	bool operator<(const Interest &interest) const;
+    bool operator<(const Interest &interest) const;
 
-	Interest(Json::Value interest);
+    Interest(Json::Value interest);
 
-	Interest(std::string category, std::string value);
+    Interest(std::string category, std::string value);
 
-	std::string getCategory() const;
+    std::string getCategory() const;
 
-	std::string getValue() const;
+    std::string getValue() const;
 
 };
 

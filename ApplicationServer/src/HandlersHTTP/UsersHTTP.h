@@ -6,15 +6,18 @@
 #define APPSERVER_USERSHTTP_H
 
 
-#include "Users.h"
+#include "../Handlers/Users.h"
 #include "../HTTP/HTTPRequest.h"
 #include "../HTTP/HTTPResponse.h"
+#include "../Handlers/Matcher.h"
 
 //! Esta clase maneja los requests HTTP que tienen que ver con login, logout, etc...
 
 class UsersHTTP {
 
-	Users *users;
+	Users& users;
+
+	const Matcher& matcher;
 
 	HTTPResponse handleSignUp(HTTPRequest request);
 
@@ -22,15 +25,18 @@ class UsersHTTP {
 
 	HTTPResponse handleLogout(HTTPRequest request);
 
+	HTTPResponse handleUpdateProfile(HTTPRequest request);
+
+	HTTPResponse handleUpdatePhoto(HTTPRequest request);
+
+	HTTPResponse handleViewProfile(HTTPRequest request);
+
 public:
 
-	UsersHTTP(UsersDB &usersDB, SharedData &sharedData);
-
-	~UsersHTTP();
+	UsersHTTP(Users& users, const Matcher& matcher): users(users), matcher(matcher){};
 
 	HTTPResponse handle(HTTPRequest request);
 
-	bool verifyCredentials(HTTPRequest request);
 };
 
 

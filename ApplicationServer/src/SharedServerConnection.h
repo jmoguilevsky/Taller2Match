@@ -15,17 +15,18 @@
 
 class SharedServerConnection : public SharedData {
 
-	std::string sharedAddress;
+    std::string sharedAddress;
 
 public:
 
-	SharedServerConnection(std::string sharedAddress);
+    SharedServerConnection(std::string sharedAddress);
 
-	std::vector<UserProfile> getUsersList();
+    bool getUsersList(vector<UserProfile>* users);
 
-	UserProfile getUserProfile(std::string user);
+    bool getUserProfile(std::string sharedId, UserProfile* userProfile);
 
-	int newUser(UserProfile &userProfile);
+    bool newUser(UserProfile userProfile, std::string* sharedId);
+
 
 };
 

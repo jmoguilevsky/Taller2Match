@@ -6,7 +6,7 @@
 #include <map>
 #include "HTTPResponse.h"
 #include "../mongoose-master/mongoose.h"
-#include "../utils.h"
+#include "../util.h"
 
 #define CRLF "\r\n"
 
@@ -38,7 +38,7 @@ std::string HTTPResponse::toString() {
 HTTPResponse::HTTPResponse(struct http_message *hm) {
 	// Parsear el mensaje
 	this->code = hm->resp_code;
-	this->body = utils::mgStrToString(hm->body);
+	this->body = util::mgStrToString(hm->body);
 }
 
 std::string HTTPResponse::getBody() {

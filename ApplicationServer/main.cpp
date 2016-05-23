@@ -1,6 +1,5 @@
 #include "src/mongoose-master/MgServer.h"
-#include "src/DB/DBManager.h"
-#include "src/Handlers/MatchRequestHandler.h"
+#include "src/HandlersHTTP/MatchRequestHandler.h"
 #include "src/SharedServerConnection.h"
 
 const static std::string SHARED_SERVER = "enigmatic-depths-58073.herokuapp.com:80";
@@ -32,8 +31,7 @@ int main(int argc, char** argv) {
 	}
 
 	SharedServerConnection serverConnection(SHARED_SERVER);
-	DBManager dbManager("login","likes","matches","noMatches");
-	MatchRequestHandler matchRequestHandler(dbManager, serverConnection);
+	MatchRequestHandler matchRequestHandler(serverConnection);
 
 	MgServer server(port, matchRequestHandler);
 

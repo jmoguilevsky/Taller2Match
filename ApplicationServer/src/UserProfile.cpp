@@ -3,67 +3,73 @@
 //
 
 #include "UserProfile.h"
-#include "utils.h"
+#include "util.h"
 #include <iostream>
 
 UserProfile::UserProfile(Json::Value &user) {
-	// Sacarle la password al Json acá
-	this->user = user;
-	id = user["id"].asString();
-	name = user["name"].asString();
-	email = user["email"].asString();
-	parseInterests(user);
+    // Sacarle la password al Json acá
+    this->user = user;
+    id = user["id"].asString();
+    name = user["name"].asString();
+    email = user["email"].asString();
+    parseInterests(user);
 }
 
 UserProfile::UserProfile() { }
 
 double UserProfile::getLatitude() const {
-	return latitude;
+    return latitude;
 }
 
 double UserProfile::getLongitude() const {
-	return longitude;
+    return longitude;
 }
 
 std::string UserProfile::getName() const {
-	return name;
+    return name;
 }
 
 void UserProfile::parseInterests(Json::Value &user) {
-	Json::Value userInterests = user["interests"];
-	int interestsSize = userInterests.size();
-	for (int i = 0; i < interestsSize; i++) {
-		Json::Value interest = userInterests[i];
-		interestList.insert(Interest(interest));
-	}
+    Json::Value userInterests = user["user"]["interests"];
+    int interestsSize = userInterests.size();
+    for (int i = 0; i < interestsSize; i++) {
+        Json::Value interest = userInterests[i];
+        interestList.insert(Interest(interest));
+    }
 }
 
 std::string UserProfile::getId() const {
-	return id;
+    return id;
 }
 
 const InterestList &UserProfile::getInterests() {
-	return interestList;
+    return interestList;
 }
 
 std::string UserProfile::getEmail() const {
-	return email;
+    return email;
 }
 
 Json::Value UserProfile::getJson() const {
-	return user;
+    return user;
 }
 
-void UserProfile::fromJson(Json::Value user) {
-	Json::Value p;
-	p["user"] = user;
-	p["user"].removeMember("password");
-	this->user = p;
-	//id = user["id"].asString();
-	name = user["name"].asString();
-	email = user["email"].asString();
-	parseInterests(user);
+void UserProfile::fromJson(std::string user_str) {
+    user = util::stringToJson(user_str);
+    if(!user["user"].isMember("name")) throw Json::Exception("Missing \"name\" field!");
+    if(!user["user"].isMember("alias")) throw Json::Exception("Missing \"alias\" field!");
+    if(!user["user"].isMember("email")) throw Json::Exception("Missing \"email\" field!");
+    if(!user["user"].isMember("interests")) throw Json::Exception("Missing \"interests\" field!");
+    name = user["user"]["name"].asString();
+    email = user["user"]["email"].asString();
+    parseInterests(user);
 }
+
+void UserProfile::changeId(std::string userId) {
+    id = userId;
+}
+
+
 
 
 

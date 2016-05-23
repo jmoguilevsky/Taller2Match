@@ -11,26 +11,26 @@
 //! Wrapper para una Base de datos RocksDB.
 
 class RocksDB : public KeyValueDB {
-	rocksdb::DB *db;
+    rocksdb::DB *db;
 public:
-	//! Abre una base de datos RocksDB con el nombre dbName. Si no existe, la crea.
-	RocksDB(const std::string &dbName);
+    //! Abre una base de datos RocksDB con el nombre dbName. Si no existe, la crea.
+    RocksDB(const std::string &dbName);
 
-	//! Guarda en la DB el par {key,value}
-	void save(const std::string &key, const std::string &value);
+    //! Guarda en la DB el par {key,value}
+    void save(const std::string &key, const std::string &value);
 
-	//! Cierra la base de datos.
-	~RocksDB();
+    //! Cierra la base de datos.
+    ~RocksDB();
 
-	//! Devuelve true si key existe como clave en la DB. False si no.
-	bool keyExists(std::string key);
+    //! Devuelve true si key existe como clave en la DB. False si no.
+    bool keyExists(std::string key);
 
-	//! Si key existe en la DB, devuelve true y asigna a value el valor asociado. Si no existe, devuelve false, y no modifica value.
-	bool get(const std::string &key, std::string &value);
+    //! Si key existe en la DB, devuelve true y asigna a value el valor asociado. Si no existe, devuelve false, y no modifica value.
+    bool get(const std::string &key, std::string &value);
 
-	std::map<std::string, std::string> listAll();
+    std::map<std::string, std::string> listAll();
 
-	std::vector<std::string> keys();
+    std::vector<std::string> keys();
 };
 
 

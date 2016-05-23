@@ -6,7 +6,7 @@
 #include "mongoose.h"
 #include "../HTTP/HTTPRequest.h"
 #include "MgHTTPClient.h"
-#include "../Handlers/RequestHandler.h"
+#include "../HandlersHTTP/RequestHandler.h"
 #include <map>
 #include <vector>
 

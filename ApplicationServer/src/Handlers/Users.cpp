@@ -3,56 +3,105 @@
 //
 
 #include <fstream>
+#include <iostream>
 #include "Users.h"
-#include "../utils.h"
 
-int Users::login(std::string email, std::string password, std::string &token) {
-	int emailPwdOK = db.login(email, password);
-	int status = 0;
-	if (emailPwdOK == LOGIN_OK) {
-		if (isConnected(email)) {
-			status = ALREADY_LOGGED_IN;
-		} else {
-			token = newToken(email);
-			status = LOGIN_OK;
-		}
-	} else {
-		status = LOGIN_ERROR;
-	}
-	return status;
+
+bool Users::signUp(std::string email, std::string password, UserProfile userProfile) {
+
+    std::string value;
+
+    bool exists = email_pwd_db->get(email, value);
+
+    if(exists) return false; // El usuario ya existe en el app server
+
+    std::string userId;
+
+    bool ok = userProfiles.newUser(userProfile, &userId);
+
+    if(!ok) return false; // No se pudo crear en el shared server
+
+    email_pwd_db -> save(email, password);
+
+    return true;
 }
 
-int Users::signUp(std::string email, std::string password, UserProfile userProfile) {
-	int code = sharedData.newUser(userProfile);
-	// Si se pudo crear en el shared, entonces lo creo en mi BD local.
-	if (code == 201) {
-		db.newUser(email, password);
-		std::cout << "**** USERS ****" << std::endl;
-		db.listAll();
-		std::cout << "****************" << std::endl;
-	}
-	return code;
+bool Users::login(std::string email, std::string password, std::string* token, UserProfile* profile) {
+
+    std::string value;
+
+    bool exists = email_pwd_db->get(email, value);
+
+    if(!exists) return false; // El usuario no está registrado acá
+
+    if(password != value) return false; // La contraseña no es correcta
+
+    string userId;
+
+    userId = userProfiles.getUserId(email);
+
+    if(isConnected(userId)) return false; // El usuario ya está conectado
+
+    UserProfile auxProfile;
+
+    bool existsInShared = userProfiles.getProfile(userId,&auxProfile);
+
+    if(!existsInShared) return false; // El usuario no está en el shared
+
+    *token = newToken(userId);
+
+    *profile = auxProfile;
+
+    return true;
+}
+
+bool Users::isConnected(std::string userId) {
+    return userId_connected_map[userId];
+}
+
+bool Users::getUserId(std::string token, std::string* userId){
+    if(token_userId_map.count(token) == 0) return false;
+    *userId = token_userId_map[token];
+    return true;
+}
+
+void Users::invalidateToken(std::string token) {
+    token_userId_map.erase(token);
+}
+
+std::string Users::newToken(std::string userId) {
+    std::string token = userId;
+    token_userId_map[token] = userId;
+    userId_connected_map[userId] = true;
+    return token;
+}
+
+void Users::logout(std::string token) {
+    invalidateToken(token);
+}
+
+bool Users::getUserProfile(std::string userId, UserProfile* profile) {
+    // TODO A partir de este Id, buscar el Id en el shared, pedir el perfil y devolverlo.
+    UserProfile aux;
+    bool ok = userProfiles.getProfile(userId, &aux);
+    if(!ok) return false;
+    *profile = aux;
+    return true;
+}
+
+bool Users::updatePhoto(std::string userId, Json::Value newPhoto) {
+    return false;
+}
+
+bool Users::updateProfile(std::string userId, UserProfile newProfile) {
+    return false;
 }
 
 
-bool Users::isConnected(std::string email) {
-	return connected.count(email);
-}
-
-void Users::invalidateToken(std::string email) {
-	connected.erase(email);
-}
-
-std::string Users::newToken(std::string email) {
-	std::string token = email;
-	connected[email] = email;
-	return token;
-}
-
-void Users::logout(std::string email) {
-	invalidateToken(email);
-}
-
-bool Users::checkToken(std::string email, std::string token) {
-	return connected.count(email) == 1 && connected[email] == token;
+Users::Users(SharedData &sharedData) : sharedData(sharedData) {
+    userProfiles.setShared(sharedData);
+    email_pwd_db = new RocksDB("email_pwd");
+    email_sharedId_db = new RocksDB("email_sharedId");
+    email_appId_db = new RocksDB("email_appId");
+    appId_email_db = new RocksDB("appId_email");
 }

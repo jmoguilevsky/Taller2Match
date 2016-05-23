@@ -48,7 +48,7 @@ RUN make static_lib
 RUN mv librocksdb.a /lib/x86_64-linux-gnu/librocksdb.a
 
 RUN mv include/rocksdb/ /usr/include/rocksdb
-RUN apt-get install -y apt-utils
+RUN apt-get install -y apt-util
 RUN apt-get install -y libgflags-dev
 RUN apt-get install -y libsnappy-dev
 RUN apt-get install -y zlib1g-dev
