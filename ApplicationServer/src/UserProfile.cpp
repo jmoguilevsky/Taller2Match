@@ -66,6 +66,7 @@ void UserProfile::fromJson(std::string user_str) {
 }
 
 void UserProfile::changeId(std::string userId) {
+    user["user"]["id"] = userId;
     id = userId;
 }
 
