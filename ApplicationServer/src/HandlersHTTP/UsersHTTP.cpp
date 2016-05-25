@@ -82,7 +82,7 @@ HTTPResponse UsersHTTP::handleLogin(HTTPRequest request) {
     bool login_OK = users.login(email, password, &token, &prof);
 
     if (!login_OK) {
-        return HTTP::Error("User doesn't exist or wrong password");
+        return HTTP::Error("User doesn't exist or wrong password, or user already connected!");
     }
     else {
         std::string tokenJson;

@@ -9,15 +9,16 @@
 #include "json/json.h"
 #include "UserProfile.h"
 #include "SharedData.h"
+#include "DB/RocksDB.h"
 
 using namespace std;
 
 class UsersProfiles {
 private:
 
-    map<string,string> userId_email_map;
-    map<string,string> email_userId_map;
-    map<string,string> email_sharedId_map;
+    RocksDB *userId_email_map;
+    RocksDB *email_userId_map;
+    RocksDB *email_sharedId_map;
     int n;
 
     string getNextId();

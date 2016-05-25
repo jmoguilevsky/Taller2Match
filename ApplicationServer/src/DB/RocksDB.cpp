@@ -39,14 +39,13 @@ bool RocksDB::keyExists(std::string key) {
 }
 
 std::map<std::string, std::string> RocksDB::listAll() {
-    rocksdb::Iterator *iter = db->NewIterator(rocksdb::ReadOptions());
-    iter->SeekToFirst();
-    while (iter->Valid()) {
-        rocksdb::Slice key = iter->key();
-        rocksdb::Slice value = iter->value();
-        std::cout << key.ToString() << " : " << value.ToString() << std::endl;
-        iter->Next();
+    rocksdb::Iterator *it = db->NewIterator(rocksdb::ReadOptions());
+    for (it->SeekToFirst(); it->Valid(); it->Next()) {
+        std::cout << it->key().ToString() << ": " << it->value().ToString() << std::endl;
     }
+    assert(it->status().ok()); // Check for any errors found during the scan
+    delete it;
+    return std::map<std::string, std::string>();
 }
 
 std::vector<std::string> RocksDB::keys() {
@@ -55,8 +54,18 @@ std::vector<std::string> RocksDB::keys() {
     std::vector<std::string> v;
     while (iter->Valid()) {
         rocksdb::Slice key = iter->key();
+        std::cout << "key: " << key.ToString();
         v.push_back(key.ToString());
         iter->Next();
     }
     return v;
+}
+
+std::string RocksDB::getLastKey() {
+    rocksdb::Iterator *it = db->NewIterator(rocksdb::ReadOptions());
+    std::string lastKey;
+    it->SeekToLast();
+    lastKey = (it->key()).ToString();
+    delete it;
+    return lastKey;
 }

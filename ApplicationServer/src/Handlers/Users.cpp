@@ -30,6 +30,10 @@ bool Users::login(std::string email, std::string password, std::string* token, U
 
     std::string value;
 
+    std::cout << "EMAIL - PASSWORD" << std::endl;
+
+    email_pwd_db->listAll();
+
     bool exists = email_pwd_db->get(email, value);
 
     if(!exists) return false; // El usuario no está registrado acá
@@ -66,6 +70,8 @@ bool Users::getUserId(std::string token, std::string* userId){
 }
 
 void Users::invalidateToken(std::string token) {
+    std::string userId = token_userId_map[token];
+    userId_connected_map[userId] = false;
     token_userId_map.erase(token);
 }
 
