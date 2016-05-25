@@ -58,15 +58,36 @@ int Matcher::postLike(std::string userId, std::string candidateId) {
     return 0;
 }
 
-int Matcher::postDislike(std::string userId) {
+int Matcher::postDislike(std::string userId, std::string candidateId) {
     std::string candidates;
     candidates_db -> get (userId, candidates);
+
     Json::Value array = util::stringToJson(candidates);
-    Json::Value lastCandidateJson;
-    array.removeIndex(0,&lastCandidateJson);
-    candidates_db -> save(userId, util::JsonToString(array));
-    Json::Value lastCandidateId = lastCandidateJson["user"]["id"];
-    append(*dislikes_db, userId,lastCandidateId);
+
+    // ***** Verifico que sea un candidato sugerido ( o que sea el PRIMERO DE LA LISTA?)
+
+    bool ok = false;
+    for (int i = 0; i < array.size(); i++) {
+        if (array[i].asString() == candidateId) ok = true;
+    }
+    if (!ok) {
+        return 0;
+        // NO ES UN CANDIDATE -> ERROR
+    }
+
+    // *****
+    // ***** Genero el nuevo listado de candidatos, o sea: saco este candidato de la lista
+    Json::Value newArray;
+    for (int i = 0; i < array.size(); i++) {
+        if (array[i].asString() != candidateId) newArray.append(array[i]);
+    }
+    // *****
+
+    candidates_db->save(userId, util::JsonToString(newArray));
+
+    append(*dislikes_db, userId, candidateId);
+    std::cout << "DISLIKES: " << std::endl;
+    dislikes_db->listAll();
     return 0;
 }
 
@@ -271,18 +292,6 @@ std::vector<UserProfile> Matcher::calculateCandidates(std::string userId) {
     return score;
 }
 
-
-void Matcher::discardCandidates(std::string userId, std::vector<UserProfile> &candidates) {
-    std::vector<UserProfile> finalCandidates;
-    for (int i = 0; i < candidates.size(); i++) {
-        std::string id = candidates[i].getId();
-        if (!valueExists(*likes_db, userId, id) || !valueExists(*dislikes_db, userId, id) ||
-            !valueExists(*matches_db, userId, id)) {
-            finalCandidates.push_back(candidates[i]);
-        }
-    }
-    candidates = finalCandidates;
-}
 
 int Matcher::getInterestsInCommon(UserProfile &user1, UserProfile &user2) {
     InterestList user1Interests = user1.getInterests();

@@ -24,8 +24,6 @@ class Matcher {
 
     int getInterestsInCommon(UserProfile &user1, UserProfile &user2);
 
-    void discardCandidates(std::string userId,std::vector<UserProfile> &candidates);
-
     int calculateScore(UserProfile &userA, UserProfile &userB);
 
     int calculateDistance(UserProfile &userA, UserProfile &userB);
@@ -43,7 +41,7 @@ public:
 
     bool getNextCandidate(std::string userId, UserProfile *profile);
 
-    int postDislike(std::string emailA);
+    int postDislike(std::string userId, std::string candidateId);
 
     bool usersMatch(std::string userId, std::string otherUserId) const;
 
