@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "MgConnectionManager.h"
-#include "mongoose.h"
+#include "mongoose-master/mongoose.h"
 #include "../HTTP/HTTPRequest.h"
 #include "MgHTTPClient.h"
 #include "../HandlersHTTP/RequestHandler.h"

@@ -13,8 +13,7 @@ RocksDB::RocksDB(const std::string &dbName) {
 
 void RocksDB::save(const std::string &key, const std::string &value) {
     // TODO : if (db == NULL) return ERROR;
-    rocksdb::Status s;
-    s = db->Put(rocksdb::WriteOptions(), key, value);
+    db->Put(rocksdb::WriteOptions(), key, value);
     //TODO return status y ver qué pasa
 }
 
@@ -46,19 +45,6 @@ std::map<std::string, std::string> RocksDB::listAll() {
     assert(it->status().ok()); // Check for any errors found during the scan
     delete it;
     return std::map<std::string, std::string>();
-}
-
-std::vector<std::string> RocksDB::keys() {
-    rocksdb::Iterator *iter = db->NewIterator(rocksdb::ReadOptions());
-    iter->SeekToFirst();
-    std::vector<std::string> v;
-    while (iter->Valid()) {
-        rocksdb::Slice key = iter->key();
-        std::cout << "key: " << key.ToString();
-        v.push_back(key.ToString());
-        iter->Next();
-    }
-    return v;
 }
 
 std::string RocksDB::getLastKey() {

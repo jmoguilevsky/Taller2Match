@@ -6,7 +6,7 @@
 #define APPSERVER_CONNECTIONTOSHARED_H
 
 #include "../HTTP/HTTPRequest.h"
-#include "mongoose.h"
+#include "mongoose-master/mongoose.h"
 #include "../HTTP/HTTPResponse.h"
 #include "MgConnectionManager.h"
 
@@ -20,7 +20,6 @@ private:
 	MgConnectionManager mgr;
 	HTTPResponse response;
 	bool waiting;
-	std::string url;
 
 	//! Handler para los eventos relacionados con la conexión al Shared MgServer.
 	void handle(mg_connection *c, int ev, void *p);

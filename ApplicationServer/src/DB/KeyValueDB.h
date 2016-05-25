@@ -25,7 +25,6 @@ public:
 
     virtual std::map<std::string, std::string> listAll() = 0;
 
-    virtual std::vector<std::string> keys() = 0;
 };
 
 bool valueExists(KeyValueDB &db, std::string key, std::string value);

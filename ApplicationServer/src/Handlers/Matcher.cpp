@@ -144,10 +144,6 @@ bool Matcher::getNextCandidate(std::string userId, UserProfile *profile) {
     return true;
 }
 
-bool comp(const std::pair<UserProfile, int> &a, const std::pair<UserProfile, int> &b) {
-    return a.second > b.second;
-}
-
 int Matcher::calculateDistance(UserProfile &userA, UserProfile &userB) {
     // Calcula la distancia entre los dos usuarios.
     return 0;

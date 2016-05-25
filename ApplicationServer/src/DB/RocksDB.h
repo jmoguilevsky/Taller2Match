@@ -32,7 +32,6 @@ public:
 
     std::string getLastKey();
 
-    std::vector<std::string> keys();
 };
 
 

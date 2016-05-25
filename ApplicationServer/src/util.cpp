@@ -44,6 +44,3 @@ std::string util::mgStrToString(const struct mg_str &str) {
     return std::string(str.p, str.len);
 }
 
-bool ::util::isNumber(std::string str) {
-    // TODO Devuelve true si es un int válido
-}

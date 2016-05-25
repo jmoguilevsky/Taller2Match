@@ -106,7 +106,7 @@ bool Users::updateProfile(std::string userId, UserProfile newProfile) {
 
 Users::Users(UsersProfiles &users) : userProfiles(users) {
     email_pwd_db = new RocksDB("email_pwd");
-    email_sharedId_db = new RocksDB("email_sharedId");
-    email_appId_db = new RocksDB("email_appId");
+    new RocksDB("email_sharedId");
+    new RocksDB("email_appId");
     appId_email_db = new RocksDB("appId_email");
 }

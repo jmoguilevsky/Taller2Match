@@ -16,7 +16,8 @@ file(GLOB app_src
         "src/Handlers/*.cpp"
         "src/HandlersHTTP/*.cpp"
         "src/HTTP/*.cpp"
-        "src/mongoose-master/*.c*"
+        "src/Mongoose/*"
+        "src/Mongoose/mongoose-master/*"
         )
 
 set(SOURCE_FILES ${app_src} src/UsersProfiles.cpp src/UsersProfiles.h src/Date.cpp src/Date.h)

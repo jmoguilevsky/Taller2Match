@@ -6,7 +6,7 @@
 #define APPSERVER_SHAREDSERVERCONNECTION_H
 
 #include "json/json.h"
-#include "mongoose-master/MgHTTPClient.h"
+#include "Mongoose/MgHTTPClient.h"
 #include "HTTP/HTTPRequest.h"
 #include "HTTP/HTTPResponse.h"
 #include "SharedData.h"

@@ -3,9 +3,8 @@
 //
 
 #include <fstream>
-#include "../mongoose-master/MgHTTPClient.h"
-#include "../mongoose-master/MgServer.h"
-#include "../util.h"
+#include "../Mongoose/MgHTTPClient.h"
+#include "../Mongoose/MgServer.h"
 
 #define CRLF "\r\n"
 #define HTTP_VERSION "HTTP/1.1"

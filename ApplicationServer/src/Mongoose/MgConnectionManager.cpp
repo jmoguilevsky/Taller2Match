@@ -1,5 +1,4 @@
 #include "MgServer.h"
-#include "MgHTTPClient.h"
 
 MgConnectionManager::MgConnectionManager() {
 	mg_mgr_init(&mgr, NULL);

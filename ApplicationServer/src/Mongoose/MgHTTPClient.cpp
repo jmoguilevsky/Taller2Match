@@ -3,7 +3,6 @@
 //
 
 #include "MgHTTPClient.h"
-#include "MgConnectionManager.h"
 #include <iostream>
 #include <fstream>
 
