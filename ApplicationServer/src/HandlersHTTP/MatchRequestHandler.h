@@ -11,13 +11,13 @@
 #include "UsersHTTP.h"
 #include "ChatHTTP.h"
 #include "MatcherHTTP.h"
-
+#include "../UsersProfiles.h"
 //! Request handler para el app server.
 
 class MatchRequestHandler : public RequestHandler {
 
 	std::map<std::string, int> handlers;
-
+	UsersProfiles usersProfiles;
 	Users* users;
 	Chat* chat;
 	Matcher* matches;

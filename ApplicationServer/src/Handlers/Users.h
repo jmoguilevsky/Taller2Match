@@ -21,13 +21,11 @@ class Users {
 
     std::map<std::string, std::string> token_userId_map;
     std::map<std::string, bool> userId_connected_map; // Si está conectado, tiene como valor el token. Si no está conectado, el usuario no está en esta tabla.
-    SharedData &sharedData;
+    UsersProfiles &userProfiles;
     RocksDB* email_pwd_db;
     RocksDB* email_sharedId_db;
     RocksDB* email_appId_db;
     RocksDB* appId_email_db;
-
-    UsersProfiles userProfiles;
 
     void invalidateToken(std::string token);
 
@@ -35,7 +33,7 @@ class Users {
 
 public:
 
-    Users(SharedData &sharedData);
+    Users(UsersProfiles &users);
 
     bool signUp(std::string email, std::string password, UserProfile userProfile);
 

@@ -11,9 +11,9 @@
 MatchRequestHandler::MatchRequestHandler(SharedData &sharedData) {
 
     // Esto podría salir y que se pasen user matches y chat por parámetro.
-
-    users = new Users(sharedData);
-    matches = new Matcher(sharedData);
+    usersProfiles.setShared(sharedData);
+    users = new Users(usersProfiles);
+    matches = new Matcher(usersProfiles);
     chat = new Chat();
 
     // TODOS necesitan Users para saber si el token es válido o no.

@@ -74,9 +74,20 @@ std::vector<UserProfile> Matcher::getMatches(std::string email) {
 UserProfile Matcher::getNextCandidate(std::string userId) {
 
     std::string lastTimeStr;
+    limit_db->listAll();
     limit_db->get(userId, lastTimeStr);
-    tm lastTime = util::stringToDate(lastTimeStr);
+    tm lastTime;
     tm today = util::currentDate();
+    if (lastTimeStr == "") {
+        // Es la primera vez que pide candidatos
+        lastTime = today;
+        lastTime.tm_mday -= 1;
+    }
+    else {
+        lastTime = util::stringToDate(lastTimeStr);
+    }
+
+
     time_t t1 = mktime(&lastTime);
     time_t t2 = mktime(&today);
     if (difftime(t2, t1) > 0) {
@@ -87,32 +98,15 @@ UserProfile Matcher::getNextCandidate(std::string userId) {
         for (int i = 0; i < newCandidates.size(); i++) {
             array.append(newCandidates[i].getJson());
         }
-        candidates_db -> save(userId,array.asString());
+        candidates_db->save(userId, util::JsonToString(array));
     }
-    else {
-        // Si es el mismo día, mando el siguiente candidato, entre los no likeados.
-        std::string candidates;
-        candidates_db -> get (userId, candidates);
-        Json::Value array = util::stringToJson(candidates);
-        UserProfile nextCandidate;
-        nextCandidate.fromJson(util::JsonToString(array[0]));
-        return nextCandidate;
-    }
-
-    std::vector<UserProfile> users;
-    sharedData.getUsersList(&users);
-    // Descartar los usuarios que no están registrados en este app server?
-    int numberOfCandidates = 3;
-    std::vector<UserProfile> returnUsers;
-    for (int i = 0; i < numberOfCandidates; i++) {
-        UserProfile user;
-        do {
-            user = users[rand() % users.size()];
-        }
-        while (user.getEmail() == userId);
-        returnUsers.push_back(user);
-    }
-    return UserProfile();
+    // Si es el mismo día, mando el siguiente candidato, entre los no likeados.
+    std::string candidates;
+    candidates_db->get(userId, candidates);
+    Json::Value array = util::stringToJson(candidates);
+    UserProfile nextCandidate;
+    nextCandidate.fromJson(util::JsonToString(array[0]));
+    return nextCandidate;
 }
 
 bool comp(const std::pair<UserProfile, int> &a, const std::pair<UserProfile, int> &b) {
@@ -148,10 +142,23 @@ std::vector<UserProfile> Matcher::candidatesLeft(std::string userId) {
     return candidatesProfiles;
 }
 
+std::vector<std::pair<std::string, int>> sortDescByValue(std::map<std::string, int> mmap) {
+    std::vector<pair<std::string, int>> pairs;
+    for (auto itr = mmap.begin(); itr != mmap.end(); ++itr)
+        pairs.push_back(*itr);
+    std::sort(pairs.begin(), pairs.end(), [=](std::pair<std::string, int> a, std::pair<std::string, int> b) {
+                  return a.second > b.second;
+              }
+    );
+    return pairs;
+
+};
+
+
 std::vector<UserProfile> Matcher::calculateCandidates(std::string userId) {
 
     std::vector<UserProfile> candidates;
-    sharedData.getUsersList(&candidates);
+    usersProfiles.getUsers(&candidates);
     UserProfile userProfile;
 
     for (std::vector<UserProfile>::iterator it = candidates.begin(); it != candidates.end(); ++it) {
@@ -162,9 +169,15 @@ std::vector<UserProfile> Matcher::calculateCandidates(std::string userId) {
         }
     }
 
+    std::map<std::string, UserProfile> candidatesWithId;
+
+    for (int i = 0; i < candidates.size(); i++) {
+        candidatesWithId[candidates[i].getId()] = candidates[i];
+    }
+
     std::map<std::string, int> scores;
 
-    discardCandidates(userId, candidates);
+    //discardCandidates(userId, candidates);
 
     for (std::vector<UserProfile>::iterator it = candidates.begin(); it != candidates.end(); ++it) {
         UserProfile otherUserProfile = *it;
@@ -174,9 +187,22 @@ std::vector<UserProfile> Matcher::calculateCandidates(std::string userId) {
 
     // TODO ordenarlos por score y devolver DAILY_CANDIDATES
 
+    std::vector<std::pair<std::string, int>> orderedByScore = sortDescByValue(scores);
+
+    // Agarrar los DAILY_LIMIT con más puntaje
+
     std::vector<UserProfile> score;
+    int nCand;
+    if (DAILY_CANDIDATES < candidatesWithId.size())nCand = DAILY_CANDIDATES;
+    else nCand = candidatesWithId.size();
+    for (int i = 0; i < nCand; i++) {
+        std::string userId = orderedByScore[i].first;
+        UserProfile userPr = candidatesWithId[userId];
+        score.push_back(userPr);
+    }
     return score;
 }
+
 
 void Matcher::discardCandidates(std::string userId, std::vector<UserProfile> &candidates) {
     std::vector<UserProfile> finalCandidates;
