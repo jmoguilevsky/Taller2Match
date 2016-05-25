@@ -41,9 +41,7 @@ public:
         limit_db = new RocksDB("limit"); //
     }
 
-    UserProfile getNextCandidate(std::string userId);
-
-    int postLikeLastCandidate(std::string userId);
+    bool getNextCandidate(std::string userId, UserProfile *profile);
 
     int postDislike(std::string emailA);
 
@@ -66,6 +64,8 @@ public:
     std::vector<UserProfile> candidatesLeft(std::string userId);
 
     RocksDB* candidates_db;
+
+    int postLike(string userId, string candidateId);
 };
 
 #endif //APPSERVER_MATCHER_H

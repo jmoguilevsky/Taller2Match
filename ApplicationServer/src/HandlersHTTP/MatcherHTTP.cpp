@@ -41,7 +41,9 @@ HTTPResponse MatcherHTTP::handlePostLikeLastCandidate(HTTPRequest &request) {
     bool validToken;
     validToken = users.getUserId(token, &userId);
     if (!validToken) return HTTP::Unauthorized();
-    matcher.postLikeLastCandidate(userId);
+    Json::Value canId = util::stringToJson(request.getBody());
+    std::string candidateId = canId["id"].asString();
+    matcher.postLike(userId, candidateId);
     return HTTP::OK();
 }
 
@@ -53,7 +55,10 @@ HTTPResponse MatcherHTTP::handleGetCandidate(HTTPRequest &request) {
     if (!validToken) return HTTP::Unauthorized();
 
     // Ahí podría devolver los Json directamente en vez de UserProfile
-    UserProfile candidate = matcher.getNextCandidate(userId);
+    UserProfile candidate;
+    bool ok = matcher.getNextCandidate(userId, &candidate);
+
+    if (!ok) return HTTP::Error("No hay más candidatos por hoy xD!");
 
     // Escribir los perfiles de usuario en un Json grande
 

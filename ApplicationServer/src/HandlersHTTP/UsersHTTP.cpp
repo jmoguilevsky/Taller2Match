@@ -57,7 +57,12 @@ HTTPResponse UsersHTTP::handleSignUp(HTTPRequest request) {
     Json::Value info = util::stringToJson(request.getBody())["info"];
     std::string password = info["password"].asString();
 
+    std::string r = request.getBody();
+
     Json::Value user = util::stringToJson(request.getBody());
+
+    std::string t = util::JsonToString(user);
+    t.c_str();
     UserProfile userProfile;
     userProfile.fromJson(util::JsonToString(user));
 
