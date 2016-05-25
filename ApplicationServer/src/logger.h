@@ -12,7 +12,9 @@
 #include <stdio.h>
 #include <time.h>
 
-class Logger{
+//! Logger para errores, info, warning y debug
+
+class Logger {
 
     int level;
     std::string path;

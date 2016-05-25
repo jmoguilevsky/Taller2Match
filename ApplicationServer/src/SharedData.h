@@ -7,17 +7,21 @@
 
 
 #include "json/json.h"
+#include "UserProfile.h"
 
-//Se puede "simular" la conexión al shared
+//! Se puede "simular" la conexión al shared con una clase que implemente estos métodos.
+
+#include <vector>
+using namespace std;
 
 class SharedData {
 
 public:
-	virtual Json::Value getUsersList() = 0;
+    virtual bool getUsersList(vector<UserProfile>* users) = 0;
 
-	virtual Json::Value getUserProfile(std::string user) = 0;
+    virtual bool getUserProfile(std::string sharedId, UserProfile* userProfile) = 0;
 
-	virtual Json::Value newUser(Json::Value &userProfile) = 0;
+    virtual bool newUser(UserProfile userProfile, std::string* sharedId) = 0;
 };
 
 

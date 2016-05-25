@@ -7,41 +7,55 @@
 
 #include <vector>
 #include <string>
+#include <set>
+#include <unordered_set>
 #include "json/json.h"
+#include "Interest.h"
 
-typedef std::vector<std::string> InterstCategory;
-typedef std::map<std::string, InterstCategory> InterestMap;
+typedef std::set<Interest> InterestList;
 
 //! Representa el perfil de un usuario y métodos para consulta de distintos campos del mismo.
 class UserProfile {
-	std::string name;
-	std::string id;
-	InterestMap interestsMap;
+    std::string name;
+    std::string id;
+    InterestList interestList;
 
 public:
 
-	const InterestMap &getInterests() const;
+    const InterestList &getInterests();
 
-	UserProfile();
-	UserProfile(const UserProfile &user);
+    UserProfile();
+//	UserProfile(const UserProfile &user);
 
-	//! Crea un perfil de usuario a partir de un objeto Json.
-	UserProfile(Json::Value &user);
+    //! Crea un perfil de usuario a partir de un objeto Json.
+    UserProfile(Json::Value &user);
 
-	std::string getName() const;
+    std::string getName() const;
 
-	std::string getId() const;
+    std::string getId() const;
 
-	double getLatitude() const;
+    double getLatitude() const;
 
-	double getLongitude() const;
+    double getLongitude() const;
+
+    std::string getEmail() const;
+
+    Json::Value getJson() const;
+
+    void changeId(std::string userId);
+
+    void fromJson(std::string user);
 
 private:
 
-	double latitude;
-	double longitude;
+    double latitude;
+    double longitude;
 
-	void parseInterests(Json::Value &user);
+    void parseInterests(Json::Value &user);
+
+    std::string email;
+
+    Json::Value user;
 };
 
 

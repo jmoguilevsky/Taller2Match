@@ -14,16 +14,17 @@ file(GLOB app_src
         "src/*.cpp"
         "src/DB/*.cpp"
         "src/Handlers/*.cpp"
+        "src/HandlersHTTP/*.cpp"
         "src/HTTP/*.cpp"
         "src/mongoose-master/*.c*"
         )
 
-set(SOURCE_FILES ${app_src} src/Handlers/Chat.cpp src/Handlers/Chat.h src/Handlers/Notification.cpp src/Handlers/Notification.h)
+set(SOURCE_FILES ${app_src} src/UsersProfiles.cpp src/UsersProfiles.h src/Date.cpp src/Date.h)
 
 add_library(core ${SOURCE_FILES})
 
-add_executable(app main.cpp src/Handlers/MatchHandlerSelector.cpp src/Handlers/MatchHandlerSelector.h)
+add_executable(app main.cpp)
 
 target_link_libraries(app core)
 
-target_link_libraries(app pthread rocksdb snappy z bz2 gtest gtest_main)
+target_link_libraries(app pthread rocksdb snappy z bz2 gtest gtest_main rt)

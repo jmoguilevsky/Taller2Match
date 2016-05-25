@@ -11,20 +11,22 @@
 #include "HTTP/HTTPResponse.h"
 #include "SharedData.h"
 
-//! Una conexión hacia el Shared MgServer
+//! Una conexión hacia el Shared Server
+
 class SharedServerConnection : public SharedData {
 
-	std::string sharedAddress;
+    std::string sharedAddress;
 
 public:
 
-	SharedServerConnection(std::string sharedAddress);
+    SharedServerConnection(std::string sharedAddress);
 
-	Json::Value getUsersList();
+    bool getUsersList(vector<UserProfile>* users);
 
-	Json::Value getUserProfile(std::string user);
+    bool getUserProfile(std::string sharedId, UserProfile* userProfile);
 
-	Json::Value newUser(Json::Value &userProfile);
+    bool newUser(UserProfile userProfile, std::string* sharedId);
+
 
 };
 

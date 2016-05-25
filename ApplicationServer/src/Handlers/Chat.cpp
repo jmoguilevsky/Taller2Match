@@ -4,16 +4,27 @@
 
 #include "Chat.h"
 
-Chat::Chat(HTTPRequest request, ChatDB &chatDB, MatchesDB &matchesDb) : Handler(request), chatDB(chatDB),
-                                                                        matchesDB(matchesDB) {
+std::string buildKey(std::string userId, std::string otherUserId){
+    if (userId < otherUserId) return userId + otherUserId;
+    return otherUserId + userId;
 }
 
-HTTPResponse Chat::handle() {
-	std::string msgStr = request.getBody();
-	Json::Value msg = utils::stringToJson(msgStr);
-	std::string userA = msg["from"].asString();
-	std::string userB = msg["to"].asString();
-	if (matchesDB.userMatch(userA, userB)) {
-		chatDB.save(userA, userB, msgStr);
-	}
+std::string Chat::getHistory(std::string userId, std::string otherUserId) const {
+    std::string chatKey = buildKey(userId,otherUserId);
+    std::string historyStr;
+    chat_db -> get(chatKey,historyStr);
+    return historyStr;
+}
+
+void Chat::sendMessage(std::string userId, std::string otherUserId, std::string content) {
+    std::string chatKey = buildKey(userId,otherUserId);
+    Json::Value msgJson("message");
+    Json::Value msgContent = util::stringToJson(content);
+    msgJson["content"] = msgContent["content"];
+    msgJson["from"] = userId;
+    msgJson["to"] = otherUserId;
+    msgJson["time"] = "now"; // TODO poner la hora de verdad acá!
+    std::string msgString = util::JsonToString(msgJson);
+    std::cout << "msgString: \"\n" << msgString << "\"" << std::endl;
+    append(*chat_db,chatKey,msgString);
 }

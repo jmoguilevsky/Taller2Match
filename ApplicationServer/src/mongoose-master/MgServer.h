@@ -6,17 +6,16 @@
 #include "mongoose.h"
 #include "../HTTP/HTTPRequest.h"
 #include "MgHTTPClient.h"
-#include "../Handlers/Handler.h"
-#include "../Handlers/HandlerSelector.h"
+#include "../HandlersHTTP/RequestHandler.h"
 #include <map>
 #include <vector>
 
-// Mongoose multithreaded server.
+// Mongoose multithreaded server. La conexión se cierran después de enviar la respuesta al cliente.
 
 class MgServer {
 private:
 	MgConnectionManager mongooseConnectionManager;
-    HandlerSelector& handlerSelector;
+	RequestHandler &requestHandler;
     bool isServerUP;
 
 	//! Event handler para las conexiones con los clientes.
@@ -32,7 +31,7 @@ public:
 
 
 	//! Crea el server con un port donde escucha conexiones entrantes, y una URL (URL:port) del Shared MgServer.
-	MgServer(std::string port, HandlerSelector &handlerSelector);
+	MgServer(std::string port, RequestHandler &handlerSelector);
 
 	~MgServer();
 };

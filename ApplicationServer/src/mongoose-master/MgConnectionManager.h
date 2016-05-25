@@ -3,6 +3,8 @@
 
 #include "mongoose.h"
 
+// Un Mongoose Manager
+
 class MgConnectionManager {
 
 public:

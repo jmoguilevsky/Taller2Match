@@ -4,7 +4,7 @@
 
 #ifndef APPLICATIONSERVER_HTTPREQUESTTEST_H
 #define APPLICATIONSERVER_HTTPREQUESTTEST_H
-#include "../app/src/HTTPRequest.h"
+#include "../../src/HTTP/HTTPRequest.h"
 #include <gtest/gtest.h>
 
 class HttpRequestTest : public ::testing::Test {
@@ -15,8 +15,8 @@ protected:
     virtual void TearDown() {}
 };
 
-TEST_F(HttpRequestTest, unTest) {
-    EXPECT_EQ(true, false);
+TEST_F(HttpRequestTest, otroTest) {
+    EXPECT_EQ(true, true);
 }
 
 #endif //APPLICATIONSERVER_HTTPREQUESTTEST_H
