@@ -11,7 +11,7 @@
 
 //! Base de datos {clave, valor}, genérica.
 
-class KeyValueDB {
+class KeyValueDb {
 
 public:
     //! Guarda en la DB el par {key,value}
@@ -27,8 +27,8 @@ public:
 
 };
 
-bool valueExists(KeyValueDB &db, std::string key, std::string value);
+bool valueExists(KeyValueDb &db, std::string key, std::string value);
 
-void append(KeyValueDB &db, std::string key, Json::Value value);
+void append(KeyValueDb &db, std::string key, Json::Value value);
 
 #endif //APPSERVER_NOSQLDATABASE_H

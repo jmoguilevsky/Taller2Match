@@ -19,11 +19,11 @@ class MatcherHTTP {
 
 	Matcher& matcher;
 
-	HTTPResponse handlePostLikeLastCandidate(HTTPRequest &request);
+	HTTPResponse handlePostLike(HTTPRequest &request);
 
 	HTTPResponse handleGetCandidate(HTTPRequest &request);
 
-	HTTPResponse handlePostDislikeLastCandidate(HTTPRequest &request);
+	HTTPResponse handlePostDislike(HTTPRequest &request);
 
 public:
 	MatcherHTTP(Users& users, Matcher& matcher): users(users), matcher(matcher){};

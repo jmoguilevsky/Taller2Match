@@ -11,8 +11,7 @@ std::string buildKey(std::string userId, std::string otherUserId){
 
 std::string Chat::getHistory(std::string userId, std::string otherUserId) const {
     std::string chatKey = buildKey(userId,otherUserId);
-    std::string historyStr;
-    chat_db -> get(chatKey,historyStr);
+    std::string historyStr = chat_db->values_as_string(chatKey);
     return historyStr;
 }
 
@@ -26,5 +25,5 @@ void Chat::sendMessage(std::string userId, std::string otherUserId, std::string 
     msgJson["time"] = "now"; // TODO poner la hora de verdad acá!
     std::string msgString = util::JsonToString(msgJson);
     std::cout << "msgString: \"\n" << msgString << "\"" << std::endl;
-    append(*chat_db,chatKey,msgString);
+//    append(*chat_db,chatKey,msgString);
 }

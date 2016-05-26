@@ -6,21 +6,21 @@
 #define APPLICATIONSERVER_DB_H
 
 #include <rocksdb/db.h>
-#include "KeyValueDB.h"
+#include "KeyValueDb.h"
 
-//! Wrapper para una Base de datos RocksDB.
+//! Wrapper para una Base de datos RocksDb.
 
-class RocksDB : public KeyValueDB {
+class RocksDb : public KeyValueDb {
     rocksdb::DB *db;
 public:
-    //! Abre una base de datos RocksDB con el nombre dbName. Si no existe, la crea.
-    RocksDB(const std::string &dbName);
+    //! Abre una base de datos RocksDb con el nombre dbName. Si no existe, la crea.
+    RocksDb(const std::string &dbName);
 
     //! Guarda en la DB el par {key,value}
     void save(const std::string &key, const std::string &value);
 
     //! Cierra la base de datos.
-    ~RocksDB();
+    ~RocksDb();
 
     //! Devuelve true si key existe como clave en la DB. False si no.
     bool keyExists(std::string key);

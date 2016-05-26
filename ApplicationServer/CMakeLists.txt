@@ -20,7 +20,7 @@ file(GLOB app_src
         "src/Mongoose/mongoose-master/*"
         )
 
-set(SOURCE_FILES ${app_src} src/UsersProfiles.cpp src/UsersProfiles.h src/Date.cpp src/Date.h)
+set(SOURCE_FILES ${app_src} src/UsersProfiles.cpp src/UsersProfiles.h src/Date.cpp src/Date.h src/DB/JsonArrayDb.cpp src/DB/JsonArrayDb.h)
 
 add_library(core ${SOURCE_FILES})
 

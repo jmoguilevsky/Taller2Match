@@ -6,12 +6,13 @@
 #define APPSERVER_CHAT_H
 
 #include <iostream>
-#include "../DB/RocksDB.h"
+#include "../DB/RocksDb.h"
+#include "../DB/JsonArrayDb.h"
 
 //! Handler para las cosas relacionadas con el chat.
 
 class Chat {
-    RocksDB* chat_db;
+    JsonArrayDb *chat_db;
 public:
 
     void sendMessage(std::string userId, std::string otherUserId, std::string content);

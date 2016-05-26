@@ -6,8 +6,8 @@
 #define APPSERVER_LOGIN_H
 
 #include "../SharedData.h"
-#include "../DB/KeyValueDB.h"
-#include "../DB/RocksDB.h"
+#include "../DB/KeyValueDb.h"
+#include "../DB/RocksDb.h"
 #include "../UsersProfiles.h"
 
 //! Handler para la cosas relacionadas con el login, alta y baja de usuarios, etc.
@@ -18,8 +18,8 @@ class Users {
     std::map<std::string, std::string> token_userId_map;
     std::map<std::string, bool> userId_connected_map; // Si está conectado, tiene como valor el token. Si no está conectado, el usuario no está en esta tabla.
     UsersProfiles &userProfiles;
-    RocksDB* email_pwd_db;
-    RocksDB* appId_email_db;
+    RocksDb *email_pwd_db;
+    RocksDb *appId_email_db;
 
     void invalidateToken(std::string token);
 
