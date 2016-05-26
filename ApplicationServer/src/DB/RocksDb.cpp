@@ -4,6 +4,7 @@
 #include <iostream>
 //
 // Created by chris on 13/04/16.
+#include <rocksdb/utilities/transaction.h>
 
 RocksDb::RocksDb(const std::string &dbName) {
     rocksdb::Options options;

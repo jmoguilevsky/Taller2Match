@@ -10,10 +10,9 @@
 #define DAILY_CANDIDATES 10
 
 int Matcher::postLike(std::string userId, std::string candidateId) {
-
     bool ok = candidates_db->has_value(userId, candidateId);
     if (!ok) return 1; //// NO ES UN CANDIDATE -> ERROR
-
+    
     candidates_db->remove_value(userId, candidateId);
 
     likes_db->append_value(userId, candidateId);
