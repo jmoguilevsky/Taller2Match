@@ -27,6 +27,8 @@ public:
 
     bool newUser(UserProfile userProfile, std::string* sharedId);
 
+    bool updateProfile(string basic_string, UserProfile profile);
+
 
 };
 

@@ -5,10 +5,10 @@
 #ifndef APPSERVER_JSONARRAYDB_H
 #define APPSERVER_JSONARRAYDB_H
 
-//! Base de datos {key,Json array}
-
 #include <string>
 #include "RocksDb.h"
+
+//! Base de datos {clave, valor}, donde el valor es un array Json.
 
 class JsonArrayDb {
 
@@ -16,65 +16,23 @@ class JsonArrayDb {
 
 public:
 
-    JsonArrayDb(std::string name) {
-        database = new RocksDb(name);
-    }
+    //! Constructor, recibe el nombre de la base de datos a abrir/crear.
+    JsonArrayDb(std::string name);
 
-    bool has_value(std::string key, std::string value) {
-        std::string arrayString;
-        database->get(key, arrayString);
-        Json::Value arrayJson = util::stringToJson(arrayString);
-        Json::ArrayIndex size = arrayJson.size();
-        for (int i = 0; i < size; i++) {
-            if (arrayJson[i].asString() == value) return true;
-        }
-        return false;
-    }
+    //! True si en el array Json asociado a la clave existe el valor, False si no.
+    bool has_value(std::string key, std::string value);
 
-    void append_value(std::string key, std::string value) {
-        // No verifica si el valor ya está o no
-        std::string arrayString;
-        database->get(key, arrayString);
-        Json::Value newArrayJson = util::stringToJson(arrayString);
-        Json::Value valueJson = value;
-        newArrayJson.append(valueJson);
-        std::string newArrayString = util::JsonToString(newArrayJson);
-        database->save(key, newArrayString);
-    }
+    //! Agrega el valor al array Json asociado a la clave.
+    void append_value(std::string key, std::string value);
 
-    void remove_value(std::string key, std::string value) {
-        // No verifica si el valor ya está o no
-        std::string arrayString;
-        database->get(key, arrayString);
-        Json::Value arrayJson = util::stringToJson(arrayString);
-        Json::Value newArrayJson;
-        Json::ArrayIndex size = arrayJson.size();
-        for (int i = 0; i < size; i++) {
-            if (arrayJson[i].asString() != value) {
-                newArrayJson.append(arrayJson[i]);
-            }
-        }
-        std::string newArrayString = util::JsonToString(newArrayJson);
-        database->save(key, newArrayString);
-    }
+    //! Elimina el valor del array Json asociado a la clave.
+    void remove_value(std::string key, std::string value);
 
-    std::vector<std::string> values(const std::string &key) {
-        std::vector<std::string> vec;
-        std::string arrayString;
-        database->get(key, arrayString);
-        Json::Value arrayJson = util::stringToJson(arrayString);
-        Json::ArrayIndex size = arrayJson.size();
-        for (int i = 0; i < size; i++) {
-            vec.push_back(arrayJson[i].asString());
-        }
-        return vec;
-    }
+    //! Devuelve valores del array Json asociado a la clave.
+    std::vector<std::string> values(const std::string &key);
 
-    std::string values_as_string(const std::string &key) {
-        std::string values;
-        database->get(key, values);
-        return values;
-    }
+    //! Devuelve el array Json asociado a la clave, como un string.
+    std::string values_as_string(const std::string &key);
 };
 
 

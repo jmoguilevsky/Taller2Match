@@ -21,10 +21,6 @@ double UserProfile::getLongitude() const {
     return longitude;
 }
 
-std::string UserProfile::getName() const {
-    return name;
-}
-
 void UserProfile::parseInterests(Json::Value &user) {
     Json::Value userInterests = user["user"]["interests"];
     int interestsSize = userInterests.size();

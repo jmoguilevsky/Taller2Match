@@ -91,7 +91,9 @@ HTTPRequest::HTTPRequest(std::string verb, std::string uri, std::string body) {
 }
 
 
-
-
-
-
+std::vector<std::string> HTTPRequest::getSplitUri() {
+	std::vector<std::string> elems;
+	util::split(uri, '/', elems);
+	elems.erase(elems.begin());
+	return elems;
+}

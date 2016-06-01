@@ -79,3 +79,14 @@ string UsersProfiles::getNextId() {
     n++;
     return std::to_string(n);
 }
+
+bool UsersProfiles::updateProfile(string userId, UserProfile userProfile) {
+    std::string email;
+    userId_email_map->get(userId, email);
+    std::string sharedId;
+    email_sharedId_map->get(email, sharedId);
+    userProfile.changeId(sharedId);
+    bool ok = sharedData->updateProfile(sharedId, userProfile);
+    return ok;
+}
+

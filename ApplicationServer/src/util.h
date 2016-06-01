@@ -22,13 +22,9 @@ namespace util {
 
     std::string mgStrToString(const struct mg_str &str);
 
-    tm currentDate();
-
     Json::Value stringToJson(const std::string &str);
 
     std::string JsonToString(const Json::Value &value);
-
-    void parseAuthorization(const std::string &authHeader, std::string &user, std::string &token);
 
 }
 #endif //MULTITHREADMULTICONNECTION_UTILS_H

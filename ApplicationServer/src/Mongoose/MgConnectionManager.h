@@ -4,7 +4,7 @@
 #include "mongoose-master/mongoose.h"
 
 
-// Un Mongoose Manager
+// Wrapper para un Mongoose Manager.
 
 class MgConnectionManager {
 
@@ -12,6 +12,8 @@ public:
 	MgConnectionManager();
 
 	~MgConnectionManager();
+
+	// Devuelve
 
 	mg_connection *configureListeningConnection(std::string port, void *data, mg_event_handler_t eventHandler);
 

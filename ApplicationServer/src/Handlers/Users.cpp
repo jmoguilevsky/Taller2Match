@@ -100,7 +100,7 @@ bool Users::updatePhoto(std::string userId, Json::Value newPhoto) {
 }
 
 bool Users::updateProfile(std::string userId, UserProfile newProfile) {
-    return false;
+    return userProfiles.updateProfile(userId, newProfile);
 }
 
 

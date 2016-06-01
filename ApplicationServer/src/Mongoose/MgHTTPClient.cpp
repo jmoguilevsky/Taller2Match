@@ -48,3 +48,6 @@ bool MgHTTPClient::connectToUrl(std::string url) {
 	return c != NULL;
 }
 
+MgHTTPClient::MgHTTPClient() {
+	c = NULL;
+}

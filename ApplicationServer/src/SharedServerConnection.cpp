@@ -82,3 +82,28 @@ bool SharedServerConnection::newUser(UserProfile userProfile, std::string* share
 
     return true;
 }
+
+bool SharedServerConnection::updateProfile(string sharedId, UserProfile userProfile) {
+    MgHTTPClient c;
+    bool connectOk = c.connectToUrl(sharedAddress);
+    if (!connectOk) return false;
+    std::map<std::string, std::string> headers;
+    headers["Host"] = "enigmatic-depths-58073.herokuapp.com";
+    headers["Content-Type"] = "application/json";
+    headers["Cache-Control"] = "no-cache";
+    std::string profile = util::JsonToString(userProfile.getJson());
+    std::stringstream s;
+
+    s << profile.size();
+    std::string t;
+    s >> t;
+
+    HTTPRequest request("PUT", "/users/" + sharedId, headers, profile);
+
+    HTTPResponse response = c.sendRequest(request);
+
+    std::cout << "RESPONSE: " << response.getCode() << std::endl;
+
+    return response.getCode() == 201;
+
+}
