@@ -30,6 +30,10 @@ bool Users::login(std::string email, std::string password, std::string* token, U
 
     std::string value;
 
+    std::cout << "EMAIL - PASSWORD" << std::endl;
+
+    email_pwd_db->listAll();
+
     bool exists = email_pwd_db->get(email, value);
 
     if(!exists) return false; // El usuario no está registrado acá
@@ -66,6 +70,8 @@ bool Users::getUserId(std::string token, std::string* userId){
 }
 
 void Users::invalidateToken(std::string token) {
+    std::string userId = token_userId_map[token];
+    userId_connected_map[userId] = false;
     token_userId_map.erase(token);
 }
 
@@ -98,8 +104,7 @@ bool Users::updateProfile(std::string userId, UserProfile newProfile) {
 }
 
 
-Users::Users(SharedData &sharedData) : sharedData(sharedData) {
-    userProfiles.setShared(sharedData);
+Users::Users(UsersProfiles &users) : userProfiles(users) {
     email_pwd_db = new RocksDB("email_pwd");
     email_sharedId_db = new RocksDB("email_sharedId");
     email_appId_db = new RocksDB("email_appId");

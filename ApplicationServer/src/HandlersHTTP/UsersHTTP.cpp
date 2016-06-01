@@ -57,7 +57,12 @@ HTTPResponse UsersHTTP::handleSignUp(HTTPRequest request) {
     Json::Value info = util::stringToJson(request.getBody())["info"];
     std::string password = info["password"].asString();
 
+    std::string r = request.getBody();
+
     Json::Value user = util::stringToJson(request.getBody());
+
+    std::string t = util::JsonToString(user);
+    t.c_str();
     UserProfile userProfile;
     userProfile.fromJson(util::JsonToString(user));
 
@@ -82,7 +87,7 @@ HTTPResponse UsersHTTP::handleLogin(HTTPRequest request) {
     bool login_OK = users.login(email, password, &token, &prof);
 
     if (!login_OK) {
-        return HTTP::Error("User doesn't exist or wrong password");
+        return HTTP::Error("User doesn't exist or wrong password, or user already connected!");
     }
     else {
         std::string tokenJson;

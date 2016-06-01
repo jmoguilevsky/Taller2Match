@@ -8,11 +8,7 @@
 
 UserProfile::UserProfile(Json::Value &user) {
     // Sacarle la password al Json acá
-    this->user = user;
-    id = user["id"].asString();
-    name = user["name"].asString();
-    email = user["email"].asString();
-    parseInterests(user);
+    fromJson(util::JsonToString(user));
 }
 
 UserProfile::UserProfile() { }
@@ -66,6 +62,7 @@ void UserProfile::fromJson(std::string user_str) {
 }
 
 void UserProfile::changeId(std::string userId) {
+    user["user"]["id"] = userId;
     id = userId;
 }
 

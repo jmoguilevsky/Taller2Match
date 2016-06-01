@@ -5,26 +5,55 @@
 #include <algorithm>
 #include <list>
 #include "Matcher.h"
+#include "../Date.h"
 
 #define DAILY_CANDIDATES 10
 
-int Matcher::postLikeLastCandidate(std::string userId) {
+int Matcher::postLike(std::string userId, std::string candidateId) {
     std::string candidates;
     candidates_db -> get (userId, candidates);
-    Json::Value array = util::stringToJson(candidates);
-    Json::Value lastCandidateJson;
-    array.removeIndex(0,&lastCandidateJson);
-    candidates_db -> save(userId, util::JsonToString(array));
-    Json::Value lastCandidateId = lastCandidateJson["user"]["id"];
-    append(*likes_db, userId,lastCandidateId);
-    Json::Value thisUserId = userId;
-    std::string lastId = lastCandidateId.asString();
-    append(*likesReceived_db, lastId, thisUserId);
 
-    if (valueExists(*likes_db,lastId, userId)) {
-        append(*matches_db, userId, lastCandidateId);
-        append(*matches_db, lastId, thisUserId);
+    Json::Value array = util::stringToJson(candidates);
+
+    // ***** Verifico que sea un candidato sugerido ( o que sea el PRIMERO DE LA LISTA?)
+
+    bool ok = false;
+    for (int i = 0; i < array.size(); i++) {
+        if (array[i].asString() == candidateId) ok = true;
     }
+    if (!ok) {
+        return 0;
+        // NO ES UN CANDIDATE -> ERROR
+    }
+
+    // *****
+    // ***** Genero el nuevo listado de candidatos, o sea: saco este candidato de la lista
+    Json::Value newArray;
+    for (int i = 0; i < array.size(); i++) {
+        if (array[i].asString() != candidateId) newArray.append(array[i]);
+    }
+    // *****
+
+    candidates_db->save(userId, util::JsonToString(newArray));
+
+    append(*likes_db, userId, candidateId);
+    std::cout << "LIKES: " << std::endl;
+    likes_db->listAll();
+
+    Json::Value thisUserId = userId;
+    Json::Value lastId = candidateId;
+
+    append(*likesReceived_db, candidateId, thisUserId);
+    std::cout << "LIKES RECEIVED: " << std::endl;
+    likesReceived_db->listAll();
+
+    if (valueExists(*likes_db, candidateId, userId)) {
+        append(*matches_db, userId, lastId);
+        append(*matches_db, candidateId, thisUserId);
+    }
+
+    std::cout << "MATCHESSS: " << std::endl;
+    matches_db->listAll();
 
     return 0;
 }
@@ -71,48 +100,48 @@ std::vector<UserProfile> Matcher::getMatches(std::string email) {
     return s;
 }
 
-UserProfile Matcher::getNextCandidate(std::string userId) {
+bool Matcher::getNextCandidate(std::string userId, UserProfile *profile) {
 
     std::string lastTimeStr;
+
+    //limit_db->listAll();
+
     limit_db->get(userId, lastTimeStr);
-    tm lastTime = util::stringToDate(lastTimeStr);
-    tm today = util::currentDate();
-    time_t t1 = mktime(&lastTime);
-    time_t t2 = mktime(&today);
-    if (difftime(t2, t1) > 0) {
+
+    //candidates_db ->listAll();
+
+    Date lastTime;
+
+    candidates_db->listAll();
+
+    if (lastTimeStr != "") {
+        lastTime = Date(lastTimeStr);
+    }
+    Date today = Date::today();
+
+    if (lastTime < today) {
         // Pasó más de un día desde la última vez que se buscaron los candidatos
         // Busco candidatos otra vez
         std::vector<UserProfile> newCandidates = calculateCandidates(userId);
         Json::Value array;
         for (int i = 0; i < newCandidates.size(); i++) {
-            array.append(newCandidates[i].getJson());
+            Json::Value id = newCandidates[i].getId();
+            array.append(id);
         }
-        candidates_db -> save(userId,array.asString());
+        limit_db->save(userId, today.str());
+        candidates_db->save(userId, util::JsonToString(array));
     }
-    else {
-        // Si es el mismo día, mando el siguiente candidato, entre los no likeados.
-        std::string candidates;
-        candidates_db -> get (userId, candidates);
-        Json::Value array = util::stringToJson(candidates);
-        UserProfile nextCandidate;
-        nextCandidate.fromJson(util::JsonToString(array[0]));
-        return nextCandidate;
-    }
+    // Si es el mismo día, mando el siguiente candidato, entre los no likeados.
+    std::string candidates;
+    candidates_db->get(userId, candidates);
+    Json::Value array = util::stringToJson(candidates);
+    if (array.size() == 0) return false;
+    std::string nextId = array[0].asString();
 
-    std::vector<UserProfile> users;
-    sharedData.getUsersList(&users);
-    // Descartar los usuarios que no están registrados en este app server?
-    int numberOfCandidates = 3;
-    std::vector<UserProfile> returnUsers;
-    for (int i = 0; i < numberOfCandidates; i++) {
-        UserProfile user;
-        do {
-            user = users[rand() % users.size()];
-        }
-        while (user.getEmail() == userId);
-        returnUsers.push_back(user);
-    }
-    return UserProfile();
+
+    std::cout << "ID: " << nextId << std::endl;
+    usersProfiles.getProfile(nextId, profile);
+    return true;
 }
 
 bool comp(const std::pair<UserProfile, int> &a, const std::pair<UserProfile, int> &b) {
@@ -148,11 +177,26 @@ std::vector<UserProfile> Matcher::candidatesLeft(std::string userId) {
     return candidatesProfiles;
 }
 
+std::vector<std::pair<std::string, int>> sortDescByValue(std::map<std::string, int> mmap) {
+    std::vector<std::pair<std::string, int>> pairs;
+    for (auto itr = mmap.begin(); itr != mmap.end(); ++itr)
+        pairs.push_back(*itr);
+    std::sort(pairs.begin(), pairs.end(), [=](std::pair<std::string, int> a, std::pair<std::string, int> b) {
+                  return a.second > b.second;
+              }
+    );
+    return pairs;
+
+};
+
+
 std::vector<UserProfile> Matcher::calculateCandidates(std::string userId) {
 
     std::vector<UserProfile> candidates;
-    sharedData.getUsersList(&candidates);
+    usersProfiles.getUsers(&candidates);
     UserProfile userProfile;
+
+    // ***** Saco el perfil de ESTE usuario de la lista
 
     for (std::vector<UserProfile>::iterator it = candidates.begin(); it != candidates.end(); ++it) {
         if (it->getId() == userId) {
@@ -162,21 +206,75 @@ std::vector<UserProfile> Matcher::calculateCandidates(std::string userId) {
         }
     }
 
+    // *****
+
+    // ***** Cargo el mapa userId -> perfil
+
+    std::map<std::string, UserProfile> candidatesWithId;
+
+    for (int i = 0; i < candidates.size(); i++) {
+        candidatesWithId[candidates[i].getId()] = candidates[i];
+    }
+
+    // *****
+
+    // ***** Descarto los candidatos que ya estan en likes, dislikes, o matches
+
+    std::string likes;
+    likes_db->get(userId, likes);
+    Json::Value arrayLikes = util::stringToJson(likes);
+    for (int i = 0; i < arrayLikes.size(); i++) {
+        if (candidatesWithId.count(arrayLikes[i].asString()) == 1) candidatesWithId.erase(arrayLikes[i].asString());
+    }
+
+
+    std::string dislikes;
+    dislikes_db->get(userId, dislikes);
+    Json::Value arrayDislikes = util::stringToJson(dislikes);
+    for (int i = 0; i < arrayDislikes.size(); i++) {
+        if (candidatesWithId.count(arrayDislikes[i].asString()) == 1)
+            candidatesWithId.erase(arrayDislikes[i].asString());
+    }
+
+
+    std::string matches;
+    matches_db->get(userId, matches);
+    Json::Value arrayMatches = util::stringToJson(matches);
+    for (int i = 0; i < arrayMatches.size(); i++) {
+        if (candidatesWithId.count(arrayMatches[i].asString()) == 1) candidatesWithId.erase(arrayMatches[i].asString());
+    }
+
+    // *****
+
+    // ***** Calculo el "puntaje" para cada usuario
+
     std::map<std::string, int> scores;
 
-    discardCandidates(userId, candidates);
-
-    for (std::vector<UserProfile>::iterator it = candidates.begin(); it != candidates.end(); ++it) {
-        UserProfile otherUserProfile = *it;
+    for (std::map<std::string, UserProfile>::iterator it = candidatesWithId.begin();
+         it != candidatesWithId.end(); ++it) {
+        UserProfile otherUserProfile = it->second;
         std::string otherUserId = otherUserProfile.getId();
         scores[otherUserId] = calculateScore(userProfile, otherUserProfile);
     }
 
     // TODO ordenarlos por score y devolver DAILY_CANDIDATES
 
+    std::vector<std::pair<std::string, int>> orderedByScore = sortDescByValue(scores);
+
+    // Agarrar los DAILY_LIMIT con más puntaje
+
     std::vector<UserProfile> score;
+    int nCand;
+    if (DAILY_CANDIDATES < candidatesWithId.size())nCand = DAILY_CANDIDATES;
+    else nCand = candidatesWithId.size();
+    for (int i = 0; i < nCand; i++) {
+        std::string userId = orderedByScore[i].first;
+        UserProfile userPr = candidatesWithId[userId];
+        score.push_back(userPr);
+    }
     return score;
 }
+
 
 void Matcher::discardCandidates(std::string userId, std::vector<UserProfile> &candidates) {
     std::vector<UserProfile> finalCandidates;

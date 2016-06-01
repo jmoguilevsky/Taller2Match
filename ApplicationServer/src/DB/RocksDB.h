@@ -30,6 +30,8 @@ public:
 
     std::map<std::string, std::string> listAll();
 
+    std::string getLastKey();
+
     std::vector<std::string> keys();
 };
 
