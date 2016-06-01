@@ -54,9 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Fetching user details from sqlite
         HashMap<String, String> user = db.getUserDetails();
-
         // Get user details from the database
-        String name = user.get("name");
         String email = user.get("email");
         // Displaying the user details on the screen
         txtEmail.setText(email);

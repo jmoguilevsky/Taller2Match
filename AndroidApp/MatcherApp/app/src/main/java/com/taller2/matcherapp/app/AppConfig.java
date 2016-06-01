@@ -9,4 +9,7 @@ public class AppConfig {
 
     // Server user register url
     public static String URL_REGISTER = "http://10.0.2.2:7000/users/signup";
+
+    // Server user update profile url
+    public static String URL_UPDATE_PROFILE = "http://10.0.2.2:7000/users/signup";
 }
