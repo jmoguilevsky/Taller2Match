@@ -10,6 +10,7 @@
 #include "HTTP/HTTPRequest.h"
 #include "HTTP/HTTPResponse.h"
 #include "SharedData.h"
+#include "UserProfile.h"
 
 //! Una conexión hacia el Shared Server
 

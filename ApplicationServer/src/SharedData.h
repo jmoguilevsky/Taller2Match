@@ -17,14 +17,13 @@ using namespace std;
 class SharedData {
 
 public:
-    //! Carga el listado de usuarios en el vector.
-    virtual bool getUsersList(vector<UserProfile>* users) = 0;
+   virtual bool getUsersList(vector<UserProfile>* users) = 0;
 
     //! Carga el perfil del usuario con id sharedId.
-    virtual bool getUserProfile(std::string sharedId, UserProfile* userProfile) = 0;
+    virtual bool getUserProfile(string sharedId, UserProfile* userProfile) = 0;
 
     //! Da de alta un nuevo usuario con el perfil, y carga el sharedId con que se creó.
-    virtual bool newUser(UserProfile userProfile, std::string* sharedId) = 0;
+    virtual bool newUser(UserProfile userProfile, string* sharedId) = 0;
 
     //! Actualiza el perfil del usuario con id sharedId.
     virtual bool updateProfile(string sharedId, UserProfile profile) = 0;

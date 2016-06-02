@@ -3,6 +3,7 @@
 #include "src/SharedServerConnection.h"
 #include "unistd.h"
 #include "src/Log/Log.h"
+#include "src/SharedMock/SharedMock.h"
 
 const static std::string SHARED_SERVER = "enigmatic-depths-58073.herokuapp.com:80";
 const static std::string DEFAULT_PORT = "7000";
@@ -96,8 +97,10 @@ int main(int argc, char** argv) {
 
 	Log::init("log.txt", logLevel);
 
-	SharedServerConnection serverConnection(SHARED_SERVER);
-	MatchRequestHandler matchRequestHandler(serverConnection);
+	//SharedServerConnection serverConnection(SHARED_SERVER);
+	//MatchRequestHandler matchRequestHandler(serverConnection);
+	SharedMock sharedMock;
+	MatchRequestHandler matchRequestHandler(sharedMock);
 
 	MgServer server(port, matchRequestHandler);
 	std::cout << "Log level: " << logLevel << std::endl;

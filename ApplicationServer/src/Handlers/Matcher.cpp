@@ -23,6 +23,7 @@ int Matcher::postLike(std::string userId, std::string candidateId) {
         // Hay match
         matches_db->append_value(userId, candidateId);
         matches_db->append_value(candidateId, userId);
+        std::cout << "MATCH BETWEEN USERS " + userId + " AND " + candidateId << std::endl;
     }
 
     return 0;
@@ -82,11 +83,13 @@ bool Matcher::getNextCandidate(std::string userId, UserProfile *profile) {
         // Pasó más de un día desde la última vez que se buscaron los candidatos
         // Busco candidatos otra vez
         std::vector<UserProfile> newCandidates = calculateCandidates(userId);
-        for (int i = 0; i < newCandidates.size(); i++) {
-            std::string id = newCandidates[i].getId();
-            candidates_db->append_value(userId, id);
+        if(newCandidates.size() != 0) {
+            for (int i = 0; i < newCandidates.size(); i++) {
+                std::string id = newCandidates[i].getId();
+                candidates_db->append_value(userId, id);
+            }
+            limit_db->save(userId, today.str());
         }
-        limit_db->save(userId, today.str());
     }
     // Si es el mismo día, mando el siguiente candidato, entre los no likeados.
 
@@ -94,7 +97,7 @@ bool Matcher::getNextCandidate(std::string userId, UserProfile *profile) {
 
     if (candidates.size() == 0) return false;
     std::string nextId = candidates[0];
-    std::cout << "ID: " << nextId << std::endl;
+    //std::cout << "ID: " << nextId << std::endl;
     usersProfiles.getProfile(nextId, profile);
     return true;
 }
