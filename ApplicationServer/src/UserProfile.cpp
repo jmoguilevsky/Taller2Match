@@ -48,7 +48,9 @@ Json::Value UserProfile::getJson() const {
 
 void UserProfile::fromJson(std::string user_str) {
     user = util::stringToJson(user_str);
-    user = user["user"];
+    user.removeMember("info");
+    std::cout << "Usuario;:" << std::endl;
+    std::cout << util::JsonToString(user) << std::endl;
     if(!user["user"].isMember("name")) throw Json::Exception("Missing \"name\" field!");
     if(!user["user"].isMember("alias")) throw Json::Exception("Missing \"alias\" field!");
     if(!user["user"].isMember("email")) throw Json::Exception("Missing \"email\" field!");
@@ -56,6 +58,7 @@ void UserProfile::fromJson(std::string user_str) {
     name = user["user"]["name"].asString();
     email = user["user"]["email"].asString();
     parseInterests(user);
+
 }
 
 void UserProfile::changeId(std::string userId) {
