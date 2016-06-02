@@ -69,7 +69,7 @@ HTTPResponse UsersHTTP::handleSignUp(HTTPRequest request) {
     bool signUp_OK = users.signUp(email, password, userProfile);
 
     if (signUp_OK) {
-        return HTTP::OK();
+        return HTTP::OKJson("{}");
     } else {
         return HTTP::Error();
     }

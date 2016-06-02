@@ -201,39 +201,6 @@ public class ProfileActivity extends AppCompatActivity {
                 // Update the local database
                 db.update_value("photo",imgDecodableString);
 
-                /*// Send the new Picture to the App server:
-                // Tag used to cancel the request
-                String tag_json_req = "req_update_pic";
-                pDialog.setMessage("Uploading new picture...");
-                showDialog();
-                // Post params to be sent to the server: just the picture in base_64 string
-                HashMap<String, String> params = new HashMap<>();
-                params.put("photo_profile", imgDecodableString);
-
-                // Create the request for a JSONObject
-                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                        AppConfig.URL_REGISTER, new JSONObject(params),
-                        new Response.Listener<JSONObject>() {
-
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                Log.d(TAG, response.toString());
-                                pDialog.hide();
-                            }
-                        }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        VolleyLog.d(TAG, "Error: " + error.getMessage());
-                        Log.d(TAG, error.toString());
-                        hideDialog();
-                    }
-
-                });
-
-                // Adding request to request queue
-                AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);*/
-
             } else {
                 Toast.makeText(this, "You haven't picked Image",
                         Toast.LENGTH_LONG).show();
@@ -371,7 +338,7 @@ public class ProfileActivity extends AppCompatActivity {
             // Create a PUT request, send JSONObject.
             // On success expect an empty JSON
             // On failute expect a JSON with an error field
-            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
                     AppConfig.URL_UPDATE_PROFILE, json_user,
                     new Response.Listener<JSONObject>() {
 

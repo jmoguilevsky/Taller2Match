@@ -115,6 +115,8 @@ public class LoginActivity extends AppCompatActivity {
         HashMap<String, String> params = new HashMap<>();
         params.put("email", email);
         params.put("password", password);
+        JSONObject json_params = new JSONObject(params);
+        Log.d("DEBUG",json_params.toString());
 
         // Create login session
         session.setLogin(true);

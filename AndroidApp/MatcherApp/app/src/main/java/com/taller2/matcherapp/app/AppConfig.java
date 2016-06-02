@@ -23,6 +23,6 @@ public class AppConfig {
     public static String URL_FIND_CANDIDATE = "http://10.0.2.2:7000/match/candidate";
 
     //Server like match url
-    public static String URL_LIKE_CANDIDATE = "http://10.0.2.2:7000/match";
+    public static String URL_REACT_CANDIDATE = "http://10.0.2.2:7000/match";
 
 }
