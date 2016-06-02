@@ -177,8 +177,7 @@ public class RegisterActivity extends AppCompatActivity {
             json_user.put("name",name);
             json_user.put("alias",alias);
             json_user.put("email",email);
-            // TODO cambiar nombre de user gender a sex
-            json_user.put("user_gender",user_gender);
+            json_user.put("sex",user_gender);
             // TODO agregar campo edad
             json_user.put("interests",json_array_interests);
             json_user.put("location",location);

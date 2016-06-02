@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +26,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -120,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Create login session
         session.setLogin(true);
-
+/*
         // Add user to database
         String name_stud = "Seba Elizalde";
         String alias_stud = "SE";
@@ -150,7 +148,7 @@ public class LoginActivity extends AppCompatActivity {
         String interests_stud = json_array_interests.toString();
         // Set up photo stud
         Bitmap profile_photo_map = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.blank_profile_picture);
-        String profile_photo_stud = getStringImage(profile_photo_map);
+        String profile_photo_stud = AppController.getInstance().getStringImage(profile_photo_map);
         // Set up location stud
         JSONObject json_location = new JSONObject();
         try {
@@ -167,8 +165,8 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this,
                 MainActivity.class);
         startActivity(intent);
-        finish();
-/*
+        finish();*/
+
         // Create the request for a JSONObject
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 AppConfig.URL_LOGIN, new JSONObject(params),
@@ -188,16 +186,12 @@ public class LoginActivity extends AppCompatActivity {
                             String alias = response.getString("alias");
                             String user_gender = response.getString("user_gender");
                             JSONArray interests = response.getJSONArray("interests");
-                            for (int i=0; i < interests.length(); i++){
-                                JSONObject interest = interests.getJSONObject(i);
-                                String category = interest.getString("category");
-                                String value = interest.getString("value");
-                            }
+                            String user_interests = interests.toString();
                             String profile_photo = response.getString("photo_profile");
                             JSONObject location = response.getJSONObject("location");
-                            String latitude = location.getString("latitude");
-                            String longitude = location.getString("longitude");
+                            String user_location = location.toString();
 
+                            db.addUser(name,alias,user_gender,email,user_interests,profile_photo,user_location,token);
                             hideDialog();
                             Intent intent = new Intent(LoginActivity.this,
                                     MainActivity.class);
@@ -222,7 +216,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
-        hideDialog();*/
     }
 
     private void showDialog() {
@@ -233,12 +226,5 @@ public class LoginActivity extends AppCompatActivity {
     private void hideDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
-    }
-
-    public String getStringImage(Bitmap bmp){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 }

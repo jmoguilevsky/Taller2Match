@@ -1,18 +1,33 @@
 package com.taller2.matcherapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.taller2.matcherapp.app.AppConfig;
+import com.taller2.matcherapp.app.AppController;
 import com.taller2.matcherapp.helper.SQLiteHandler;
 import com.taller2.matcherapp.helper.SessionManager;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -25,9 +40,11 @@ public class MainActivity extends AppCompatActivity {
     private ImageView iconCross;
     private int LIKE_MATCH = 1;
     private int DISLIKE_MATCH = 2;
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private SQLiteHandler db;
     private SessionManager session;
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,24 +155,79 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void findMatch(){
-        imgMatch.setImageResource(R.drawable.sans);
-        imgMatch.setVisibility(View.VISIBLE);
+        //imgMatch.setImageResource(R.drawable.sans);
+        //imgMatch.setVisibility(View.VISIBLE);
+
+        // Progress dialog
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Finding Match...");
+        pDialog.show();
+
+        // Create a POST request, send JSONObject.
+        // On success expect an empty JSON
+        // On failute expect a JSON with an error field
+        String tag_json_req = "req_candidate";
+        JSONObject json_params = new JSONObject();
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                AppConfig.URL_FIND_CANDIDATE, json_params,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+                        try {
+                            String cand_id = response.getString("id");
+                            String cand_name = response.getString("name");
+                            String cand_alias = response.getString("alias");
+                            String cand_email = response.getString("email");
+                            String cand_photo = response.getString("phto_profile");
+                            Bitmap photo_map = AppController.getInstance().getBitmapImage(cand_photo);
+                            imgMatch.setImageBitmap(photo_map);
+                            JSONArray arr_interests = response.getJSONArray("interests");
+                            String cand_interests = arr_interests.toString();
+                            JSONObject cand_location = response.getJSONObject("location");
+                            String cand_latitude = response.getString("latitude");
+                            String cand_longitude = response.getString("longitude");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        pDialog.hide();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, error.toString());
+                pDialog.hide();
+            }
+
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
+
     }
 
     private void acceptMatch(){
-        // TODO
+        react_to_match(LIKE_MATCH);
     }
 
     private void rejectMatch(){
-        // TODO
+        react_to_match(DISLIKE_MATCH);
     }
 
     private void react_to_match(int reaction){
+        String reaction_string;
         if (reaction == LIKE_MATCH){
-
+            reaction_string = "like";
         }
         else if (reaction == DISLIKE_MATCH){
-
+            reaction_string = "diselike";
         }
+
+        // Send PUT request to server
     }
 }

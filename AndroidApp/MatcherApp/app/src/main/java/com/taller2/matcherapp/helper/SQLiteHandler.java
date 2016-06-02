@@ -134,4 +134,14 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         Log.d(TAG, "Deleted all user info from sqlite");
     }
 
+    public void update_value(String column_name, String value){
+        SQLiteDatabase db = this.getWritableDatabase();
+        // New value for column
+        ContentValues values = new ContentValues();
+        values.put(column_name,value);
+        // We update the column for all rows because we only have 1 user (1 row).
+        int count = db.update(TABLE_USER, values, null, null);
+        Log.d(TAG,"Modified " + column_name + " with " + value.substring(0,50) + " for " + count + " users.");
+    }
+
 }

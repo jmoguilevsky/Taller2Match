@@ -17,7 +17,6 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +30,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -44,8 +44,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -79,7 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
         // Populate de profile picture with the image saved as base_64 in the database.
         viewProfilePicture = (ImageView) findViewById(R.id.match_image);
         String profile_photo_str = user.get("photo");
-        Bitmap profile_photo_map = getBitmapImage(profile_photo_str);
+        Bitmap profile_photo_map = AppController.getInstance().getBitmapImage(profile_photo_str);
         viewProfilePicture.setImageBitmap(profile_photo_map);
 
         // Event when the profile picture is clicked: select a new picture from gallery.
@@ -193,11 +193,13 @@ public class ProfileActivity extends AppCompatActivity {
                 viewProfilePicture = (ImageView) findViewById(R.id.match_image);
                 // Set the Image in ImageView after decoding the String
                 Bitmap map = BitmapFactory.decodeFile(imgPath);
-                String imgDecodableString = getStringImage(map);
-                Bitmap picture_map = getBitmapImage(imgDecodableString);
+                String imgDecodableString = AppController.getInstance().getStringImage(map);
+                Bitmap picture_map = AppController.getInstance().getBitmapImage(imgDecodableString);
                 viewProfilePicture.setImageBitmap(picture_map);
                 // The profile was modified
                 isProfileModified = true;
+                // Update the local database
+                db.update_value("photo",imgDecodableString);
 
                 /*// Send the new Picture to the App server:
                 // Tag used to cancel the request
@@ -243,7 +245,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    // Function that adds rows with the format Category /I nterest / Trash can icon to the table.
+    // Function that adds rows with the format Category / Interest / Trash can icon to the table.
     public void add_row_interests_table(String category, String interest){
         // The interests table is populated dynamically, so we get its layout
         TableLayout interests_layout = (TableLayout) findViewById(R.id.interests_table);
@@ -320,27 +322,13 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    public Bitmap getBitmapImage (String image_string){
-        // Function that decodes a base_64 string into a bitmap.
-        byte[] decodedString = Base64.decode(image_string, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-    }
-
-    public String getStringImage(Bitmap bmp){
-        // Function that encodes a bitmap into a base_64 string.
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
-    }
-
     public void update_profile(){
         // Method that commmits to the server the changes in the user profile, if any.
         // If the commit request is successful, the changes are committed locally too.
         // On error, the changes are discarded.
         if (isProfileModified){
             // We create the JSONObject defined in the API (check documentation) to be PUT to the server.
-            HashMap<String, String> user = db.getUserDetails();
+            final HashMap<String, String> user = db.getUserDetails();
 
             JSONObject json_user = new JSONObject();
             try{
@@ -350,7 +338,7 @@ public class ProfileActivity extends AppCompatActivity {
                 // We get the current profile picture
                 Drawable pic = viewProfilePicture.getDrawable();
                 Bitmap bitmap = ((BitmapDrawable)pic).getBitmap();
-                String pic_string = getStringImage(bitmap);
+                String pic_string = AppController.getInstance().getStringImage(bitmap);
                 json_user.put("photo_profile",pic_string);
                 // We read the rows of the interest table and load them to a JSONArray
                 JSONArray json_arr_interest = new JSONArray();
@@ -403,7 +391,14 @@ public class ProfileActivity extends AppCompatActivity {
                     hideDialog();
                 }
 
-            });
+            }){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", user.get("token"));
+                    return params;
+                }
+            };
 
             // Adding request to request queue
             AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
