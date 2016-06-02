@@ -88,11 +88,11 @@ HTTPResponse UsersHTTP::handleLogin(HTTPRequest request) {
         return HTTP::Error("User doesn't exist or wrong password, or user already connected!");
     }
     else {
-        std::string tokenJson;
+        Json::Value profJson = prof.getJson();
+        profJson["token"] = token;
         std::string profileJson = util::JsonToString(prof.getJson());
-        tokenJson = "{\"token\":\""+ token + "\",\n" + profileJson + "}";
         Log::info("New user connected");
-        return HTTP::OKJson(tokenJson);
+        return HTTP::OKJson(profileJson);
     }
 }
 
