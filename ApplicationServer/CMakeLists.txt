@@ -16,6 +16,7 @@ file(GLOB app_src
         "src/Handlers/*.cpp"
         "src/HandlersHTTP/*.cpp"
         "src/HTTP/*.cpp"
+        "src/Log/*.cpp"
         "src/Mongoose/*"
         "src/Mongoose/mongoose-master/*"
         )

@@ -5,6 +5,7 @@
 #include <iostream>
 #include "UsersHTTP.h"
 #include "../HTTP/HTTP.h"
+#include "../Log/Log.h"
 
 #define HTTP_GET "GET"
 #define HTTP_PUT "PUT"
@@ -90,6 +91,7 @@ HTTPResponse UsersHTTP::handleLogin(HTTPRequest request) {
         std::string tokenJson;
         std::string profileJson = util::JsonToString(prof.getJson());
         tokenJson = "{\"token\":\""+ token + "\",\n" + profileJson + "}";
+        Log::info("New user connected");
         return HTTP::OKJson(tokenJson);
     }
 }
@@ -107,6 +109,7 @@ HTTPResponse UsersHTTP::handleUpdateProfile(HTTPRequest request) {
 
     bool ok = users.updateProfile(userId, newProfile);
     if(ok){
+        // TODO Log::info("Login de usuario OK"
         return HTTP::OK();
     } else{
         return HTTP::Error();
@@ -155,6 +158,7 @@ HTTPResponse UsersHTTP::handleLogout(HTTPRequest request) {
     if(!validToken) return HTTP::Unauthorized();
 
     users.logout(token);
+    Log::info("User logged out");
 
     return HTTP::OK();
 }
