@@ -19,6 +19,7 @@ file(GLOB app_src
         "src/Log/*.cpp"
         "src/Mongoose/*"
         "src/Mongoose/mongoose-master/*"
+        "src/SharedMock/*.cpp"
         )
 
 set(SOURCE_FILES ${app_src})

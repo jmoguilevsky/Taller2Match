@@ -40,12 +40,6 @@ bool UsersProfiles::getProfile(string userId, UserProfile *userProfile) {
 bool UsersProfiles::newUser(UserProfile userProfile, string *userId) {
     string email = userProfile.getEmail();
 
-    std::cout << "EMAIL - USERID" << std::endl;
-    email_userId_map->listAll();
-
-    std::cout << "USERID - EMAIL" << std::endl;
-    userId_email_map->listAll();
-
     string sharedId;
     email_sharedId_map->get(email, sharedId);
     if (sharedId != "") return false;
@@ -55,6 +49,15 @@ bool UsersProfiles::newUser(UserProfile userProfile, string *userId) {
     email_sharedId_map->save(email, sharedId); // Registrar sharedId para ese email
     userId_email_map->save(*userId, email); // Registrar email para el userId
     email_userId_map->save(email, *userId);
+
+    std::cout << "EMAIL - USERID" << std::endl;
+    email_userId_map->listAll();
+
+    std::cout << "USERID - EMAIL" << std::endl;
+    userId_email_map->listAll();
+
+    std::cout << "EMAIL - SHARED ID" << std::endl;
+    email_sharedId_map-> listAll();
 
     return true;
 }
