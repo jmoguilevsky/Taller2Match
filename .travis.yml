@@ -1,13 +1,60 @@
 languaje: cpp
 compiler:
 - g++
+cache:
+- ccache
 before_install:
+- sudo apt-get install -y gcc
+- sudo apt-get install -y g++
 - sudo apt-get update
+install: 
+# Instalar c++11
+- sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
+- sudo unlink /usr/bin/g++ && sudo ln -s /usr/bin/g++-5 /usr/bin/g++
+- sudo ln -sf /usr/bin/gcov-4.7 /usr/bin/gcov
 - sudo apt-get install libgtest-dev
-- ls
+# Instalar wget
+- sudo apt-get install -y wget
+# Instalar cmake
+- mkdir cmake-install
+- cd cmake-install
+- sudo wget --no-check-certificate https://cmake.org/files/v3.5/cmake-3.5.1.tar.gz
+- tar xf cmake-3.5.1.tar.gz
+- cd cmake-3.5.1
+- ./configure
+- sudo make
+- sudo make install
+- cd ..
+- cd .. 
+- rm -rf cmake-install
+# Instalar RocksDB
+- mkdir rocksdb-install
+- cd rocksdb-install
+- sudo wget --no-check-certificate https://github.com/facebook/rocksdb/archive/v4.5.1.tar.gz
+- tar xf v4.5.1.tar.gz
+- cd rocksdb-4.5.1
+- make static_lib
+- sudo mv librocksdb.a /lib/x86_64-linux-gnu/librocksdb.a
+- sudo mv include/rocksdb/ /usr/include/rocksdb
+- sudo apt-get install -y apt-utils
+## - sudo apt-get install -y libgflags-dev
+- sudo apt-get install -y libsnappy-dev
+- sudo apt-get install -y zlib1g-dev
+- sudo apt-get install -y libbz2-dev
+- cd ..
+- cd ..
+- rm -rf rocksdb-install
 script:
 - cd ApplicationServer/
 - cmake .
 - make
 - cd test
 - ./unitTests
+- cd ..
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-5
+    - g++-5

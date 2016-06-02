@@ -7,8 +7,11 @@
 
 #include <string>
 #include <map>
+#include <vector>
+#include "../util.h"
 
-//! Un request HTTP.
+//! Request HTTP.
+
 class HTTPRequest {
 
 	std::map<std::string, std::string> headers;
@@ -49,6 +52,9 @@ public:
 
 	//! Devuelve el HTTPRequest completo como un char* de C.
 	const char *toCString();
+
+	//! Divide la uri por los '/' y devuelve las partes separadas en un vector.
+	std::vector<std::string> getSplitUri();
 };
 
 #endif //APPSERVER_HTTPMESSAGE_H

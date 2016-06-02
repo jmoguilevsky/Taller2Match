@@ -1,0 +1,94 @@
+.TH "mg_connection" 3 "Fri May 27 2016" "Match - Application Server" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mg_connection \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBmg_connection\fP * \fBnext\fP"
+.br
+.ti -1c
+.RI "struct \fBmg_connection\fP * \fBprev\fP"
+.br
+.ti -1c
+.RI "struct \fBmg_connection\fP * \fBlistener\fP"
+.br
+.ti -1c
+.RI "struct \fBmg_mgr\fP * \fBmgr\fP"
+.br
+.ti -1c
+.RI "sock_t \fBsock\fP"
+.br
+.ti -1c
+.RI "int \fBerr\fP"
+.br
+.ti -1c
+.RI "union \fBsocket_address\fP \fBsa\fP"
+.br
+.ti -1c
+.RI "size_t \fBrecv_mbuf_limit\fP"
+.br
+.ti -1c
+.RI "struct \fBmbuf\fP \fBrecv_mbuf\fP"
+.br
+.ti -1c
+.RI "struct \fBmbuf\fP \fBsend_mbuf\fP"
+.br
+.ti -1c
+.RI "SSL * \fBssl\fP"
+.br
+.ti -1c
+.RI "SSL_CTX * \fBssl_ctx\fP"
+.br
+.ti -1c
+.RI "time_t \fBlast_io_time\fP"
+.br
+.ti -1c
+.RI "double \fBev_timer_time\fP"
+.br
+.ti -1c
+.RI "mg_event_handler_t \fBproto_handler\fP"
+.br
+.ti -1c
+.RI "void * \fBproto_data\fP"
+.br
+.ti -1c
+.RI "void(* \fBproto_data_destructor\fP )(void *proto_data)"
+.br
+.ti -1c
+.RI "mg_event_handler_t \fBhandler\fP"
+.br
+.ti -1c
+.RI "void * \fBuser_data\fP"
+.br
+.ti -1c
+.RI "union {"
+.br
+.ti -1c
+.RI "   void * \fBv\fP"
+.br
+.ti -1c
+.RI "   mg_event_handler_t \fBf\fP"
+.br
+.ti -1c
+.RI "} \fBpriv_1\fP"
+.br
+.ti -1c
+.RI "void * \fBpriv_2\fP"
+.br
+.ti -1c
+.RI "void * \fBmgr_data\fP"
+.br
+.ti -1c
+.RI "unsigned long \fBflags\fP"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Match - Application Server from the source code\&.

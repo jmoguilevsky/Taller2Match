@@ -1,0 +1,54 @@
+.TH "HTTPResponse" 3 "Fri May 27 2016" "Match - Application Server" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+HTTPResponse \- 
+.PP
+Una respuesta HTTP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <HTTPResponse\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBHTTPResponse\fP (std::string code, std::string phrase, std::map< std::string, std::string > headers, std::string body)"
+.br
+.RI "\fICrea un \fBHTTPResponse\fP a partir de un código, la phrase HTTP (OK, Error, etc\&.), un map de headers (como en el \fBHTTPRequest\fP), y un body\&. \fP"
+.ti -1c
+.RI "\fBHTTPResponse\fP ()"
+.br
+.RI "\fIDevuelve el \fBHTTPResponse\fP completo como un char* de C\&. \fP"
+.ti -1c
+.RI "\fBHTTPResponse\fP (struct http_message *hm)"
+.br
+.ti -1c
+.RI "const char * \fBtoCString\fP ()"
+.br
+.ti -1c
+.RI "std::string \fBtoString\fP ()"
+.br
+.ti -1c
+.RI "std::string \fBgetBody\fP ()"
+.br
+.ti -1c
+.RI "int \fBgetCode\fP ()"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "int \fBcode\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Una respuesta HTTP\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Match - Application Server from the source code\&.

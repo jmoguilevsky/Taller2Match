@@ -6,25 +6,29 @@
 #define APPSERVER_SHAREDSERVERCONNECTION_H
 
 #include "json/json.h"
-#include "mongoose-master/MgHTTPClient.h"
+#include "Mongoose/MgHTTPClient.h"
 #include "HTTP/HTTPRequest.h"
 #include "HTTP/HTTPResponse.h"
 #include "SharedData.h"
 
-//! Una conexión hacia el Shared MgServer
+//! Una conexión hacia el Shared Server
+
 class SharedServerConnection : public SharedData {
 
-	std::string sharedAddress;
+    std::string sharedAddress;
 
 public:
 
-	SharedServerConnection(std::string sharedAddress);
+    SharedServerConnection(std::string sharedAddress);
 
-	Json::Value getUsersList();
+    bool getUsersList(vector<UserProfile>* users);
 
-	Json::Value getUserProfile(std::string user);
+    bool getUserProfile(std::string sharedId, UserProfile* userProfile);
 
-	Json::Value newUser(Json::Value &userProfile);
+    bool newUser(UserProfile userProfile, std::string* sharedId);
+
+    bool updateProfile(string basic_string, UserProfile profile);
+
 
 };
 

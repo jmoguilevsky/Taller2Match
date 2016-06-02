@@ -5,29 +5,25 @@
 #ifndef APPSERVER_CHAT_H
 #define APPSERVER_CHAT_H
 
+#include <iostream>
+#include "../DB/RocksDb.h"
+#include "../DB/JsonArrayDb.h"
 
-#include "Handler.h"
-#include "../DB/LoginDB.h"
-#include "../HTTP/HTTPResponse.h"
-#include "../TokenManager.h"
-#include "../DB/DBManager.h"
-#include "../DB/ChatDB.h"
+//! Handler para las cosas relacionadas con el chat.
 
-//! Handler para los requests relacionados con el login.
-
-class Chat : public Handler {
-
-private:
-
-	MatchesDB &matchesDB;
-	ChatDB &chatDB;
-
+class Chat {
+    JsonArrayDb *chat_db;
 public:
 
-	Chat(HTTPRequest request, ChatDB &chatDB, MatchesDB &matchesDb);
+    //! "Envia" el mensaje enviado por el primer usuario al segundo. Guarda el mensaje en la base de datos.
+    void sendMessage(std::string userId, std::string otherUserId, std::string content);
 
-	HTTPResponse handle();
+    //! Devuelve el historial de conversaciones completo entre los dos usuarios.
+    std::string getHistory(std::string userA, std::string userB) const;
+
 };
+
+
 
 
 #endif //APPSERVER_CHAT_H

@@ -156,6 +156,7 @@ _Uso_
 `lcov --directory <appdir> --zerocounters`  
 `./ejemplo` # Corremos el ejemplo para poder generar el coverage. Esta info es capturada en unos archivos que se pueden ver con `ls`  
 `lcov --directory <appdir> --capture --output-file app.info` # O algun otro nombre en vez de app.info  
+`lcov --remove app.info "/usr/*" --output-file app.info`  # Remover cosas de /usr/ que no nos interesan
 `genhtml app.info`  
 `google-chrome index.html`  
 

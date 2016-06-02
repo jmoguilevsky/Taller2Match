@@ -17,7 +17,7 @@ download_project(PROJ                googletest
 
 add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fprofile-arcs -ftest-coverage")
 
 include_directories(../app)
 

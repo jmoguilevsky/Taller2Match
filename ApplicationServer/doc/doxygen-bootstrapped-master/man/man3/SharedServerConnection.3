@@ -1,0 +1,38 @@
+.TH "SharedServerConnection" 3 "Fri May 27 2016" "Match - Application Server" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+SharedServerConnection \- 
+.PP
+Una conexión hacia el Shared Server\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <SharedServerConnection\&.h>\fP
+.PP
+Inherits \fBSharedData\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSharedServerConnection\fP (std::string sharedAddress)"
+.br
+.ti -1c
+.RI "bool \fBgetUsersList\fP (vector< \fBUserProfile\fP > *users)"
+.br
+.ti -1c
+.RI "bool \fBgetUserProfile\fP (std::string sharedId, \fBUserProfile\fP *userProfile)"
+.br
+.ti -1c
+.RI "bool \fBnewUser\fP (\fBUserProfile\fP userProfile, std::string *sharedId)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Una conexión hacia el Shared Server\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Match - Application Server from the source code\&.

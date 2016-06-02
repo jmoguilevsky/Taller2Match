@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_request_handler.html" title="Request Handler genérico. " alt="" coords="6,5,122,32"/>
+<area shape="rect" id="node2" href="$class_match_request_handler.html" title="Request handler para el app server. " alt="" coords="171,5,323,32"/>
+</map>
