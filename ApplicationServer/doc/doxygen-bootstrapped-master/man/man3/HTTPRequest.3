@@ -1,0 +1,66 @@
+.TH "HTTPRequest" 3 "Fri May 27 2016" "Match - Application Server" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+HTTPRequest \- 
+.PP
+Request HTTP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <HTTPRequest\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBHTTPRequest\fP (std::string verb, std::string uri, std::map< std::string, std::string > headers, std::string body)"
+.br
+.RI "\fICrea el \fBHTTPRequest\fP dado un HTTP verb, una URI, un map con headers del tipo {header,value}, y un body\&. \fP"
+.ti -1c
+.RI "\fBHTTPRequest\fP (std::string verb, std::string uri, std::string body)"
+.br
+.ti -1c
+.RI "\fBHTTPRequest\fP (struct http_message *hm)"
+.br
+.RI "\fICrea un \fBHTTPRequest\fP dado un http_message de Mongoose\&. \fP"
+.ti -1c
+.RI "std::string \fBgetHeader\fP (std::string header)"
+.br
+.RI "\fIDevuelve el valor que tiene el header especificado para este request\&. \fP"
+.ti -1c
+.RI "std::string \fBtoString\fP ()"
+.br
+.RI "\fIDevuelve el \fBHTTPRequest\fP completo como un std::string\&. \fP"
+.ti -1c
+.RI "std::string \fBgetVerb\fP ()"
+.br
+.RI "\fIDevuelve el HTTP verb\&. \fP"
+.ti -1c
+.RI "std::string \fBgetUri\fP ()"
+.br
+.RI "\fIDevuelve la URI HTTP\&. \fP"
+.ti -1c
+.RI "std::string \fBgetBody\fP ()"
+.br
+.RI "\fIDevuelve el body del request HTTP\&. \fP"
+.ti -1c
+.RI "bool \fBisEmpty\fP ()"
+.br
+.RI "\fIDevuelve true si es un request vacío, false si no\&. \fP"
+.ti -1c
+.RI "const char * \fBtoCString\fP ()"
+.br
+.RI "\fIDevuelve el \fBHTTPRequest\fP completo como un char* de C\&. \fP"
+.ti -1c
+.RI "std::vector< std::string > \fBgetSplitUri\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Request HTTP\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Match - Application Server from the source code\&.

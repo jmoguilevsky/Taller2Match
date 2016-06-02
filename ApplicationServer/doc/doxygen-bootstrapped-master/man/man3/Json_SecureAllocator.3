@@ -1,0 +1,84 @@
+.TH "Json::SecureAllocator< T >" 3 "Fri May 27 2016" "Match - Application Server" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Json::SecureAllocator< T > \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBrebind\fP"
+.br
+.in -1c
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBvalue_type\fP = T"
+.br
+.ti -1c
+.RI "using \fBpointer\fP = T *"
+.br
+.ti -1c
+.RI "using \fBconst_pointer\fP = const T *"
+.br
+.ti -1c
+.RI "using \fBreference\fP = T &"
+.br
+.ti -1c
+.RI "using \fBconst_reference\fP = const T &"
+.br
+.ti -1c
+.RI "using \fBsize_type\fP = std::size_t"
+.br
+.ti -1c
+.RI "using \fBdifference_type\fP = std::ptrdiff_t"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "pointer \fBallocate\fP (size_type n)"
+.br
+.ti -1c
+.RI "void \fBdeallocate\fP (volatile pointer p, size_type n)"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> void \fBconstruct\fP (pointer p, Args &&\&.\&.\&.args)"
+.br
+.ti -1c
+.RI "size_type \fBmax_size\fP () const "
+.br
+.ti -1c
+.RI "pointer \fBaddress\fP (reference x) const "
+.br
+.ti -1c
+.RI "const_pointer \fBaddress\fP (const_reference x) const "
+.br
+.ti -1c
+.RI "void \fBdestroy\fP (pointer p)"
+.br
+.ti -1c
+.RI "template<typename U > \fBSecureAllocator\fP (const \fBSecureAllocator\fP< U > &)"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > pointer \fBJson::SecureAllocator\fP< T >::allocate (size_typen)\fC [inline]\fP"
+Allocate memory for N items using the standard allocator\&. 
+.SS "template<typename T > template<typename\&.\&.\&. Args> void \fBJson::SecureAllocator\fP< T >::construct (pointerp, Args &&\&.\&.\&.args)\fC [inline]\fP"
+Construct an item in-place at pointer P\&. 
+.SS "template<typename T > void \fBJson::SecureAllocator\fP< T >::deallocate (volatile pointerp, size_typen)\fC [inline]\fP"
+Release memory which was allocated for N items at pointer P\&.
+.PP
+The memory block is filled with zeroes before being released\&. The pointer argument is tagged as 'volatile' to prevent the compiler optimizing out this critical step\&. 
+.SS "template<typename T > void \fBJson::SecureAllocator\fP< T >::destroy (pointerp)\fC [inline]\fP"
+Destroy an item in-place at pointer P\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Match - Application Server from the source code\&.

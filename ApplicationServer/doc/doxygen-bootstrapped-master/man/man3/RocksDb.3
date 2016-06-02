@@ -1,0 +1,54 @@
+.TH "RocksDb" 3 "Fri May 27 2016" "Match - Application Server" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RocksDb \- 
+.PP
+Wrapper para una Base de datos \fBRocksDb\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <RocksDb\&.h>\fP
+.PP
+Inherits \fBKeyValueDb\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRocksDb\fP (const std::string &dbName)"
+.br
+.RI "\fIAbre una base de datos \fBRocksDb\fP con el nombre dbName\&. Si no existe, la crea\&. \fP"
+.ti -1c
+.RI "void \fBsave\fP (const std::string &key, const std::string &value)"
+.br
+.RI "\fIGuarda en la DB el par {key,value}\&. \fP"
+.ti -1c
+.RI "\fB~RocksDb\fP ()"
+.br
+.RI "\fICierra la base de datos\&. \fP"
+.ti -1c
+.RI "bool \fBkeyExists\fP (std::string key)"
+.br
+.RI "\fIDevuelve true si key existe como clave en la DB\&. False si no\&. \fP"
+.ti -1c
+.RI "bool \fBget\fP (const std::string &key, std::string &value)"
+.br
+.RI "\fISi key existe en la DB, devuelve true y asigna a value el valor asociado\&. Si no existe, devuelve false, y no modifica value\&. \fP"
+.ti -1c
+.RI "std::map< std::string, 
+.br
+std::string > \fBlistAll\fP ()"
+.br
+.ti -1c
+.RI "std::string \fBgetLastKey\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Wrapper para una Base de datos \fBRocksDb\fP\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Match - Application Server from the source code\&.

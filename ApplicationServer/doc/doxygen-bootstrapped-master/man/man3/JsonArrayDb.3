@@ -1,0 +1,42 @@
+.TH "JsonArrayDb" 3 "Fri May 27 2016" "Match - Application Server" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+JsonArrayDb \- 
+.PP
+Base de datos {key,Json array}\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <JsonArrayDb\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBJsonArrayDb\fP (std::string name)"
+.br
+.ti -1c
+.RI "bool \fBhas_value\fP (std::string key, std::string value)"
+.br
+.ti -1c
+.RI "void \fBappend_value\fP (std::string key, std::string value)"
+.br
+.ti -1c
+.RI "void \fBremove_value\fP (std::string key, std::string value)"
+.br
+.ti -1c
+.RI "std::vector< std::string > \fBvalues\fP (const std::string &key)"
+.br
+.ti -1c
+.RI "std::string \fBvalues_as_string\fP (const std::string &key)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base de datos {key,Json array}\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Match - Application Server from the source code\&.

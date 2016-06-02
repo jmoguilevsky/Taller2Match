@@ -1,0 +1,27 @@
+.TH "SharedData" 3 "Fri May 27 2016" "Match - Application Server" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+SharedData \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherited by \fBSharedServerConnection\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual bool \fBgetUsersList\fP (vector< \fBUserProfile\fP > *users)=0"
+.br
+.ti -1c
+.RI "virtual bool \fBgetUserProfile\fP (std::string sharedId, \fBUserProfile\fP *userProfile)=0"
+.br
+.ti -1c
+.RI "virtual bool \fBnewUser\fP (\fBUserProfile\fP userProfile, std::string *sharedId)=0"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Match - Application Server from the source code\&.
