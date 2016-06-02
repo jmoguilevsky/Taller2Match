@@ -15,6 +15,7 @@ private:
     std::string value;
     std::string category;
 public:
+    //! Operador <, para poder ordenar los intereses de alguna forma.
     bool operator<(const Interest &interest) const;
 
     Interest(Json::Value interest);

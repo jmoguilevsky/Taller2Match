@@ -21,9 +21,9 @@ HTTPResponse MatcherHTTP::handle(HTTPRequest request) {
     if (verb == HTTP_GET && uri == FULL_URI_CANDIDATES) {
         return handleGetCandidate(request);
     } else if (verb == HTTP_POST && uri == FULL_URI_LIKES) {
-        return handlePostLikeLastCandidate(request);
+        return handlePostLike(request);
     } else if (verb == HTTP_POST && uri == FULL_URI_DISLIKES) {
-        return handlePostDislikeLastCandidate(request);
+        return handlePostDislike(request);
     } else if (verb == HTTP_GET && uri == FULL_URI_MATCHES) {
         return handleGetMatches(request);
     } else {
@@ -35,7 +35,7 @@ HTTPResponse MatcherHTTP::handleGetMatches(HTTPRequest &request) {
     return HTTP::OK();
 }
 
-HTTPResponse MatcherHTTP::handlePostLikeLastCandidate(HTTPRequest &request) {
+HTTPResponse MatcherHTTP::handlePostLike(HTTPRequest &request) {
     std::string userId;
     std::string token = request.getHeader("Authorization");
     bool validToken;
@@ -43,7 +43,7 @@ HTTPResponse MatcherHTTP::handlePostLikeLastCandidate(HTTPRequest &request) {
     if (!validToken) return HTTP::Unauthorized();
     Json::Value canId = util::stringToJson(request.getBody());
     std::string candidateId = canId["id"].asString();
-    matcher.postLike(userId, candidateId);
+    if (matcher.postLike(userId, candidateId) == 1) return HTTP::Error();
     return HTTP::OK();
 }
 
@@ -69,11 +69,14 @@ HTTPResponse MatcherHTTP::handleGetCandidate(HTTPRequest &request) {
     return HTTP::OK(userList);
 }
 
-HTTPResponse MatcherHTTP::handlePostDislikeLastCandidate(HTTPRequest &request) {
+HTTPResponse MatcherHTTP::handlePostDislike(HTTPRequest &request) {
     std::string userId;
     std::string token = request.getHeader("Authorization");
-    bool validToken = users.getUserId(token, &userId);
+    bool validToken;
+    validToken = users.getUserId(token, &userId);
     if (!validToken) return HTTP::Unauthorized();
-    matcher.postDislike(userId);
+    Json::Value canId = util::stringToJson(request.getBody());
+    std::string candidateId = canId["id"].asString();
+    if (matcher.postDislike(userId, candidateId) == 1) return HTTP::Error();
     return HTTP::OK();
 }

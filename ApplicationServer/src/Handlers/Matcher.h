@@ -7,65 +7,70 @@
 
 #include "../SharedData.h"
 #include "../UserProfile.h"
-#include "../DB/RocksDB.h"
+#include "../DB/JsonArrayDb.h"
 #include "../UsersProfiles.h"
 
 //! Handler para todo lo relacionado con likes, matches, etc.
 
 class Matcher {
-
-    RocksDB* likesReceived_db; // Guarda la cantidad de liks que recibió cada usuario.
-    RocksDB* likes_db; // Guarda todos los usuarios que likeo cada usuario.
-    RocksDB* dislikes_db; // Guarda todos los usuario que este usuario no likeo.
-    RocksDB* matches_db; // Guarda todos los matches de cada usuario.
-    RocksDB* limit_db; // Guarda la cantidad de candidatos entregados hoy, cuántos quedan, y cuándo se reinicia la cuenta.
+    //! Guarda la cantidad de likes que recibió cada usuario.
+    JsonArrayDb *likesReceived_db;
+    //! Guarda todos los usuarios que likeo cada usuario.
+    JsonArrayDb *likes_db;
+    //! Guarda todos los usuario que este usuario no likeo.
+    JsonArrayDb *dislikes_db;
+    //! Guarda todos los matches de cada usuario.
+    JsonArrayDb *matches_db;
+    //! Guarda la cantidad de candidatos entregados hoy, cuántos quedan, y cuándo se reinicia la cuenta.
+    RocksDb *limit_db;
+    //! Guarda los candidatos que fueron calculados para cada usuario.
+    JsonArrayDb *candidates_db;
 
     UsersProfiles &usersProfiles;
 
+    //! Devuelve la cantidad de intereses en común entre los dos perfiles de usuario.
     int getInterestsInCommon(UserProfile &user1, UserProfile &user2);
 
-    void discardCandidates(std::string userId,std::vector<UserProfile> &candidates);
-
+    //! Devuelve el "puntaje" (i.e. "compatibilidad") entre los dos usuarios.
     int calculateScore(UserProfile &userA, UserProfile &userB);
 
+    //! Calcula la distancia entre los dos usuarios.
     int calculateDistance(UserProfile &userA, UserProfile &userB);
 
 public:
-
-    Matcher(UsersProfiles &users) : usersProfiles(users) {
-            candidates_db = new RocksDB("candidates");
-        likesReceived_db = new RocksDB("likesReceived"); // Guarda la cantidad de liks que recibió cada usuario.
-        likes_db = new RocksDB("likes"); // Guarda todos los usuarios que likeo cada usuario.
-        dislikes_db =  new RocksDB("dislikes"); // Guarda todos los usuario que este usuario no likeo.
-        matches_db = new RocksDB("matches"); // Guarda todos los matches de cada usuario.
-        limit_db = new RocksDB("limit"); //
-    }
-
+    //! Recibe un UsersProfiles, que utilizará para obtener la información de los perfiles de los usuarios.
+    Matcher(UsersProfiles &users);
+    //! Carga en _profile_ el perfil del próximo candidato para el usuario con id userId. Devuelve true si no hay problema.Si no hay candidatos o hay un error, devuelve False y no modifica _profile_.
     bool getNextCandidate(std::string userId, UserProfile *profile);
 
-    int postDislike(std::string emailA);
-
+    //! Guarda el candidato en la lista de rechazados del usuario.
+    int postDislike(std::string userId, std::string candidateId);
+    //! Devuelve True si hay un match enntre los usuarios, False si no.
     bool usersMatch(std::string userId, std::string otherUserId) const;
 
-    std::vector<UserProfile> getMatches(std::string email) const;
+    //! Devuelve todos los matches del usuario.
+    std::vector<std::string> getMatches(const std::string &user);
 
-    std::string getMatches(const std::string &user);
+    //! Devuelve todos los likes del usuario.
+    std::vector<std::string> getLikes(const std::string &user);
 
-    std::string getLikes(const std::string &user);
+    //! Devuelve todos los usuarios que le dieron like a este usuario.
+    std::vector<std::string> getLikesReceived(const std::string &user);
 
-    int getLikesReceived(const std::string &user);
-
+    //! Devuelve todos los usuarios que el usuario rechazó.
     std::vector<std::string> getDislikes(const std::string &user);
 
+    //! Devuelve los perfiles de todos los matches del usuario.
     std::vector<UserProfile> getMatches(std::string email);
 
+    //! Calcula una nuevba tanda de candidatos para el usuario.
     std::vector<UserProfile> calculateCandidates(std::string userId);
 
-    std::vector<UserProfile> candidatesLeft(std::string userId);
-
-    RocksDB* candidates_db;
-
+    //! Guarda un like del usuario al candidate.
     int postLike(string userId, string candidateId);
+
+    //! En la lista preliminar de candidatos, descarta los ya han sugeridos previamente.
+    void discardCandidates(string userId, map<string, UserProfile> &candidates);
 };
 
 #endif //APPSERVER_MATCHER_H

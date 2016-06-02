@@ -13,6 +13,7 @@
 class RequestHandler {
 
 public:
+	//! Recibe un request HTTP, y devuelve la respuesta al mismo.
 	virtual HTTPResponse handle(HTTPRequest &request) = 0;
 };
 

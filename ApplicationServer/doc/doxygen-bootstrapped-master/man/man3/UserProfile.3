@@ -1,0 +1,55 @@
+.TH "UserProfile" 3 "Fri May 27 2016" "Match - Application Server" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+UserProfile \- 
+.PP
+Representa el perfil de un usuario y métodos para consulta de distintos campos del mismo\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <UserProfile\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "const InterestList & \fBgetInterests\fP ()"
+.br
+.ti -1c
+.RI "\fBUserProfile\fP (Json::Value &user)"
+.br
+.RI "\fICrea un perfil de usuario a partir de un objeto Json\&. \fP"
+.ti -1c
+.RI "std::string \fBgetName\fP () const "
+.br
+.ti -1c
+.RI "std::string \fBgetId\fP () const "
+.br
+.ti -1c
+.RI "double \fBgetLatitude\fP () const "
+.br
+.ti -1c
+.RI "double \fBgetLongitude\fP () const "
+.br
+.ti -1c
+.RI "std::string \fBgetEmail\fP () const "
+.br
+.ti -1c
+.RI "Json::Value \fBgetJson\fP () const "
+.br
+.ti -1c
+.RI "void \fBchangeId\fP (std::string userId)"
+.br
+.ti -1c
+.RI "void \fBfromJson\fP (std::string user)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Representa el perfil de un usuario y métodos para consulta de distintos campos del mismo\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Match - Application Server from the source code\&.

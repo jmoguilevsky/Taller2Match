@@ -1,0 +1,54 @@
+.TH "Users" 3 "Fri May 27 2016" "Match - Application Server" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Users \- 
+.PP
+Handler para la cosas relacionadas con el login, alta y baja de usuarios, etc\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Users\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBUsers\fP (\fBUsersProfiles\fP &users)"
+.br
+.ti -1c
+.RI "bool \fBsignUp\fP (std::string email, std::string password, \fBUserProfile\fP userProfile)"
+.br
+.ti -1c
+.RI "bool \fBupdateProfile\fP (std::string userId, \fBUserProfile\fP newProfile)"
+.br
+.ti -1c
+.RI "bool \fBupdatePhoto\fP (std::string userId, Json::Value newPhoto)"
+.br
+.ti -1c
+.RI "bool \fBlogin\fP (std::string email, std::string password, std::string *token, \fBUserProfile\fP *profile)"
+.br
+.ti -1c
+.RI "void \fBlogout\fP (std::string token)"
+.br
+.ti -1c
+.RI "bool \fBuserExists\fP (std::string userId)"
+.br
+.ti -1c
+.RI "bool \fBisConnected\fP (std::string email)"
+.br
+.ti -1c
+.RI "bool \fBgetUserProfile\fP (std::string userId, \fBUserProfile\fP *prof)"
+.br
+.ti -1c
+.RI "bool \fBgetUserId\fP (string token, string *userId)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Handler para la cosas relacionadas con el login, alta y baja de usuarios, etc\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Match - Application Server from the source code\&.

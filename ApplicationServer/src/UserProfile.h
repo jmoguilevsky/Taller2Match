@@ -21,29 +21,32 @@ class UserProfile {
     InterestList interestList;
 
 public:
-
+    //! Devuelve un listado de todos los intereses del usuario.
     const InterestList &getInterests();
 
+    //! Crea un perfil de usuario con los datos vacíos.
     UserProfile();
-//	UserProfile(const UserProfile &user);
 
     //! Crea un perfil de usuario a partir de un objeto Json.
     UserProfile(Json::Value &user);
 
-    std::string getName() const;
-
+    //! Devuelve el id del usuario.
     std::string getId() const;
 
     double getLatitude() const;
 
     double getLongitude() const;
 
+    //! Devuelve el email con el que se registró el usuario.
     std::string getEmail() const;
 
+    //! Devuelve el perfil del usuario como un Json::Value.
     Json::Value getJson() const;
 
+    //! Cambia el Id del perfil, esto se usa para pasar entre el Id interno del app server y el id del shared server.
     void changeId(std::string userId);
 
+    //! Carga el perfil con los datos un string que contiene el perfil en formato Json.
     void fromJson(std::string user);
 
 private:

@@ -5,7 +5,7 @@
 
 #include <map>
 #include "HTTPResponse.h"
-#include "../mongoose-master/mongoose.h"
+#include "../Mongoose/mongoose-master/mongoose.h"
 #include "../util.h"
 
 #define CRLF "\r\n"

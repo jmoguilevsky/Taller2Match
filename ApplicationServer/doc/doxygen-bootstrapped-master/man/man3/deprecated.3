@@ -1,0 +1,26 @@
+.TH "deprecated" 3 "Fri May 27 2016" "Match - Application Server" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+deprecated \- Deprecated List 
+
+.IP "\fBClass \fBJson::FastWriter\fP \fP" 1c
+Use StreamWriterBuilder\&.  
+.IP "\fBClass \fBJson::Reader\fP \fP" 1c
+Use CharReader and CharReaderBuilder\&.  
+.IP "\fBMember \fBJson::Reader::getFormatedErrorMessages\fP () const \fP" 1c
+Use getFormattedErrorMessages() instead (typo fix)\&.  
+.IP "\fBClass \fBJson::StyledStreamWriter\fP \fP" 1c
+Use StreamWriterBuilder\&.  
+.IP "\fBClass \fBJson::StyledWriter\fP \fP" 1c
+Use StreamWriterBuilder\&.  
+.IP "\fBMember \fBJson::Value::removeMember\fP (const JSONCPP_STRING &key)\fP" 1c
+.IP "\fBMember \fBJson::Value::removeMember\fP (const char *key)\fP" 1c
+.IP "\fBMember \fBJson::Value::setComment\fP (const char *comment, CommentPlacement placement)\fP" 1c
+Always pass len\&.  
+.IP "\fBMember \fBJson::ValueIteratorBase::memberName\fP () const \fP" 1c
+This cannot be used for UTF-8 strings, since there can be embedded nulls\&.  
+.IP "\fBClass \fBJson::Writer\fP \fP" 1c
+Use StreamWriter\&. (And really, this is an implementation detail\&.) 
+.PP
+

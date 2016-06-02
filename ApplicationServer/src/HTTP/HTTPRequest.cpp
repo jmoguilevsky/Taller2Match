@@ -3,9 +3,8 @@
 //
 
 #include <fstream>
-#include "../mongoose-master/MgHTTPClient.h"
-#include "../mongoose-master/MgServer.h"
-#include "../util.h"
+#include "../Mongoose/MgHTTPClient.h"
+#include "../Mongoose/MgServer.h"
 
 #define CRLF "\r\n"
 #define HTTP_VERSION "HTTP/1.1"
@@ -92,7 +91,9 @@ HTTPRequest::HTTPRequest(std::string verb, std::string uri, std::string body) {
 }
 
 
-
-
-
-
+std::vector<std::string> HTTPRequest::getSplitUri() {
+	std::vector<std::string> elems;
+	util::split(uri, '/', elems);
+	elems.erase(elems.begin());
+	return elems;
+}

@@ -1,0 +1,32 @@
+.TH "MgHTTPClient" 3 "Fri May 27 2016" "Match - Application Server" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MgHTTPClient \- 
+.PP
+Una conexión a un server HTTP, la conexión se cierra inmediatamnte después de obtener la respuesta al request\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <MgHTTPClient\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBconnectToUrl\fP (std::string url)"
+.br
+.RI "\fICrea la conexión al Shared \fBMgServer\fP, recibiendo su URL como parámetro\&. \fP"
+.ti -1c
+.RI "\fBHTTPResponse\fP \fBsendRequest\fP (\fBHTTPRequest\fP request)"
+.br
+.RI "\fIEnvia un request HTTP al Shared \fBMgServer\fP, espera por la respuesta, y la devuelve como \fBHTTPResponse\fP\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Una conexión a un server HTTP, la conexión se cierra inmediatamnte después de obtener la respuesta al request\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Match - Application Server from the source code\&.

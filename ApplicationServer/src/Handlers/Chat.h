@@ -6,16 +6,19 @@
 #define APPSERVER_CHAT_H
 
 #include <iostream>
-#include "../DB/RocksDB.h"
+#include "../DB/RocksDb.h"
+#include "../DB/JsonArrayDb.h"
 
 //! Handler para las cosas relacionadas con el chat.
 
 class Chat {
-    RocksDB* chat_db;
+    JsonArrayDb *chat_db;
 public:
 
+    //! "Envia" el mensaje enviado por el primer usuario al segundo. Guarda el mensaje en la base de datos.
     void sendMessage(std::string userId, std::string otherUserId, std::string content);
 
+    //! Devuelve el historial de conversaciones completo entre los dos usuarios.
     std::string getHistory(std::string userA, std::string userB) const;
 
 };

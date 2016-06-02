@@ -6,9 +6,9 @@
 #include "UsersProfiles.h"
 
 UsersProfiles::UsersProfiles() {
-    userId_email_map = new RocksDB("userId_email");
-    email_userId_map = new RocksDB("email_userId");
-    email_sharedId_map = new RocksDB("email_sharedId");
+    userId_email_map = new RocksDb("userId_email");
+    email_userId_map = new RocksDb("email_userId");
+    email_sharedId_map = new RocksDb("email_sharedId");
     n = 0;
 }
 
@@ -59,7 +59,7 @@ bool UsersProfiles::newUser(UserProfile userProfile, string *userId) {
     return true;
 }
 
-bool UsersProfiles::getUsers(vector<UserProfile> *users) {
+bool UsersProfiles::getUsers(map<string, UserProfile> *users) {
     vector<UserProfile> aux;
     bool usersOk = sharedData->getUsersList(&aux); // Pido todos los usuarios del shared
     if (!usersOk) return false; // Su hubo algún error en el shared -> ERROR
@@ -68,7 +68,7 @@ bool UsersProfiles::getUsers(vector<UserProfile> *users) {
         email_userId_map->get(aux[i].getEmail(), userId);
         if (userId != "") {
             aux[i].changeId(userId); // Cambiar el sharedId por el userId del app server
-            users->push_back(aux[i]); //Agregar a la lista de los usuarios
+            (*users)[userId] = aux[i]; //Agregar a la lista de los usuarios
         }
     }
     return true;
@@ -79,3 +79,14 @@ string UsersProfiles::getNextId() {
     n++;
     return std::to_string(n);
 }
+
+bool UsersProfiles::updateProfile(string userId, UserProfile userProfile) {
+    std::string email;
+    userId_email_map->get(userId, email);
+    std::string sharedId;
+    email_sharedId_map->get(email, sharedId);
+    userProfile.changeId(sharedId);
+    bool ok = sharedData->updateProfile(sharedId, userProfile);
+    return ok;
+}
+

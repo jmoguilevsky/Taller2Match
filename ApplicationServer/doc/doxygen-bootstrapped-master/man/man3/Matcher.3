@@ -1,0 +1,70 @@
+.TH "Matcher" 3 "Fri May 27 2016" "Match - Application Server" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Matcher \- 
+.PP
+Handler para todo lo relacionado con likes, matches, etc\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Matcher\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBMatcher\fP (\fBUsersProfiles\fP &users)"
+.br
+.ti -1c
+.RI "bool \fBgetNextCandidate\fP (std::string userId, \fBUserProfile\fP *profile)"
+.br
+.ti -1c
+.RI "int \fBpostDislike\fP (std::string userId, std::string candidateId)"
+.br
+.ti -1c
+.RI "bool \fBusersMatch\fP (std::string userId, std::string otherUserId) const "
+.br
+.ti -1c
+.RI "std::vector< \fBUserProfile\fP > \fBgetMatches\fP (std::string email) const "
+.br
+.ti -1c
+.RI "std::vector< std::string > \fBgetMatches\fP (const std::string &user)"
+.br
+.ti -1c
+.RI "std::vector< std::string > \fBgetLikes\fP (const std::string &user)"
+.br
+.ti -1c
+.RI "std::vector< std::string > \fBgetLikesReceived\fP (const std::string &user)"
+.br
+.ti -1c
+.RI "std::vector< std::string > \fBgetDislikes\fP (const std::string &user)"
+.br
+.ti -1c
+.RI "std::vector< \fBUserProfile\fP > \fBgetMatches\fP (std::string email)"
+.br
+.ti -1c
+.RI "std::vector< \fBUserProfile\fP > \fBcalculateCandidates\fP (std::string userId)"
+.br
+.ti -1c
+.RI "int \fBpostLike\fP (string userId, string candidateId)"
+.br
+.ti -1c
+.RI "void \fBdiscardCandidates\fP (string userId, map< string, \fBUserProfile\fP > &candidates)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBJsonArrayDb\fP * \fBcandidates_db\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Handler para todo lo relacionado con likes, matches, etc\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Match - Application Server from the source code\&.

@@ -27,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.jar.JarOutputStream;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -117,11 +116,11 @@ public class RegisterActivity extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.btn_male:
                 if (checked)
-                    user_gender = "male";
+                    user_gender = "Male";
                 break;
             case R.id.btn_female:
                 if (checked)
-                    user_gender = "female";
+                    user_gender = "Female";
                 break;
         }
     }
@@ -134,13 +133,11 @@ public class RegisterActivity extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.btn_men:
                 if (checked)
-                    // User wants to meet men
-                    sex_interest = "male";
+                    sex_interest = "Male";
                 break;
             case R.id.btn_women:
                 if (checked)
-                    // User wants to
-                    sex_interest = "female";
+                    sex_interest = "Female";
                 break;
         }
     }
@@ -190,9 +187,7 @@ public class RegisterActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        // Create a POST request, send JSONObject.
-        // On success expect an empty JSON
-        // On failute expect a JSON with an error field
+        // Create the request for a JSONObject
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 AppConfig.URL_REGISTER, json_params,
                 new Response.Listener<JSONObject>() {

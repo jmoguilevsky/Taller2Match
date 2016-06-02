@@ -5,6 +5,7 @@
 #include <iostream>
 #include "UsersHTTP.h"
 #include "../HTTP/HTTP.h"
+#include "../Log/Log.h"
 
 #define HTTP_GET "GET"
 #define HTTP_PUT "PUT"
@@ -13,14 +14,15 @@
 #define FULL_URI_SIGNUP "/users/signup"
 #define FULL_URI_LOGIN "/users/login"
 #define FULL_URI_LOGOUT "/users/logout"
-#define FULL_URI_ME "/users/me"
-#define FULL_URI_PHOTO "/users/me/photo"
+#define FULL_URI_PROFILE "/users/update"
+#define FULL_URI_PHOTO "/users/update/photo"
 
 HTTPResponse UsersHTTP::handle(HTTPRequest request) {
 
     std::string verb = request.getVerb();
     std::string uri = request.getUri();
-
+    std::cout << "verb:" << "\"" + verb + "\"" << std::endl;
+    std::cout << "uri:" << "\"" + uri + "\"" << std::endl;
     if (verb == HTTP_POST && uri == FULL_URI_SIGNUP) {
         std::cout << " >>> SIGNUP <<< " << std::endl;
         return handleSignUp(request);
@@ -30,10 +32,10 @@ HTTPResponse UsersHTTP::handle(HTTPRequest request) {
     } else if (verb == HTTP_POST && uri == FULL_URI_LOGOUT) {
         std::cout << " >>> LOGOUT <<< " << std::endl;
         return handleLogout(request);
-    } else if (verb == HTTP_DELETE && uri == FULL_URI_ME) {
+    } else if (verb == HTTP_DELETE && uri == FULL_URI_PROFILE) {
         std::cout << " >>> DELETE <<< " << std::endl;
         return handleSignUp(request);
-    } else if (verb == HTTP_PUT && uri == FULL_URI_ME) {
+    } else if (verb == HTTP_PUT && uri == FULL_URI_PROFILE) {
         std::cout << " >>> UPDATE PROFILE <<< " << std::endl;
         return handleUpdateProfile(request);
     } else if (verb == HTTP_PUT && uri == FULL_URI_PHOTO) {
@@ -57,12 +59,8 @@ HTTPResponse UsersHTTP::handleSignUp(HTTPRequest request) {
     Json::Value info = util::stringToJson(request.getBody())["info"];
     std::string password = info["password"].asString();
 
-    std::string r = request.getBody();
-
     Json::Value user = util::stringToJson(request.getBody());
 
-    std::string t = util::JsonToString(user);
-    t.c_str();
     UserProfile userProfile;
     userProfile.fromJson(util::JsonToString(user));
 
@@ -93,6 +91,7 @@ HTTPResponse UsersHTTP::handleLogin(HTTPRequest request) {
         std::string tokenJson;
         std::string profileJson = util::JsonToString(prof.getJson());
         tokenJson = "{\"token\":\""+ token + "\",\n" + profileJson + "}";
+        Log::info("New user connected");
         return HTTP::OKJson(tokenJson);
     }
 }
@@ -106,8 +105,11 @@ HTTPResponse UsersHTTP::handleUpdateProfile(HTTPRequest request) {
     Json::Value profileJson = util::stringToJson(request.getBody());
     UserProfile newProfile (profileJson);
 
+    std::cout << "NUEVO PERFIL: " << util::JsonToString(newProfile.getJson()) << std::endl;
+
     bool ok = users.updateProfile(userId, newProfile);
     if(ok){
+        // TODO Log::info("Login de usuario OK"
         return HTTP::OK();
     } else{
         return HTTP::Error();
@@ -156,6 +158,7 @@ HTTPResponse UsersHTTP::handleLogout(HTTPRequest request) {
     if(!validToken) return HTTP::Unauthorized();
 
     users.logout(token);
+    Log::info("User logged out");
 
     return HTTP::OK();
 }

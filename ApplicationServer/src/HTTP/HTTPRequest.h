@@ -53,12 +53,8 @@ public:
 	//! Devuelve el HTTPRequest completo como un char* de C.
 	const char *toCString();
 
-	std::vector<std::string> getSplitUri(){
-		std::vector<std::string> elems;
-		util::split(uri, '/',elems);
-		elems.erase(elems.begin());
-		return elems;
-	}
+	//! Divide la uri por los '/' y devuelve las partes separadas en un vector.
+	std::vector<std::string> getSplitUri();
 };
 
 #endif //APPSERVER_HTTPMESSAGE_H

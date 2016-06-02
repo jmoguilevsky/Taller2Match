@@ -28,12 +28,6 @@ Json::Value util::stringToJson(const std::string &str) {
     return value;
 }
 
-void util::parseAuthorization(const std::string &authHeader, std::string &user, std::string &token) {
-    Json::Value auth = stringToJson(authHeader);
-    user = auth["email"].asString();
-    token = auth["token"].asString();
-}
-
 std::string util::JsonToString(const Json::Value &value) {
     Json::FastWriter writer;
     writer.omitEndingLineFeed();
@@ -44,6 +38,3 @@ std::string util::mgStrToString(const struct mg_str &str) {
     return std::string(str.p, str.len);
 }
 
-bool ::util::isNumber(std::string str) {
-    // TODO Devuelve true si es un int válido
-}

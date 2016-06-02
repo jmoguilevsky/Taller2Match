@@ -100,13 +100,13 @@ bool Users::updatePhoto(std::string userId, Json::Value newPhoto) {
 }
 
 bool Users::updateProfile(std::string userId, UserProfile newProfile) {
-    return false;
+    return userProfiles.updateProfile(userId, newProfile);
 }
 
 
 Users::Users(UsersProfiles &users) : userProfiles(users) {
-    email_pwd_db = new RocksDB("email_pwd");
-    email_sharedId_db = new RocksDB("email_sharedId");
-    email_appId_db = new RocksDB("email_appId");
-    appId_email_db = new RocksDB("appId_email");
+    email_pwd_db = new RocksDb("email_pwd");
+    new RocksDb("email_sharedId");
+    new RocksDb("email_appId");
+    appId_email_db = new RocksDb("appId_email");
 }

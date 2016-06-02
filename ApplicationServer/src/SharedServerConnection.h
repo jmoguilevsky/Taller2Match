@@ -6,7 +6,7 @@
 #define APPSERVER_SHAREDSERVERCONNECTION_H
 
 #include "json/json.h"
-#include "mongoose-master/MgHTTPClient.h"
+#include "Mongoose/MgHTTPClient.h"
 #include "HTTP/HTTPRequest.h"
 #include "HTTP/HTTPResponse.h"
 #include "SharedData.h"
@@ -26,6 +26,8 @@ public:
     bool getUserProfile(std::string sharedId, UserProfile* userProfile);
 
     bool newUser(UserProfile userProfile, std::string* sharedId);
+
+    bool updateProfile(string basic_string, UserProfile profile);
 
 
 };
