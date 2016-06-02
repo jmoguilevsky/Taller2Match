@@ -14,7 +14,6 @@
 
     <ImageView android:id="@+id/match_image"
         android:contentDescription="@string/match_image_desc"
-        android:src="@drawable/blank_profile_picture"
         android:layout_height="300dp"
         android:layout_width="300dp"
         android:paddingTop="10dp"

@@ -21,7 +21,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "android_api";
+    private static final String DATABASE_NAME = "matcher";
 
     // Login table name
     private static final String TABLE_USER = "user";
@@ -29,9 +29,13 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     // Login Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
+    private static final String KEY_ALIAS = "alias";
+    private static final String KEY_GENDER = "gender";
     private static final String KEY_EMAIL = "email";
+    private static final String KEY_INTERESTS = "interests";
+    private static final String KEY_PHOTO = "photo";
+    private static final String KEY_LOCATION = "location";
     private static final String KEY_TOKEN = "token";
-    private static final String KEY_CREATED_AT = "created_at";
 
     public SQLiteHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,10 +44,16 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_EMAIL + " TEXT UNIQUE," + KEY_TOKEN + " TEXT,"
-                + KEY_CREATED_AT + " TEXT" + ")";
+        String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "(" +
+                KEY_ID + " INTEGER PRIMARY KEY," +
+                KEY_NAME + " TEXT," +
+                KEY_ALIAS + " TEXT," +
+                KEY_GENDER + " TEXT," +
+                KEY_EMAIL + " TEXT UNIQUE," +
+                KEY_INTERESTS + " TEXT," +
+                KEY_PHOTO + " TEXT," +
+                KEY_LOCATION + " TEXT," +
+                KEY_TOKEN + " TEXT" + ")";
         db.execSQL(CREATE_LOGIN_TABLE);
 
         Log.d(TAG, "Database tables created");
@@ -52,9 +62,11 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // This database is only a cache for online data, so its upgrade policy is
+        // to simply to discard the data and start over
+
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
-
         // Create tables again
         onCreate(db);
     }
@@ -62,20 +74,25 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     /**
      * Storing user details in database
      * */
-    public void addUser(String name, String email, String token, String created_at) {
+    public void addUser(String name, String alias, String gender, String email, String interests,
+                        String profile_photo, String location, String token) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, name); // Name
+        values.put(KEY_ALIAS, alias); // Alias
+        values.put(KEY_GENDER, gender); // User gender
         values.put(KEY_EMAIL, email); // Email
-        values.put(KEY_TOKEN, token); // token
-        values.put(KEY_CREATED_AT, created_at); // Created At
+        values.put(KEY_INTERESTS, interests); // Interests
+        values.put(KEY_PHOTO, profile_photo); // Profile picture
+        values.put(KEY_LOCATION, location); // Location: lat and long
+        values.put(KEY_TOKEN, token); // Token
 
         // Inserting Row
         long id = db.insert(TABLE_USER, null, values);
         db.close(); // Closing database connection
 
-        Log.d(TAG, "New user inserted into sqlite: " + id);
+        Log.d(TAG, "New user inserted into sqlite: ");
     }
 
     /**
@@ -91,14 +108,18 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {
             user.put("name", cursor.getString(1));
-            user.put("email", cursor.getString(2));
-            user.put("token", cursor.getString(3));
-            user.put("created_at", cursor.getString(4));
+            user.put("alias",cursor.getString(2));
+            user.put("gender", cursor.getString(3));
+            user.put("email", cursor.getString(4));
+            user.put("interests", cursor.getString(5));
+            user.put("photo", cursor.getString(6));
+            user.put("location", cursor.getString(7));
+            user.put("token",cursor.getString(8));
         }
         cursor.close();
         db.close();
         // return user
-        Log.d(TAG, "Fetching user from Sqlite: " + user.toString());
+        Log.d(TAG, "Fetching user from Sqlite: ");
 
         return user;
     }
@@ -111,6 +132,16 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         db.close();
 
         Log.d(TAG, "Deleted all user info from sqlite");
+    }
+
+    public void update_value(String column_name, String value){
+        SQLiteDatabase db = this.getWritableDatabase();
+        // New value for column
+        ContentValues values = new ContentValues();
+        values.put(column_name,value);
+        // We update the column for all rows because we only have 1 user (1 row).
+        int count = db.update(TABLE_USER, values, null, null);
+        Log.d(TAG,"Modified " + column_name + " with " + value.substring(0,50) + " for " + count + " users.");
     }
 
 }

@@ -1,11 +1,16 @@
 package com.taller2.matcherapp.app;
 
 import android.app.Application;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
+import android.util.Base64;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Created by seba on 24/04/16.
@@ -51,7 +56,17 @@ public class AppController extends Application {
         }
     }
 
-    public void update_info (){
+    public Bitmap getBitmapImage (String image_string){
+        // Function that decodes a base_64 string into a bitmap.
+        byte[] decodedString = Base64.decode(image_string, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
 
+    public String getStringImage(Bitmap bmp){
+        // Function that encodes a bitmap into a base_64 string.
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 }

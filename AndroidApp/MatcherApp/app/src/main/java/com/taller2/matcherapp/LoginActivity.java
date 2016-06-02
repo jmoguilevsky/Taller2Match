@@ -2,6 +2,8 @@ package com.taller2.matcherapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,10 +27,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = RegisterActivity.class.getSimpleName();
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private Button btnLogin;
     private Button btnLinkToRegister;
     private EditText inputEmail;
@@ -109,9 +112,60 @@ public class LoginActivity extends AppCompatActivity {
         showDialog();
 
         // Post params to be sent to the server
-        HashMap<String, String> params = new HashMap<String, String>();
+        HashMap<String, String> params = new HashMap<>();
         params.put("email", email);
         params.put("password", password);
+
+        // Create login session
+        session.setLogin(true);
+/*
+        // Add user to database
+        String name_stud = "Seba Elizalde";
+        String alias_stud = "SE";
+        String gender_stud = "male";
+        String email_stud = "seba@gmail.com";
+        // Set up interests stud
+        JSONObject json_sex_interest = new JSONObject();
+        JSONObject json_band_interest = new JSONObject();
+        JSONObject json_led_interest = new JSONObject();
+        JSONArray json_array_interests = new JSONArray();
+        try {
+            json_sex_interest.put("category","sex");
+            json_sex_interest.put("value","female");
+
+            json_band_interest.put("category","music/band");
+            json_band_interest.put("value","Deep Purple");
+
+            json_led_interest.put("category","music/band");
+            json_led_interest.put("value","Led Zeppelin");
+
+            json_array_interests.put(json_sex_interest);
+            json_array_interests.put(json_band_interest);
+            json_array_interests.put(json_led_interest);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String interests_stud = json_array_interests.toString();
+        // Set up photo stud
+        Bitmap profile_photo_map = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.blank_profile_picture);
+        String profile_photo_stud = AppController.getInstance().getStringImage(profile_photo_map);
+        // Set up location stud
+        JSONObject json_location = new JSONObject();
+        try {
+            json_location.put("latitude",-121.34343);
+            json_location.put("longitude",45.51119);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String location_stud = json_location.toString();
+        String token_stud = "123token123";
+        db.addUser(name_stud, alias_stud, gender_stud, email_stud, interests_stud,
+                profile_photo_stud, location_stud, token_stud);
+        hideDialog();
+        Intent intent = new Intent(LoginActivity.this,
+                MainActivity.class);
+        startActivity(intent);
+        finish();*/
 
         // Create the request for a JSONObject
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
@@ -132,21 +186,12 @@ public class LoginActivity extends AppCompatActivity {
                             String alias = response.getString("alias");
                             String user_gender = response.getString("user_gender");
                             JSONArray interests = response.getJSONArray("interests");
-                            for (int i=0; i < interests.length(); i++){
-                                JSONObject interest = interests.getJSONObject(i);
-                                String category = interest.getString("category");
-                                String value = interest.getString("value");
-                            }
-                            String profile_photo = response.getString("profile_photo");
+                            String user_interests = interests.toString();
+                            String profile_photo = response.getString("photo_profile");
                             JSONObject location = response.getJSONObject("location");
-                            String latitude = location.getString("latitude");
-                            String longitude = location.getString("longitude");
+                            String user_location = location.toString();
 
-                            String name_stud = "usuario";
-                            String token_stud = "000";
-                            String email_stud = "seba@gmail.com";
-                            String fecha = "ahora";
-                            db.addUser(name_stud, email_stud,token_stud,fecha);
+                            db.addUser(name,alias,user_gender,email,user_interests,profile_photo,user_location,token);
                             hideDialog();
                             Intent intent = new Intent(LoginActivity.this,
                                     MainActivity.class);
@@ -171,7 +216,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
-        hideDialog();
     }
 
     private void showDialog() {
