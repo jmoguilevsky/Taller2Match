@@ -3,10 +3,11 @@
 //
 
 #include "Chat.h"
+#include "../HandlersHTTP/Notifier.h"
 
 std::string buildKey(std::string userId, std::string otherUserId){
-    if (userId < otherUserId) return userId + otherUserId;
-    return otherUserId + userId;
+    if (userId < otherUserId) return userId + ":" + otherUserId;
+    return otherUserId + ":" + userId;
 }
 
 std::string Chat::getHistory(std::string userId, std::string otherUserId) const {
@@ -15,15 +16,16 @@ std::string Chat::getHistory(std::string userId, std::string otherUserId) const 
     return historyStr;
 }
 
-void Chat::sendMessage(std::string userId, std::string otherUserId, std::string content) {
+std::string Chat::sendMessage(std::string userId, std::string otherUserId, std::string content) {
     std::string chatKey = buildKey(userId,otherUserId);
-    Json::Value msgJson("message");
-    Json::Value msgContent = util::stringToJson(content);
-    msgJson["content"] = msgContent["content"];
+    Json::Value msgJson;
+    Json::Value main;
+    msgJson["content"] = content;
     msgJson["from"] = userId;
     msgJson["to"] = otherUserId;
     msgJson["time"] = "now"; // TODO poner la hora de verdad acá!
-    std::string msgString = util::JsonToString(msgJson);
-    std::cout << "msgString: \"\n" << msgString << "\"" << std::endl;
-//    append(*chat_db,chatKey,msgString);
+    main["message"] = msgJson;
+    std::string msgString = util::JsonToString(main);
+    chat_db->append_value(chatKey, msgString);
+    return msgString;
 }

@@ -26,7 +26,7 @@ bool Users::signUp(std::string email, std::string password, UserProfile userProf
     return true;
 }
 
-bool Users::login(std::string email, std::string password, std::string* token, UserProfile* profile) {
+bool Users::login(std::string email, std::string password, std::string *token, UserProfile *profile, std::string url) {
 
     std::string value;
 
@@ -56,11 +56,17 @@ bool Users::login(std::string email, std::string password, std::string* token, U
 
     *profile = auxProfile;
 
+    userId_url[userId] = url;
+
     return true;
 }
 
 bool Users::isConnected(std::string userId) {
     return userId_connected_map[userId];
+}
+
+std::string Users::getUserURL(std::string userId) {
+    return userId_url[userId];
 }
 
 bool Users::getUserId(std::string token, std::string* userId){
@@ -106,7 +112,4 @@ bool Users::updateProfile(std::string userId, UserProfile newProfile) {
 
 Users::Users(UsersProfiles &users) : userProfiles(users) {
     email_pwd_db = new RocksDb("email_pwd");
-    new RocksDb("email_sharedId");
-    new RocksDb("email_appId");
-    appId_email_db = new RocksDb("appId_email");
 }

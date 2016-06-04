@@ -3,70 +3,68 @@
 //
 
 #include "ChatHTTP.h"
+#include "../Mongoose/MgHTTPClient.h"
 
 #define HTTP_GET "GET"
 #define HTTP_POST "POST"
 
 HTTPResponse ChatHTTP::handle(HTTPRequest request) {
 	std::string verb = request.getVerb();
-	std::string uri = request.getUri();
 
-	std::vector<std::string> uriSplit;
-	uriSplit = request.getSplitUri();
-
-	if (verb == HTTP_POST && uriSplit.size() == 3 &&  uriSplit[1] == "me") {
+	if (verb == HTTP_POST) {
 		return handleSendChat(request);
-	} else if (verb == HTTP_GET && uriSplit.size() == 3 &&  uriSplit[1] == "me") {
+	} else if (verb == HTTP_GET) {
 		return handleGetHistory(request);
 	} else {
 		return HTTP::NotFound();
 	}
 }
 
-HTTPResponse ChatHTTP::handleSendChat(HTTPRequest request) {
-	std::vector<std::string> uriSplit;
-	uriSplit = request.getSplitUri();
+void *notifyChat(void *msg) {
+	Json::Value msgJson = *(Json::Value *) (msg);
+	MgHTTPClient client;
+	client.connectToUrl(msgJson["url"].asString());
+	msgJson.removeMember("url");
+	HTTPRequest request("POST", "/chat", util::JsonToString(msgJson));
+	HTTPResponse resp = client.sendRequest(request);
+	delete ((Json::Value *) msg);
+}
 
+HTTPResponse ChatHTTP::handleSendChat(HTTPRequest request) {
 	std::string userId;
 	std::string token = request.getHeader("Authorization");
 	bool validToken = users.getUserId(token, &userId);
 	if (!validToken) return HTTP::Unauthorized();
 
+	Json::Value msg = util::stringToJson(request.getBody());
+	std::string otherUserId = msg["id"].asString();
 
-	std::string otherUserId = uriSplit[2];
-	if (!users.userExists(otherUserId)) {
-		return HTTP::Error("User doesn't exist");
-	} else {
-		if (!matcher.usersMatch(userId, otherUserId)) {
+	if (!matcher.usersMatch(userId, otherUserId)) {
 			return HTTP::Error("User is not a match");
-		}
 	}
 
-	std::string content = request.getBody();
+	std::string content = msg["msg"].asString();
 
-	chat.sendMessage(userId, otherUserId, content);
-
+	std::string msgJson = chat.sendMessage(userId, otherUserId, content);
+	Json::Value notif = util::stringToJson(msgJson);
+	notif["url"] = users.getUserURL(otherUserId);
+	Json::Value *notification = new Json::Value(notif);
+	mg_start_thread(notifyChat, notification);
 	return HTTP::OK();
 }
 
 HTTPResponse ChatHTTP::handleGetHistory(HTTPRequest request) {
-	std::vector<std::string> uriSplit;
-	uriSplit = request.getSplitUri();
-
 	std::string userId;
 	std::string token = request.getHeader("Authorization");
-	bool validToken = users.getUserId(token,&userId);
-	if(!validToken) return HTTP::Unauthorized();
+	bool validToken = users.getUserId(token, &userId);
+	if (!validToken) return HTTP::Unauthorized();
 
-	std::string otherUserId = uriSplit[2];
-	if(!users.userExists(otherUserId)){
-		return HTTP::Error("User doesn't exist");
-	}else{
-		if(!matcher.usersMatch(userId, otherUserId)){
-			return HTTP::Error("User is not a match");
-		}
+	Json::Value info = util::stringToJson(request.getBody());
+	std::string otherUserId = info["id"].asString();
+
+	if (!matcher.usersMatch(userId, otherUserId)) {
+		return HTTP::Error("User is not a match");
 	}
-
 	// FIXME que devuelva el Json completo y listo
 
 	std::string history = chat.getHistory(userId, otherUserId);
