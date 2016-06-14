@@ -148,12 +148,48 @@ public class MainActivity extends AppCompatActivity {
     private void logoutUser() {
         session.setLogin(false);
 
-        db.deleteUsers();
+        final HashMap<String, String> user = db.getUserDetails();
+        final String token = user.get("token");
+        Log.d("token",token);
 
-        // Launching the login activity
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+        // Create a POST request, send JSONObject.
+        // On success expect an empty JSON
+        // On failute expect a JSON with an error field
+        String tag_json_req = "req_logout";
+        JSONObject json_params = new JSONObject();
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                AppConfig.URL_LOGOUT, json_params,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+                        db.deleteUsers();
+                        // Launching the login activity
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, error.toString());
+            }
+
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", token);
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
     }
 
     private void findMatch(){

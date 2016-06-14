@@ -55,7 +55,7 @@ HTTPResponse UsersHTTP::handle(HTTPRequest request) {
 }
 
 HTTPResponse UsersHTTP::handleSignUp(HTTPRequest request) {
-
+    std::cout << "req:" << request.toString() << std::endl;
     Json::Value info = util::stringToJson(request.getBody())["info"];
     std::string password = info["password"].asString();
 
@@ -76,6 +76,7 @@ HTTPResponse UsersHTTP::handleSignUp(HTTPRequest request) {
 }
 
 HTTPResponse UsersHTTP::handleLogin(HTTPRequest request) {
+    std::cout << "req:" << request.toString() << std::endl;
     Json::Value credentials = util::stringToJson(request.getBody());
     std::string email = credentials["email"].asString();
     std::string password = credentials["password"].asString();
@@ -90,7 +91,7 @@ HTTPResponse UsersHTTP::handleLogin(HTTPRequest request) {
     else {
         Json::Value profJson = prof.getJson();
         profJson["token"] = token;
-        std::string profileJson = util::JsonToString(prof.getJson());
+        std::string profileJson = util::JsonToString(profJson);
         Log::info("New user connected");
         return HTTP::OKJson(profileJson);
     }
@@ -153,12 +154,14 @@ HTTPResponse UsersHTTP::handleViewProfile(HTTPRequest request) {
 
 HTTPResponse UsersHTTP::handleLogout(HTTPRequest request) {
     std::string userId;
+    std::cout<<"req:" << request.toString()<<std::endl;
     std::string token = request.getHeader("Authorization");
     bool validToken = users.getUserId(token,&userId);
-    if(!validToken) return HTTP::Unauthorized();
-
+    std::cout << token;
+    if(!validToken) { std::cout<<"no logout"<<std::endl;return HTTP::Unauthorized();}
+    std::cout<<"logout"<<std::endl;
     users.logout(token);
     Log::info("User logged out");
 
-    return HTTP::OK();
+    return HTTP::OKJson("{}");
 }
