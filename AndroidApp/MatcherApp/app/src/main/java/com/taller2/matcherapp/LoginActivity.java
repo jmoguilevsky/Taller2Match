@@ -115,6 +115,8 @@ public class LoginActivity extends AppCompatActivity {
         HashMap<String, String> params = new HashMap<>();
         params.put("email", email);
         params.put("password", password);
+        JSONObject json_params = new JSONObject(params);
+        Log.d("DEBUG",json_params.toString());
 
         // Create login session
         session.setLogin(true);
@@ -168,7 +170,7 @@ public class LoginActivity extends AppCompatActivity {
         finish();*/
 
         // Create the request for a JSONObject
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+        final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 AppConfig.URL_LOGIN, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
 
@@ -182,13 +184,18 @@ public class LoginActivity extends AppCompatActivity {
 
                             // Add user and his data to SQLite local database.
                             String token = response.getString("token");
-                            String name = response.getString("name");
-                            String alias = response.getString("alias");
-                            String user_gender = response.getString("user_gender");
-                            JSONArray interests = response.getJSONArray("interests");
+                            JSONObject user = new JSONObject(response.getString("user"));
+                            String name = user.getString("name");
+                            String alias = user.getString("alias");
+                            String user_gender = user.getString("sex");
+                            JSONArray interests = user.getJSONArray("interests");
                             String user_interests = interests.toString();
-                            String profile_photo = response.getString("photo_profile");
-                            JSONObject location = response.getJSONObject("location");
+                            Log.d("Interests",user_interests);
+
+                            //Bitmap profile_photo_map = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.blank_profile_picture);
+                            //String profile_photo_stud = AppController.getInstance().getStringImage(profile_photo_map);
+                            String profile_photo = user.getString("photo_profile");
+                            JSONObject location = user.getJSONObject("location");
                             String user_location = location.toString();
 
                             db.addUser(name,alias,user_gender,email,user_interests,profile_photo,user_location,token);

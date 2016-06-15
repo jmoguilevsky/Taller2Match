@@ -101,13 +101,12 @@ public class ProfileActivity extends AppCompatActivity {
         // Set the table's columns to be stretchable
         interests_layout.setStretchAllColumns(true);
         // Populate the interests table with the values in the database
-        // Set up the string to create a JSONObject
-        String interests_string = "{\"interests\":" + user.get("interests") + "}";
         try {
             // Create de JSONObject, get its array with the interests
-            JSONObject interests_object = new JSONObject(interests_string);
-            JSONArray interests_array = interests_object.getJSONArray("interests");
+            JSONArray interests_array = new JSONArray(user.get("interests"));
+            Log.d("Profile lee de la db",interests_array.toString());
             // Iterate over the interests in the array, whose form is (category,value)
+            Log.d("length",String.valueOf(interests_array.length()));
             for (int i=0; i < interests_array.length(); i++){
                 // Add each interest to the table
                 JSONObject interest = interests_array.getJSONObject(i);
@@ -201,39 +200,6 @@ public class ProfileActivity extends AppCompatActivity {
                 // Update the local database
                 db.update_value("photo",imgDecodableString);
 
-                /*// Send the new Picture to the App server:
-                // Tag used to cancel the request
-                String tag_json_req = "req_update_pic";
-                pDialog.setMessage("Uploading new picture...");
-                showDialog();
-                // Post params to be sent to the server: just the picture in base_64 string
-                HashMap<String, String> params = new HashMap<>();
-                params.put("photo_profile", imgDecodableString);
-
-                // Create the request for a JSONObject
-                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                        AppConfig.URL_REGISTER, new JSONObject(params),
-                        new Response.Listener<JSONObject>() {
-
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                Log.d(TAG, response.toString());
-                                pDialog.hide();
-                            }
-                        }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        VolleyLog.d(TAG, "Error: " + error.getMessage());
-                        Log.d(TAG, error.toString());
-                        hideDialog();
-                    }
-
-                });
-
-                // Adding request to request queue
-                AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);*/
-
             } else {
                 Toast.makeText(this, "You haven't picked Image",
                         Toast.LENGTH_LONG).show();
@@ -257,12 +223,18 @@ public class ProfileActivity extends AppCompatActivity {
         // which will be TextView / TextView / ImageView. Set them up:
         TextView viewCategory = new TextView(this);
         viewCategory.setText(category);
+        viewCategory.setTextSize(22);
 
         TextView viewInterest = new TextView(this);
         viewInterest.setText(interest);
+        viewInterest.setTextSize(22);
 
         ImageView viewTrashCan = new ImageView(this);
         viewTrashCan.setImageDrawable(getResources().getDrawable(R.drawable.ic_delete_black_18dp));
+
+        Bitmap bMap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_delete_black_24dp);
+        Bitmap bMapScaled = Bitmap.createScaledBitmap(bMap,pxFromDp(28),pxFromDp(28), true);
+        viewTrashCan.setImageBitmap(bMapScaled);
         // Set the trash icon to delete the interest when clicked
         viewTrashCan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -330,11 +302,13 @@ public class ProfileActivity extends AppCompatActivity {
             // We create the JSONObject defined in the API (check documentation) to be PUT to the server.
             final HashMap<String, String> user = db.getUserDetails();
 
+            JSONObject json_param_user = new JSONObject();
             JSONObject json_user = new JSONObject();
             try{
                 json_user.put("name",user.get("name"));
+                json_user.put("email",user.get("email"));
                 json_user.put("alias",user.get("alias"));
-                json_user.put("user_gender",user.get("gender"));
+                json_user.put("sex",user.get("gender"));
                 // We get the current profile picture
                 Drawable pic = viewProfilePicture.getDrawable();
                 Bitmap bitmap = ((BitmapDrawable)pic).getBitmap();
@@ -351,14 +325,14 @@ public class ProfileActivity extends AppCompatActivity {
                         TextView viewCat = (TextView) row.getChildAt(0);
                         TextView viewInt = (TextView) row.getChildAt(1);
                         dupla.put("category",viewCat.getText().toString());
-                        dupla.put("interest",viewInt.getText().toString());
+                        dupla.put("value",viewInt.getText().toString());
                         json_arr_interest.put(dupla);
                     }
                 }
                 json_user.put("interests",json_arr_interest);
                 JSONObject loc = new JSONObject(user.get("location"));
                 json_user.put("location",loc);
-                Log.d(TAG,json_user.getString("location"));
+                json_param_user.put("user",json_user);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -371,8 +345,8 @@ public class ProfileActivity extends AppCompatActivity {
             // Create a PUT request, send JSONObject.
             // On success expect an empty JSON
             // On failute expect a JSON with an error field
-            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                    AppConfig.URL_UPDATE_PROFILE, json_user,
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
+                    AppConfig.URL_UPDATE_PROFILE, json_param_user,
                     new Response.Listener<JSONObject>() {
 
                         @Override
@@ -419,4 +393,13 @@ public class ProfileActivity extends AppCompatActivity {
             pDialog.dismiss();
     }
 
+    private int pxFromDp(float dp)
+    {
+        return (int) (dp * getResources().getDisplayMetrics().density);
+    }
+
+    private int dpFromPx(float px)
+    {
+        return (int) (px / getResources().getDisplayMetrics().density);
+    }
 }
