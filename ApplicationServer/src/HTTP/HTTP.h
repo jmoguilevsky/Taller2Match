@@ -6,6 +6,7 @@
 #define APPSERVER_HTTP_H
 
 #include "HTTPResponse.h"
+#include "../json/json.h"
 
 // Wrapper para obtener las HTTPResponse más fácilmente.
 
@@ -14,7 +15,7 @@ namespace HTTP {
 	HTTPResponse OK(std::string str = "");
 
 	//! Devuelve una response HTTP: "HTTP/1.1 200 OK", con el Json en el body.
-	HTTPResponse OKJson(std::string json);
+	HTTPResponse OK(Json::Value json);
 
 	//! Devuelve una response HTTP: "HTTP/1.1 404 Not Found".
 	HTTPResponse NotFound();

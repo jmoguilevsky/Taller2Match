@@ -17,6 +17,7 @@ private:
 	MgConnectionManager mongooseConnectionManager;
 	RequestHandler &requestHandler;
     bool isServerUP;
+	mg_connection* c;
 
 	//! Event handler para las conexiones con los clientes.
 	// TODO: Explicar que es cada argumento al menos.
@@ -34,6 +35,7 @@ public:
 	MgServer(std::string port, RequestHandler &handlerSelector);
 
 	~MgServer();
+
 };
 
 #endif //MULTITHREADMULTICONNECTION_SERVER_H

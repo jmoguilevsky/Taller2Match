@@ -102,39 +102,39 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define APPLICATIONSERVER_HANDLERSELECTOR_H</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;../SharedData.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;../SharedProfilesDatabase.h&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;RequestHandler.h&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;UsersHTTP.h&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;ChatHTTP.h&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;MatcherHTTP.h&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;../UsersProfiles.h&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;MatchHTTP.h&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;../ProfilesDatabase.h&quot;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
 <div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_match_request_handler.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_match_request_handler.html">MatchRequestHandler</a> : <span class="keyword">public</span> <a class="code" href="class_request_handler.html">RequestHandler</a> {</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    std::map&lt;std::string, int&gt; handlers;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_users_profiles.html">UsersProfiles</a> usersProfiles;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_users_profiles.html">ProfilesDatabase</a> usersProfiles;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_users.html">Users</a>* users;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_chat.html">Chat</a>* chat;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_matcher.html">Matcher</a>* matches;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_users_h_t_t_p.html">UsersHTTP</a> *usersHttp;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_chat_h_t_t_p.html">ChatHTTP</a> *chatHttp;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_matcher_h_t_t_p.html">MatcherHTTP</a> *matcherHttp;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_matcher_h_t_t_p.html">MatchHTTP</a> *matcherHttp;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_match_request_handler.html">MatchRequestHandler</a>(<a class="code" href="class_shared_data.html">SharedData</a> &amp;sharedData);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_match_request_handler.html">MatchRequestHandler</a>(<a class="code" href="class_shared_data.html">SharedProfilesDatabase</a> &amp;sharedData);</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_h_t_t_p_response.html">HTTPResponse</a> handle(<a class="code" href="class_h_t_t_p_request.html">HTTPRequest</a> &amp;request);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif //APPLICATIONSERVER_HANDLERSELECTOR_H</span></div>
 <div class="ttc" id="class_chat_h_t_t_p_html"><div class="ttname"><a href="class_chat_h_t_t_p.html">ChatHTTP</a></div><div class="ttdoc">Esta clase maneja los requests HTTP del chat. </div><div class="ttdef"><b>Definition:</b> ChatHTTP.h:17</div></div>
-<div class="ttc" id="class_matcher_h_t_t_p_html"><div class="ttname"><a href="class_matcher_h_t_t_p.html">MatcherHTTP</a></div><div class="ttdoc">Esta clase maneja los request HTTP que tienen que ver con los likes, matches, etc. </div><div class="ttdef"><b>Definition:</b> MatcherHTTP.h:16</div></div>
+<div class="ttc" id="class_matcher_h_t_t_p_html"><div class="ttname"><a href="class_matcher_h_t_t_p.html">MatchHTTP</a></div><div class="ttdoc">Esta clase maneja los request HTTP que tienen que ver con los likes, matches, etc. </div><div class="ttdef"><b>Definition:</b> MatchHTTP.h:16</div></div>
 <div class="ttc" id="class_match_request_handler_html"><div class="ttname"><a href="class_match_request_handler.html">MatchRequestHandler</a></div><div class="ttdoc">Request handler para el app server. </div><div class="ttdef"><b>Definition:</b> MatchRequestHandler.h:17</div></div>
-<div class="ttc" id="class_shared_data_html"><div class="ttname"><a href="class_shared_data.html">SharedData</a></div><div class="ttdef"><b>Definition:</b> SharedData.h:17</div></div>
+<div class="ttc" id="class_shared_data_html"><div class="ttname"><a href="class_shared_data.html">SharedProfilesDatabase</a></div><div class="ttdef"><b>Definition:</b> SharedProfilesDatabase.h:17</div></div>
 <div class="ttc" id="class_h_t_t_p_response_html"><div class="ttname"><a href="class_h_t_t_p_response.html">HTTPResponse</a></div><div class="ttdoc">Una respuesta HTTP. </div><div class="ttdef"><b>Definition:</b> HTTPResponse.h:15</div></div>
-<div class="ttc" id="class_users_profiles_html"><div class="ttname"><a href="class_users_profiles.html">UsersProfiles</a></div><div class="ttdef"><b>Definition:</b> UsersProfiles.h:16</div></div>
+<div class="ttc" id="class_users_profiles_html"><div class="ttname"><a href="class_users_profiles.html">ProfilesDatabase</a></div><div class="ttdef"><b>Definition:</b> ProfilesDatabase.h:16</div></div>
 <div class="ttc" id="class_users_html"><div class="ttname"><a href="class_users.html">Users</a></div><div class="ttdoc">Handler para la cosas relacionadas con el login, alta y baja de usuarios, etc. </div><div class="ttdef"><b>Definition:</b> Users.h:16</div></div>
 <div class="ttc" id="class_users_h_t_t_p_html"><div class="ttname"><a href="class_users_h_t_t_p.html">UsersHTTP</a></div><div class="ttdoc">Esta clase maneja los requests HTTP que tienen que ver con login, logout, etc... </div><div class="ttdef"><b>Definition:</b> UsersHTTP.h:16</div></div>
 <div class="ttc" id="class_request_handler_html"><div class="ttname"><a href="class_request_handler.html">RequestHandler</a></div><div class="ttdoc">Request Handler genérico. </div><div class="ttdef"><b>Definition:</b> RequestHandler.h:13</div></div>

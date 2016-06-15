@@ -1,4 +1,9 @@
+#include <iostream>
 #include "MatchRequestHandler.h"
+#include "../Exceptions/ParseException.h"
+#include "../Exceptions/DatabaseException.h"
+#include "../Exceptions/SharedServerException.h"
+#include "../MatchData/Threads.h"
 
 #define URI_MATCHES "matches"
 #define URI_CHAT "chat"
@@ -8,46 +13,64 @@
 #define REQ_MATCHES 2
 #define REQ_CHAT 3
 
-MatchRequestHandler::MatchRequestHandler(SharedData &sharedData) {
+MatchRequestHandler::MatchRequestHandler(SharedProfilesDatabase &sharedData) {
 
-    // Esto podría salir y que se pasen user matches y chat por parámetro.
-    usersProfiles.setShared(sharedData);
-    users = new Users(usersProfiles);
-    matches = new Matcher(usersProfiles);
+    usersProfiles = new ProfilesDatabase();
+    matcher = new Matcher(*usersProfiles);
     chat = new Chat();
 
-    // TODOS necesitan Users para saber si el token es válido o no.
-    // UsersHTTP necesita Matcher para que un usuario no pueda pedir el perfil de otro usuario si no es un match.
-    // ChatHTTP necesita Matcher para que un usuario no pueda mandar un chat a otro usuario si no es un match.
+    usersProfiles -> setShared(sharedData);
 
-    usersHttp = new UsersHTTP(*users, *matches);
-    matcherHttp = new MatcherHTTP(*users,*matches);
-    chatHttp = new ChatHTTP(*users,*matches, *chat);
+    usersHttp = new UsersHTTP(connected, *usersProfiles, *matcher);
+    matcherHttp = new MatchHTTP(*usersProfiles, *matcher, connected);
+    chatHttp = new ChatHTTP(*matcher, *chat, connected);
 
     handlers[URI_USERS] = REQ_USERS;
     handlers[URI_MATCHES] = REQ_MATCHES;
     handlers[URI_CHAT] = REQ_CHAT;
+
+    startThread(pollingThread, &connected);
 }
 
 HTTPResponse MatchRequestHandler::handle(HTTPRequest &request) {
 
-    std::vector<std::string> uriSplit = request.getSplitUri();
-
-    std::cout << "URI: " << request.getUri() << std::endl;
+    std::vector<std::string> uriSplit = request . getSplitUri();
 
     int requestType = handlers[uriSplit[0]];
 
-    switch (requestType) {
-        case REQ_USERS:
-            std::cout << " >>> USERS <<< " << std::endl;
-            return usersHttp->handle(request);
-        case REQ_MATCHES:
-            std::cout << " >>> MATCHES <<< " << std::endl;
-            return matcherHttp->handle(request);
-        case REQ_CHAT:
-            std::cout << " >>> CHAT <<< " << std::endl;
-            return chatHttp->handle(request);
-        default:
-            return HTTP::NotFound();
+    try {
+
+        switch (requestType) {
+            case REQ_USERS: {
+                std::cout << " >>> USERS <<< " << std::endl;
+                return usersHttp -> handle(request);
+            }
+            case REQ_MATCHES: {
+                std::cout << " >>> MATCHES <<< " << std::endl;
+                return matcherHttp -> handle(request);
+            }
+            case REQ_CHAT: {
+                std::cout << " >>> CHAT <<< " << std::endl;
+                return chatHttp -> handle(request);
+            }
+            default:
+                return HTTP::NotFound();
+        }
+
+    } catch (ParseException e) {
+        std::cout << "ParseException" << std::endl;
+        return HTTP::BadRequest();
+    } catch (DatabaseException e) {
+        std::cout << "DatabaseException: " << e.what() << std::endl;
+        return HTTP::Error(e . what());
+    } catch (AuthorizationException e) {
+        std::cout << "AuthorizationException: " << e.what() << std::endl;
+        return HTTP::Unauthorized();
+    } catch (SharedServerException e) {
+        std::cout << "SharedServerException: " << e.what() << std::endl;
+        return HTTP::Error(e . what());
+    } catch (Exception e) {
+        std::cout << "Exception: " << e.what() << std::endl;
+        return HTTP::Error(e . what());
     }
 }

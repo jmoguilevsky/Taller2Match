@@ -101,10 +101,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef APPSERVER_MATCHER_H</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define APPSERVER_MATCHER_H</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;../SharedData.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;../SharedProfilesDatabase.h&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;../UserProfile.h&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;../DB/JsonArrayDb.h&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;../UsersProfiles.h&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;../ProfilesDatabase.h&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_matcher.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_matcher.html">Matcher</a> {</div>
@@ -115,7 +115,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_json_array_db.html">JsonArrayDb</a> *matches_db; <span class="comment">// Guarda todos los matches de cada usuario.</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_rocks_db.html">RocksDb</a> *limit_db; <span class="comment">// Guarda la cantidad de candidatos entregados hoy, cuántos quedan, y cuándo se reinicia la cuenta.</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_users_profiles.html">UsersProfiles</a> &amp;usersProfiles;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_users_profiles.html">ProfilesDatabase</a> &amp;usersProfiles;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">int</span> getInterestsInCommon(<a class="code" href="class_user_profile.html">UserProfile</a> &amp;user1, <a class="code" href="class_user_profile.html">UserProfile</a> &amp;user2);</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
@@ -125,7 +125,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_matcher.html">Matcher</a>(<a class="code" href="class_users_profiles.html">UsersProfiles</a> &amp;users);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_matcher.html">Matcher</a>(<a class="code" href="class_users_profiles.html">ProfilesDatabase</a> &amp;users);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">bool</span> getNextCandidate(std::string userId, <a class="code" href="class_user_profile.html">UserProfile</a> *profile);</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
@@ -157,7 +157,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif //APPSERVER_MATCHER_H</span></div>
 <div class="ttc" id="class_user_profile_html"><div class="ttname"><a href="class_user_profile.html">UserProfile</a></div><div class="ttdoc">Representa el perfil de un usuario y métodos para consulta de distintos campos del mismo...</div><div class="ttdef"><b>Definition:</b> UserProfile.h:18</div></div>
 <div class="ttc" id="class_json_array_db_html"><div class="ttname"><a href="class_json_array_db.html">JsonArrayDb</a></div><div class="ttdoc">Base de datos {key,Json array}. </div><div class="ttdef"><b>Definition:</b> JsonArrayDb.h:13</div></div>
-<div class="ttc" id="class_users_profiles_html"><div class="ttname"><a href="class_users_profiles.html">UsersProfiles</a></div><div class="ttdef"><b>Definition:</b> UsersProfiles.h:16</div></div>
+<div class="ttc" id="class_users_profiles_html"><div class="ttname"><a href="class_users_profiles.html">ProfilesDatabase</a></div><div class="ttdef"><b>Definition:</b> ProfilesDatabase.h:16</div></div>
 <div class="ttc" id="class_rocks_db_html"><div class="ttname"><a href="class_rocks_db.html">RocksDb</a></div><div class="ttdoc">Wrapper para una Base de datos RocksDb. </div><div class="ttdef"><b>Definition:</b> RocksDb.h:13</div></div>
 <div class="ttc" id="class_matcher_html"><div class="ttname"><a href="class_matcher.html">Matcher</a></div><div class="ttdoc">Handler para todo lo relacionado con likes, matches, etc. </div><div class="ttdef"><b>Definition:</b> Matcher.h:15</div></div>
 </div><!-- fragment --></div><!-- contents -->

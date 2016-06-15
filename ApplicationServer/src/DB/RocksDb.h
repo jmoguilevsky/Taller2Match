@@ -23,7 +23,7 @@ public:
     ~RocksDb();
 
     //! Devuelve true si key existe como clave en la DB. False si no.
-    bool keyExists(std::string key);
+    bool hasKey(std::string key);
 
     //! Si key existe en la DB, devuelve true y asigna a value el valor asociado. Si no existe, devuelve false, y no modifica value.
     bool get(const std::string &key, std::string &value);

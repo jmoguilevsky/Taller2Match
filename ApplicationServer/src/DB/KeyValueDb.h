@@ -7,7 +7,7 @@
 
 #include <string>
 #include "../json/json.h"
-#include "../util.h"
+#include "../Utilities/util.h"
 
 //! Base de datos {clave, valor}, genérica.
 
@@ -18,7 +18,7 @@ public:
     virtual void save(const std::string &key, const std::string &value) = 0;
 
     //! Devuelve True si key existe como clave en la DB, False si no.
-    virtual bool keyExists(std::string basic_string) = 0;
+    virtual bool hasKey(std::string basic_string) = 0;
 
     //! Si key existe en la DB, devuelve true y asigna a value el valor asociado. Si no existe, devuelve false, y no modifica value.
     virtual bool get(const std::string &key, std::string &value) = 0;

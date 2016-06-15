@@ -21,6 +21,7 @@ mg_connection *MgConnectionManager::configureListeningConnection(std::string por
 mg_connection *MgConnectionManager::configureOutboundConnection(std::string url, void *data,
                                                                 mg_event_handler_t eventHandler) {
 	mg_connection *outboundConnection = mg_connect(&mgr, url.c_str(), eventHandler);
+	if(outboundConnection == NULL) return NULL;
 	outboundConnection->user_data = data;
 	mg_set_protocol_http_websocket(outboundConnection);
 	return outboundConnection;

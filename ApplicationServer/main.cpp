@@ -1,24 +1,12 @@
 #include "src/Mongoose/MgServer.h"
 #include "src/HandlersHTTP/MatchRequestHandler.h"
-#include "src/SharedServerConnection.h"
-#include "unistd.h"
 #include "src/Log/Log.h"
 #include "src/SharedMock/SharedMock.h"
+#include "src/MatchData/Threads.h"
+#include "src/MatchData/SharedServerConnection.h"
 
 const static std::string SHARED_SERVER = "enigmatic-depths-58073.herokuapp.com:80";
 const static std::string DEFAULT_PORT = "7000";
-
-void *checkForQuit(void *data) {
-
-	std::cout << "type 'quit' to shutdown server" << std::endl;
-
-	std::string input;
-	do {
-		std::cin >> input;
-	} while (input != "quit");
-
-	((MgServer *) data)->stop();
-}
 
 int parseArgs(int argc, char **argv, LogLevel &logLevel, std::string &port, std::string &sharedServer) {
 	int c;
@@ -87,6 +75,9 @@ int parseArgs(int argc, char **argv, LogLevel &logLevel, std::string &port, std:
 
 }
 
+
+
+
 int main(int argc, char** argv) {
 	opterr = 0;
 	LogLevel logLevel = ERROR;
@@ -97,12 +88,13 @@ int main(int argc, char** argv) {
 
 	Log::init("log.txt", logLevel);
 
-	SharedServerConnection serverConnection(SHARED_SERVER);
-	MatchRequestHandler matchRequestHandler(serverConnection);
-	//SharedMock sharedMock;
-	//MatchRequestHandler matchRequestHandler(sharedMock);
+//	SharedServerConnection serverConnection(SHARED_SERVER);
+//	MatchRequestHandler matchRequestHandler(serverConnection);
+	SharedMock sharedMock;
+	MatchRequestHandler matchRequestHandler(sharedMock);
 
 	MgServer server(port, matchRequestHandler);
+
 	std::cout << "Log level: " << logLevel << std::endl;
 
 	Log::info("Listening connections on port " + port);
@@ -111,7 +103,7 @@ int main(int argc, char** argv) {
 	std::cout << "MgServer started on port " << port << std::endl;
 	std::cout << "Configuring shared server, trying to connect to " << sharedServer << std::endl;
 
-	mg_start_thread(checkForQuit, &server);
+	startThread(checkForQuitThread,&server);
 
 	server.start();
 	return 0;

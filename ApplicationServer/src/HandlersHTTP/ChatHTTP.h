@@ -9,16 +9,16 @@
 #include "../HTTP/HTTP.h"
 #include "../HTTP/HTTPResponse.h"
 #include "../HTTP/HTTPRequest.h"
-#include "../Handlers/Chat.h"
-#include "../Handlers/Users.h"
-#include "../Handlers/Matcher.h"
+#include "../MatchData/Chat.h"
+#include "../MatchData/Matcher.h"
+#include "../MatchData/ConnectedUsers.h"
 //! Esta clase maneja los requests HTTP del chat.
 
 class ChatHTTP {
 
-    Users &users;
-
     Matcher &matcher;
+
+    ConnectedUsers& connected;
 
     Chat &chat;
 
@@ -28,7 +28,8 @@ class ChatHTTP {
 
 public:
 
-    ChatHTTP(Users &users,Matcher &matcher, Chat &chat) : users(users), matcher(matcher), chat(chat) { }
+    ChatHTTP(Matcher &matcher, Chat &chat, ConnectedUsers &connected)
+            : matcher(matcher), chat(chat), connected(connected) { }
 
     HTTPResponse handle(HTTPRequest request);
 
