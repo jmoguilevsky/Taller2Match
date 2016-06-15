@@ -9,7 +9,8 @@
 #include "../json/json.h"
 #include <string>
 #include <vector>
-
+#define pi 3.14159265358979323846
+#define earthRadiusKm 6371.0
 //! Utilidades varias
 
 namespace util {
@@ -24,6 +25,13 @@ namespace util {
     Json::Value stringToJson(const std::string &str);
 
     std::string JsonToString(const Json::Value &value);
+
+
+    double deg2rad(double deg);
+
+    double rad2deg(double rad);
+
+    double distanceEarth(double lat1d, double lon1d, double lat2d, double lon2d);
 
 }
 #endif //MULTITHREADMULTICONNECTION_UTILS_H

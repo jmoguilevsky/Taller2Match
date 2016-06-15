@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private int DISLIKE_MATCH = 2;
     private static final String TAG = MainActivity.class.getSimpleName();
     private String id_candidate;
-
     private SQLiteHandler db;
     private SessionManager session;
     private ProgressDialog pDialog;

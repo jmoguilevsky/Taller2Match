@@ -34,6 +34,8 @@ public:
 			: users(users), matcher(matcher), connected(connected) {};
 
 	HTTPResponse handle(HTTPRequest request);
+
+	HTTPResponse handleGetAllInterests(HTTPRequest request);
 };
 
 

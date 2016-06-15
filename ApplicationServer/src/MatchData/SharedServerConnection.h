@@ -30,7 +30,7 @@ public:
 
     void updateProfile(string basic_string, UserProfile profile);
 
-
+    std::vector<Interest> getAllInterests();
 };
 
 #endif //APPSERVER_SHAREDSERVERCONNECTION_H

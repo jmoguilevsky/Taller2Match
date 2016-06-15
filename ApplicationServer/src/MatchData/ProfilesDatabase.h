@@ -47,6 +47,8 @@ public:
     void updateProfile(string userId, UserProfile userProfile);
 
     bool verify(string email, string password);
+
+    vector<Interest> getAllInterests();
 };
 
 

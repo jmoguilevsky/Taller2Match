@@ -115,3 +115,33 @@ void SharedServerConnection::updateProfile(string sharedId, UserProfile userProf
         throw SharedServerException("Could not update user profile in Shared Server");
     }
 }
+
+std::vector<Interest> SharedServerConnection::getAllInterests() {
+    MgHTTPClient c;
+    bool connectOk = c.connectToUrl(sharedAddress);
+    if(!connectOk) throw SharedServerException("Could not connect to Shared Server");
+
+    std::map<std::string, std::string> headers;
+    headers["Host"] = sharedAddress;
+
+    HTTPRequest request("GET", "/interests", headers, "");
+    HTTPResponse response = c.sendRequest(request);
+
+    if (response.getCode() != 200) {
+        throw SharedServerException ("Could not get user profile from Shared Server");
+    }
+
+    Json::Value interestsJson = util::stringToJson(response.getBody())["interests"];
+
+    std::vector<Interest> interests;
+    for (int i = 0; i < interestsJson.size(); i++){
+        Interest interest(interestsJson[i]);
+        interests.push_back(interest);
+    }
+
+    return interests;
+
+}
+
+
+

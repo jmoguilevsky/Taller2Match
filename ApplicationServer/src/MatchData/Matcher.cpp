@@ -46,7 +46,7 @@ std::vector<std::string> Matcher::getLikes(const std::string &userId) {
     return likes_db->values(userId);
 }
 
-std::vector<std::string> Matcher::getMatches(const std::string &userId) {
+std::vector<std::string> Matcher::getMatches(std::string userId) {
     return matches_db->values(userId);
 }
 
@@ -54,11 +54,6 @@ std::vector<std::string> Matcher::getDislikes(const std::string &user) {
     // Devuelve los users que user rechazó.
     /*return util::valuesAsVector(noMatches, user);*/
     return std::vector<std::string>();
-}
-
-std::vector<UserProfile> Matcher::getMatches(std::string email) {
-    std::vector<UserProfile> s;
-    return s;
 }
 
 int Matcher::candidatesLeft(std::string userId){
@@ -82,11 +77,10 @@ UserProfile Matcher::getNextCandidate(std::string userId) {
     if (lastTime < today) {
         // Pasó más de un día desde la última vez que se buscaron los candidatos
         // Busco candidatos otra vez
-        std::vector<UserProfile> newCandidates = calculateCandidates(userId);
+        std::vector<std::string> newCandidates = calculateCandidates(userId);
         if(newCandidates.size() != 0) {
             for (int i = 0; i < newCandidates.size(); i++) {
-                std::string id = newCandidates[i].getId();
-                candidates_db->append_value(userId, id);
+                candidates_db->append_value(userId, newCandidates[i]);
             }
             limit_db->save(userId, today.str());
         }
@@ -103,17 +97,20 @@ UserProfile Matcher::getNextCandidate(std::string userId) {
     return profile;
 }
 
-int Matcher::calculateDistance(UserProfile &userA, UserProfile &userB) {
+double Matcher::calculateDistance(UserProfile &userA, UserProfile &userB) {
     // Calcula la distancia entre los dos usuarios.
-    return 0;
+    double latA = userA.getLatitude();
+    double lonA = userA.getLongitude();
+    double latB = userB.getLatitude();
+    double lonB = userB.getLongitude();
+    return util::distanceEarth(latA, lonA, latB, lonB);
 }
-
 
 int Matcher::calculateScore(UserProfile &userId, UserProfile &otherUserId) {
     // Calcula el "score" que tiene el match userA - userB, según sus intereses y distancia.
     int intInCommon = getInterestsInCommon(userId, otherUserId);
-    int distance = calculateDistance(userId, otherUserId);
-    // Hacer algo con la distancia.
+    double distance = calculateDistance(userId, otherUserId);
+    //if (distance > MAX_DISTANCE)
     int score = intInCommon - distance; // Algo que a menor distancia dé mejor puntaje.
     return score;
 }
@@ -147,11 +144,13 @@ void Matcher::discardCandidates(std::string userId, std::map<std::string, UserPr
     }
 }
 
-std::vector<UserProfile> Matcher::calculateCandidates(std::string userId) {
+std::vector<std::string> Matcher::calculateCandidates(std::string userId) {
 
     std::map<std::string, UserProfile> candidates = usersProfiles.getUsers();
     UserProfile userProfile = candidates[userId];
     candidates.erase(userId);
+
+    filterBySex(candidates, userProfile.getSexInterest(), userProfile.getSex());
 
     // ***** Descarto los candidatos que ya estan en likes y dislikes
 
@@ -168,22 +167,20 @@ std::vector<UserProfile> Matcher::calculateCandidates(std::string userId) {
         scores[candidateId] = calculateScore(userProfile, candidateProfile);
     }
 
-    // TODO ordenarlos por score y devolver DAILY_CANDIDATES (siempre que haya esa cantidad)
+    // Los ordeno por puntaje
 
     std::vector<std::pair<std::string, int>> orderedByScore = sortDescByValue(scores);
 
     // Agarrar los DAILY_LIMIT con más puntaje
 
-    std::vector<UserProfile> newCandidates;
-    int nCand = candidates.size() < DAILY_CANDIDATES ? candidates.size() : DAILY_CANDIDATES;
+    std::vector<std::string> newCandidates;
+    int nCand = (int) (candidates.size() < DAILY_CANDIDATES ? candidates.size() : DAILY_CANDIDATES);
     for (int i = 0; i < nCand; i++) {
         std::string candidateId = orderedByScore[i].first;
-        UserProfile candidateProfile = candidates[candidateId];
-        newCandidates.push_back(candidateProfile);
+        newCandidates.push_back(candidateId);
     }
     return newCandidates;
 }
-
 
 int Matcher::getInterestsInCommon(UserProfile &user1, UserProfile &user2) {
     InterestList user1Interests = user1.getInterests();
@@ -209,6 +206,28 @@ Matcher::Matcher(ProfilesDatabase &users) : usersProfiles(users) {
     limit_db = new RocksDb("db/limit"); //
 }
 
+std::vector<Interest> Matcher::getAllInterests(){
+    return usersProfiles.getAllInterests();
+}
+
 bool Matcher::usersMatch(std::string userId, std::string otherUserId) const {
     return matches_db->has_value(userId, otherUserId);
 }
+
+void Matcher::filterBySex(map<string, UserProfile> &candidates, string is, string wants) {
+    std::vector<std::string> toRemove;
+    for (std::map<std::string, UserProfile>::iterator it = candidates.begin();
+         it != candidates.end(); ++it) {
+        UserProfile candidateProfile = it->second;
+        std::string candidateIs = candidateProfile.getSex();
+        std::string candidateWants = candidateProfile.getSexInterest();
+        if(candidateIs != is && candidateWants != wants){
+            toRemove.push_back(it -> first);
+        }
+    }
+
+    for (int i  = 0; i < toRemove.size(); i++){
+        candidates.erase(toRemove[i]);
+    }
+}
+

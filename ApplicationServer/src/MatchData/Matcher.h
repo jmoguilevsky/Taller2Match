@@ -35,7 +35,7 @@ class Matcher {
     int calculateScore(UserProfile &userA, UserProfile &userB);
 
     //! Calcula la distancia entre los dos usuarios.
-    int calculateDistance(UserProfile &userA, UserProfile &userB);
+    double calculateDistance(UserProfile &userA, UserProfile &userB);
 
 public:
     //! Recibe un ProfilesDatabase, que utilizará para obtener la información de los perfiles de los usuarios.
@@ -47,7 +47,7 @@ public:
     bool usersMatch(std::string userId, std::string otherUserId) const;
 
     //! Devuelve todos los matches del usuario.
-    std::vector<std::string> getMatches(const std::string &user);
+    std::vector<std::string> getMatches(std::string user);
 
     //! Devuelve todos los likes del usuario.
     std::vector<std::string> getLikes(const std::string &user);
@@ -58,11 +58,8 @@ public:
     //! Devuelve todos los usuarios que el usuario rechazó.
     std::vector<std::string> getDislikes(const std::string &user);
 
-    //! Devuelve los perfiles de todos los matches del usuario.
-    std::vector<UserProfile> getMatches(std::string email);
-
     //! Calcula una nuevba tanda de candidatos para el usuario.
-    std::vector<UserProfile> calculateCandidates(std::string userId);
+    std::vector<std::string> calculateCandidates(std::string userId);
 
     //! Guarda un like del usuario al candidate.
     void postReaction(string userId, string candidateId, string reaction);
@@ -71,6 +68,11 @@ public:
     void discardCandidates(string userId, map<string, UserProfile> &candidates);
 
     int candidatesLeft(string userId);
+
+    vector<Interest> getAllInterests();
+
+    // Filtra los candidatos por sexo. Quedan solo los de sexo "is" que buscan gente de sexo "wants".
+    void filterBySex(std::map<string, UserProfile> &candidates, string is, string wants);
 };
 
 #endif //APPSERVER_MATCHER_H

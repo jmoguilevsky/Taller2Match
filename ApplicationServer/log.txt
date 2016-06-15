@@ -1,3 +1,5 @@
 [2016/06/15-13:38:37]  ***** New log session: ERROR *****
 [2016/06/15-13:38:50]  ***** New log session: ERROR *****
 [2016/06/15-14:05:28]  ***** New log session: ERROR *****
+[2016/06/15-17:04:02]  ***** New log session: ERROR *****
+[2016/06/15-18:25:50]  ***** New log session: ERROR *****

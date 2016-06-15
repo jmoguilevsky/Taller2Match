@@ -26,7 +26,11 @@ void UserProfile::parseInterests(Json::Value &user) {
     int interestsSize = userInterests.size();
     for (int i = 0; i < interestsSize; i++) {
         Json::Value interest = userInterests[i];
-        interestList.insert(Interest(interest));
+        if(interest["category"].asString() == "sex"){
+            sexInterest = interest["value"].asString();
+        } else {
+            interestList . insert(Interest(interest));
+        }
     }
 }
 
@@ -55,8 +59,10 @@ void UserProfile::fromJson(std::string user_str) {
     if(!user["user"].isMember("alias")) throw Json::Exception("Missing \"alias\" field!");
     if(!user["user"].isMember("email")) throw Json::Exception("Missing \"email\" field!");
     if(!user["user"].isMember("interests")) throw Json::Exception("Missing \"interests\" field!");
+    if(!user["user"].isMember("sex")) throw Json::Exception("Missing \"sex\" field!");
     name = user["user"]["name"].asString();
     email = user["user"]["email"].asString();
+    sex = user["user"]["sex"].asString();
     parseInterests(user);
 
 }
@@ -64,6 +70,14 @@ void UserProfile::fromJson(std::string user_str) {
 void UserProfile::changeId(std::string userId) {
     user["user"]["id"] = userId;
     id = userId;
+}
+
+std::string UserProfile::getSex() {
+    return sex;
+}
+
+std::string UserProfile::getSexInterest() {
+    return sexInterest;
 }
 
 

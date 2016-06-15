@@ -76,6 +76,10 @@ void ProfilesDatabase::updateProfile(string userId, UserProfile userProfile) {
     sharedData -> updateProfile(sharedId, userProfile);
 }
 
+std::vector<Interest> ProfilesDatabase::getAllInterests(){
+    return sharedData -> getAllInterests();
+}
+
 bool ProfilesDatabase::verify(string email, string password) {
     std::string pass;
     if(!email_pwd_map->hasKey(email)) throw Exception("User not registered in server");

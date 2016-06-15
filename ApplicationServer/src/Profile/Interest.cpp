@@ -26,3 +26,10 @@ std::string Interest::getCategory() const {
 std::string Interest::getValue() const {
     return value;
 }
+
+Json::Value Interest::getJson(){
+    Json::Value json;
+    json["category"] = category;
+    json["value"] = value;
+    return json;
+}

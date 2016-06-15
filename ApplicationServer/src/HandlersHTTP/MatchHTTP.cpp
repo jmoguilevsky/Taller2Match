@@ -13,6 +13,7 @@
 #define FULL_URI_CANDIDATES "/matches/candidates"
 #define FULL_URI_REACTION "/matches/reaction"
 #define FULL_URI_MATCHES "/matches/matches"
+#define FULL_URI_INTERESTS "/matches/interests"
 
 HTTPResponse MatchHTTP::handle(HTTPRequest request) {
     std::string verb = request.getVerb();
@@ -24,13 +25,23 @@ HTTPResponse MatchHTTP::handle(HTTPRequest request) {
         return handlePostReaction(request);
     } else if (verb == HTTP_GET && uri == FULL_URI_MATCHES) {
         return handleGetMatches(request);
+    } else if (verb == HTTP_GET && uri == FULL_URI_INTERESTS) {
+        return handleGetAllInterests(request);
     } else {
         return HTTP::NotFound();
     }
 }
 
 HTTPResponse MatchHTTP::handleGetMatches(HTTPRequest request) {
-    return HTTP::OK();
+    std::string token;
+    RequestParser::parseToken(request, &token);
+    std::string userId = connected.getUserId(token);
+    std::vector<std::string> matches = matcher.getMatches(userId);
+    std::string answer;
+    for(int i = 0; i < matches.size(); i++){
+        answer += matches[i] + ",";
+    }
+    return HTTP::OK(answer);
 }
 
 HTTPResponse MatchHTTP::handlePostReaction(HTTPRequest request) {
@@ -52,4 +63,16 @@ HTTPResponse MatchHTTP::handleGetCandidate(HTTPRequest request) {
     UserProfile candidate = matcher.getNextCandidate(userId);
     Json::Value user = candidate.getJson();
     return HTTP::OK(user);
+}
+
+
+HTTPResponse MatchHTTP::handleGetAllInterests(HTTPRequest request){
+    std::vector<Interest> interests = matcher.getAllInterests();
+    Json::Value interestsJson;
+    Json::Value array;
+    for (int i = 0; i < interests.size(); i++){
+        array.append(interests[i].getJson());
+    }
+    interestsJson["interests"] = array;
+    return HTTP::OK(interestsJson);
 }

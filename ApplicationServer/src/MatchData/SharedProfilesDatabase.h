@@ -28,6 +28,9 @@ public:
 
     //! Actualiza el perfil del usuario con id sharedId.
     virtual void updateProfile(string sharedId, UserProfile profile) = 0;
+
+    //! Devuelve una lista de todos los intereses que ya existen
+    virtual std::vector<Interest> getAllInterests() = 0;
 };
 
 

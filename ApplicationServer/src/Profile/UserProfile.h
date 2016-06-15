@@ -37,6 +37,8 @@ public:
 
     double getLongitude() const;
 
+    std::string getSexInterest();
+
     //! Devuelve el email con el que se registró el usuario.
     std::string getEmail() const;
 
@@ -49,6 +51,8 @@ public:
     //! Carga el perfil con los datos un string que contiene el perfil en formato Json.
     void fromJson(std::string user);
 
+    std::string getSex();
+
 private:
 
     double latitude;
@@ -59,7 +63,8 @@ private:
     std::string email;
 
     Json::Value user;
+    std::string sexInterest;
+    std::string sex;
 };
-
 
 #endif //JSONTEST_USER_H

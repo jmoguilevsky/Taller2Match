@@ -26,6 +26,8 @@ public:
 
     std::string getValue() const;
 
+    Json::Value getJson();
+
 };
 
 
