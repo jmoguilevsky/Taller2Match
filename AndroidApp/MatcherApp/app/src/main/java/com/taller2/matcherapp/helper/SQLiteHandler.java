@@ -79,13 +79,13 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, name); // Name
-        values.put(KEY_ALIAS, alias); // Alias
-        values.put(KEY_GENDER, gender); // User gender
-        values.put(KEY_EMAIL, email); // Email
-        values.put(KEY_INTERESTS, interests); // Interests
+        values.put(KEY_NAME, name); // text
+        values.put(KEY_ALIAS, alias); // text
+        values.put(KEY_GENDER, gender); // text
+        values.put(KEY_EMAIL, email); // text
+        values.put(KEY_INTERESTS, interests); // JSONArray
         values.put(KEY_PHOTO, profile_photo); // Profile picture
-        values.put(KEY_LOCATION, location); // Location: lat and long
+        values.put(KEY_LOCATION, location); // JSONObject
         values.put(KEY_TOKEN, token); // Token
 
         // Inserting Row

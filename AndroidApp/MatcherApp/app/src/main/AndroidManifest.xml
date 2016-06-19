@@ -33,13 +33,13 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ChatActivity"
             android:label="@string/title_activity_chat"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.taller2.matcherapp.MainActivity" />
@@ -47,12 +47,30 @@
         <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
-            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.taller2.matcherapp.MainActivity" />
+        </activity>
+        <activity
+            android:name=".MessageActvity"
+            android:label="@string/title_activity_message_actvity"
+            android:parentActivityName=".ChatActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.taller2.matcherapp.ChatActivity" />
+        </activity>
+        <activity
+            android:name=".MatchActivity"
+            android:label="@string/title_activity_match"
+            android:parentActivityName=".MessageActvity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.taller2.matcherapp.MessageActvity" />
         </activity>
     </application>
 

@@ -13,9 +13,6 @@ import com.android.volley.toolbox.Volley;
 
 import java.io.ByteArrayOutputStream;
 
-/**
- * Created by seba on 24/04/16.
- */
 public class AppController extends Application {
     public static final String TAG = AppController.class.getSimpleName();
 
@@ -44,7 +41,7 @@ public class AppController extends Application {
     public <T> void addToRequestQueue(Request<T> req, String tag) {
         req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
         req.setRetryPolicy(new DefaultRetryPolicy(
-                20000,
+                1500,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         getRequestQueue().add(req);

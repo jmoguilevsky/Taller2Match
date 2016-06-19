@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="50dp"
+    android:paddingTop="65dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"

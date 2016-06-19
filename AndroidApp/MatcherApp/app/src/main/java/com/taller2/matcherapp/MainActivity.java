@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
         // Obtain and assign views
@@ -104,6 +103,9 @@ public class MainActivity extends AppCompatActivity {
         iconCross.setOnClickListener(match_clickListener);
         btnFind.setOnClickListener(match_clickListener);
 
+        // Find a match
+        findMatch();
+
     }
 
     @Override
@@ -116,10 +118,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                // User chose the "Settings" item, show the app settings UI...
-                return true;
-
             case R.id.action_chat:
                 Intent intent = new Intent(MainActivity.this, ChatActivity.class);
                 startActivity(intent);
@@ -193,10 +191,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void findMatch(){
-        //imgMatch.setImageResource(R.drawable.sans);
-        //imgMatch.setVisibility(View.VISIBLE);
         final HashMap<String, String> user = db.getUserDetails();
-        String token = user.get("token");
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -244,6 +239,8 @@ public class MainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Log.d(TAG, error.toString());
+                imgMatch.setImageResource(R.drawable.sans);
+                imgMatch.setVisibility(View.VISIBLE);
                 pDialog.hide();
             }
 
@@ -263,10 +260,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void acceptMatch(){
         react_to_match(LIKE_MATCH);
+        // Find the next match
+        findMatch();
     }
 
     private void rejectMatch(){
         react_to_match(DISLIKE_MATCH);
+        // Find the next match.
+        findMatch();
     }
 
     private void react_to_match(int reaction){
@@ -283,7 +284,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Send PUT request to server
         final HashMap<String, String> user = db.getUserDetails();
-        String token = user.get("token");
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -298,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
         JSONObject json_params = new JSONObject();
         try {
             json_params.put("id",id_candidate);
-            json_params.put("reaction",reaction);
+            json_params.put("reaction",reaction_string);
         } catch (JSONException e) {
             e.printStackTrace();
         }

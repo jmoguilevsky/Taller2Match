@@ -3,15 +3,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@color/bg_login"
-    android:padding="10dp">
+    android:background="@color/app_background" >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp" />
+    <include layout="@layout/app_bar" />
 
     <ImageView android:id="@+id/match_image"
         android:contentDescription="@string/match_image_desc"
@@ -61,7 +55,7 @@
         android:id="@+id/email"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="5dp"
         android:textSize="16sp" />
 
 </LinearLayout>

@@ -27,7 +27,12 @@
     <string name="header_category">Category</string>
     <string name="header_interest">Interest</string>
     <string name="header_delete">Delete</string>
+    <string name="type_message">Type message</string>
+    <string name="btn_send">Send</string>
 
     <string name="match_image_desc">Profile image of the match</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_message_actvity">MessageActvity</string>
+    <string name="title_activity_match_profile">MatchProfileActivity</string>
+    <string name="title_activity_match">MatchActivity</string>
 </resources>

@@ -216,7 +216,7 @@ public class LoginActivity extends AppCompatActivity {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Log.e(TAG, "Login Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                        "Server Error " + error.getMessage() + ". Please try again.", Toast.LENGTH_LONG).show();
                 hideDialog();
             }
         });

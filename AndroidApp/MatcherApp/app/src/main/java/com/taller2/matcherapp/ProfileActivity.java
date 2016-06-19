@@ -22,9 +22,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -44,7 +47,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -66,6 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         isProfileModified = false;
 
         // Get the database handler
@@ -104,7 +110,7 @@ public class ProfileActivity extends AppCompatActivity {
         try {
             // Create de JSONObject, get its array with the interests
             JSONArray interests_array = new JSONArray(user.get("interests"));
-            Log.d("Profile lee de la db",interests_array.toString());
+            Log.d("Profile lee de la db:",interests_array.toString());
             // Iterate over the interests in the array, whose form is (category,value)
             Log.d("length",String.valueOf(interests_array.length()));
             for (int i=0; i < interests_array.length(); i++){
@@ -118,7 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        // Event when the Add Interest image is clicked: add a new interest
+        // Event when the Add Interest image is clicked: add a custom category and interest
         addIcon = (ImageView) findViewById(R.id.match_add);
         addIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,20 +134,52 @@ public class ProfileActivity extends AppCompatActivity {
                 // Create alert and set title and message.
                 AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
                 alert.setTitle("Add Category and Interest");
-                alert.setMessage("Please complete the following fields");
+                alert.setMessage("Select an existing category or add a new one");
 
                 // Create a layout that will have EditText fields.
-                Context context = v.getContext();
-                LinearLayout layout = new LinearLayout(context);
+                final Context context = v.getContext();
+                final LinearLayout layout = new LinearLayout(context);
                 layout.setOrientation(LinearLayout.VERTICAL);
-                // Create and add the Category field to the layout
+                // TODO poner limite a la cantidad de texto que puede ingresar el usuario.
+                // Create the add custom category field, but we dont add it to the layout yet
                 final EditText categoryBox = new EditText(context);
                 categoryBox.setHint("Category");
-                layout.addView(categoryBox);
-                // Createa and add the interest field to the layout
+                layout.addView(categoryBox,0);
+                // Create the add interest field, but we dont add it to the layout yet
                 final EditText interestBox = new EditText(context);
                 interestBox.setHint("Interest");
-                layout.addView(interestBox);
+                layout.addView(interestBox,0);
+                // Create a spinner menu with the category options
+                List<String> spinnerArray =  new ArrayList<String>();
+                // TODO pedir al server lista de categorias.
+                spinnerArray.add("Music");
+                spinnerArray.add("Outdoors");
+                spinnerArray.add("Add new category");
+                Spinner spinner = new Spinner(context);
+                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, spinnerArray);
+                spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(spinnerArrayAdapter);
+                layout.addView(spinner,0);
+                // Create a onClick listener
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                    {
+                        String selectedItem = parent.getItemAtPosition(position).toString();
+                        if(selectedItem.equals("Add new category"))
+                        {
+                            // Add the custom category field to the layout
+                            categoryBox.setText("");
+                            layout.addView(categoryBox,1);
+                        } else {
+                            layout.removeView(categoryBox);
+                            categoryBox.setText(selectedItem);
+                        }
+                    } // to close the onItemSelected
+                    public void onNothingSelected(AdapterView<?> parent)
+                    {
+                        categoryBox.setText("");
+                    }
+                });
                 // Add the layout to the alert
                 alert.setView(layout);
 
@@ -151,15 +189,19 @@ public class ProfileActivity extends AppCompatActivity {
                         // Get input strings and add a row to the table with category and interest.
                         String category = categoryBox.getText().toString();
                         String interest = interestBox.getText().toString();
-                        add_row_interests_table(category, interest);
-                        // The profile was modified
-                        isProfileModified = true;
+                        if (category.isEmpty() || interest.isEmpty() ){
+                            Toast.makeText(context,"One of the fields was emtpy! Try again",Toast.LENGTH_LONG).show();
+                        } else {
+                            add_row_interests_table(category, interest);
+                            // The profile was modified
+                            isProfileModified = true;
+                        }
                     }
                 });
                 // Define behaviour for click on negative button
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        // Canceled.
+                        Toast.makeText(context,"Canceled",Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -267,19 +309,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_profile, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                Log.d(TAG,"action settings");
-                return true;
-
             case android.R.id.home:
                 update_profile();
                 Log.d(TAG,"volviendo a main act");
