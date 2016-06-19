@@ -6,31 +6,32 @@
 #define APPLICATIONSERVER_HANDLERSELECTOR_H
 
 #include <map>
-#include "../SharedData.h"
 #include "RequestHandler.h"
 #include "UsersHTTP.h"
 #include "ChatHTTP.h"
-#include "MatcherHTTP.h"
-#include "../UsersProfiles.h"
+#include "MatchHTTP.h"
+#include "../MatchData/Chat.h"
 //! Request handler para el app server.
 
 class MatchRequestHandler : public RequestHandler {
 
 	std::map<std::string, int> handlers;
-	UsersProfiles usersProfiles;
-	Users* users;
+
+	ProfilesDatabase* usersProfiles;
+	ConnectedUsers connected;
 	Chat* chat;
-	Matcher* matches;
+	Matcher* matcher;
 
 	UsersHTTP *usersHttp;
 	ChatHTTP *chatHttp;
-	MatcherHTTP *matcherHttp;
+	MatchHTTP *matcherHttp;
 
 public:
 
-	MatchRequestHandler(SharedData &sharedData);
+	MatchRequestHandler(SharedProfilesDatabase &sharedData);
 
 	HTTPResponse handle(HTTPRequest &request);
+
 };
 
 #endif //APPLICATIONSERVER_HANDLERSELECTOR_H

@@ -3,20 +3,18 @@
 //
 
 #include "ChatHTTP.h"
+#include "../Mongoose/MgHTTPClient.h"
+#include "RequestParser.h"
+#include "../Exceptions/AuthorizationException.h"
 
 #define HTTP_GET "GET"
 #define HTTP_POST "POST"
 
 HTTPResponse ChatHTTP::handle(HTTPRequest request) {
 	std::string verb = request.getVerb();
-	std::string uri = request.getUri();
-
-	std::vector<std::string> uriSplit;
-	uriSplit = request.getSplitUri();
-
-	if (verb == HTTP_POST && uriSplit.size() == 3 &&  uriSplit[1] == "me") {
+	if (verb == HTTP_POST) {
 		return handleSendChat(request);
-	} else if (verb == HTTP_GET && uriSplit.size() == 3 &&  uriSplit[1] == "me") {
+	} else if (verb == HTTP_GET) {
 		return handleGetHistory(request);
 	} else {
 		return HTTP::NotFound();
@@ -24,52 +22,22 @@ HTTPResponse ChatHTTP::handle(HTTPRequest request) {
 }
 
 HTTPResponse ChatHTTP::handleSendChat(HTTPRequest request) {
-	std::vector<std::string> uriSplit;
-	uriSplit = request.getSplitUri();
-
-	std::string userId;
-	std::string token = request.getHeader("Authorization");
-	bool validToken = users.getUserId(token, &userId);
-	if (!validToken) return HTTP::Unauthorized();
-
-
-	std::string otherUserId = uriSplit[2];
-	if (!users.userExists(otherUserId)) {
-		return HTTP::Error("User doesn't exist");
-	} else {
-		if (!matcher.usersMatch(userId, otherUserId)) {
-			return HTTP::Error("User is not a match");
-		}
-	}
-
-	std::string content = request.getBody();
-
-	chat.sendMessage(userId, otherUserId, content);
-
+	std::string token;
+	std::string matchId;
+	std::string message;
+	RequestParser::parseSendChat(request, &token, &matchId, &message);
+	std::string userId = connected.getUserId(token);
+	if (!matcher.usersMatch(userId, matchId)) throw AuthorizationException("User is not a match");
+	std::string msgJson = chat.sendMessage(userId, matchId, message);
 	return HTTP::OK();
 }
 
 HTTPResponse ChatHTTP::handleGetHistory(HTTPRequest request) {
-	std::vector<std::string> uriSplit;
-	uriSplit = request.getSplitUri();
-
-	std::string userId;
-	std::string token = request.getHeader("Authorization");
-	bool validToken = users.getUserId(token,&userId);
-	if(!validToken) return HTTP::Unauthorized();
-
-	std::string otherUserId = uriSplit[2];
-	if(!users.userExists(otherUserId)){
-		return HTTP::Error("User doesn't exist");
-	}else{
-		if(!matcher.usersMatch(userId, otherUserId)){
-			return HTTP::Error("User is not a match");
-		}
-	}
-
-	// FIXME que devuelva el Json completo y listo
-
-	std::string history = chat.getHistory(userId, otherUserId);
-
-	return HTTP::OKJson(history);
+	std::string token;
+	std::string matchId;
+	RequestParser::parseGetHistory(request, &token, &matchId);
+	std::string userId = connected.getUserId(token);
+	if (!matcher.usersMatch(userId, matchId)) throw AuthorizationException("User is not a match");
+	Json::Value history = chat.getHistory(userId, matchId);
+	return HTTP::OK(history);
 }

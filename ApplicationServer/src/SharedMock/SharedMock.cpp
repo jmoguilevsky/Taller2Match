@@ -4,30 +4,29 @@
 
 #include "SharedMock.h"
 
-bool SharedMock::getUsersList(vector<UserProfile> *users) {
+vector<UserProfile> SharedMock::getUsersList() {
+    vector<UserProfile> users;
     for ( std::map<std::string, UserProfile>::iterator iter  = (this -> users).begin(); iter != (this -> users).end(); ++iter) {
-        users -> push_back(iter -> second);
+        users . push_back(iter -> second);
     }
-    return true;
+    return users;
 }
 
-bool SharedMock::getUserProfile(string sharedId, UserProfile *userProfile) {
-    if (users.count(sharedId) == 0) return false;
-    *userProfile = users[sharedId];
-    return true;
+UserProfile SharedMock::getUserProfile(string sharedId) {
+    return users[sharedId];
 }
 
-bool SharedMock::newUser(UserProfile userProfile, string *sharedId) {
+std::string SharedMock::newUser(UserProfile userProfile) {
+    std::string sharedId;
     // Supongo que el mail con el que viene el perfil siempre es nuevo, no se repite.
-    *sharedId = std::to_string(users.size() + 1);
-    users[*sharedId] = userProfile;
-    return true;
+    sharedId = std::to_string(users.size() + 1);
+    users[sharedId] = userProfile;
+    return sharedId;
 }
 
-bool SharedMock::updateProfile(string sharedId, UserProfile profile) {
-    if(users.count(sharedId) == 0) return false;
+void SharedMock::updateProfile(string sharedId, UserProfile profile) {
+
     users[sharedId] = profile;
-    return true;
 }
 
 

@@ -7,23 +7,22 @@
 
 
 #include <cstdbool>
-#include "../SharedData.h"
-#include "../UserProfile.h"
+#include "../Profile/UserProfile.h"
+#include "../MatchData/SharedProfilesDatabase.h"
 
-class SharedMock : public SharedData {
+class SharedMock : public SharedProfilesDatabase {
     std::map<std::string, UserProfile> users;
 public:
-    //! Carga el listado de usuarios en el vector.
-    bool getUsersList(vector<UserProfile>* users);
+     std::vector<UserProfile> getUsersList() ;
 
     //! Carga el perfil del usuario con id sharedId.
-    bool getUserProfile(string sharedId, UserProfile* userProfile);
+     UserProfile getUserProfile(std::string sharedId) ;
 
     //! Da de alta un nuevo usuario con el perfil, y carga el sharedId con que se creó.
-    bool newUser(UserProfile userProfile, string* sharedId);
+     std::string newUser(UserProfile userProfile) ;
 
     //! Actualiza el perfil del usuario con id sharedId.
-    bool updateProfile(string sharedId, UserProfile profile);
+     void updateProfile(string sharedId, UserProfile profile) ;
 };
 
 

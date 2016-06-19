@@ -1,23 +1,5 @@
-[2016/06/02-17:41:28]  ***** New log session: ERROR *****
-[2016/06/02-17:48:34]  ***** New log session: ERROR *****
-[2016/06/02-18:02:45]  ***** New log session: DEBUG *****
-[2016/06/02-18:02:46] INFO : Listening connections on port 7000
-[2016/06/02-18:02:46] INFO : Shared server: enigmatic-depths-58073.herokuapp.com:80
-[2016/06/02-18:02:53] INFO : Retrieved user profile from shared server
-[2016/06/02-18:02:53] INFO : New user connected
-[2016/06/02-18:11:37] INFO : Retrieved user profile from shared server
-[2016/06/02-18:11:37] INFO : New user connected
-[2016/06/02-18:12:00] INFO : User profile updated
-[2016/06/02-18:12:04] INFO : User logged out
-[2016/06/02-18:12:11] INFO : Retrieved user profile from shared server
-[2016/06/02-18:12:11] INFO : New user connected
-[2016/06/02-18:12:37] INFO : User logged out
-[2016/06/02-18:14:26] INFO : Couldn't create user
-[2016/06/02-18:15:13] INFO : Couldn't create user
-[2016/06/02-18:15:45] INFO : New user created
-[2016/06/02-18:16:35] INFO : Retrieved user profile from shared server
-[2016/06/02-18:16:35] INFO : New user connected
-[2016/06/02-18:19:44] INFO : User profile updated
-[2016/06/02-18:20:42] INFO : User logged out
-[2016/06/02-18:21:32] INFO : Retrieved user profile from shared server
-[2016/06/02-18:21:32] INFO : New user connected
+[2016/06/15-13:38:37]  ***** New log session: ERROR *****
+[2016/06/15-13:38:50]  ***** New log session: ERROR *****
+[2016/06/15-14:05:28]  ***** New log session: ERROR *****
+[2016/06/15-17:04:02]  ***** New log session: ERROR *****
+[2016/06/15-18:25:50]  ***** New log session: ERROR *****

@@ -12,14 +12,18 @@ add_definitions(-DMG_ENABLE_THREADS)
 
 file(GLOB app_src
         "src/*.cpp"
+        "src/*.h"
+        "src/json/*.cpp"
         "src/DB/*.cpp"
-        "src/Handlers/*.cpp"
+        "src/MatchData/*.cpp"
         "src/HandlersHTTP/*.cpp"
         "src/HTTP/*.cpp"
         "src/Log/*.cpp"
         "src/Mongoose/*"
         "src/Mongoose/mongoose-master/*"
         "src/SharedMock/*.cpp"
+        "src/Profile/*.cpp"
+        "src/Utilities/*.cpp"
         )
 
 set(SOURCE_FILES ${app_src})

@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private int DISLIKE_MATCH = 2;
     private static final String TAG = MainActivity.class.getSimpleName();
     private String id_candidate;
-
     private SQLiteHandler db;
     private SessionManager session;
     private ProgressDialog pDialog;
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         // Obtain and assign views
         txtEmail = (TextView) findViewById(R.id.email);
         imgMatch = (ImageView) findViewById(R.id.match_image);
-        btnFind = (Button) findViewById(R.id.btnFind);
+        //btnFind = (Button) findViewById(R.id.btnFind);
         iconHeart = (ImageView) findViewById(R.id.match_accept);
         iconCross = (ImageView) findViewById(R.id.match_reject);
 
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         imgMatch.setOnClickListener(match_clickListener);
         iconHeart.setOnClickListener(match_clickListener);
         iconCross.setOnClickListener(match_clickListener);
-        btnFind.setOnClickListener(match_clickListener);
+        //btnFind.setOnClickListener(match_clickListener);
 
         // Find a match
         findMatch();

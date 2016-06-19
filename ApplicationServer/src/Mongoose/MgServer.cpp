@@ -4,10 +4,9 @@
 // TODO: Eliminar este handler, que sea un método de un objeto que se dedique a manejar requests
 
 void MgServer::clientHandler(struct mg_connection *c, int ev, void *p) {
-	if(ev==MG_EV_RECV){
-		std::cout << "HOLA HOLA HOLA";
-	}
 	if (ev == MG_EV_HTTP_REQUEST) {
+
+
 		HTTPRequest request((struct http_message *) p);
 		MgServer *thisServer = (MgServer *) c->user_data;
 
@@ -18,6 +17,8 @@ void MgServer::clientHandler(struct mg_connection *c, int ev, void *p) {
 	}
 }
 
+
+
 void MgServer::stop() {
 	this->isServerUP = false;
 }
@@ -26,7 +27,7 @@ MgServer::MgServer(std::string port, RequestHandler &requestHandler)
 		: requestHandler(requestHandler) {
 
 	// TODO Poner esto en un método "init", para poder devolver OK o ERROR si falla la conexión.
-	mongooseConnectionManager.configureListeningConnection(port, this, this->clientHandler);
+	c = mongooseConnectionManager.configureListeningConnection(port, this, this->clientHandler);
 }
 
 void MgServer::start() {

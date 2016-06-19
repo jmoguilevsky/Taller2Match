@@ -120,7 +120,7 @@ function SearchBox(name, resultsPath, inFrame, label)
   this.DOMSearchBox = function()
   {  return document.getElementById("MSearchBox");  }
 
-  // ------------ Event Handlers
+  // ------------ Event MatchData
 
   // Called when focus is added or removed from the search field.
   this.OnSearchFieldFocus = function(isActive)

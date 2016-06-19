@@ -5,6 +5,7 @@
 #include <fstream>
 #include "../Mongoose/MgHTTPClient.h"
 #include "../Mongoose/MgServer.h"
+#include "../Exceptions/ParseException.h"
 
 #define CRLF "\r\n"
 #define HTTP_VERSION "HTTP/1.1"
@@ -78,7 +79,8 @@ HTTPRequest::HTTPRequest() {
 }
 
 std::string HTTPRequest::getHeader(std::string header) {
-	return headers.count(header) ? headers[header] : "";
+	if (headers.count(header) == 0) throw ParseException ("Missing header: \"Authorization\"");
+	return headers[header];
 }
 
 HTTPRequest::HTTPRequest(std::string verb, std::string uri, std::string body) {

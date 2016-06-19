@@ -111,7 +111,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_key_value_db.html#ab3a42bca60d7280367b806d4594d3934">save</a>(<span class="keyword">const</span> std::string &amp;key, <span class="keyword">const</span> std::string &amp;value) = 0;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_key_value_db.html#a9f15e394416377bf4fa30acb3c73bb29">keyExists</a>(std::string basic_string) = 0;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_key_value_db.html#a9f15e394416377bf4fa30acb3c73bb29">hasKey</a>(std::string basic_string) = 0;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <span class="keyword">get</span>(<span class="keyword">const</span> std::string &amp;key, std::string &amp;value) = 0;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
@@ -125,7 +125,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#endif //APPSERVER_NOSQLDATABASE_H</span></div>
 <div class="ttc" id="class_key_value_db_html_ab3a42bca60d7280367b806d4594d3934"><div class="ttname"><a href="class_key_value_db.html#ab3a42bca60d7280367b806d4594d3934">KeyValueDb::save</a></div><div class="ttdeci">virtual void save(const std::string &amp;key, const std::string &amp;value)=0</div><div class="ttdoc">Guarda en la DB el par {key,value}. </div></div>
-<div class="ttc" id="class_key_value_db_html_a9f15e394416377bf4fa30acb3c73bb29"><div class="ttname"><a href="class_key_value_db.html#a9f15e394416377bf4fa30acb3c73bb29">KeyValueDb::keyExists</a></div><div class="ttdeci">virtual bool keyExists(std::string basic_string)=0</div><div class="ttdoc">Devuelve true si key existe como clave en la DB. False si no. </div></div>
+<div class="ttc" id="class_key_value_db_html_a9f15e394416377bf4fa30acb3c73bb29"><div class="ttname"><a href="class_key_value_db.html#a9f15e394416377bf4fa30acb3c73bb29">KeyValueDb::hasKey</a></div><div class="ttdeci">virtual bool hasKey(std::string basic_string)=0</div><div class="ttdoc">Devuelve true si key existe como clave en la DB. False si no. </div></div>
 <div class="ttc" id="class_key_value_db_html"><div class="ttname"><a href="class_key_value_db.html">KeyValueDb</a></div><div class="ttdoc">Base de datos {clave, valor}, genérica. </div><div class="ttdef"><b>Definition:</b> KeyValueDb.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->

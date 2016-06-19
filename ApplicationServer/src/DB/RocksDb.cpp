@@ -30,7 +30,7 @@ RocksDb::~RocksDb() {
     delete db;
 }
 
-bool RocksDb::keyExists(std::string key) {
+bool RocksDb::hasKey(std::string key) {
     // TODO HACER ESTO BIEN
     std::string value;
     get(key, value);
