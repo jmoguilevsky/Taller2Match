@@ -10,15 +10,15 @@
 #define HTTP_POST "POST"
 #define HTTP_DELETE "DELETE"
 
-#define FULL_URI_CANDIDATES "/matches/candidates"
-#define FULL_URI_REACTION "/matches/reaction"
-#define FULL_URI_MATCHES "/matches/matches"
-#define FULL_URI_INTERESTS "/matches/interests"
+#define FULL_URI_CANDIDATES "/match/candidate"
+#define FULL_URI_REACTION "/match/reaction"
+#define FULL_URI_MATCHES "/match/matches"
+#define FULL_URI_INTERESTS "/match/interests"
 
 HTTPResponse MatchHTTP::handle(HTTPRequest request) {
     std::string verb = request.getVerb();
     std::string uri = request.getUri();
-
+    std::cout<< "ffff "  << uri;
     if (verb == HTTP_GET && uri == FULL_URI_CANDIDATES) {
         return handleGetCandidate(request);
     } else if (verb == HTTP_POST && uri == FULL_URI_REACTION) {

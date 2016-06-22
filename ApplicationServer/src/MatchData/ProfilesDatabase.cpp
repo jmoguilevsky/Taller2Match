@@ -39,7 +39,9 @@ UserProfile ProfilesDatabase::getProfile(string userId) {
 
 void ProfilesDatabase::newUser(std::string email, std::string password, UserProfile userProfile) {
     if(email_sharedId_map->hasKey(email)) throw Exception("Email already registered in server");
+    std::cout<<"asdasd";
     std::string sharedId = sharedData -> newUser(userProfile);
+    std::cout<<"asdasd2";
     std::string userId = getNextId();
     email_sharedId_map -> save(email, sharedId); // Registrar sharedId para ese email
     userId_email_map -> save(userId, email); // Registrar email para el userId

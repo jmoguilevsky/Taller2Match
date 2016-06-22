@@ -5,7 +5,7 @@
 #include "../Exceptions/SharedServerException.h"
 #include "../MatchData/Threads.h"
 
-#define URI_MATCHES "matches"
+#define URI_MATCHES "match"
 #define URI_CHAT "chat"
 #define URI_USERS "users"
 

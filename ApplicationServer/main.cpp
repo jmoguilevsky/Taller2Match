@@ -88,10 +88,10 @@ int main(int argc, char** argv) {
 
 	Log::init("log.txt", logLevel);
 
-	SharedServerConnection serverConnection(SHARED_SERVER);
-	MatchRequestHandler matchRequestHandler(serverConnection);
-//	SharedMock sharedMock;
-//	MatchRequestHandler matchRequestHandler(sharedMock);
+//	SharedServerConnection serverConnection(SHARED_SERVER);
+//	MatchRequestHandler matchRequestHandler(serverConnection);
+	SharedMock sharedMock;
+	MatchRequestHandler matchRequestHandler(sharedMock);
 
 	MgServer server(port, matchRequestHandler);
 

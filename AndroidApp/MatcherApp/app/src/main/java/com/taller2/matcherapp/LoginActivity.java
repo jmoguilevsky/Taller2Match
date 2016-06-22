@@ -120,6 +120,7 @@ public class LoginActivity extends AppCompatActivity {
         // Create login session
         session.setLogin(true);
 
+        /*
         // Add user to database
         String name_stud = "Seba Elizalde";
         String alias_stud = "SE";
@@ -166,10 +167,10 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this,
                 MainActivity.class);
         startActivity(intent);
-        finish();
+        finish();*/
 
         // Create the request for a JSONObject
-        /*final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+        final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 AppConfig.URL_LOGIN, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
 
@@ -215,13 +216,13 @@ public class LoginActivity extends AppCompatActivity {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Log.e(TAG, "Login Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
-                        "Server Error " + error.getMessage() + ". Please try again.", Toast.LENGTH_LONG).show();
+                        "Server Error: Please try again.", Toast.LENGTH_LONG).show();
                 hideDialog();
             }
         });
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);*/
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
     }
 
     private void showDialog() {

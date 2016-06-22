@@ -6,10 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = RegisterActivity.class.getSimpleName();
@@ -41,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String sex_interest = "";
     private String user_gender = "";
     private TextView inputDistance;
+    private Spinner spinner_age;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
         inputDistance = (TextView) findViewById(R.id.display_distance);
+        spinner_age = (Spinner) findViewById(R.id.spinner_age);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -80,11 +87,12 @@ public class RegisterActivity extends AppCompatActivity {
                 String alias = inputAlias.getText().toString().trim();
                 String sex = sex_interest.trim();
                 String gender = user_gender.trim();
+                String age = spinner_age.getSelectedItem().toString();
                 String distance = inputDistance.getText().toString().replaceAll("[^0-9?!\\.]",""); // get only the number
 
                 if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty() &&
                         !sex.isEmpty() && !gender.isEmpty() && !alias.isEmpty()) {
-                    registerUser(name, alias, gender, email, password, sex, distance);
+                    registerUser(name, alias, gender, email, password, sex, distance, age);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Please enter your details!", Toast.LENGTH_LONG).show();
@@ -102,6 +110,15 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        List age = new ArrayList<>();
+        for (int i = 18; i <= 80; i++) {
+            age.add(Integer.toString(i));
+        }
+        ArrayAdapter<Integer> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, age);
+        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+        Spinner spinner = (Spinner)findViewById(R.id.spinner_age);
+        spinner.setAdapter(spinnerArrayAdapter);
 
         // Seekbar set up
         SeekBar mSeekbar = (SeekBar) findViewById(R.id.age_seekbar);
@@ -159,7 +176,7 @@ public class RegisterActivity extends AppCompatActivity {
     // Function that creates POST request to register user with the parameters provided.
     // If registration is successful, user is taken to Login activity,
     private void registerUser(final String name, final String alias, final String user_gender, final String email,
-                              final String password, final String sex_interest, final String distance) {
+                              final String password, final String sex_interest, final String distance, final String user_age) {
         // Tag used to cancel the request
         String tag_json_req = "req_register";
 
@@ -190,7 +207,9 @@ public class RegisterActivity extends AppCompatActivity {
             json_user.put("alias",alias);
             json_user.put("email",email);
             json_user.put("sex",user_gender);
-            // TODO agregar campo edad
+
+            int int_age = Integer.parseInt(user_age);
+            json_user.put("age",int_age);
             json_user.put("interests",json_array_interests);
             json_user.put("location",location);
 

@@ -23,6 +23,8 @@ public:
 
     //! Actualiza el perfil del usuario con id sharedId.
      void updateProfile(string sharedId, UserProfile profile) ;
+
+    std::vector<Interest> getAllInterests();
 };
 
 

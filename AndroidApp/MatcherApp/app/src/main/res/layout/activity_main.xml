@@ -7,10 +7,19 @@
 
     <include layout="@layout/app_bar" />
 
+    <TextView
+        android:id="@+id/match_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+
     <ImageView android:id="@+id/match_image"
         android:src="@drawable/blank_profile_picture"
         android:contentDescription="@string/match_image_desc"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:layout_width="match_parent"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
@@ -42,12 +51,5 @@
             android:scaleType="centerInside"
             android:src="@drawable/match_heart" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textSize="16sp" />
 
 </LinearLayout>

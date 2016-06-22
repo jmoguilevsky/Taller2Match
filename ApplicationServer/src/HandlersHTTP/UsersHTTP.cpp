@@ -51,7 +51,7 @@ HTTPResponse UsersHTTP::handleSignUp(HTTPRequest request) {
     UserProfile profile;
     RequestParser::parseSignUp(request, &email, &password, &profile);
     profilesDatabase.newUser(email, password, profile);
-    return HTTP::OK();
+    return HTTP::OK(util::stringToJson("{}"));
 }
 
 HTTPResponse UsersHTTP::handleLogin(HTTPRequest request) {

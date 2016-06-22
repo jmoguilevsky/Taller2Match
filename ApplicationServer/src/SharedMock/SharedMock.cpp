@@ -30,8 +30,4 @@ void SharedMock::updateProfile(string sharedId, UserProfile profile) {
 }
 
 
-
-
-
-
-
+std::vector<Interest> SharedMock::getAllInterests() {return std::vector<Interest>();}

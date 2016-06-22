@@ -34,7 +34,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView txtEmail;
+    private TextView matchName;
     private ImageView imgMatch;
     private ImageView iconHeart;
     private ImageView iconCross;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         // Obtain and assign views
-        txtEmail = (TextView) findViewById(R.id.email);
+        matchName = (TextView) findViewById(R.id.match_name);
         imgMatch = (ImageView) findViewById(R.id.match_image);
         //btnFind = (Button) findViewById(R.id.btnFind);
         iconHeart = (ImageView) findViewById(R.id.match_accept);
@@ -72,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> user = db.getUserDetails();
         // Get user details from the database
         String email = user.get("email");
-        // Displaying the user details on the screen
-        txtEmail.setText(email);
 
         // Starting the service for polling messages. Give it the session token.
         startService(user.get("token"));
@@ -181,7 +179,13 @@ public class MainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Log.d(TAG, error.toString());
+                db.deleteUsers();
                 pDialog.hide();
+                pDialog.dismiss();
+                // Launching the login activity
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
 
         }){
@@ -220,23 +224,26 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
                         try {
+                            JSONObject user = response.getJSONObject("user");
                             // We store the id to then send it to the server with the reaction to the candidate.
-                            id_candidate = response.getString("id");
-                            String cand_name = response.getString("name");
-                            String cand_alias = response.getString("alias");
-                            String cand_email = response.getString("email");
-                            String cand_photo = response.getString("phto_profile");
+                            id_candidate = user.getString("id");
+                            String cand_name = user.getString("name");
+                            matchName.setText(cand_name);
+                            String cand_alias = user.getString("alias");
+                            String cand_email = user.getString("email");
+                            String cand_photo = user.getString("photo_profile");
                             Bitmap photo_map = AppController.getInstance().getBitmapImage(cand_photo);
                             imgMatch.setImageBitmap(photo_map);
-                            JSONArray arr_interests = response.getJSONArray("interests");
+                            JSONArray arr_interests = user.getJSONArray("interests");
                             String cand_interests = arr_interests.toString();
-                            JSONObject cand_location = response.getJSONObject("location");
-                            String cand_latitude = response.getString("latitude");
-                            String cand_longitude = response.getString("longitude");
+                            JSONObject cand_location = user.getJSONObject("location");
+                            String cand_latitude = cand_location.getString("latitude");
+                            String cand_longitude = cand_location.getString("longitude");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         pDialog.hide();
+                        pDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
 
@@ -247,6 +254,7 @@ public class MainActivity extends AppCompatActivity {
                 imgMatch.setImageResource(R.drawable.sans);
                 imgMatch.setVisibility(View.VISIBLE);
                 pDialog.hide();
+                pDialog.dismiss();
             }
 
         }){

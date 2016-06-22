@@ -1,13 +1,10 @@
 package com.taller2.matcherapp;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.View;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
