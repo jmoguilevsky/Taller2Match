@@ -1,24 +1,24 @@
 package com.taller2.matcherapp.helper;
 
 public class Message {
-    private String fromName, message;
+    private String fromID, message;
     private boolean isSelf;
 
     public Message() {
     }
 
-    public Message(String fromName, String message, boolean isSelf) {
-        this.fromName = fromName;
+    public Message(String fromID, String message, boolean isSelf) {
+        this.fromID = fromID;
         this.message = message;
         this.isSelf = isSelf;
     }
 
-    public String getFromName() {
-        return fromName;
+    public String getFromID() {
+        return fromID;
     }
 
-    public void setFromName(String fromName) {
-        this.fromName = fromName;
+    public void setFromID(String fromID) {
+        this.fromID = fromID;
     }
 
     public String getMessage() {

@@ -156,7 +156,7 @@ public class ProfileActivity extends AppCompatActivity {
                 spinnerArray.add("Outdoors");
                 spinnerArray.add("Add new category");
                 Spinner spinner = new Spinner(context);
-                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, spinnerArray);
+                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, spinnerArray);
                 spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(spinnerArrayAdapter);
                 layout.addView(spinner,0);
@@ -399,7 +399,7 @@ public class ProfileActivity extends AppCompatActivity {
             }){
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<String, String>();
+                    Map<String, String> params = new HashMap<>();
                     params.put("Authorization", user.get("token"));
                     return params;
                 }

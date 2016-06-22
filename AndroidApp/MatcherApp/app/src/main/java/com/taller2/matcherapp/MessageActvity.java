@@ -1,5 +1,6 @@
 package com.taller2.matcherapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,10 @@ import android.widget.ListView;
 import com.taller2.matcherapp.helper.Message;
 import com.taller2.matcherapp.helper.MessagesListAdapter;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MessageActvity extends AppCompatActivity {
@@ -30,21 +35,49 @@ public class MessageActvity extends AppCompatActivity {
         Intent intent = getIntent();
         match_id = intent.getStringExtra("Match ID");
 
-        listMessages = new ArrayList<Message>();
+        String filePath = "data/data/com.taller2.matcherapp/"+match_id+".txt";
+        File file = new File(filePath);
+        if (file.exists()){
+            int length = (int) file.length();
+            byte[] bytes = new byte[length];
+            try {
+                FileInputStream fis = new FileInputStream(file);
+                fis.read(bytes);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String contents = new String(bytes);
+            parseContents(contents);
+        }
+        else {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        listMessages = new ArrayList<>();
         Message msg;
-        for (int i=0; i < 10; i++){
+        Message msg2;
+        for (int i=0; i < 12; i++){
             if(i%2 == 0){
                 msg = new Message("Par","Hola",false);
+                msg2 = new Message("Par","Hola2",false);
             } else {
-                msg = new Message("Impar","Yo",true);
+                msg = new Message("Impar","HOLIS",true);
+                msg2 = new Message("Impar","Hola2",true);
             }
             listMessages.add(msg);
+            listMessages.add(msg2);
         }
 
         MessagesListAdapter adapter = new MessagesListAdapter(this, listMessages);
         ListView listViewMessages = (ListView) findViewById(R.id.messagesContainer);
         listViewMessages.setAdapter(adapter);
-
+        listViewMessages.setSelection(adapter.getCount()-1);
     }
 
     @Override
@@ -70,4 +103,11 @@ public class MessageActvity extends AppCompatActivity {
         }
     }
 
+    public void parseContents(String contents){
+        // TODO
+    }
+
+    public void refreshListView(){
+        // TODO
+    }
 }

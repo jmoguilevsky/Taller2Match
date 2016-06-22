@@ -27,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -120,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Create login session
         session.setLogin(true);
-/*
+
         // Add user to database
         String name_stud = "Seba Elizalde";
         String alias_stud = "SE";
@@ -167,10 +166,10 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this,
                 MainActivity.class);
         startActivity(intent);
-        finish();*/
+        finish();
 
         // Create the request for a JSONObject
-        final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+        /*final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 AppConfig.URL_LOGIN, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
 
@@ -222,7 +221,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);*/
     }
 
     private void showDialog() {

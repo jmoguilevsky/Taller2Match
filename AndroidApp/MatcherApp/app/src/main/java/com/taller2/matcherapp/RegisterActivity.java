@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -19,15 +21,11 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
-import com.taller2.matcherapp.helper.SQLiteHandler;
 import com.taller2.matcherapp.helper.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.jar.JarOutputStream;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -42,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
     private SessionManager session;
     private String sex_interest = "";
     private String user_gender = "";
-    private SQLiteHandler db;
+    private TextView inputDistance;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         inputAlias= (EditText) findViewById(R.id.alias);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
+        inputDistance = (TextView) findViewById(R.id.display_distance);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -62,9 +61,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Session manager
         session = new SessionManager(getApplicationContext());
-
-        // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
 
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
@@ -82,13 +78,13 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
                 String alias = inputAlias.getText().toString().trim();
-
-                sex_interest.trim();
-                user_gender.trim();
+                String sex = sex_interest.trim();
+                String gender = user_gender.trim();
+                String distance = inputDistance.getText().toString().replaceAll("[^0-9?!\\.]",""); // get only the number
 
                 if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty() &&
-                        !sex_interest.isEmpty() && !user_gender.isEmpty() && !alias.isEmpty()) {
-                    registerUser(name, alias, user_gender, email, password, sex_interest);
+                        !sex.isEmpty() && !gender.isEmpty() && !alias.isEmpty()) {
+                    registerUser(name, alias, gender, email, password, sex, distance);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Please enter your details!", Toast.LENGTH_LONG).show();
@@ -105,6 +101,21 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(i);
                 finish();
             }
+        });
+
+        // Seekbar set up
+        SeekBar mSeekbar = (SeekBar) findViewById(R.id.age_seekbar);
+
+        mSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+        {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+            {
+                inputDistance.setText(String.valueOf(progress + 1)+" km"); // to set the minimum at 1
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
     }
@@ -148,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity {
     // Function that creates POST request to register user with the parameters provided.
     // If registration is successful, user is taken to Login activity,
     private void registerUser(final String name, final String alias, final String user_gender, final String email,
-                              final String password, final String sex_interest) {
+                              final String password, final String sex_interest, final String distance) {
         // Tag used to cancel the request
         String tag_json_req = "req_register";
 
@@ -161,6 +172,7 @@ public class RegisterActivity extends AppCompatActivity {
             JSONObject json_info = new JSONObject();
             json_info.put("password",password);
             json_info.put("email",email);
+            json_info.put("distance",distance);
 
             JSONObject location = new JSONObject();
             location.put("latitude", -121.34343);

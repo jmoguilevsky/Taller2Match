@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Permission to write to external storage -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Permission to get coarse (not as precise) location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:name=".app.AppController"
@@ -72,6 +74,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.taller2.matcherapp.MessageActvity" />
         </activity>
+
+        <service
+            android:name=".PollingService"
+            android:enabled="true"
+            android:exported="false"></service>
     </application>
 
 </manifest>

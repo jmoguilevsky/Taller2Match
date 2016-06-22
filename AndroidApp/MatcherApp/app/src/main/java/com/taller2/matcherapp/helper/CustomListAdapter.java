@@ -1,6 +1,7 @@
 package com.taller2.matcherapp.helper;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.taller2.matcherapp.R;
+import com.taller2.matcherapp.app.AppController;
 
 /**
  * Created by seba on 16/06/16.
@@ -18,11 +20,13 @@ public class CustomListAdapter extends ArrayAdapter<String> {
 
     private final Activity context;
     private final String[] itemname;
+    private final String[] itemphoto;
 
-    public CustomListAdapter(Activity context, String[] itemname) {
+    public CustomListAdapter(Activity context, String[] itemname, String[] itemphoto) {
         super(context, R.layout.chatlist_view, itemname);
         this.context=context;
         this.itemname=itemname;
+        this.itemphoto=itemphoto;
     }
 
     public View getView(int position, View view, ViewGroup parent) {
@@ -33,8 +37,9 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 
         txtTitle.setText(itemname[position]);
-        imageView.setImageResource(R.drawable.ic_chat_black_24dp);
+        Bitmap profile_photo_map = AppController.getInstance().getBitmapImage(itemphoto[position]);
+        imageView.setImageBitmap(profile_photo_map);
         return rowView;
 
-    };
+    }
 }

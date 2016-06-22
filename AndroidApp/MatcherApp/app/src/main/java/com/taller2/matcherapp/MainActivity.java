@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView txtEmail;
     private ImageView imgMatch;
-    private Button btnFind;
     private ImageView iconHeart;
     private ImageView iconCross;
     private int LIKE_MATCH = 1;
@@ -76,11 +75,15 @@ public class MainActivity extends AppCompatActivity {
         // Displaying the user details on the screen
         txtEmail.setText(email);
 
+        // Starting the service for polling messages. Give it the session token.
+        startService(user.get("token"));
+
         // Match piture image click event
         View.OnClickListener match_clickListener = new View.OnClickListener() {
             public void onClick(View v) {
                 if (v.equals(imgMatch)) {
                     // Define what to do when user clicks image
+                    stopService();
                 }
                 else if (v.equals(iconHeart)){
                     // Accept (heart) button click event
@@ -89,10 +92,6 @@ public class MainActivity extends AppCompatActivity {
                 else if (v.equals(iconCross)) {
                     // Reject (cross) match button click event
                     rejectMatch();
-                }
-                else if (v.equals(btnFind)) {
-                    // Find match button click event
-                    findMatch();
                 }
             }
         };
@@ -149,6 +148,12 @@ public class MainActivity extends AppCompatActivity {
         final String token = user.get("token");
         Log.d("token",token);
 
+        // Progress dialog
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Loging out...");
+        pDialog.show();
+
         // Create a POST request, send JSONObject.
         // On success expect an empty JSON
         // On failute expect a JSON with an error field
@@ -163,6 +168,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
                         db.deleteUsers();
+                        pDialog.hide();
+                        pDialog.dismiss();
                         // Launching the login activity
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
@@ -174,12 +181,13 @@ public class MainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Log.d(TAG, error.toString());
+                pDialog.hide();
             }
 
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("Authorization", token);
                 return params;
             }
@@ -212,10 +220,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
                         try {
-                            // We get the candidate id.
-                            String cand_id = response.getString("id");
                             // We store the id to then send it to the server with the reaction to the candidate.
-                            id_candidate = cand_id;
+                            id_candidate = response.getString("id");
                             String cand_name = response.getString("name");
                             String cand_alias = response.getString("alias");
                             String cand_email = response.getString("email");
@@ -246,15 +252,13 @@ public class MainActivity extends AppCompatActivity {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("Authorization", user.get("token"));
                 return params;
             }
         };
-
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
-
     }
 
     private void acceptMatch(){
@@ -323,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("Authorization", user.get("token"));
                 return params;
             }
@@ -331,5 +335,17 @@ public class MainActivity extends AppCompatActivity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
+    }
+
+    // Method to start the service
+    public void startService(String token) {
+        Intent service_intent = new Intent(getBaseContext(), PollingService.class);
+        service_intent.putExtra("token",token);
+        startService(service_intent);
+    }
+
+    public void stopService(){
+        Intent stop_intent = new Intent(getBaseContext(),PollingService.class);
+        stopService(stop_intent);
     }
 }

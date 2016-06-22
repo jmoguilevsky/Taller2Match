@@ -5,20 +5,19 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="65dp"
-    android:paddingLeft="10dp"
+    android:paddingTop="75dp"
     android:paddingRight="10dp"
+    android:paddingLeft="10dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.taller2.matcherapp.ProfileActivity"
     tools:showIn="@layout/activity_profile">
 
     <ImageView android:id="@+id/match_image"
         android:contentDescription="@string/match_image_desc"
-        android:layout_height="300dp"
-        android:layout_width="300dp"
-        android:paddingTop="10dp"
-        android:adjustViewBounds="true"
-        android:layout_gravity="center_horizontal" />
+        android:layout_height="250dp"
+        android:layout_width="match_parent"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true" />
 
     <LinearLayout
         android:layout_width="fill_parent"

@@ -24,7 +24,16 @@ public class AppConfig {
     // Server find candidate url
     public static String URL_FIND_CANDIDATE = app_server_ip + "/match/candidate";
 
-    //Server like match url
+    // Server like match url
     public static String URL_REACT_CANDIDATE = app_server_ip + "/match";
+
+    // Server get the new matches url
+    public static String URL_GET_NEW_MATCHES = app_server_ip + "/match/new";
+
+    // Server get all the matches url
+    public static String URL_GET_ALL_MATCHES = app_server_ip + "/chat/matches";
+
+    // Server get all the new messages url
+    public static String URL_GET_NEW_MESSAGES = app_server_ip + "/chat/new";
 
 }
