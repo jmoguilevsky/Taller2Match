@@ -44,6 +44,8 @@ install:
 - cd ..
 - cd ..
 - rm -rf rocksdb-install
+- sudo apt-get install python-jsonschema -y
+- sudo apt-get install python-requests -y
 script:
 - cd ApplicationServer/
 - cmake .
@@ -51,6 +53,7 @@ script:
 - cd test
 - ./unitTests
 - cd ..
+- ./ApiTest/apiTests
 addons:
   apt:
     sources:
