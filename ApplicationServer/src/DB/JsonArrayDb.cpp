@@ -43,7 +43,7 @@ void JsonArrayDb::append_value(std::string key, std::string value) {
     std::string arrayString;
     database->get(key, arrayString);
     Json::Value newArrayJson = util::stringToJson(arrayString);
-    Json::Value valueJson = value;
+    Json::Value valueJson = util::stringToJson(value);
     newArrayJson.append(valueJson);
     std::string newArrayString = util::JsonToString(newArrayJson);
     database->save(key, newArrayString);

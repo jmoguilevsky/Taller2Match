@@ -32,6 +32,8 @@ void ::RequestParser::parseToken(HTTPRequest request, std::string *token) {
 
 void ::RequestParser::parseViewProfile(HTTPRequest request, std::string *token, std::string *userId) {
     RequestParser::parseToken(request, token);
+    std::cout << "req body: " << request.getBody() << std::endl;
+    *userId = util::stringToJson(request.getBody())["id"].asString();
 }
 
 void ::RequestParser::parseLogin(HTTPRequest request, std::string *email, std::string *password, std::string *url) {

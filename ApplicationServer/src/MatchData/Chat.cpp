@@ -33,6 +33,7 @@ std::string Chat::sendMessage(std::string userId, std::string otherUserId, std::
     msg["from"] = userId;
     msg["time"] = "now";
     notif["message"] = msg;
+    std::cout << "jsontostring: " << util::JsonToString(notif) << std::endl;
     notifications_db -> append_value(otherUserId, util::JsonToString(notif));
     std::cout << "Notifications for user: " << otherUserId << std::endl <<
     notifications_db -> values_as_string(otherUserId) << std::endl;

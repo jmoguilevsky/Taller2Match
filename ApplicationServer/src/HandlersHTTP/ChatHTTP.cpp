@@ -41,8 +41,13 @@ HTTPResponse ChatHTTP::handleGetNew(HTTPRequest request) {
 	RequestParser::parseGetNew(request, &token);
 	std::string userId = connected . getUserId(token);
 	Json::Value newMsgs = chat . getNewForUser(userId);
-	if (newMsgs . size() == 0) { return HTTP::OK(util::stringToJson("{}")); }
-	return HTTP::OK(newMsgs);
+  std::cout << "NEW MESSAGES: " << util::JsonToString(newMsgs) << std::endl;
+  std::cout << "NEW MSGS SIZE: " << newMsgs.size() << std::endl;
+	if (newMsgs . size() == 0) { std::cout << "NOTHINGA" << std::endl;return HTTP::OK(util::stringToJson("{}")); }
+
+  Json::Value top;
+  top["messages"] = newMsgs;
+  return HTTP::OK(top);
 }
 
 HTTPResponse ChatHTTP::handleGetHistory(HTTPRequest request) {
