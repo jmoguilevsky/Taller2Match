@@ -28,7 +28,7 @@ HTTPResponse MatchHTTP::handle(HTTPRequest request) {
         return handlePostReaction(request);
     } else if (verb == HTTP_GET && uri == FULL_URI_MATCHES) {
         return handleGetMatches(request);
-    } else if (verb == HTTP_GET && uri == FULL_URI_MATCH) {
+    } else if (verb == HTTP_PUT && uri == FULL_URI_MATCH) {
       std::cout <<"request:" << request.toString() << std::endl;
       return handleViewProfile(request);
     } else if (verb == HTTP_GET && uri == FULL_URI_INTERESTS) {
