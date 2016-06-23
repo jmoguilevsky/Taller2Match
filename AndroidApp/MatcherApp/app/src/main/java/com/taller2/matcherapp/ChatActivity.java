@@ -206,8 +206,8 @@ public class ChatActivity extends AppCompatActivity {
                         try {
                             JSONArray messages = response.getJSONArray("messages");
                             for (int i = 0; i < messages.length(); i++){
-                                JSONObject message = messages.getJSONObject(i);
-                                String from_id = message.getString("id");
+                                JSONObject message = messages.getJSONObject(i).getJSONObject("message");
+                                String from_id = message.getString("from");
                                 String text = message.getString("message");
                                 Log.d(TAG,from_id+" "+text);
                                 Message msg = new Message(from_id,text,false);
