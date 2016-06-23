@@ -31,8 +31,6 @@ class UsersHTTP {
 
 	HTTPResponse handleUpdatePhoto(HTTPRequest request);
 
-	HTTPResponse handleViewProfile(HTTPRequest request);
-
 public:
 
 	UsersHTTP(ConnectedUsers& connected, ProfilesDatabase& users, const Matcher& matcher): connected(connected), profilesDatabase(users), matcher(matcher){};

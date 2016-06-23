@@ -37,9 +37,6 @@ HTTPResponse UsersHTTP::handle(HTTPRequest request) {
     } else if (verb == HTTP_PUT && uri == FULL_URI_PHOTO) {
         //std::cout << " >>> UPDATE PHOTO <<< " << std::endl;
         return handleUpdatePhoto(request);
-    } else if (verb == HTTP_GET) {
-        //std::cout << " >>> GET PROFILE <<< " << std::endl;
-        return handleViewProfile(request);
     } else {
         return HTTP::NotFound();
     }
@@ -87,15 +84,6 @@ HTTPResponse UsersHTTP::handleUpdatePhoto(HTTPRequest request) {
     return HTTP::OK();
 }
 
-HTTPResponse UsersHTTP::handleViewProfile(HTTPRequest request) {
-    std::string token;
-    std::string otherUserId;
-    RequestParser::parseViewProfile(request, &token, &otherUserId);
-    std::string userId = connected.getUserId(token);
-    if(!matcher.usersMatch(userId, otherUserId)) throw AuthorizationException("User is not a match");
-    UserProfile profile = profilesDatabase.getProfile(otherUserId);
-    return ResponseFormatter::formatViewProfile(profile);
-}
 
 HTTPResponse UsersHTTP::handleLogout(HTTPRequest request) {
     std::string token;

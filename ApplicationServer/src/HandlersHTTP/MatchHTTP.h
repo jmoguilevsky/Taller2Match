@@ -28,6 +28,8 @@ class MatchHTTP {
 
 	HTTPResponse handleGetMatches(HTTPRequest request);
 
+  HTTPResponse handleViewProfile(HTTPRequest request);
+
 public:
 
 	MatchHTTP(ProfilesDatabase &users, Matcher &matcher, ConnectedUsers &connected)

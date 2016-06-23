@@ -7,7 +7,7 @@
 #include "HTTP.h"
 #include "../json/json.h"
 #include "../Utilities/util.h"
-
+#include <iostream>
 HTTPResponse HTTP::BadRequest() {
 	std::map<std::string, std::string> headers;
 	return HTTPResponse("400", "Bad Request", headers, "");
@@ -36,5 +36,6 @@ HTTPResponse HTTP::Error(std::string msg) {
 HTTPResponse HTTP::OK(Json::Value json) {
 	std::map<std::string, std::string> headers;
 	headers["Content-type"] = "application/json";
+  std::cout << "RESPONSE::::  " << util::JsonToString(json) << std::endl;
 	return HTTPResponse("200", "OK", headers, util::JsonToString(json));
 }

@@ -4,6 +4,7 @@
 
 #include "MatchHTTP.h"
 #include "RequestParser.h"
+#include "ResponseFormatter.h"
 
 #define HTTP_GET "GET"
 #define HTTP_PUT "PUT"
@@ -13,6 +14,7 @@
 #define FULL_URI_CANDIDATES "/match/candidate"
 #define FULL_URI_REACTION "/match/reaction"
 #define FULL_URI_MATCHES "/match/matches"
+#define FULL_URI_MATCH "/match/match"
 #define FULL_URI_INTERESTS "/match/interests"
 
 HTTPResponse MatchHTTP::handle(HTTPRequest request) {
@@ -26,11 +28,26 @@ HTTPResponse MatchHTTP::handle(HTTPRequest request) {
         return handlePostReaction(request);
     } else if (verb == HTTP_GET && uri == FULL_URI_MATCHES) {
         return handleGetMatches(request);
+    } else if (verb == HTTP_GET && uri == FULL_URI_MATCH) {
+      std::cout <<"request:" << request.toString() << std::endl;
+      return handleViewProfile(request);
     } else if (verb == HTTP_GET && uri == FULL_URI_INTERESTS) {
         return handleGetAllInterests(request);
     } else {
         return HTTP::NotFound();
     }
+}
+
+
+HTTPResponse MatchHTTP::handleViewProfile(HTTPRequest request) {
+      std::string token;
+          std::string otherUserId;
+              RequestParser::parseViewProfile(request, &token, &otherUserId);
+                  std::string userId = connected.getUserId(token);
+                  std::cout << "otherUserId: " << otherUserId << std::endl;
+                      if(!matcher.usersMatch(userId, otherUserId)) throw AuthorizationException("User is not a match");
+                          UserProfile profile = users.getProfile(otherUserId);
+                              return ResponseFormatter::formatViewProfile(profile);
 }
 
 HTTPResponse MatchHTTP::handleGetMatches(HTTPRequest request) {
