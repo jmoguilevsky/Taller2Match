@@ -79,7 +79,7 @@ public class MessageActvity extends AppCompatActivity {
             public void onClick(View v)
             {
                 String text = textField.getText().toString();
-                Message msg = new Message(user.get("id"),text,true);
+                Message msg = new Message(match_id,text,true);
                 listMessages.add(msg);
                 saveMessage(msg);
                 sendMessage(msg);
@@ -186,6 +186,7 @@ public class MessageActvity extends AppCompatActivity {
         String tag_json_req = "send_message";
         JSONObject json_params = new JSONObject();
         try {
+            // Pongo el id de a quien se lo mando.
             json_params.put("id",match_id);
             json_params.put("message",msg.getMessage());
         } catch (JSONException e) {
