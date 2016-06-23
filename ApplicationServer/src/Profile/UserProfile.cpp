@@ -61,7 +61,7 @@ void UserProfile::fromJson(std::string user_str) {
     name = user["user"]["name"].asString();
     email = user["user"]["email"].asString();
     sex = user["user"]["sex"].asString();
-    user["user"]["photo_profile"] = "asdasdkjgfkygfkhgkjhgkjhgkjhgkjhgkhgkjhgkjhgkjhgkhgkjgk";
+    if (!user["user"] . isMember("photo_profile"))user["user"]["photo_profile"] = "asdasdkjgfkygfkhgkjhg";
     parseInterests(user);
 
 }
