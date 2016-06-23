@@ -13,20 +13,27 @@ vector<UserProfile> SharedMock::getUsersList() {
 }
 
 UserProfile SharedMock::getUserProfile(string sharedId) {
-    return users[sharedId];
+    //return users[sharedId];
+    std::string profile;
+    db -> get (sharedId, profile);
+    Json::Value profileJson = util::stringToJson(profile);
+    UserProfile prof (profileJson);
+    return prof;
 }
 
 std::string SharedMock::newUser(UserProfile userProfile) {
     std::string sharedId;
     // Supongo que el mail con el que viene el perfil siempre es nuevo, no se repite.
-    sharedId = std::to_string(users.size() + 1);
-    users[sharedId] = userProfile;
-    return sharedId;
+      sharedId = std::to_string(users.size() + 1);
+    db -> save(sharedId, util::JsonToString(userProfile.getJson()));
+//    users[sharedId] = userProfile;
+//    return sharedId;
+
 }
 
 void SharedMock::updateProfile(string sharedId, UserProfile profile) {
-
-    users[sharedId] = profile;
+    db -> save(sharedId, util::JsonToString(profile.getJson()));
+    //users[sharedId] = profile;
 }
 
 

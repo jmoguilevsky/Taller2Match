@@ -14,6 +14,7 @@ HTTPResponse::HTTPResponse(std::string code, std::string phrase,
                            std::map<std::string, std::string> headers,
                            std::string body) {
 	message = HTTP_VERSION;
+	this -> code = atoi(code.c_str());
 	message += " " + code + " " + phrase + CRLF;
 	for (std::map<std::string, std::string>::iterator it = headers.begin();
 	     it != headers.end(); ++it) {

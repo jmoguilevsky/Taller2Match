@@ -47,7 +47,7 @@ public:
     bool usersMatch(std::string userId, std::string otherUserId) const;
 
     //! Devuelve todos los matches del usuario.
-    std::vector<std::string> getMatches(std::string user);
+    std::vector<UserProfile> getMatches(std::string user);
 
     //! Devuelve todos los likes del usuario.
     std::vector<std::string> getLikes(const std::string &user);
