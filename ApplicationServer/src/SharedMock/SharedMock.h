@@ -12,11 +12,12 @@
 #include "../DB/RocksDb.h"
 
 class SharedMock : public SharedProfilesDatabase {
-    std::map<std::string, UserProfile> users;
+    int n;
     RocksDb* db;
 public:
     SharedMock(){
          db = new RocksDb("usersProfiles");
+        n = (int) (db -> listAll()) . size();
     }
 
      std::vector<UserProfile> getUsersList() ;

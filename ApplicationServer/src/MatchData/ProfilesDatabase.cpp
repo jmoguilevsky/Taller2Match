@@ -30,7 +30,10 @@ UserProfile ProfilesDatabase::getProfile(string userId) {
     userId_email_map -> get(userId, email);
     if (email == "") throw Exception("User not registered in server");
     string sharedId;
+    std::cout << "LISTING ALL USERS EMAIL - SHARED" << std::endl;
+    email_sharedId_map -> listAll();
     email_sharedId_map -> get(email, sharedId);
+
     if (sharedId == "") throw Exception("User not registered in server");
     UserProfile profile = sharedData -> getUserProfile(sharedId);
     profile . changeId(userId);
@@ -41,6 +44,7 @@ void ProfilesDatabase::newUser(std::string email, std::string password, UserProf
     if(email_sharedId_map->hasKey(email)) throw Exception("Email already registered in server");
     std::cout<<"asdasd";
     std::string sharedId = sharedData -> newUser(userProfile);
+    std::cout << "User created with shared Id: " << sharedId << std::endl;
     std::cout<<"asdasd2";
     std::string userId = getNextId();
     email_sharedId_map -> save(email, sharedId); // Registrar sharedId para ese email

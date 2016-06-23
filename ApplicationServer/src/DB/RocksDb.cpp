@@ -10,6 +10,7 @@ RocksDb::RocksDb(const std::string &dbName) {
     rocksdb::Options options;
     options.create_if_missing = true;
     rocksdb::Status status = rocksdb::DB::Open(options, dbName, &db);
+    std::cout << "Db " << dbName << " created with status: " << status . ToString() << std::endl;
 }
 
 void RocksDb::save(const std::string &key, const std::string &value) {
