@@ -167,7 +167,7 @@ public class MessageActvity extends AppCompatActivity {
         File file = new File(filePath);
         if (file.exists()){
             try {
-                OutputStream fo = new FileOutputStream(file);
+                OutputStream fo = new FileOutputStream(file, true);
                 fo.write(data.getBytes());
                 fo.close();
                 Log.e("Save message","Message saved for conversation with id: "+id);
