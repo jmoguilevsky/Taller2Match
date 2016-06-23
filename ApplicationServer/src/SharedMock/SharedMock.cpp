@@ -8,7 +8,11 @@
 vector<UserProfile> SharedMock::getUsersList() {
     vector<UserProfile> users;
 
+    std::cout << "listing all users in sharedData ..." << std::endl;
+
     std::map<std::string, std::string> all = db -> listAll();
+
+    std::cout << all . size() << " users in map" << std::endl;
 
     for (std::map<std::string, std::string>::iterator iter = all . begin(); iter != all . end(); ++iter) {
         Json::Value js = util::stringToJson(iter -> second);

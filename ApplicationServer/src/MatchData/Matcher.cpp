@@ -177,14 +177,24 @@ void Matcher::discardCandidates(std::string userId, std::map<std::string, UserPr
 std::vector<std::string> Matcher::calculateCandidates(std::string userId) {
 
     std::map<std::string, UserProfile> candidates = usersProfiles.getUsers();
+    std::cout << candidates . size() << " candidates initially" << std::endl;
+
     UserProfile userProfile = candidates[userId];
     candidates.erase(userId);
 
+    std::cout << candidates . size() << " candidates remaining before filtering by sex interests" << std::endl;
+
     filterBySex(candidates, userProfile.getSexInterest(), userProfile.getSex());
+
+    std::cout << candidates . size() << " candidates remaining after filtering by sex interests" << std::endl;
 
     // ***** Descarto los candidatos que ya estan en likes y dislikes
 
+
+    std::cout << candidates . size() << " candidates remaining before discarding" << std::endl;
+
     discardCandidates(userId, candidates);
+    std::cout << candidates . size() << " candidates remaining after discarding" << std::endl;
 
     // ***** Calculo el "puntaje" para cada usuario
 

@@ -55,6 +55,7 @@ void ProfilesDatabase::newUser(std::string email, std::string password, UserProf
 
 map<string, UserProfile> ProfilesDatabase::getUsers() {
     vector<UserProfile> users = sharedData -> getUsersList(); // Pido todos los usuarios del shared
+    std::cout << users . size() << " users from sharedData" << std::endl;
     map<string, UserProfile> usersMap;
     for (int i = 0; i < users . size(); i++) {
         std::string userId;

@@ -40,12 +40,14 @@ bool RocksDb::hasKey(std::string key) {
 
 std::map<std::string, std::string> RocksDb::listAll() {
     rocksdb::Iterator *it = db->NewIterator(rocksdb::ReadOptions());
+    std::map<std::string, std::string> all;
     for (it->SeekToFirst(); it->Valid(); it->Next()) {
         std::cout << it->key().ToString() << ": " << it->value().ToString() << std::endl;
+        all[it -> key() . ToString()] = it -> value() . ToString();
     }
     assert(it->status().ok()); // Check for any errors found during the scan
     delete it;
-    return std::map<std::string, std::string>();
+    return all;
 }
 
 std::string RocksDb::getLastKey() {
