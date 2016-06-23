@@ -49,8 +49,9 @@ HTTPResponse UsersHTTP::handleSignUp(HTTPRequest request) {
     std::string email;
     std::string password;
     UserProfile profile;
-    RequestParser::parseSignUp(request, &email, &password, &profile);
-    profilesDatabase.newUser(email, password, profile);
+    int distance;
+    RequestParser::parseSignUp(request, &email, &password, &profile, &distance);
+    profilesDatabase . newUser(email, password, profile, distance);
     return HTTP::OK(util::stringToJson("{}"));
 }
 

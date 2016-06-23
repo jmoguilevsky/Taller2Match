@@ -5,12 +5,13 @@
 #include "RequestParser.h"
 
 void ::RequestParser::parseSignUp(HTTPRequest request, std::string *email, std::string *password,
-                                  UserProfile *profile) {
+                                  UserProfile *profile, int *distance) {
     Json::Value info = util::stringToJson(request . getBody())["info"];
     *email = info["email"] . asString();
     *password = info["password"] . asString();
     Json::Value user = util::stringToJson(request . getBody());
     *profile = UserProfile(user);
+    if (info . isMember("distance"))*distance = info["distance"] . asInt();
 }
 
 void ::RequestParser::parseUpdateProfile(HTTPRequest request, std::string *token, UserProfile *profile) {

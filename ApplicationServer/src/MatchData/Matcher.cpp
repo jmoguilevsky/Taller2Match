@@ -189,7 +189,7 @@ UserProfile Matcher::calculateNextCandidate(std::string userId) {
     discardCandidates(userId, candidates);
     std::cout << candidates . size() << " candidates remaining after discarding" << std::endl;
 
-    //TODO filterByDistance()
+    //filterByDistance(candidates,userProfile.getLatitude(), userProfile.getLongitude(), usersProfiles.getMaxDistance(userId));
 
     // ***** Calculo el "puntaje" para cada usuario
 
@@ -263,3 +263,19 @@ void Matcher::filterBySex(map<string, UserProfile> &candidates, string is, strin
     }
 }
 
+void Matcher::filterByDistance(map<string, UserProfile> &candidates, double lat, double lon, int distance) {
+    std::vector<std::string> toRemove;
+    for (std::map<std::string, UserProfile>::iterator it = candidates . begin();
+         it != candidates . end(); ++it) {
+        UserProfile candidateProfile = it -> second;
+        double candLon = candidateProfile . getLongitude();
+        double candLat = candidateProfile . getLatitude();
+        if (util::distanceEarth(lat, lon, candLon, candLat) > (double) distance) {
+            toRemove . push_back(it -> first);
+        }
+    }
+
+    for (int i = 0; i < toRemove . size(); i++) {
+        candidates . erase(toRemove[i]);
+    }
+}

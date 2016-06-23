@@ -23,7 +23,7 @@ private:
     RocksDb *userId_email_map;
     RocksDb *email_userId_map;
     RocksDb *email_sharedId_map;
-
+    RocksDb *distance_db;
     int n;
 
     string getNextId();
@@ -40,11 +40,15 @@ public:
     //! A partir del id interno, carga el perfil del usuario. Si no hay nadie con ese id, no carga nada y devuelve False.
     UserProfile getProfile(string userId);
     //! Registra un nuevo usuario con el perfil recibido, y carga el id interno creado para él en userId.
-    void newUser(std::string email, std::string password, UserProfile userProfile);
+    void newUser(std::string email, std::string password, UserProfile userProfile, int maxDistance);
     //! Carga un map con clave = id *interno* del usuario, valor = perfil del usuario
     map<string, UserProfile> getUsers();
     //! Dado el id interno del usuario, actualiza su perfil con el recibido.
     void updateProfile(string userId, UserProfile userProfile);
+
+    //!
+    int getMaxDistance(string userId);
+
 
     bool verify(string email, string password);
 

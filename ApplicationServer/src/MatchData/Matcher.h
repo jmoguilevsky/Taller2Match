@@ -72,6 +72,8 @@ public:
     void filterBySex(std::map<string, UserProfile> &candidates, string is, string wants);
 
     UserProfile calculateNextCandidate(string userId);
+
+    void filterByDistance(map<string, UserProfile> &candidates, double lat, double lon, int distance);
 };
 
 #endif //APPSERVER_MATCHER_H

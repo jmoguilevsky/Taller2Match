@@ -11,6 +11,7 @@ ProfilesDatabase::ProfilesDatabase() {
     email_userId_map = new RocksDb("db/email_userId");
     email_sharedId_map = new RocksDb("db/email_sharedId");
     email_pwd_map = new RocksDb("db/email_pwd");
+    distance_db = new RocksDb("db/distance_db");
     n = 0;
 }
 
@@ -40,7 +41,7 @@ UserProfile ProfilesDatabase::getProfile(string userId) {
     return profile;
 }
 
-void ProfilesDatabase::newUser(std::string email, std::string password, UserProfile userProfile) {
+void ProfilesDatabase::newUser(std::string email, std::string password, UserProfile userProfile, int maxDistance) {
     if(email_sharedId_map->hasKey(email)) throw Exception("Email already registered in server");
     std::cout<<"asdasd";
     std::string sharedId = sharedData -> newUser(userProfile);
@@ -51,6 +52,7 @@ void ProfilesDatabase::newUser(std::string email, std::string password, UserProf
     userId_email_map -> save(userId, email); // Registrar email para el userId
     email_userId_map -> save(email, userId);
     email_pwd_map -> save(email, password);
+    distance_db -> save(userId, std::to_string(maxDistance));
 }
 
 map<string, UserProfile> ProfilesDatabase::getUsers() {
@@ -93,4 +95,12 @@ bool ProfilesDatabase::verify(string email, string password) {
     email_pwd_map -> get(email, pass);
     return password == pass;
 }
+
+int ProfilesDatabase::getMaxDistance(string userId) {
+    std::string distStr;
+    distance_db -> get(userId, distStr);
+    return atoi(distStr . c_str());
+}
+
+
 

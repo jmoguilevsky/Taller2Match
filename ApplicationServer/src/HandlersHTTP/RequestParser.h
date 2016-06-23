@@ -23,7 +23,8 @@
 
 namespace RequestParser{
 
-    void parseSignUp(HTTPRequest request, std::string* email, std::string* password, UserProfile* profile);
+    void parseSignUp(HTTPRequest request, std::string *email, std::string *password, UserProfile *profile,
+                     int *distance);
 
     void parseUpdateProfile(HTTPRequest request, std::string* token, UserProfile* profile);
 
