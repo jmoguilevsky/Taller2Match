@@ -14,7 +14,14 @@ void Matcher::postReaction(std::string userId, std::string candidateId, std::str
     bool ok = candidates_db->has_value(userId, candidateId);
 
     if (!ok) throw AuthorizationException("Candidate is not a suggested candidate!");
-    
+
+    std::string limitStr;
+    limit_db -> get(userId, limitStr);
+    Json::Value limitJson = util::stringToJson(limitStr);
+    limitJson["left"] = limitJson["left"] . asInt() - 1;
+
+    limit_db -> save(userId, util::JsonToString(limitJson));
+
     candidates_db->remove_value(userId, candidateId);
 
     if(reaction == "LIKE") {
@@ -120,8 +127,6 @@ UserProfile Matcher::getNextCandidate(std::string userId) {
     if (candidates.size() != 0) {
         std::string nextId = candidates[0];
         profile = usersProfiles.getProfile(nextId);
-        limitJson["left"]=limitJson["left"].asInt() - 1;
-        limit_db->save(userId, util::JsonToString(limitJson));
     }
 
     return profile;
