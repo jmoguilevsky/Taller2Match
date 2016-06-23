@@ -119,16 +119,6 @@ public class ChatActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Log.d(TAG, error.toString());
-
-                int ji = 0;
-                String jid = "1";
-                String jname = "Amigo";
-                String jphoto = "Basura";
-                matches_map.put(ji,jid);
-                names_list.add(ji,jname);
-                photos_list.add(ji,jphoto);
-                construct(names_list,photos_list,matches_map);
-
                 pDialog.hide();
                 pDialog.dismiss();
             }
@@ -258,8 +248,6 @@ public class ChatActivity extends AppCompatActivity {
             fo.write(data.getBytes());
             fo.close();
             Log.e(TAG,"Message saved for conversation with id: "+id);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

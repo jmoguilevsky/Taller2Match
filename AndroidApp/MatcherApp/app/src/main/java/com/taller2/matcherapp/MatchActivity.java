@@ -84,7 +84,7 @@ public class MatchActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
                 AppConfig.URL_VIEW_MATCH, json_params,
                 new Response.Listener<JSONObject>() {
 

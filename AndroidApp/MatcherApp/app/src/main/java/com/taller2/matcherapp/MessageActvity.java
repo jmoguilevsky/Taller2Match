@@ -37,6 +37,9 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class MessageActvity extends AppCompatActivity {
 
@@ -47,6 +50,7 @@ public class MessageActvity extends AppCompatActivity {
     private EditText textField;
     private MessagesListAdapter adapter;
     private SQLiteHandler db;
+    ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +66,6 @@ public class MessageActvity extends AppCompatActivity {
 
         Intent intent = getIntent();
         match_id = intent.getStringExtra("Match ID");
-        Log.d(TAG,match_id);
         textField = (EditText) findViewById(R.id.messageEdit);
 
         listMessages = new ArrayList<>();
@@ -110,6 +113,27 @@ public class MessageActvity extends AppCompatActivity {
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        scheduler.scheduleAtFixedRate
+                (new Runnable() {
+                    public void run() {
+                        Log.i(TAG,"Getting messages");
+                        getMessages();
+                        cargarMensajes();
+                    }
+                }, 0, 10, TimeUnit.SECONDS);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        scheduler.shutdown();
+        while (!scheduler.isTerminated());
     }
 
     public void parseContents(String contents){
@@ -166,20 +190,63 @@ public class MessageActvity extends AppCompatActivity {
 
         String filePath = "data/data/com.taller2.matcherapp/"+id+".txt";
         File file = new File(filePath);
-        if (file.exists()){
-            try {
-                OutputStream fo = new FileOutputStream(file, true);
-                fo.write(data.getBytes());
-                fo.close();
-                Log.e("Save message","Message saved for conversation with id: "+id);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            Log.e("Save message","Error: there was no file matching for the given id: "+id);
+        try {
+            OutputStream fo = new FileOutputStream(file, true);
+            fo.write(data.getBytes());
+            fo.close();
+            Log.e("Save message","Message saved for conversation with id: "+id);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    private void getMessages(){
+        // Create a GET request, send JSONObject.
+        String tag_json_req = "get_new_messages";
+        JSONObject json_params = new JSONObject();
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                AppConfig.URL_GET_NEW_MESSAGES, json_params,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+                        try {
+                            JSONArray messages = response.getJSONArray("messages");
+                            for (int i = 0; i < messages.length(); i++){
+                                JSONObject message = messages.getJSONObject(i).getJSONObject("message");
+                                String from_id = message.getString("from");
+                                String text = message.getString("message");
+                                Log.d(TAG,from_id+" "+text);
+                                Message msg = new Message(from_id,text,false);
+                                saveMessage(msg);
+                            }
+                        } catch (JSONException e) {
+                            //e.printStackTrace();
+                            Log.d(TAG, "El usuario no tiene mensajes nuevos");
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, error.toString());
+            }
+
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                // Fetching user details from sqlite
+                HashMap<String, String> user = db.getUserDetails();
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", user.get("token"));
+                return params;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
     }
 
     public void sendMessage(Message msg){
