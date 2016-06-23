@@ -74,7 +74,7 @@ HTTPResponse UsersHTTP::handleUpdateProfile(HTTPRequest request) {
     RequestParser::parseUpdateProfile(request, &token, &profile);
     std::string userId = connected.getUserId(token);
     profilesDatabase.updateProfile(userId, profile);
-    return HTTP::OK();
+    return HTTP::OK(util::stringToJson("{}"));
 }
 
 HTTPResponse UsersHTTP::handleUpdatePhoto(HTTPRequest request) {
