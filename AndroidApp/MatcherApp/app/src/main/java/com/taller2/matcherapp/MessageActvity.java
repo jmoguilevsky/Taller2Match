@@ -53,6 +53,7 @@ public class MessageActvity extends AppCompatActivity {
     private EditText textField;
     private MessagesListAdapter adapter;
     private SQLiteHandler db;
+    private ListView listViewMessages;
     ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     Handler h;
 
@@ -76,7 +77,7 @@ public class MessageActvity extends AppCompatActivity {
         cargarMensajes(); // Modifica la lista de mensajes
 
         adapter = new MessagesListAdapter(this, listMessages);
-        final ListView listViewMessages = (ListView) findViewById(R.id.messagesContainer);
+        listViewMessages = (ListView) findViewById(R.id.messagesContainer);
         listViewMessages.setAdapter(adapter);
         listViewMessages.setSelection(adapter.getCount()-1);
 
@@ -176,7 +177,11 @@ public class MessageActvity extends AppCompatActivity {
             }
             String contents = new String(bytes);
             Log.d(TAG,contents);
-            parseContents(contents);
+            listMessages.clear();
+            parseContents(contents); // renueva toda la lista de mensajes
+            adapter.notifyDataSetChanged();
+            listViewMessages.invalidateViews();
+            listViewMessages.refreshDrawableState();
         }
         else {
             try {
