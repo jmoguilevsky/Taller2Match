@@ -188,6 +188,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         scheduler.shutdown();
+        while (!scheduler.isTerminated());
     }
 
     private void getMessages(){
@@ -205,7 +206,7 @@ public class ChatActivity extends AppCompatActivity {
                         try {
                             JSONArray messages = response.getJSONArray("messages");
                             for (int i = 0; i < messages.length(); i++){
-                                JSONObject message = messages.getJSONObject(i).getJSONObject("message");
+                                JSONObject message = messages.getJSONObject(i);
                                 String from_id = message.getString("id");
                                 String text = message.getString("message");
                                 Log.d(TAG,from_id+" "+text);
