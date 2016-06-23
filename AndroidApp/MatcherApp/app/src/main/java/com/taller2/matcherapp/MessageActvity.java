@@ -73,12 +73,12 @@ public class MessageActvity extends AppCompatActivity {
         textField = (EditText) findViewById(R.id.messageEdit);
 
         listMessages = new ArrayList<>();
+        cargarMensajes(); // Modifica la lista de mensajes
+
         adapter = new MessagesListAdapter(this, listMessages);
         final ListView listViewMessages = (ListView) findViewById(R.id.messagesContainer);
         listViewMessages.setAdapter(adapter);
         listViewMessages.setSelection(adapter.getCount()-1);
-
-        cargarMensajes();
 
         h = new Handler(){
             @Override
@@ -105,6 +105,15 @@ public class MessageActvity extends AppCompatActivity {
                 textField.setText("");
             }
         });
+
+        scheduler.scheduleAtFixedRate
+                (new Runnable() {
+                    public void run() {
+                        Log.i(TAG,"Getting messages");
+                        getMessages();
+                        h.sendEmptyMessage(DO_LOAD);
+                    }
+                }, 0, 10, TimeUnit.SECONDS);
     }
 
     @Override
@@ -131,24 +140,11 @@ public class MessageActvity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
-        scheduler.scheduleAtFixedRate
-                (new Runnable() {
-                    public void run() {
-                        Log.i(TAG,"Getting messages");
-                        getMessages();
-                        h.sendEmptyMessage(DO_LOAD);
-                    }
-                }, 0, 10, TimeUnit.SECONDS);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         scheduler.shutdown();
-        while (!scheduler.isTerminated());
+        while (!scheduler.isTerminated()){
+        };
     }
 
     public void parseContents(String contents){
