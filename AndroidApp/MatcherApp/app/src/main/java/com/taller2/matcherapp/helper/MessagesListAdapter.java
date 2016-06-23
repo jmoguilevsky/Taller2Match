@@ -1,5 +1,7 @@
 package com.taller2.matcherapp.helper;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -67,7 +69,9 @@ public class MessagesListAdapter extends BaseAdapter {
         TextView txtMsg = (TextView) convertView.findViewById(R.id.txtMsg);
 
         txtMsg.setText(m.getMessage());
-        lblFrom.setText(m.getFromID());
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        lblFrom.setText(currentDateTimeString);
+        //lblFrom.setText(m.getFromID());
 
         return convertView;
     }

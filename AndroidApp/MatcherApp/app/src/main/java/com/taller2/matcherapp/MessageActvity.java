@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.taller2.matcherapp.helper.Message;
@@ -21,7 +24,10 @@ import java.util.ArrayList;
 public class MessageActvity extends AppCompatActivity {
 
     private String match_id;
-    private ArrayList<Message> listMessages;
+    private Button btnSend;
+    private ArrayList listMessages;
+    private EditText textField;
+    private MessagesListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,7 @@ public class MessageActvity extends AppCompatActivity {
 
         Intent intent = getIntent();
         match_id = intent.getStringExtra("Match ID");
+        textField = (EditText) findViewById(R.id.messageEdit);
 
         String filePath = "data/data/com.taller2.matcherapp/"+match_id+".txt";
         File file = new File(filePath);
@@ -74,10 +81,22 @@ public class MessageActvity extends AppCompatActivity {
             listMessages.add(msg2);
         }
 
-        MessagesListAdapter adapter = new MessagesListAdapter(this, listMessages);
-        ListView listViewMessages = (ListView) findViewById(R.id.messagesContainer);
+        adapter = new MessagesListAdapter(this, listMessages);
+        final ListView listViewMessages = (ListView) findViewById(R.id.messagesContainer);
         listViewMessages.setAdapter(adapter);
         listViewMessages.setSelection(adapter.getCount()-1);
+
+        btnSend = (Button)findViewById(R.id.chatSendButton);
+        // Register the onClick listener with the implementation above
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                String text = textField.getText().toString();
+                Message msg = new Message(match_id,text,true);
+                listMessages.add(msg);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -104,10 +123,6 @@ public class MessageActvity extends AppCompatActivity {
     }
 
     public void parseContents(String contents){
-        // TODO
-    }
-
-    public void refreshListView(){
         // TODO
     }
 }

@@ -3,6 +3,7 @@ package com.taller2.matcherapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,7 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
+        // Start the polling service that listens to messages.
+        // startService(new Intent(getBaseContext(), PollingService.class));
+
         // Obtain and assign views
         matchName = (TextView) findViewById(R.id.match_name);
         imgMatch = (ImageView) findViewById(R.id.match_image);
@@ -70,11 +73,6 @@ public class MainActivity extends AppCompatActivity {
         db = new SQLiteHandler(getApplicationContext());
         // Fetching user details from sqlite
         HashMap<String, String> user = db.getUserDetails();
-        // Get user details from the database
-        String email = user.get("email");
-
-        // Starting the service for polling messages. Give it the session token.
-        startService(user.get("token"));
 
         // Match piture image click event
         View.OnClickListener match_clickListener = new View.OnClickListener() {
@@ -168,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
                         db.deleteUsers();
                         pDialog.hide();
                         pDialog.dismiss();
+                        stopService(new Intent(getBaseContext(), PollingService.class));
                         // Launching the login activity
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
@@ -182,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 db.deleteUsers();
                 pDialog.hide();
                 pDialog.dismiss();
+                //stopService(new Intent(getBaseContext(), PollingService.class));
                 // Launching the login activity
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
         // Progress dialog
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
-        pDialog.setMessage("Finding Match...");
+        pDialog.setMessage("Finding a new Match...");
         pDialog.show();
 
         // Create a POST request, send JSONObject.
@@ -240,7 +240,8 @@ public class MainActivity extends AppCompatActivity {
                             String cand_latitude = cand_location.getString("latitude");
                             String cand_longitude = cand_location.getString("longitude");
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            //e.printStackTrace();
+                            matchName.setText("No more matches today. Please come back tomorrow!");
                         }
                         pDialog.hide();
                         pDialog.dismiss();
@@ -251,8 +252,6 @@ public class MainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Log.d(TAG, error.toString());
-                imgMatch.setImageResource(R.drawable.sans);
-                imgMatch.setVisibility(View.VISIBLE);
                 pDialog.hide();
                 pDialog.dismiss();
             }
@@ -283,11 +282,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void react_to_match(int reaction){
         String reaction_string;
-        if (reaction == LIKE_MATCH){
-            reaction_string = "like";
+        if (matchName.getText().toString().equals("No more matches today. Please come back tomorrow!")){
+            return;
+        }
+        else if (reaction == LIKE_MATCH){
+            reaction_string = "LIKE";
         }
         else if (reaction == DISLIKE_MATCH){
-            reaction_string = "dislike";
+            reaction_string = "DISLIKE";
         }
         else {
             reaction_string = "error";
@@ -295,12 +297,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Send PUT request to server
         final HashMap<String, String> user = db.getUserDetails();
-
-        // Progress dialog
-        pDialog = new ProgressDialog(this);
-        pDialog.setCancelable(false);
-        pDialog.setMessage("Reacting to Match...");
-        pDialog.show();
 
         // Create a POST request, send JSONObject.
         // On success expect an empty JSON
@@ -314,14 +310,13 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 AppConfig.URL_REACT_CANDIDATE, json_params,
                 new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
-                        pDialog.hide();
                     }
                 }, new Response.ErrorListener() {
 
@@ -329,7 +324,6 @@ public class MainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Log.d(TAG, error.toString());
-                pDialog.hide();
             }
 
         }){
