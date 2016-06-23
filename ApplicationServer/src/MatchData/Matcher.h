@@ -49,22 +49,11 @@ public:
     //! Devuelve todos los matches del usuario.
     std::vector<UserProfile> getMatches(std::string user);
 
-    //! Devuelve todos los likes del usuario.
-    std::vector<std::string> getLikes(const std::string &user);
-
-    //! Devuelve todos los usuarios que le dieron like a este usuario.
-    std::vector<std::string> getLikesReceived(const std::string &user);
-
-    //! Devuelve todos los usuarios que el usuario rechazó.
-    std::vector<std::string> getDislikes(const std::string &user);
-
     //! Guarda un like del usuario al candidate.
     void postReaction(string userId, string candidateId, string reaction);
 
     //! En la lista preliminar de candidatos, descarta los ya han sugeridos previamente.
     void discardCandidates(string userId, map<string, UserProfile> &candidates);
-
-    int candidatesLeft(string userId);
 
     vector<Interest> getAllInterests();
 
@@ -75,5 +64,6 @@ public:
 
     void filterByDistance(map<string, UserProfile> &candidates, double lat, double lon, int distance);
 };
+
 
 #endif //APPSERVER_MATCHER_H

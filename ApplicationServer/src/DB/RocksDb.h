@@ -28,8 +28,10 @@ public:
     //! Si key existe en la DB, devuelve true y asigna a value el valor asociado. Si no existe, devuelve false, y no modifica value.
     bool get(const std::string &key, std::string &value);
 
+    //! "Convierte la base de datos en un map {clave, valor}
     std::map<std::string, std::string> listAll();
 
+    //! Devuelve la última clave, en orden alfabético, almacenada en la base de datos.
     std::string getLastKey();
 
 };

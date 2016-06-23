@@ -1,6 +1,7 @@
 package com.taller2.matcherapp.app;
 
 public class AppConfig {
+
     public static String app_server_ip = "http://10.1.73.36:7000";
 
     // Server user login url

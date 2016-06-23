@@ -27,6 +27,7 @@ public:
     //! Devuelve el historial de conversaciones completo entre los dos usuarios.
     std::string getHistory(std::string userA, std::string userB) const;
 
+    //! Devuelve un Json Array con todos los mensajes nuevos para un usuario.
     Json::Value getNewForUser(std::string userId);
 
 };

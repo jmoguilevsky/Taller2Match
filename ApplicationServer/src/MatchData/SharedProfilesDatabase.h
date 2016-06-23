@@ -9,15 +9,16 @@
 #include "../json/json.h"
 #include "../Profile/UserProfile.h"
 
-//! Se puede "simular" la conexión al shared con una clase que implemente estos métodos.
 
 #include <vector>
 using namespace std;
 
+//! Se puede "simular" la conexión al shared con una clase que implemente estos métodos.
 class SharedProfilesDatabase {
 
 public:
 
+    //! Devuelve un vector con todos los perfiles de todos los usuarios registrados en el shared.
     virtual std::vector<UserProfile> getUsersList() = 0;
 
     //! Carga el perfil del usuario con id sharedId.

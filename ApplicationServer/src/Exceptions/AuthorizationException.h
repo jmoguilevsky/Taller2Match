@@ -8,6 +8,7 @@
 #include <string>
 #include "Exception.h"
 
+//! Excepción que se lanza cuando un usuario ingresa credenciales incorrectas o quiere acceder a un dato (por ejemplo, un perfil de usuario) para el cual no tiene autorización.
 class AuthorizationException: public Exception {
 public:
     AuthorizationException(std::string msg):Exception(msg){}

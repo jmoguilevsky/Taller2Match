@@ -4,7 +4,7 @@
 #include "mongoose-master/mongoose.h"
 
 
-// Wrapper para un Mongoose Manager.
+//! Wrapper para un Mongoose Manager.
 
 class MgConnectionManager {
 
@@ -13,12 +13,14 @@ public:
 
 	~MgConnectionManager();
 
-	// Devuelve
+	//! Devuelve una nueva mg_connection que escucha conexiones entrantes.
 
 	mg_connection *configureListeningConnection(std::string port, void *data, mg_event_handler_t eventHandler);
 
+	//! Wrapper para la función mg_poll de la librería mongoose.
 	void poll(int everyMilliseconds);
 
+	//! Devuelve una nueva mg_connection saliente hacia una url.
 	mg_connection *configureOutboundConnection(std::string url, void *data, mg_event_handler_t eventHandler);
 
 private:

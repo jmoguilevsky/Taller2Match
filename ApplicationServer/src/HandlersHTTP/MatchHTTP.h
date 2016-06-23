@@ -21,14 +21,14 @@ class MatchHTTP {
 	Matcher& matcher;
 
 	ConnectedUsers& connected;
-
+	//! Handler para que un usuario pueda "reaccionar" (aceptar o rechazar) a otro usuario.
 	HTTPResponse handlePostReaction(HTTPRequest request);
-
+	//! Handler para obtener un nuevo candidato a match para un usuario.
 	HTTPResponse handleGetCandidate(HTTPRequest request);
-
+	//! Handler para que un usuario pueda obtener todos los perfiles de todos sus matches.
 	HTTPResponse handleGetMatches(HTTPRequest request);
-
-  HTTPResponse handleViewProfile(HTTPRequest request);
+	//! Handler para que un usuario pueda ver el perfil de uno de sus matches.
+	HTTPResponse handleViewProfile(HTTPRequest request);
 
 public:
 

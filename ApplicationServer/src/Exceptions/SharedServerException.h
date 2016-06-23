@@ -8,6 +8,7 @@
 
 #include "Exception.h"
 
+//!Excepción que se lanza cuando no se puede cumplir con un pedido hacia el shared server, por ejemplo, porque no está disponible actualmente.
 class SharedServerException: public Exception {
 public:
     SharedServerException(std::string msg):Exception(msg){}

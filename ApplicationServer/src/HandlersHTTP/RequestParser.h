@@ -21,6 +21,8 @@
 #define FULL_URI_PROFILE "/users/update"
 #define FULL_URI_PHOTO "/users/update/photo"
 
+//! Este namespace contiene funciones varias que parsean los distintos requests recibidos por el servidor.
+
 namespace RequestParser{
 
     void parseSignUp(HTTPRequest request, std::string *email, std::string *password, UserProfile *profile,

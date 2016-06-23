@@ -11,6 +11,7 @@
 #include "../Profile/UserProfile.h"
 #include "../Utilities/util.h"
 
+//! Este namespace tiene funciones para formatear las respuestas para los distintos requests.
 
 namespace ResponseFormatter {
 

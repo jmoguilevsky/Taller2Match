@@ -22,8 +22,10 @@ class ChatHTTP {
 
     Chat &chat;
 
+    //! Handler para enviar un mensaje en el chat entre dos usuarios.
     HTTPResponse handleSendChat(HTTPRequest request);
 
+    //! Handler para obtener el historial completo de una conversación entre dos usuarios.
     HTTPResponse handleGetHistory(HTTPRequest request);
 
 public:
@@ -33,6 +35,7 @@ public:
 
     HTTPResponse handle(HTTPRequest request);
 
+    //! Handler para el request para obtener los mensajes que aún no recibió un usuario.
     HTTPResponse handleGetNew(HTTPRequest request);
 };
 
