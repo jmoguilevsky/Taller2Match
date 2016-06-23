@@ -74,12 +74,12 @@ public class MessageActvity extends AppCompatActivity {
         textField = (EditText) findViewById(R.id.messageEdit);
 
         listMessages = new ArrayList<>();
-        cargarMensajes(); // Modifica la lista de mensajes
-
         adapter = new MessagesListAdapter(this, listMessages);
         listViewMessages = (ListView) findViewById(R.id.messagesContainer);
         listViewMessages.setAdapter(adapter);
         listViewMessages.setSelection(adapter.getCount()-1);
+
+        cargarMensajes();
 
         h = new Handler(){
             @Override
