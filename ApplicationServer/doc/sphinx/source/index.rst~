@@ -1,5 +1,33 @@
 Application server - Documentación técnica
 ==========================================
+Instalación
+-----------
+
+
+
+Diseño de la estructura de clases
+---------------------------------
+
+Se dividió la aplicación en varios "módulos" con funcionalidades diferentes, de forma que sean lo más independientes posible entre sí.
+
+Así, por ejemplo, tenemos el módulo de bases de datos **DB**, que contiene las clases:
+
+- **KeyValueDb** clase "abstracta" para una base de datos no relacional, del tipo *{clave, valor}*
+- **RocksDb** derivada de KeyValueDb, una implementación específica de este tipo de base de datos con la librería RocksDb
+- **JsonArrayDb** que utiliza a su vez a RocksDb, y contiene como valores a arrays Json, y tiene una interfaz amigable para trabajar con datos en este formato
+
+Otro módulo es el módulo **Mongoose**, que contiene las clases necesarias para realizar todo lo relacionado con la conexión del servidor y sus clientes, y del Application Server como cliente del Shared Server. Contiene las clases:
+
+- **MgServer** un server multithread, es decir, que por cada request que recibe, lanza un nuevo thread en donde se procesa el mismo, y al finalizar el procesamiento y luego de enviar la respuesta, el thread es destruido
+- **MgHTTPClient** cliente HTTP, permite realizar un HTTP request a una URL y obtener una respuesta
+- **MgConnectionManager** wrapper para la estructura "mg_mgr" y sus funciones relacionadas, para hacer el código más comprensible y a su vez encapsular un poco el uso de la librería Mongoose
+
+El módulo **HTTP** tiene toda la funcionalidad requerida para manejar los requests HTTP (crear las respuestas con el código adecuado, por ejemplo 200 para "Ok", transformar la estructura de la librería Mongoose que contiene un request HTTP en un objeto más fácil de manejar, etc.).
+
+- **HTTPResponse**
+- **HTTPRequest**
+- **HTTP** (*namespace*) facilita la creación de las responses HTTP, por ejemplo, con HTTP::OK(), se crea un HTTP response con el código de status adecuado según el estándar.
+
 
 Diseño de las bases de datos
 ----------------------------
@@ -7,6 +35,7 @@ Diseño de las bases de datos
 Dado que todas las bases de datos son no relacionales, es decir tienen la forma *{clave,valor}*, todas las bases de datos utilizadas tienen como clave algún identificador de un usuario, ya sea un email o un id interno al servidor.
 
 ``userId``: identificador del usuario *dentro* del servidor, se utiliza para la comunicación entre los clientes y el servidor en lugar del email
+
 ``email``: email con que se registró cada usuario
 
 1. Base de datos ``login_db``
