@@ -141,7 +141,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(column_name,value);
         // We update the column for all rows because we only have 1 user (1 row).
         int count = db.update(TABLE_USER, values, null, null);
-        Log.d(TAG,"Modified " + column_name + " with " + value.substring(0,50) + " for " + count + " users.");
+        Log.d(TAG,"Modified " + column_name + " with " + value.substring(0,10) + " for " + count + " users.");
     }
 
 }

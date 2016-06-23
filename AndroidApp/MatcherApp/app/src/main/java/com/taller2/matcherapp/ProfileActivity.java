@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,6 +42,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
+import com.taller2.matcherapp.helper.GPSTracker;
 import com.taller2.matcherapp.helper.SQLiteHandler;
 
 import org.json.JSONArray;
@@ -58,6 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView viewProfilePicture;
     private ProgressDialog pDialog;
     private ImageView addIcon;
+    private Button btnLocation;
     private static int RESULT_LOAD_IMG = 1;
     private boolean isProfileModified;
     String imgPath;
@@ -86,7 +89,9 @@ public class ProfileActivity extends AppCompatActivity {
         viewProfilePicture = (ImageView) findViewById(R.id.match_image);
         String profile_photo_str = user.get("photo");
         Bitmap profile_photo_map = AppController.getInstance().getBitmapImage(profile_photo_str);
-        viewProfilePicture.setImageBitmap(profile_photo_map);
+        if (profile_photo_map != null){
+            viewProfilePicture.setImageBitmap(profile_photo_map);
+        }
 
         // Event when the profile picture is clicked: select a new picture from gallery.
         viewProfilePicture.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +128,38 @@ public class ProfileActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        btnLocation = (Button) findViewById(R.id.btnLocation);
+        btnLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // create class object
+                GPSTracker gps = new GPSTracker(ProfileActivity.this);
+                double latitude = 0;
+                double longitude = 0;
+                // check if GPS enabled
+                if(gps.canGetLocation()){
+                    latitude = gps.getLatitude();
+                    longitude = gps.getLongitude();
+                    // \n is for new line
+                    Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+                }else{
+                    // can't get location
+                    // GPS or Network is not enabled
+                    // Ask user to enable GPS/network in settings
+                    gps.showSettingsAlert();
+                }
+                JSONObject location = new JSONObject();
+                try {
+                    location.put("latitude",latitude);
+                    location.put("longitude",longitude);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                db.update_value("location",location.toString());
+                isProfileModified = true;
+            }
+        });
 
         // Event when the Add Interest image is clicked: add a custom category and interest
         addIcon = (ImageView) findViewById(R.id.match_add);
@@ -360,6 +397,7 @@ public class ProfileActivity extends AppCompatActivity {
                         json_arr_interest.put(dupla);
                     }
                 }
+                db.update_value("interests",json_arr_interest.toString());
                 json_user.put("interests",json_arr_interest);
                 JSONObject loc = new JSONObject(user.get("location"));
                 json_user.put("location",loc);

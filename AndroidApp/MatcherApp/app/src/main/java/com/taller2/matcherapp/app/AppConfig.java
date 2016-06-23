@@ -33,4 +33,7 @@ public class AppConfig {
     // Server get all the new messages url
     public static String URL_GET_NEW_MESSAGES = app_server_ip + "/chat/new";
 
+    // Server send a new message url
+    public static String URL_SEND_MESSAGE = app_server_ip + "/chat/message";
+
 }

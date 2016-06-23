@@ -1,11 +1,9 @@
 package com.taller2.matcherapp;
 
 import android.app.ProgressDialog;
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.support.v4.app.ActivityCompat;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,13 +23,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
+import com.taller2.matcherapp.helper.GPSTracker;
 import com.taller2.matcherapp.helper.SessionManager;
 
 import org.json.JSONArray;
@@ -41,11 +35,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+public class RegisterActivity extends AppCompatActivity{
 
     private static final String TAG = RegisterActivity.class.getSimpleName();
-    private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 1;
     private Button btnRegister;
     private Button btnLinkToLogin;
     private EditText inputFullName;
@@ -58,16 +50,7 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
     private String user_gender = "";
     private TextView inputDistance;
     private Spinner spinner_age;
-    private GoogleApiClient mGoogleApiClient;
-    private Location mLastLocation;
-    // boolean flag to toggle periodic location updates
-    private boolean mRequestingLocationUpdates = false;
-    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
-    private LocationRequest mLocationRequest;
-    // Location updates intervals in sec
-    private static int UPDATE_INTERVAL = 10000; // 10 sec
-    private static int FATEST_INTERVAL = 5000; // 5 sec
-    private static int DISPLACEMENT = 10; // 10 meters
+    private GPSTracker gps;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,16 +82,6 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
             finish();
         }
 
-        // First we need to check availability of play services
-        if (checkPlayServices()) {
-            // Building the GoogleApi client
-            buildGoogleApiClient();
-        }
-
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                MY_PERMISSIONS_REQUEST_FINE_LOCATION);
-
         // Register Button Click event
         btnRegister.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -118,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
                 String alias = inputAlias.getText().toString().trim();
                 String sex = sex_interest.trim();
                 String gender = user_gender.trim();
-                String age = spinner_age.getSelectedItem().toString();
+                String age = spinner_age.getSelectedItem().toString().trim();
                 String distance = inputDistance.getText().toString().replaceAll("[^0-9?!\\.]", ""); // get only the number
 
                 if (!isEmailValid(email)) {
@@ -168,70 +141,6 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
             }
         });
 
-    }
-
-    /**
-     * Creating google api client object
-     * */
-    protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API).build();
-    }
-
-    /**
-     * Method to verify google play services on the device
-     * */
-    private boolean checkPlayServices() {
-        int resultCode = GooglePlayServicesUtil
-                .isGooglePlayServicesAvailable(this);
-        if (resultCode != ConnectionResult.SUCCESS) {
-            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
-                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
-                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
-            } else {
-                Toast.makeText(getApplicationContext(),
-                        "This device is not supported.", Toast.LENGTH_LONG)
-                        .show();
-                finish();
-            }
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (mGoogleApiClient != null) {
-            mGoogleApiClient.connect();
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        checkPlayServices();
-    }
-
-    /**
-     * Google api callback methods
-     */
-    @Override
-    public void onConnectionFailed(ConnectionResult result) {
-        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = "
-                + result.getErrorCode());
-    }
-
-    @Override
-    public void onConnected(Bundle arg0) {
-    }
-
-    @Override
-    public void onConnectionSuspended(int arg0) {
-        mGoogleApiClient.connect();
     }
 
     boolean isEmailValid(CharSequence email) {
@@ -293,27 +202,25 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
             json_info.put("distance", distance);
 
             JSONObject location = new JSONObject();
-
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
             double latitude = -121.34343;
             double longitude = 45.51119;
 
-            if (mLastLocation != null) {
-                latitude = mLastLocation.getLatitude();
-                longitude = mLastLocation.getLongitude();
-            } else {
-                Toast.makeText(getApplicationContext(),"(Couldn't get the location. Make sure location is enabled on the device)",Toast.LENGTH_LONG).show();
+            // create class object
+            gps = new GPSTracker(RegisterActivity.this);
+
+            // check if GPS enabled
+            if(gps.canGetLocation()){
+
+                latitude = gps.getLatitude();
+                longitude = gps.getLongitude();
+
+                // \n is for new line
+                Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+            }else{
+                // can't get location
+                // GPS or Network is not enabled
+                // Ask user to enable GPS/network in settings
+                gps.showSettingsAlert();
             }
 
             location.put("latitude", latitude);
@@ -331,6 +238,10 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
             json_user.put("alias",alias);
             json_user.put("email",email);
             json_user.put("sex",user_gender);
+
+            Bitmap map = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.blank_profile_picture);
+            String foto = AppController.getInstance().getStringImage(map);
+            json_user.put("photo_profile",foto);
 
             int int_age = Integer.parseInt(user_age);
             json_user.put("age",int_age);

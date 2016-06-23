@@ -1,9 +1,12 @@
 package com.taller2.matcherapp;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,6 +22,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
+import com.taller2.matcherapp.helper.Alarm;
 import com.taller2.matcherapp.helper.CustomListAdapter;
 import com.taller2.matcherapp.helper.Message;
 import com.taller2.matcherapp.helper.SQLiteHandler;
@@ -36,11 +40,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ChatActivity extends AppCompatActivity {
 
     private final static String TAG = ChatActivity.class.getSimpleName();
     private ProgressDialog pDialog;
+    Alarm alarm = new Alarm();
+    SQLiteHandler db = new SQLiteHandler(this);
+    ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +91,8 @@ public class ChatActivity extends AppCompatActivity {
                             }
                             if (count <= 0){
                                 Log.d(TAG, "El usuario no tiene matches");
+                                pDialog.hide();
+                                pDialog.dismiss();
                                 return;
                             }
                             JSONArray matches = response.getJSONArray("matches");
@@ -107,7 +119,16 @@ public class ChatActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Log.d(TAG, error.toString());
-                pDialog.hide();
+
+                int ji = 0;
+                String jid = "1";
+                String jname = "Amigo";
+                String jphoto = "Basura";
+                matches_map.put(ji,jid);
+                names_list.add(ji,jname);
+                photos_list.add(ji,jphoto);
+                construct(names_list,photos_list,matches_map);
+
                 pDialog.hide();
                 pDialog.dismiss();
             }
@@ -126,14 +147,6 @@ public class ChatActivity extends AppCompatActivity {
         };
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
-
-        int i = 0;
-        String id = "1";
-        String name = "Amigo";
-        String photo = "Basura";
-        matches_map.put(i,id);
-        names_list.add(i,name);
-        photos_list.add(i,photo);
     }
 
     public void construct(List<String> names_list, List<String> photos_list, final HashMap matches_map){
@@ -161,13 +174,20 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //getMessages();
+
+        scheduler.scheduleAtFixedRate
+                (new Runnable() {
+                    public void run() {
+                        Log.i(TAG,"Getting messages");
+                        getMessages();
+                    }
+                }, 0, 10, TimeUnit.SECONDS);
     }
 
     @Override
-    protected void onResume(){
-        super.onResume();
-        //getMessages();
+    protected void onStop() {
+        super.onStop();
+        scheduler.shutdown();
     }
 
     private void getMessages(){
@@ -183,27 +203,18 @@ public class ChatActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
                         try {
-                            int count = -1;
-                            try {
-                                count = Integer.parseInt(response.getString("count"));
-                            } catch(NumberFormatException nfe) {
-                                System.out.println("Could not parse " + nfe);
-                            }
-                            if (count <= 0){
-                                Log.d(TAG, "El usuario no tiene mensajes nuevos");
-                                return;
-                            }
                             JSONArray messages = response.getJSONArray("messages");
                             for (int i = 0; i < messages.length(); i++){
                                 JSONObject message = messages.getJSONObject(i).getJSONObject("message");
                                 String from_id = message.getString("id");
                                 String text = message.getString("message");
-                                String time = message.getString("time");
+                                Log.d(TAG,from_id+" "+text);
                                 Message msg = new Message(from_id,text,false);
                                 saveMessage(msg);
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            //e.printStackTrace();
+                            Log.d(TAG, "El usuario no tiene mensajes nuevos");
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -217,8 +228,6 @@ public class ChatActivity extends AppCompatActivity {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                // SqLite database handler
-                SQLiteHandler db = new SQLiteHandler(getApplicationContext());
                 // Fetching user details from sqlite
                 HashMap<String, String> user = db.getUserDetails();
                 Map<String, String> params = new HashMap<>();
@@ -230,8 +239,7 @@ public class ChatActivity extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
     }
 
-    public void saveMessage(Message message){
-
+    private void saveMessage(Message message){
         // Set up the String to be stored: isSelf,text newline
         String isSelf = String.valueOf(message.isSelf());
         String field_sep = ",";
@@ -244,19 +252,15 @@ public class ChatActivity extends AppCompatActivity {
 
         String filePath = "data/data/com.taller2.matcherapp/"+id+".txt";
         File file = new File(filePath);
-        if (file.exists()){
-            try {
-                OutputStream fo = new FileOutputStream(file);
-                fo.write(data.getBytes());
-                fo.close();
-                Log.e("Save message","Message saved for conversation with id: "+id);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            Log.e("Save message","Error: there was no file matching for the given id");
+        try {
+            OutputStream fo = new FileOutputStream(file, true);
+            fo.write(data.getBytes());
+            fo.close();
+            Log.e(TAG,"Message saved for conversation with id: "+id);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

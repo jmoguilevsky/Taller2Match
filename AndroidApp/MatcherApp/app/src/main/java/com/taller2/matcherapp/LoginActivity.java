@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -19,6 +20,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
+import com.taller2.matcherapp.helper.Message;
 import com.taller2.matcherapp.helper.SQLiteHandler;
 import com.taller2.matcherapp.helper.SessionManager;
 
@@ -26,7 +28,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -48,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
         inputPassword = (EditText) findViewById(R.id.password);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
+
+        //test();
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -225,6 +236,8 @@ public class LoginActivity extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
     }
 
+
+
     private void showDialog() {
         if (!pDialog.isShowing())
             pDialog.show();
@@ -233,5 +246,26 @@ public class LoginActivity extends AppCompatActivity {
     private void hideDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
+    }
+
+    public void guardar(String id){
+        String data = "false,Mensaje\r\ntrue,Mensaje mio\nfalse,Mensaje con ,\n";
+        String filePath = "data/data/com.taller2.matcherapp/"+id+".txt";
+        File file = new File(filePath);
+        if (file.exists()){
+            try {
+                file.delete();
+                OutputStream fo = new FileOutputStream(file, true);
+                fo.write(data.getBytes());
+                fo.close();
+                Log.e("Save message","Message saved for conversation with id: "+id);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.e("Save message","Error: there was no file matching for the given id");
+        }
     }
 }

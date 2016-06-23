@@ -14,11 +14,21 @@
 
     <ImageView android:id="@+id/match_image"
         android:contentDescription="@string/match_image_desc"
-        android:layout_height="250dp"
+        android:layout_height="220dp"
         android:layout_width="match_parent"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:src="@drawable/tap_here_pic"/>
+
+    <Button
+        android:id="@+id/btnLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:background="@color/bg_login"
+        android:text="@string/btn_location"
+        android:textColor="@color/white" />
 
     <LinearLayout
         android:layout_width="fill_parent"
