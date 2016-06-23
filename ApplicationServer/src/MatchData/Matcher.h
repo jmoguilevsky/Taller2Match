@@ -24,7 +24,7 @@ class Matcher {
     //! Guarda la cantidad de candidatos entregados hoy, cuántos quedan, y cuándo se reinicia la cuenta.
     RocksDb *limit_db;
     //! Guarda los candidatos que fueron calculados para cada usuario.
-    JsonArrayDb *candidates_db;
+    RocksDb *candidate_db;
 
     ProfilesDatabase &usersProfiles;
 
@@ -58,9 +58,6 @@ public:
     //! Devuelve todos los usuarios que el usuario rechazó.
     std::vector<std::string> getDislikes(const std::string &user);
 
-    //! Calcula una nuevba tanda de candidatos para el usuario.
-    std::vector<std::string> calculateCandidates(std::string userId);
-
     //! Guarda un like del usuario al candidate.
     void postReaction(string userId, string candidateId, string reaction);
 
@@ -73,6 +70,8 @@ public:
 
     // Filtra los candidatos por sexo. Quedan solo los de sexo "is" que buscan gente de sexo "wants".
     void filterBySex(std::map<string, UserProfile> &candidates, string is, string wants);
+
+    UserProfile calculateNextCandidate(string userId);
 };
 
 #endif //APPSERVER_MATCHER_H

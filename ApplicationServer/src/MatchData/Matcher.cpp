@@ -11,9 +11,12 @@
 #define DAILY_CANDIDATES 10
 
 void Matcher::postReaction(std::string userId, std::string candidateId, std::string reaction) {
-    bool ok = candidates_db->has_value(userId, candidateId);
+    std::string suggested;
+    candidate_db -> get(userId, suggested);
 
-    if (!ok) throw AuthorizationException("Candidate is not a suggested candidate!");
+    // Si no es el último candidato sugerido => ERROR!
+
+    if (candidateId != suggested) throw AuthorizationException("Candidate is not a suggested candidate!");
 
     std::string limitStr;
     limit_db -> get(userId, limitStr);
@@ -22,7 +25,7 @@ void Matcher::postReaction(std::string userId, std::string candidateId, std::str
 
     limit_db -> save(userId, util::JsonToString(limitJson));
 
-    candidates_db->remove_value(userId, candidateId);
+    candidate_db -> save(userId, ""); // Equivalente a borrar la clave
 
     if(reaction == "LIKE") {
 
@@ -89,8 +92,7 @@ UserProfile Matcher::getNextCandidate(std::string userId) {
 
     Json::Value limitJson = util::stringToJson(limitStr);
     std::string lastTimeStr = limitJson["lastTime"].asString();
-    int left = limitJson["left"].asInt();
-    std::cout << "LEFT: " << left << std::endl;
+
     Date lastTime;
 
     if (lastTimeStr != "") {
@@ -100,36 +102,22 @@ UserProfile Matcher::getNextCandidate(std::string userId) {
     Date today = Date::today();
 
     if (lastTime < today) {
-        // Pasó más de un día desde la última vez que se buscaron los candidatos
-        // Busco candidatos otra vez
-        std::cout << "ACA ESTOY" << std::endl;
-        std::vector<std::string> newCandidates = calculateCandidates(userId);
-        std::cout << "ACA ESTOY2" << std::endl;
-        if(newCandidates.size() != 0) {
-            std::cout << "ACA ESTOY3" << std::endl;
-            for (int i = 0; i < newCandidates.size(); i++) {
-                std::cout << "ACA ESTOY4" << std::endl;
-                candidates_db->append_value(userId, newCandidates[i]);
-            }
-            std::cout << "ACA ESTOY5" << std::endl;
-            limitJson["lastTime"] = today.str();
-            limitJson["left"] = (int)newCandidates.size();
-            limit_db->save(userId, util::JsonToString(limitJson));
-        } else {
-            throw Exception("Couldn't find candidates!!!");
-        }
-    }
-    // Si es el mismo día, mando el siguiente candidato, entre los no likeados.
-    std::cout << "CANDIDATES LEFT: "  << limitJson["left"].asInt() << std::endl;
-    if(limitJson["left"].asInt() == 0) throw Exception("No more candidates!");
-    std::vector<std::string> candidates = candidates_db->values(userId);
-    UserProfile profile;
-    if (candidates.size() != 0) {
-        std::string nextId = candidates[0];
-        profile = usersProfiles.getProfile(nextId);
+        limitJson["lastTime"] = today . str();
+        limitJson["left"] = DAILY_CANDIDATES;
     }
 
-    return profile;
+    UserProfile nextCandidate;
+
+    if (limitJson["left"] . asInt() > 0) {
+        // Cada vez que me pide un candidato, pido todos los usuarios y hago todo el cálculo otra vez!
+        nextCandidate = calculateNextCandidate(userId);
+        candidate_db -> save(userId, nextCandidate . getId()); // Tiene el último candidato sugerido
+        limit_db -> save(userId, util::JsonToString(limitJson));
+    } else if (limitJson["left"] . asInt() == 0) {
+        throw Exception("No more candidates!");
+    }
+
+    return nextCandidate;
 }
 
 double Matcher::calculateDistance(UserProfile &userA, UserProfile &userB) {
@@ -179,7 +167,7 @@ void Matcher::discardCandidates(std::string userId, std::map<std::string, UserPr
     }
 }
 
-std::vector<std::string> Matcher::calculateCandidates(std::string userId) {
+UserProfile Matcher::calculateNextCandidate(std::string userId) {
 
     std::map<std::string, UserProfile> candidates = usersProfiles.getUsers();
     std::cout << candidates . size() << " candidates initially" << std::endl;
@@ -201,6 +189,8 @@ std::vector<std::string> Matcher::calculateCandidates(std::string userId) {
     discardCandidates(userId, candidates);
     std::cout << candidates . size() << " candidates remaining after discarding" << std::endl;
 
+    //TODO filterByDistance()
+
     // ***** Calculo el "puntaje" para cada usuario
 
     std::map<std::string, int> scores;
@@ -216,15 +206,10 @@ std::vector<std::string> Matcher::calculateCandidates(std::string userId) {
 
     std::vector<std::pair<std::string, int>> orderedByScore = sortDescByValue(scores);
 
-    // Agarrar los DAILY_LIMIT con más puntaje
+    // Agarro el mejor candidato
 
-    std::vector<std::string> newCandidates;
-    int nCand = (int) (candidates.size() < DAILY_CANDIDATES ? candidates.size() : DAILY_CANDIDATES);
-    for (int i = 0; i < nCand; i++) {
-        std::string candidateId = orderedByScore[i].first;
-        newCandidates.push_back(candidateId);
-    }
-    return newCandidates;
+    return candidates[orderedByScore[0] . first];
+
 }
 
 int Matcher::getInterestsInCommon(UserProfile &user1, UserProfile &user2) {
@@ -243,7 +228,7 @@ int Matcher::getInterestsInCommon(UserProfile &user1, UserProfile &user2) {
 }
 
 Matcher::Matcher(ProfilesDatabase &users) : usersProfiles(users) {
-    candidates_db = new JsonArrayDb("db/candidates");
+    candidate_db = new RocksDb("db/candidate");
     likesReceived_db = new JsonArrayDb("db/likesReceived"); // Guarda la cantidad de liks que recibió cada usuario.
     likes_db = new JsonArrayDb("db/likes"); // Guarda todos los usuarios que likeo cada usuario.
     dislikes_db = new JsonArrayDb("db/dislikes"); // Guarda todos los usuario que este usuario no likeo.
