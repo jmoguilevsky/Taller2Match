@@ -164,7 +164,7 @@ public class ChatActivity extends AppCompatActivity {
                         Log.i(TAG,"Getting messages");
                         getMessages();
                     }
-                }, 0, 10, TimeUnit.SECONDS);
+                }, 0, 5, TimeUnit.SECONDS);
     }
 
     @Override

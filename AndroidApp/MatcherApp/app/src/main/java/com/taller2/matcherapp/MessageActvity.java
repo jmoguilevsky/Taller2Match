@@ -99,10 +99,9 @@ public class MessageActvity extends AppCompatActivity {
             {
                 String text = textField.getText().toString();
                 myMessage msg = new myMessage(match_id,text,true);
-                listMessages.add(msg);
                 saveMessage(msg);
                 sendMessage(msg);
-                adapter.notifyDataSetChanged();
+                cargarMensajes();
                 textField.setText("");
             }
         });
@@ -114,7 +113,7 @@ public class MessageActvity extends AppCompatActivity {
                         getMessages();
                         h.sendEmptyMessage(DO_LOAD);
                     }
-                }, 0, 10, TimeUnit.SECONDS);
+                }, 0, 5, TimeUnit.SECONDS);
     }
 
     @Override
