@@ -7,7 +7,7 @@
 
 
 #include "Exception.h"
-
+//! Excepción  que se lanza cuando hay algún error en el parseo de un request (por ejemplo, un Json mal formateado, con una '}' faltante)
 class ParseException: public Exception{
 public:
     ParseException(std::string msg):Exception(msg){}

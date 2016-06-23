@@ -13,7 +13,6 @@
 #include "../Profile/UserProfile.h"
 
 //! Una conexión hacia el Shared Server
-
 class SharedServerConnection : public SharedProfilesDatabase {
 
     std::string sharedAddress;

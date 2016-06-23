@@ -13,9 +13,7 @@
 
 using namespace std;
 
-//! Información relacionada a los perfiles de los usuarios registrados en este app server.
-//! Es decir, sirve como un "filtro" para los usuarios que devuelve SharedProfilesDatabase. Mantiene los ids internos al app server, y
-//! "sabe" a que sharedId y email corresponde cada userId interno.
+//! Información relacionada a los perfiles de los usuarios registrados en este app server. Es decir, sirve como un "filtro" para los usuarios que devuelve SharedProfilesDatabase. Mantiene los ids internos al app server, y "sabe" a que sharedId y email corresponde cada userId interno.
 
 class ProfilesDatabase {
 private:
@@ -45,13 +43,12 @@ public:
     map<string, UserProfile> getUsers();
     //! Dado el id interno del usuario, actualiza su perfil con el recibido.
     void updateProfile(string userId, UserProfile userProfile);
-
-    //!
+    //!Devuelve la distancia máxima que el usuario eligió para encontrar sus matches.
     int getMaxDistance(string userId);
 
-
+    //! Devuelve true si el email y la password recibidos corresponden a un usuario registrado en el servidor.
     bool verify(string email, string password);
-
+    //! Devuelve un listado con todos los intereses de todos los usuarios registrados en el servidor.
     vector<Interest> getAllInterests();
 };
 

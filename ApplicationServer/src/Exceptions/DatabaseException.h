@@ -6,6 +6,7 @@
 #define APPSERVER_DATABASEEXCEPTION_H
 #include "Exception.h"
 
+//! Excepción que se lanza cuando hay algún error en algunba base de datos.
 class DatabaseException : public Exception {
 public:
     DatabaseException(std::string msg):Exception(msg){}

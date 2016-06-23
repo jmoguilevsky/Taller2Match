@@ -33,8 +33,9 @@ public:
     //! Devuelve el id del usuario.
     std::string getId() const;
 
+    //! Devuelve la latitud de la última ubicación conocida del usuario.
     double getLatitude() const;
-
+    //! Devuelve la longitud de la última ubicación conocida del usuario.
     double getLongitude() const;
 
     std::string getSexInterest();

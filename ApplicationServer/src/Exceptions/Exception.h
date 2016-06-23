@@ -9,6 +9,7 @@
 #include <exception>
 #include <string>
 
+//! Excepción genérica.
 class Exception : public std::exception {
     std::string msg;
 public:

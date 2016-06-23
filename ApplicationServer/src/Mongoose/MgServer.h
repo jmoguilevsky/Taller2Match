@@ -10,8 +10,7 @@
 #include <map>
 #include <vector>
 
-// Mongoose multithreaded server. La conexión se cierran después de enviar la respuesta al cliente.
-
+//! Mongoose multithreaded server. La conexión se cierran después de enviar la respuesta al cliente.
 class MgServer {
 private:
 	MgConnectionManager mongooseConnectionManager;

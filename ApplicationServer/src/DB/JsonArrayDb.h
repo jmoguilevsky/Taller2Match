@@ -34,6 +34,7 @@ public:
     //! Devuelve el array Json asociado a la clave, como un string.
     std::string values_as_string(const std::string &key);
 
+    //! Elimina la clave recibida de la base de dato
     void erase_key(std::string key);
 };
 

@@ -21,14 +21,15 @@ class UsersHTTP {
 
 	const Matcher& matcher;
 
+	//! Handler para registrar un nuevo usuario en el servidor.
 	HTTPResponse handleSignUp(HTTPRequest request);
-
+	//! Handler para que un usuario se conecte al servidor.
 	HTTPResponse handleLogin(HTTPRequest request);
-
+	//! Handler para que un usuario se desconecte del servidor.
 	HTTPResponse handleLogout(HTTPRequest request);
-
+	//! Handler para la actualización del perfil de un usuario.
 	HTTPResponse handleUpdateProfile(HTTPRequest request);
-
+	//! Handler para la actualización de la foto de perfil de un usuario.
 	HTTPResponse handleUpdatePhoto(HTTPRequest request);
 
 public:

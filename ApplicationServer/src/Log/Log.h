@@ -16,19 +16,20 @@
 enum LogLevel {
     ERROR, WARNING, INFO, DEBUG
 };
-
+//! Logger
 class Log {
 
     static LogLevel level;
     static std::string path;
 
 public:
+    //! Log con el tag "DEBUG"
     static void debug(const std::string &msg);
-
+    //! Log con el tag "INFO"
     static void info(const std::string &msg);
-
+    //! Log con el tag "ERROR"
     static void error(const std::string &msg);
-
+    //! Log con el tag "WARNING"
     static void warning(const std::string &msg);
 
 

@@ -61,7 +61,7 @@ HTTPResponse UsersHTTP::handleLogin(HTTPRequest request) {
     if (!passOK) return HTTP::Unauthorized();
     std::string userId = profilesDatabase.getUserId(email);
     UserProfile profile = profilesDatabase.getProfile(userId);
-    std::string token = connected.login(userId, url);
+    std::string token = connected . login(userId);
     return ResponseFormatter::formatLogin(token, profile);
 }
 

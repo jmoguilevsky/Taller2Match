@@ -10,7 +10,7 @@
 #include "../Profile/UserProfile.h"
 #include "../MatchData/SharedProfilesDatabase.h"
 #include "../DB/RocksDb.h"
-
+//! Mock del shared server
 class SharedMock : public SharedProfilesDatabase {
     int n;
     RocksDb* db;

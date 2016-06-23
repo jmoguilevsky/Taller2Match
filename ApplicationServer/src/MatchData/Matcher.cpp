@@ -47,15 +47,6 @@ void Matcher::postReaction(std::string userId, std::string candidateId, std::str
 
 }
 
-std::vector<std::string> Matcher::getLikesReceived(const std::string &userId) {
-    std::string list;
-    return likesReceived_db->values(userId);
-}
-
-std::vector<std::string> Matcher::getLikes(const std::string &userId) {
-    return likes_db->values(userId);
-}
-
 std::vector<UserProfile> Matcher::getMatches(std::string userId) {
     std::vector<std::string> matches = matches_db->values(userId);
     std::vector<UserProfile> profiles;
@@ -65,23 +56,6 @@ std::vector<UserProfile> Matcher::getMatches(std::string userId) {
         profiles.push_back(usersProfiles.getProfile(matches[i]));
     }
     return profiles;
-}
-
-std::vector<std::string> Matcher::getDislikes(const std::string &user) {
-    // Devuelve los users que user rechazó.
-    /*return util::valuesAsVector(noMatches, user);*/
-    return std::vector<std::string>();
-}
-
-int Matcher::candidatesLeft(std::string userId){
-    std::string limitStr;
-
-    limit_db->get(userId, limitStr);
-
-    Json::Value limitJson = util::stringToJson(limitStr);
-    std::string lastTimeStr = limitJson["lastTime"].asString();
-    int left = limitJson["left"].asInt();
-    return left;
 }
 
 UserProfile Matcher::getNextCandidate(std::string userId) {

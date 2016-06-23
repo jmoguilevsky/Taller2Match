@@ -4,14 +4,15 @@ Application server - Documentación técnica
 Instalación
 -----------
 
-
+Configuración
+-------------
 
 Diseño de la estructura de clases
 ---------------------------------
 
-Se dividió la aplicación en varios "módulos" con funcionalidades diferentes, de forma que sean lo más independientes posible entre sí.
+Se dividió la aplicación en varios "módulos" con funcionalidades diferentes, de forma que sean lo más independientes posible entre sí, cada uno con funcionalidades bien claras y distintas a las de los demás.
 
-Así, por ejemplo, tenemos el módulo de bases de datos **DB**, que contiene las clases:
+Así, tenemos el módulo de bases de datos **DB**, que contiene las clases:
 
 - **KeyValueDb** clase "abstracta" para una base de datos no relacional, del tipo *{clave, valor}*
 - **RocksDb** derivada de KeyValueDb, una implementación específica de este tipo de base de datos con la librería RocksDb
@@ -28,6 +29,8 @@ El módulo **HTTP** tiene toda la funcionalidad requerida para manejar los reque
 - **HTTPResponse**
 - **HTTPRequest**
 - **HTTP** (*namespace*) facilita la creación de las responses HTTP, por ejemplo, con HTTP::OK(), se crea un HTTP response con el código de status adecuado según el estándar.
+
+Por lado también hay otras dos partes que son más específicas a la aplicación particular que se desarrolló. La primera, en el directorio **MatchData** controla la lógica de la aplicación, por ejemplo, el manejo de los likes, los matches, etc., pero sin tener en cuenta cómo es que se comunican los clientes con el servidor, ni cómo se comunica éste con el *shared server*. Para esto, en el módulo **HandlersHTTP** se encuentran las clases encargadas de parsear los requests HTTP de los clientes, determinar qué se debe hacer, pedirle a la entidad que corresponda de MatchData que procese el pedido, y finalmente de generar la respuesta en el formato que espera el cliente.
 
 
 Diseño de las bases de datos
