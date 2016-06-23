@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -48,13 +49,20 @@ public class PollingService extends Service {
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-        return mBinder;
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        // Let it continue running until it is stopped.
+        Log.d(TAG,"Service started");
+        return START_STICKY;
     }
 
-    /** method for clients */
-    public int getRandomNumber() {
-        return 1;
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return mBinder;
     }
 
     private void getMessages(){
@@ -87,7 +95,7 @@ public class PollingService extends Service {
                                 String text = message.getString("message");
                                 String time = message.getString("time");
                                 Message msg = new Message(from_id,text,false);
-                                saveMessage(msg);
+                                saveMessageToMap(msg);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -117,7 +125,7 @@ public class PollingService extends Service {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
     }
 
-    public void saveMessage(Message message){
+    public void saveMessageToMap(Message message){
 
         // Set up the String to be stored: isSelf,text newline
         String isSelf = String.valueOf(message.isSelf());

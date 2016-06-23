@@ -14,7 +14,7 @@
 
     <ImageView android:id="@+id/match_profile_pic"
         android:contentDescription="@string/match_image_desc"
-        android:layout_height="250dp"
+        android:layout_height="220dp"
         android:layout_width="match_parent"
         android:scaleType="fitCenter"
         android:src="@drawable/sans" />
@@ -22,25 +22,25 @@
     <TextView android:id="@+id/match_alias"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textColor="@color/input_login"/>
 
     <TextView android:id="@+id/match_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textColor="@color/input_login"/>
 
     <TextView android:id="@+id/match_age"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textColor="@color/input_login"/>
 
     <TextView android:id="@+id/match_distance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textColor="@color/input_login"/>
 
     <ScrollView
