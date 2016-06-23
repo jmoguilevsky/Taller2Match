@@ -21,8 +21,9 @@ HTTPResponse MgHTTPClient::sendRequest(HTTPRequest request) {
 void MgHTTPClient::handle(mg_connection *c, int ev, void *p) {
 	if (ev == MG_EV_HTTP_REPLY) {
 		struct http_message *hm = (struct http_message *) p;
-		std::cout << "received: " << std::string(hm->message.p, hm->message.len) << std::endl;
+		//std::cout << "received: " << std::string(hm->message.p, hm->message.len) << std::endl;
 		response = HTTPResponse(hm); //TODO No queda bien esto.
+		std::cout << "response code: " << response.getCode() << std::endl;
 		c->flags |= MG_F_CLOSE_IMMEDIATELY;
 		waiting = false;
 	}

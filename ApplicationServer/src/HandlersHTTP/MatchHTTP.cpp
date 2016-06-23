@@ -20,6 +20,7 @@ HTTPResponse MatchHTTP::handle(HTTPRequest request) {
     std::string uri = request.getUri();
     std::cout<< "ffff "  << uri;
     if (verb == HTTP_GET && uri == FULL_URI_CANDIDATES) {
+        std::cout << "GET CANDIDATE" << std::endl;
         return handleGetCandidate(request);
     } else if (verb == HTTP_POST && uri == FULL_URI_REACTION) {
         return handlePostReaction(request);
@@ -36,12 +37,17 @@ HTTPResponse MatchHTTP::handleGetMatches(HTTPRequest request) {
     std::string token;
     RequestParser::parseToken(request, &token);
     std::string userId = connected.getUserId(token);
-    std::vector<std::string> matches = matcher.getMatches(userId);
-    std::string answer;
+    std::vector<UserProfile> matches = matcher.getMatches(userId);
+    Json::Value ret;
+    ret["count"] = (int)matches.size();
+    Json::Value array;
     for(int i = 0; i < matches.size(); i++){
-        answer += matches[i] + ",";
+        std::cout << "profile::: " << util::JsonToString(matches[i].getJson()) << std::endl;
+        array.append(matches[i].getJson());
     }
-    return HTTP::OK(answer);
+    ret["matches"] = array;
+    std::cout << "MATCHES: " << util::JsonToString(ret) << std::endl;
+    return HTTP::OK(ret);
 }
 
 HTTPResponse MatchHTTP::handlePostReaction(HTTPRequest request) {
@@ -60,9 +66,13 @@ HTTPResponse MatchHTTP::handleGetCandidate(HTTPRequest request) {
     std::string token;
     RequestParser::parseGetCandidate(request, &token);
     std::string userId = connected.getUserId(token);
-    UserProfile candidate = matcher.getNextCandidate(userId);
-    Json::Value user = candidate.getJson();
-    return HTTP::OK(user);
+    try{
+        UserProfile candidate = matcher.getNextCandidate(userId);
+        Json::Value user = candidate.getJson();
+        return HTTP::OK(user);
+    } catch (Exception e){
+        return HTTP::OK(util::stringToJson("{}"));
+    }
 }
 
 

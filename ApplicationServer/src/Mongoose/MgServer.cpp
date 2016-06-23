@@ -12,6 +12,8 @@ void MgServer::clientHandler(struct mg_connection *c, int ev, void *p) {
 
 		HTTPResponse response = thisServer->requestHandler.handle(
 				request);
+		std::cout << "RESPONSE CODE: " << response.getCode() << std::endl;
+		std::cout << "RESPONSE Body: " << response.getBody() << std::endl;
 		mg_printf(c, "%s\r\n", response.toCString());
 		c->flags |= MG_F_SEND_AND_CLOSE;
 	}

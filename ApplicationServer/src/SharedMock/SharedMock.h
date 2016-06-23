@@ -9,10 +9,16 @@
 #include <cstdbool>
 #include "../Profile/UserProfile.h"
 #include "../MatchData/SharedProfilesDatabase.h"
+#include "../DB/RocksDb.h"
 
 class SharedMock : public SharedProfilesDatabase {
     std::map<std::string, UserProfile> users;
+    RocksDb* db;
 public:
+    SharedMock(){
+         db = new RocksDb("usersProfiles");
+    }
+
      std::vector<UserProfile> getUsersList() ;
 
     //! Carga el perfil del usuario con id sharedId.

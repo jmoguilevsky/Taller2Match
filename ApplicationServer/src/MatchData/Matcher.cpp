@@ -46,8 +46,15 @@ std::vector<std::string> Matcher::getLikes(const std::string &userId) {
     return likes_db->values(userId);
 }
 
-std::vector<std::string> Matcher::getMatches(std::string userId) {
-    return matches_db->values(userId);
+std::vector<UserProfile> Matcher::getMatches(std::string userId) {
+    std::vector<std::string> matches = matches_db->values(userId);
+    std::vector<UserProfile> profiles;
+    for(int i = 0; i < matches.size(); i++){
+        std::cout << "match id: " << matches[i] << std::endl;
+        std::cout << "profile: " << util::JsonToString((usersProfiles.getProfile(matches[i])).getJson()) << std::endl;
+        profiles.push_back(usersProfiles.getProfile(matches[i]));
+    }
+    return profiles;
 }
 
 std::vector<std::string> Matcher::getDislikes(const std::string &user) {
@@ -57,15 +64,26 @@ std::vector<std::string> Matcher::getDislikes(const std::string &user) {
 }
 
 int Matcher::candidatesLeft(std::string userId){
+    std::string limitStr;
 
+    limit_db->get(userId, limitStr);
+
+    Json::Value limitJson = util::stringToJson(limitStr);
+    std::string lastTimeStr = limitJson["lastTime"].asString();
+    int left = limitJson["left"].asInt();
+    return left;
 }
 
 UserProfile Matcher::getNextCandidate(std::string userId) {
 
-    std::string lastTimeStr;
+    std::string limitStr;
 
-    limit_db->get(userId, lastTimeStr);
+    limit_db->get(userId, limitStr);
 
+    Json::Value limitJson = util::stringToJson(limitStr);
+    std::string lastTimeStr = limitJson["lastTime"].asString();
+    int left = limitJson["left"].asInt();
+    std::cout << "LEFT: " << left << std::endl;
     Date lastTime;
 
     if (lastTimeStr != "") {
@@ -77,21 +95,33 @@ UserProfile Matcher::getNextCandidate(std::string userId) {
     if (lastTime < today) {
         // Pasó más de un día desde la última vez que se buscaron los candidatos
         // Busco candidatos otra vez
+        std::cout << "ACA ESTOY" << std::endl;
         std::vector<std::string> newCandidates = calculateCandidates(userId);
+        std::cout << "ACA ESTOY2" << std::endl;
         if(newCandidates.size() != 0) {
+            std::cout << "ACA ESTOY3" << std::endl;
             for (int i = 0; i < newCandidates.size(); i++) {
+                std::cout << "ACA ESTOY4" << std::endl;
                 candidates_db->append_value(userId, newCandidates[i]);
             }
-            limit_db->save(userId, today.str());
+            std::cout << "ACA ESTOY5" << std::endl;
+            limitJson["lastTime"] = today.str();
+            limitJson["left"] = (int)newCandidates.size();
+            limit_db->save(userId, util::JsonToString(limitJson));
+        } else {
+            throw Exception("Couldn't find candidates!!!");
         }
     }
     // Si es el mismo día, mando el siguiente candidato, entre los no likeados.
-
+    std::cout << "CANDIDATES LEFT: "  << limitJson["left"].asInt() << std::endl;
+    if(limitJson["left"].asInt() == 0) throw Exception("No more candidates!");
     std::vector<std::string> candidates = candidates_db->values(userId);
     UserProfile profile;
     if (candidates.size() != 0) {
         std::string nextId = candidates[0];
         profile = usersProfiles.getProfile(nextId);
+        limitJson["left"]=limitJson["left"].asInt() - 1;
+        limit_db->save(userId, util::JsonToString(limitJson));
     }
 
     return profile;
