@@ -9,13 +9,17 @@
 
 #define HTTP_GET "GET"
 #define HTTP_POST "POST"
+#define FULL_URI_MESSAGE "/chat/message"
+#define FULL_URI_NEW_CHAT "/chat/new"
 
 HTTPResponse ChatHTTP::handle(HTTPRequest request) {
 	std::string verb = request.getVerb();
-	if (verb == HTTP_POST) {
+	std::string uri = request . getUri();
+
+	if (verb == HTTP_POST && uri == FULL_URI_MESSAGE) {
 		return handleSendChat(request);
-	} else if (verb == HTTP_GET) {
-		return handleGetHistory(request);
+	} else if (verb == HTTP_GET && uri == FULL_URI_NEW_CHAT) {
+		return handleGetNew(request);
 	} else {
 		return HTTP::NotFound();
 	}
@@ -28,8 +32,17 @@ HTTPResponse ChatHTTP::handleSendChat(HTTPRequest request) {
 	RequestParser::parseSendChat(request, &token, &matchId, &message);
 	std::string userId = connected.getUserId(token);
 	if (!matcher.usersMatch(userId, matchId)) throw AuthorizationException("User is not a match");
-	std::string msgJson = chat.sendMessage(userId, matchId, message);
-	return HTTP::OK();
+	chat . sendMessage(userId, matchId, message);
+	return HTTP::OK(util::stringToJson("{}"));
+}
+
+HTTPResponse ChatHTTP::handleGetNew(HTTPRequest request) {
+	std::string token;
+	RequestParser::parseGetNew(request, &token);
+	std::string userId = connected . getUserId(token);
+	Json::Value newMsgs = chat . getNewForUser(userId);
+	if (newMsgs . size() == 0) { return HTTP::OK(util::stringToJson("{}")); }
+	return HTTP::OK(newMsgs);
 }
 
 HTTPResponse ChatHTTP::handleGetHistory(HTTPRequest request) {

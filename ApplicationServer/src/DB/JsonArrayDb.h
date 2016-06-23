@@ -33,6 +33,8 @@ public:
 
     //! Devuelve el array Json asociado a la clave, como un string.
     std::string values_as_string(const std::string &key);
+
+    void erase_key(std::string key);
 };
 
 

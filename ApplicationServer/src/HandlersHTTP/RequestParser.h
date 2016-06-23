@@ -47,6 +47,10 @@ namespace RequestParser{
     void parseGetHistory(HTTPRequest request, std::string* token, std::string* candId);
 
     void parseToken(HTTPRequest request, std::string *token);
+
+    void parseGetNew(HTTPRequest request, std::string *token);
+
+    void parseGetNew(HTTPRequest request, std::string *token);
 };
 
 

@@ -33,6 +33,7 @@ public:
 
     HTTPResponse handle(HTTPRequest request);
 
+    HTTPResponse handleGetNew(HTTPRequest request);
 };
 
 

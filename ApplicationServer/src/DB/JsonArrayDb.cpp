@@ -63,3 +63,8 @@ bool JsonArrayDb::has_value(std::string key, std::string value) {
 JsonArrayDb::JsonArrayDb(std::string name) {
     database = new RocksDb(name);
 }
+
+void JsonArrayDb::erase_key(std::string key) {
+    database -> save(key, "");
+}
+

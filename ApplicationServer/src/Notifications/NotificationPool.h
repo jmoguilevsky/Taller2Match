@@ -15,7 +15,8 @@ public:
     void add(Notification notification){
         pool[notification.forUser()].push_back(notification);
     }
-    void sendAllForUser(std::string user){
+
+    void getAllForUser(std::string user) {
         // Para mandar todas las notificaciones cuando un usuario recién se conecta
 
     }

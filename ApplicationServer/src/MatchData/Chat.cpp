@@ -27,5 +27,23 @@ std::string Chat::sendMessage(std::string userId, std::string otherUserId, std::
     main["message"] = msgJson;
     std::string msgString = util::JsonToString(main);
     chat_db->append_value(chatKey, msgString);
+    Json::Value notif;
+    Json::Value msg;
+    msg["message"] = content;
+    msg["from"] = userId;
+    msg["time"] = "now";
+    notif["message"] = msg;
+    notifications_db -> append_value(otherUserId, util::JsonToString(notif));
+    std::cout << "Notifications for user: " << otherUserId << std::endl <<
+    notifications_db -> values_as_string(otherUserId) << std::endl;
     return msgString;
+}
+
+Json::Value Chat::getNewForUser(std::string userId) {
+    Json::Value array = util::stringToJson(notifications_db -> values_as_string(userId));
+    notifications_db -> erase_key(userId);
+    for (int i = 0; i < array . size(); i++) {
+        //notifications_db -> remove_value(userId,util::JsonToString(array[i])); // Borro las notificationes que ya estoy mandando
+    }
+    return array;
 }

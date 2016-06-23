@@ -11,7 +11,8 @@ void ::RequestParser::parseSignUp(HTTPRequest request, std::string *email, std::
     *password = info["password"] . asString();
     Json::Value user = util::stringToJson(request . getBody());
     *profile = UserProfile(user);
-    if (info . isMember("distance"))*distance = info["distance"] . asInt();
+    std::cout << "info: " << util::JsonToString(info) << std::endl;
+    if (info . isMember("distance"))*distance = atoi(info["distance"] . asString() . c_str());
 }
 
 void ::RequestParser::parseUpdateProfile(HTTPRequest request, std::string *token, UserProfile *profile) {
@@ -53,7 +54,7 @@ void ::RequestParser::parseSendChat(HTTPRequest request, std::string *token, std
     RequestParser::parseToken(request, token);
     Json::Value msg = util::stringToJson(request . getBody());
     *candId = msg["id"] . asString();
-    *message = msg["msg"] . asString();
+    *message = msg["message"] . asString();
 }
 
 void ::RequestParser::parseGetHistory(HTTPRequest request, std::string *token, std::string *candId) {
@@ -67,5 +68,9 @@ void ::RequestParser::parseGetCandidate(HTTPRequest &request, std::string *token
 }
 
 void ::RequestParser::parseLogout(HTTPRequest request, std::string *token) {
+    RequestParser::parseToken(request, token);
+}
+
+void ::RequestParser::parseGetNew(HTTPRequest request, std::string *token) {
     RequestParser::parseToken(request, token);
 }
