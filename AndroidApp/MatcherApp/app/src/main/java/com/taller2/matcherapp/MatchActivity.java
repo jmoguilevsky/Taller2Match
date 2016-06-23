@@ -77,6 +77,7 @@ public class MatchActivity extends AppCompatActivity {
         JSONObject json_params = new JSONObject();
         Intent intent = getIntent();
         String match_id = intent.getStringExtra("Match ID");
+        Log.d(TAG,match_id);
         try {
             json_params.put("id",match_id);
         } catch (JSONException e) {
@@ -113,11 +114,8 @@ public class MatchActivity extends AppCompatActivity {
                             JSONObject cand_location = response.getJSONObject("location");
                             String cand_lat = cand_location.getString("latitude");
                             String cand_long = cand_location.getString("longitude");
-                            // Fetch user location from local db.
-                            JSONObject user_location = new JSONObject(user.get("location"));
-                            String user_lat = user_location.getString("latitude");
-                            String user_long = user_location.getString("longitude");
-                            // TODO funcion distancia
+                            int distancia = response.getInt("distance");
+                            match_distance.setText(String.valueOf(distancia));
 
                         } catch (JSONException e) {
                             e.printStackTrace();

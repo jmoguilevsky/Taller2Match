@@ -84,6 +84,7 @@ public class MessageActvity extends AppCompatActivity {
                 saveMessage(msg);
                 sendMessage(msg);
                 adapter.notifyDataSetChanged();
+                textField.setText("");
             }
         });
     }
