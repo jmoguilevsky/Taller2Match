@@ -28,8 +28,6 @@ MatchRequestHandler::MatchRequestHandler(SharedProfilesDatabase &sharedData) {
     handlers[URI_USERS] = REQ_USERS;
     handlers[URI_MATCHES] = REQ_MATCHES;
     handlers[URI_CHAT] = REQ_CHAT;
-
-    startThread(pollingThread, &connected);
 }
 
 HTTPResponse MatchRequestHandler::handle(HTTPRequest &request) {
