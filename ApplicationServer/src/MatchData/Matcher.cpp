@@ -114,7 +114,7 @@ UserProfile Matcher::getNextCandidate(std::string userId) {
         candidate_db -> save(userId, nextCandidate . getId()); // Tiene el último candidato sugerido
         limit_db -> save(userId, util::JsonToString(limitJson));
     } else if (limitJson["left"] . asInt() == 0) {
-        throw Exception("No more candidates!");
+        throw Exception("No more candidates today!");
     }
 
     return nextCandidate;
@@ -207,6 +207,8 @@ UserProfile Matcher::calculateNextCandidate(std::string userId) {
     std::vector<std::pair<std::string, int>> orderedByScore = sortDescByValue(scores);
 
     // Agarro el mejor candidato
+
+    if (candidates . size() == 0) throw Exception("Couldn't find more candidates!");
 
     return candidates[orderedByScore[0] . first];
 
