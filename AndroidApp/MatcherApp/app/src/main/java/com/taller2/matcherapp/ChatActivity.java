@@ -48,7 +48,6 @@ public class ChatActivity extends AppCompatActivity {
 
     private final static String TAG = ChatActivity.class.getSimpleName();
     private ProgressDialog pDialog;
-    Alarm alarm = new Alarm();
     SQLiteHandler db = new SQLiteHandler(this);
     ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 

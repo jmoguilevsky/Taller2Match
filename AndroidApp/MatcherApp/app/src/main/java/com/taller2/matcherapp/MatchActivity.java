@@ -92,16 +92,17 @@ public class MatchActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
                         try {
+                            JSONObject user = response.getJSONObject("user");
                             // Set the title to the match's name
-                            getSupportActionBar().setTitle(response.getString("name"));
+                            getSupportActionBar().setTitle(user.getString("name"));
 
-                            match_alias.setText(response.getString("alias"));
-                            match_email.setText(response.getString("email"));
+                            match_alias.setText(user.getString("alias"));
+                            match_email.setText(user.getString("email"));
                             // TODO match age
-                            String cand_photo = response.getString("phto_profile");
+                            String cand_photo = user.getString("phto_profile");
                             Bitmap photo_map = AppController.getInstance().getBitmapImage(cand_photo);
                             match_picture.setImageBitmap(photo_map);
-                            JSONArray arr_interests = response.getJSONArray("interests");
+                            JSONArray arr_interests = user.getJSONArray("interests");
                             for (int i=0; i < arr_interests.length(); i++){
                                 // Add each interest to the table
                                 JSONObject interest = arr_interests.getJSONObject(i);
@@ -111,10 +112,10 @@ public class MatchActivity extends AppCompatActivity {
                             }
 
                             // Get the candidate location and calculate the distance.
-                            JSONObject cand_location = response.getJSONObject("location");
+                            JSONObject cand_location = user.getJSONObject("location");
                             String cand_lat = cand_location.getString("latitude");
                             String cand_long = cand_location.getString("longitude");
-                            int distancia = response.getInt("distance");
+                            int distancia = user.getInt("distance");
                             match_distance.setText(String.valueOf(distancia));
 
                         } catch (JSONException e) {
