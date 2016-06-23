@@ -62,6 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView addIcon;
     private Button btnLocation;
     private static int RESULT_LOAD_IMG = 1;
+    int PICK_IMAGE = 2;
     private boolean isProfileModified;
     String imgPath;
     private SQLiteHandler db;
@@ -99,12 +100,20 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Create intent to Open Image applications like Gallery, Google Photos
                 // See the method onActivityResult below
-                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+
+                /*Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 // Start the Intent
-                startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+                startActivityForResult(galleryIntent, RESULT_LOAD_IMG);*/
             }
         });
+
+
 
         // Create the interest table:
         // The interests table is populated dynamically, so we get its layout
@@ -189,8 +198,13 @@ public class ProfileActivity extends AppCompatActivity {
                 // Create a spinner menu with the category options
                 List<String> spinnerArray =  new ArrayList<String>();
                 // TODO pedir al server lista de categorias.
-                spinnerArray.add("Music");
-                spinnerArray.add("Outdoors");
+                spinnerArray.add("music");
+                spinnerArray.add("music/band");
+                spinnerArray.add("outdoors");
+                spinnerArray.add("sport");
+                spinnerArray.add("sex");
+                spinnerArray.add("travel");
+                spinnerArray.add("food");
                 spinnerArray.add("Add new category");
                 Spinner spinner = new Spinner(context);
                 ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, spinnerArray);
@@ -247,6 +261,50 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == RESULT_LOAD_IMG) {
+                Uri selectedImageUri = data.getData();
+                imgPath = getPath(selectedImageUri);
+                // Get the view that will display the image
+                viewProfilePicture = (ImageView) findViewById(R.id.match_image);
+                // Set the Image in ImageView after decoding the String
+                Bitmap map = BitmapFactory.decodeFile(imgPath);
+                String imgDecodableString = AppController.getInstance().getStringImage(map);
+                Bitmap picture_map = AppController.getInstance().getBitmapImage(imgDecodableString);
+                viewProfilePicture.setImageBitmap(picture_map);
+                // The profile was modified
+                isProfileModified = true;
+                // Update the local database
+                db.update_value("photo",imgDecodableString);
+            }
+        }
+    }
+
+    /**
+     * helper to retrieve the path of an image URI
+     */
+    public String getPath(Uri uri) {
+        // just some safety built in
+        if( uri == null ) {
+            // TODO perform some logging or show user feedback
+            return null;
+        }
+        // try to retrieve the image from the media store first
+        // this will only work for images selected from gallery
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        if( cursor != null ){
+            int column_index = cursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        }
+        // this is our fallback here
+        return uri.getPath();
+    }
+
+    /*
     // Here we define the behaviour when the gallery activity finishes.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -288,7 +346,7 @@ public class ProfileActivity extends AppCompatActivity {
                     .show();
         }
 
-    }
+    }*/
 
     // Function that adds rows with the format Category / Interest / Trash can icon to the table.
     public void add_row_interests_table(String category, String interest){

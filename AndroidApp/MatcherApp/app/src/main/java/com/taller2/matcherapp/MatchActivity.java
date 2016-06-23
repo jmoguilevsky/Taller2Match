@@ -99,10 +99,11 @@ public class MatchActivity extends AppCompatActivity {
                             match_alias.setText(user.getString("alias"));
                             match_email.setText(user.getString("email"));
                             // TODO match age
-                            String cand_photo = user.getString("phto_profile");
+                            String cand_photo = user.getString("photo_profile");
                             Bitmap photo_map = AppController.getInstance().getBitmapImage(cand_photo);
                             match_picture.setImageBitmap(photo_map);
                             JSONArray arr_interests = user.getJSONArray("interests");
+                            Log.d(TAG,arr_interests.toString());
                             for (int i=0; i < arr_interests.length(); i++){
                                 // Add each interest to the table
                                 JSONObject interest = arr_interests.getJSONObject(i);
@@ -130,17 +131,6 @@ public class MatchActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Log.d(TAG, error.toString());
-                // Set the title to the match's name
-                getSupportActionBar().setTitle("Sin respuesta");
-
-                match_email.setText("Email: asd@asd");
-                match_alias.setText("Alias: alias");
-                match_age.setText("Age: 99");
-                match_distance.setText("Distance: 5km");
-
-                add_row_interests_table("Cat 2","Val 2",false);
-                add_row_interests_table("Cat 3","Val 3",false);
-
                 pDialog.hide();
                 pDialog.dismiss();
             }

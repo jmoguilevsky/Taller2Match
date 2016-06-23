@@ -181,6 +181,7 @@ public class MessageActvity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
             listViewMessages.invalidateViews();
             listViewMessages.refreshDrawableState();
+            listViewMessages.setSelection(adapter.getCount() - 1); // Scroll to bottom.
         }
         else {
             try {

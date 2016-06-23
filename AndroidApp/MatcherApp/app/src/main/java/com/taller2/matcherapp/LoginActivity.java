@@ -122,10 +122,9 @@ public class LoginActivity extends AppCompatActivity {
         JSONObject json_params = new JSONObject(params);
         Log.d("DEBUG",json_params.toString());
 
+        /*
         // Create login session
         session.setLogin(true);
-
-        /*
         // Add user to database
         String name_stud = "Seba Elizalde";
         String alias_stud = "SE";
