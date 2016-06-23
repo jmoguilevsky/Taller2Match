@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -98,7 +97,7 @@ public class Alarm extends BroadcastReceiver
                                 JSONObject message = messages.getJSONObject(i).getJSONObject("message");
                                 String from_id = message.getString("id");
                                 String text = message.getString("message");
-                                Message msg = new Message(from_id,text,false);
+                                myMessage msg = new myMessage(from_id,text,false);
                                 saveMessage(msg);
                             }
                         } catch (JSONException e) {
@@ -129,16 +128,16 @@ public class Alarm extends BroadcastReceiver
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
     }
 
-    private void saveMessage(Message message){
+    private void saveMessage(myMessage myMessage){
         // Set up the String to be stored: isSelf,text newline
-        String isSelf = String.valueOf(message.isSelf());
+        String isSelf = String.valueOf(myMessage.isSelf());
         String field_sep = ",";
         // TODO length protocol
-        String text = message.getMessage();
+        String text = myMessage.getMessage();
         String line_sep = "\r\n";
         String data = isSelf+field_sep+text+line_sep;
 
-        String id = message.getFromID();
+        String id = myMessage.getFromID();
 
         String filePath = "data/data/com.taller2.matcherapp/"+id+".txt";
         File file = new File(filePath);
@@ -146,7 +145,7 @@ public class Alarm extends BroadcastReceiver
             OutputStream fo = new FileOutputStream(file, true);
             fo.write(data.getBytes());
             fo.close();
-            Log.e(TAG,"Message saved for conversation with id: "+id);
+            Log.e(TAG,"myMessage saved for conversation with id: "+id);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

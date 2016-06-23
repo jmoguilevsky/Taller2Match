@@ -18,9 +18,9 @@ import com.taller2.matcherapp.R;
 public class MessagesListAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Message> messagesItems;
+    private List<myMessage> messagesItems;
 
-    public MessagesListAdapter(Context context, List<Message> navDrawerItems) {
+    public MessagesListAdapter(Context context, List<myMessage> navDrawerItems) {
         this.context = context;
         this.messagesItems = navDrawerItems;
     }
@@ -49,7 +49,7 @@ public class MessagesListAdapter extends BaseAdapter {
          * are showing incorrect data Add the solution if you have one
          * */
 
-        Message m = messagesItems.get(position);
+        myMessage m = messagesItems.get(position);
 
         LayoutInflater mInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);

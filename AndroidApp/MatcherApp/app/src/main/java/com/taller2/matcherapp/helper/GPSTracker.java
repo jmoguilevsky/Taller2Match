@@ -179,7 +179,7 @@ public class GPSTracker extends Service implements LocationListener {
         // Setting Dialog Title
         alertDialog.setTitle("GPS is settings");
 
-        // Setting Dialog Message
+        // Setting Dialog myMessage
         alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
 
         // On pressing Settings button
@@ -197,7 +197,7 @@ public class GPSTracker extends Service implements LocationListener {
             }
         });
 
-        // Showing Alert Message
+        // Showing Alert myMessage
         alertDialog.show();
     }
 

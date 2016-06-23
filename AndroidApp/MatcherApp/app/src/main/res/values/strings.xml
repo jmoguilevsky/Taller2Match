@@ -27,7 +27,7 @@
     <string name="header_category">Category</string>
     <string name="header_interest">Interest</string>
     <string name="header_delete">Delete</string>
-    <string name="type_message">Type message</string>
+    <string name="type_message">Type myMessage</string>
     <string name="btn_send">Send</string>
     <string name="header_distance">Max distance range to meet people:</string>
 

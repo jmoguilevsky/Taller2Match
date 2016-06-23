@@ -2,8 +2,6 @@ package com.taller2.matcherapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,7 +17,6 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
-import com.taller2.matcherapp.helper.Message;
 import com.taller2.matcherapp.helper.SQLiteHandler;
 import com.taller2.matcherapp.helper.SessionManager;
 
@@ -29,13 +25,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
-import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -258,7 +252,7 @@ public class LoginActivity extends AppCompatActivity {
                 OutputStream fo = new FileOutputStream(file, true);
                 fo.write(data.getBytes());
                 fo.close();
-                Log.e("Save message","Message saved for conversation with id: "+id);
+                Log.e("Save message","myMessage saved for conversation with id: "+id);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {

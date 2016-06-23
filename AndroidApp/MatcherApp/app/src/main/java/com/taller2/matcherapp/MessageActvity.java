@@ -2,12 +2,14 @@ package com.taller2.matcherapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -20,7 +22,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
-import com.taller2.matcherapp.helper.Message;
+import com.taller2.matcherapp.helper.myMessage;
 import com.taller2.matcherapp.helper.MessagesListAdapter;
 import com.taller2.matcherapp.helper.SQLiteHandler;
 
@@ -44,6 +46,7 @@ import java.util.concurrent.TimeUnit;
 public class MessageActvity extends AppCompatActivity {
 
     private static final String TAG = MessageActvity.class.getSimpleName();
+    private static final int DO_LOAD = 1;
     private String match_id;
     private Button btnSend;
     private ArrayList listMessages;
@@ -51,6 +54,7 @@ public class MessageActvity extends AppCompatActivity {
     private MessagesListAdapter adapter;
     private SQLiteHandler db;
     ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+    Handler h;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,13 +80,24 @@ public class MessageActvity extends AppCompatActivity {
 
         cargarMensajes();
 
+        h = new Handler(){
+            @Override
+            public void handleMessage(Message msg){
+                if(msg.what == DO_LOAD){
+                    cargarMensajes();
+                }else{
+                    Log.e(TAG,"Error thread");
+                }
+            }
+        };
+
         btnSend = (Button)findViewById(R.id.chatSendButton);
         // Register the onClick listener with the implementation above
         btnSend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                 String text = textField.getText().toString();
-                Message msg = new Message(match_id,text,true);
+                myMessage msg = new myMessage(match_id,text,true);
                 listMessages.add(msg);
                 saveMessage(msg);
                 sendMessage(msg);
@@ -124,7 +139,7 @@ public class MessageActvity extends AppCompatActivity {
                     public void run() {
                         Log.i(TAG,"Getting messages");
                         getMessages();
-                        cargarMensajes();
+                        h.sendEmptyMessage(DO_LOAD);
                     }
                 }, 0, 10, TimeUnit.SECONDS);
     }
@@ -143,7 +158,7 @@ public class MessageActvity extends AppCompatActivity {
             if (iend != -1) {
                 String isSelf= lines[i].substring(0 , iend);
                 String text = lines[i].substring(iend+1, lines[i].length());
-                Message msg = new Message("idk",text, Boolean.valueOf(isSelf));
+                myMessage msg = new myMessage("idk",text, Boolean.valueOf(isSelf));
                 listMessages.add(msg);
             }
         }
@@ -176,17 +191,17 @@ public class MessageActvity extends AppCompatActivity {
         }
     }
 
-    public void saveMessage(Message message){
+    public void saveMessage(myMessage myMessage){
 
         // Set up the String to be stored: isSelf,text newline
-        String isSelf = String.valueOf(message.isSelf());
+        String isSelf = String.valueOf(myMessage.isSelf());
         String field_sep = ",";
         // TODO length protocol
-        String text = message.getMessage();
+        String text = myMessage.getMessage();
         String line_sep = "\r\n";
         String data = isSelf+field_sep+text+line_sep;
 
-        String id = message.getFromID();
+        String id = myMessage.getFromID();
 
         String filePath = "data/data/com.taller2.matcherapp/"+id+".txt";
         File file = new File(filePath);
@@ -194,7 +209,7 @@ public class MessageActvity extends AppCompatActivity {
             OutputStream fo = new FileOutputStream(file, true);
             fo.write(data.getBytes());
             fo.close();
-            Log.e("Save message","Message saved for conversation with id: "+id);
+            Log.e("Save myMessage","myMessage saved for conversation with id: "+id);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -219,7 +234,7 @@ public class MessageActvity extends AppCompatActivity {
                                 String from_id = message.getString("from");
                                 String text = message.getString("message");
                                 Log.d(TAG,from_id+" "+text);
-                                Message msg = new Message(from_id,text,false);
+                                myMessage msg = new myMessage(from_id,text,false);
                                 saveMessage(msg);
                             }
                         } catch (JSONException e) {
@@ -249,7 +264,7 @@ public class MessageActvity extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
     }
 
-    public void sendMessage(Message msg){
+    public void sendMessage(myMessage msg){
         // Create a POST request, send JSONObject.
         String tag_json_req = "send_message";
         JSONObject json_params = new JSONObject();

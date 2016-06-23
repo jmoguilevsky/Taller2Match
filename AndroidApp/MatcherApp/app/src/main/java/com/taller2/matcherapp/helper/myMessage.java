@@ -1,13 +1,13 @@
 package com.taller2.matcherapp.helper;
 
-public class Message {
+public class myMessage {
     private String fromID, message;
     private boolean isSelf;
 
-    public Message() {
+    public myMessage() {
     }
 
-    public Message(String fromID, String message, boolean isSelf) {
+    public myMessage(String fromID, String message, boolean isSelf) {
         this.fromID = fromID;
         this.message = message;
         this.isSelf = isSelf;
