@@ -62,7 +62,8 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView addIcon;
     private Button btnLocation;
     private static int RESULT_LOAD_IMG = 1;
-    int PICK_IMAGE = 2;
+    private static final int PROFILE_IMAGE_SIZE = 280;
+    int SELECT_PICTURE = 2;
     private boolean isProfileModified;
     String imgPath;
     private SQLiteHandler db;
@@ -101,10 +102,7 @@ public class ProfileActivity extends AppCompatActivity {
                 // Create intent to Open Image applications like Gallery, Google Photos
                 // See the method onActivityResult below
 
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+                changeProfilePhoto();
 
                 /*Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -259,49 +257,6 @@ public class ProfileActivity extends AppCompatActivity {
                 alert.show();
             }
         });
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == RESULT_LOAD_IMG) {
-                Uri selectedImageUri = data.getData();
-                imgPath = getPath(selectedImageUri);
-                // Get the view that will display the image
-                viewProfilePicture = (ImageView) findViewById(R.id.match_image);
-                // Set the Image in ImageView after decoding the String
-                Bitmap map = BitmapFactory.decodeFile(imgPath);
-                String imgDecodableString = AppController.getInstance().getStringImage(map);
-                Bitmap picture_map = AppController.getInstance().getBitmapImage(imgDecodableString);
-                viewProfilePicture.setImageBitmap(picture_map);
-                // The profile was modified
-                isProfileModified = true;
-                // Update the local database
-                db.update_value("photo",imgDecodableString);
-            }
-        }
-    }
-
-    /**
-     * helper to retrieve the path of an image URI
-     */
-    public String getPath(Uri uri) {
-        // just some safety built in
-        if( uri == null ) {
-            // TODO perform some logging or show user feedback
-            return null;
-        }
-        // try to retrieve the image from the media store first
-        // this will only work for images selected from gallery
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
-        if( cursor != null ){
-            int column_index = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        }
-        // this is our fallback here
-        return uri.getPath();
     }
 
     /*
@@ -507,6 +462,34 @@ public class ProfileActivity extends AppCompatActivity {
         }
         else {
             Log.d(TAG,"Profile was not modified.");
+        }
+    }
+
+    private void changeProfilePhoto(){
+        Log.d(TAG,"Change profile pic");
+        Intent imgDownload = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        imgDownload.putExtra("crop", "true");
+        imgDownload.putExtra("aspectX", 1);
+        imgDownload.putExtra("aspectY", 1);
+        imgDownload.putExtra("outputX",PROFILE_IMAGE_SIZE);
+        imgDownload.putExtra("outputY",PROFILE_IMAGE_SIZE);
+        imgDownload.putExtra("return-data", true);
+        startActivityForResult(imgDownload,SELECT_PICTURE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK && data!=null){
+            Bundle extras = data.getExtras();
+            Bitmap image = extras.getParcelable("data");
+            viewProfilePicture.setImageBitmap(image);
+            Log.d(TAG,"Profile picture modified");
+
+            String imgDecodableString = AppController.getInstance().getStringImage(image);
+            // The profile was modified
+            isProfileModified = true;
+            // Update the local database
+            db.update_value("photo",imgDecodableString);
         }
     }
 
