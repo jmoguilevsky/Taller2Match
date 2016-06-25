@@ -1,8 +1,10 @@
 package com.taller2.matcherapp.app;
 
+import android.util.Log;
+
 public class AppConfig {
 
-    public static String app_server_ip = "http://10.1.73.36:7000";
+    public static String app_server_ip = "http://192.168.1.12:7000";
 
     // Server user login url
     public static String URL_LOGIN = app_server_ip + "/users/login";

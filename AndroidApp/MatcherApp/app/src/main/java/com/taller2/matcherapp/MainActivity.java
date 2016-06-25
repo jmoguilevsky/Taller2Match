@@ -3,7 +3,6 @@ package com.taller2.matcherapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,7 +19,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
 import com.taller2.matcherapp.helper.SQLiteHandler;
 import com.taller2.matcherapp.helper.SessionManager;
@@ -45,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private SQLiteHandler db;
     private SessionManager session;
     private ProgressDialog pDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         JSONObject json_params = new JSONObject();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                AppConfig.URL_LOGOUT, json_params,
+                AppController.getInstance().getLogout(), json_params,
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -217,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
         JSONObject json_params = new JSONObject();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                AppConfig.URL_FIND_CANDIDATE, json_params,
+                AppController.getInstance().getFindCandidate(), json_params,
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -301,7 +300,7 @@ public class MainActivity extends AppCompatActivity {
         // Create a POST request, send JSONObject.
         // On success expect an empty JSON
         // On failute expect a JSON with an error field
-        String tag_json_req = "req_candidate";
+        String tag_json_req = "react_candidate";
         JSONObject json_params = new JSONObject();
         try {
             json_params.put("id",id_candidate);
@@ -311,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                AppConfig.URL_REACT_CANDIDATE, json_params,
+                AppController.getInstance().getReactCandidate(), json_params,
                 new Response.Listener<JSONObject>() {
 
                     @Override

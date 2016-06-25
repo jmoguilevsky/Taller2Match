@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -17,6 +18,8 @@ public class AppController extends Application {
     public static final String TAG = AppController.class.getSimpleName();
 
     private RequestQueue mRequestQueue;
+
+    private String app_server_ip;
 
     private static AppController mInstance;
 
@@ -70,5 +73,54 @@ public class AppController extends Application {
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
+    }
+
+    public void cambiarIP(String ip){
+        app_server_ip = "http://".concat(ip).concat(":7000");
+        Log.d("AppC",app_server_ip);
+    }
+
+    public String getLogin(){
+        return app_server_ip.concat("/users/login");
+    }
+
+    public String getRegister(){
+        return app_server_ip.concat("/users/signup");
+    }
+
+    public String getLogout(){
+        return app_server_ip.concat("/users/logout");
+    }
+
+    public String getUpdateProfile(){
+        return app_server_ip.concat("/users/update");
+    }
+
+    public String getViewMatch(){
+        return app_server_ip.concat("/match/match");
+    }
+
+    public String getFindCandidate(){
+        return app_server_ip.concat("/match/candidate");
+    }
+
+    public String getReactCandidate(){
+        return app_server_ip.concat("/match/reaction");
+    }
+
+    public String getNewMatches(){
+        return app_server_ip.concat("/match/new");
+    }
+
+    public String getAllMatches(){
+        return app_server_ip.concat("/match/matches");
+    }
+
+    public String getNewMessages(){
+        return app_server_ip.concat("/chat/new");
+    }
+
+    public String getSendMessage(){
+        return app_server_ip.concat("/chat/message");
     }
 }

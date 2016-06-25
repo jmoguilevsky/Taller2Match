@@ -20,7 +20,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
 import com.taller2.matcherapp.helper.myMessage;
 import com.taller2.matcherapp.helper.MessagesListAdapter;
@@ -222,7 +221,7 @@ public class MessageActvity extends AppCompatActivity {
         JSONObject json_params = new JSONObject();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                AppConfig.URL_GET_NEW_MESSAGES, json_params,
+                AppController.getInstance().getNewMessages(), json_params,
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -279,7 +278,7 @@ public class MessageActvity extends AppCompatActivity {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                AppConfig.URL_SEND_MESSAGE, json_params,
+                AppController.getInstance().getSendMessage(), json_params,
                 new Response.Listener<JSONObject>() {
 
                     @Override

@@ -26,7 +26,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
 import com.taller2.matcherapp.helper.GPSTracker;
 import com.taller2.matcherapp.helper.SessionManager;
@@ -54,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity{
     private TextView inputDistance;
     private Spinner spinner_age;
     private GPSTracker gps;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -263,7 +263,7 @@ public class RegisterActivity extends AppCompatActivity{
         // On success expect an empty JSON
         // On failute expect a JSON with an error field
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                AppConfig.URL_REGISTER, json_params,
+                AppController.getInstance().getRegister(), json_params,
                 new Response.Listener<JSONObject>() {
 
                     @Override

@@ -40,7 +40,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
 import com.taller2.matcherapp.helper.GPSTracker;
 import com.taller2.matcherapp.helper.SQLiteHandler;
@@ -67,6 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
     private boolean isProfileModified;
     String imgPath;
     private SQLiteHandler db;
+
 
 
     @Override
@@ -428,7 +428,7 @@ public class ProfileActivity extends AppCompatActivity {
             // On success expect an empty JSON
             // On failute expect a JSON with an error field
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
-                    AppConfig.URL_UPDATE_PROFILE, json_param_user,
+                    AppController.getInstance().getUpdateProfile(), json_param_user,
                     new Response.Listener<JSONObject>() {
 
                         @Override

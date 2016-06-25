@@ -20,7 +20,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
 import com.taller2.matcherapp.helper.SQLiteHandler;
 
@@ -85,7 +84,7 @@ public class MatchActivity extends AppCompatActivity {
         }
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
-                AppConfig.URL_VIEW_MATCH, json_params,
+                AppController.getInstance().getViewMatch(), json_params,
                 new Response.Listener<JSONObject>() {
 
                     @Override

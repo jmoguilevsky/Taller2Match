@@ -1,13 +1,17 @@
 package com.taller2.matcherapp;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -15,7 +19,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
 import com.taller2.matcherapp.helper.SQLiteHandler;
 import com.taller2.matcherapp.helper.SessionManager;
@@ -53,6 +56,8 @@ public class LoginActivity extends AppCompatActivity {
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
 
         //test();
+
+        configurarIP();
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -175,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Create the request for a JSONObject
         final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                AppConfig.URL_LOGIN, new JSONObject(params),
+                AppController.getInstance().getLogin(), new JSONObject(params),
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -220,7 +225,7 @@ public class LoginActivity extends AppCompatActivity {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Log.e(TAG, "Login Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
-                        "Server Error: Please try again.", Toast.LENGTH_LONG).show();
+                        "Check you details please.", Toast.LENGTH_LONG).show();
                 hideDialog();
             }
         });
@@ -239,6 +244,42 @@ public class LoginActivity extends AppCompatActivity {
     private void hideDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
+    }
+
+    private void configurarIP(){
+        // Create alert and set title and message.
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("IP config");
+        alert.setMessage("Por favor ingresar la IP del app server (no especificar puerto)");
+        final Context context = this;
+        // Create a layout that will have EditText fields.
+        final LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        final EditText categoryBox = new EditText(this);
+        categoryBox.setHint("IP. Ej: 192.168.1.12");
+        layout.addView(categoryBox,0);
+
+        // Add the layout to the alert
+        alert.setView(layout);
+
+        // Define behaviour for click on positive button
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String ip = categoryBox.getText().toString();
+                if (ip.isEmpty()){
+                    Toast.makeText(context,"The field was emtpy! Try again",Toast.LENGTH_LONG).show();
+                } else {
+                    AppController.getInstance().cambiarIP(ip);
+                }
+            }
+        });
+        // Define behaviour for click on negative button
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                Toast.makeText(context,"Re-crear la app por favor. No funciona sin la ip seteada!",Toast.LENGTH_LONG).show();
+            }
+        });
+        alert.show();
     }
 
     public void guardar(String id){

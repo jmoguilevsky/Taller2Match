@@ -14,7 +14,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.taller2.matcherapp.app.AppConfig;
 import com.taller2.matcherapp.app.AppController;
 
 import org.json.JSONArray;
@@ -75,7 +74,7 @@ public class Alarm extends BroadcastReceiver
         JSONObject json_params = new JSONObject();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                AppConfig.URL_GET_NEW_MESSAGES, json_params,
+                AppController.getInstance().getNewMessages(), json_params,
                 new Response.Listener<JSONObject>() {
 
                     @Override
