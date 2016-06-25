@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Application server - Documentación técnica &mdash; Application Server 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Application Server 1.0 documentation" href="#" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="#">Application Server 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="application-server-documentacion-tecnica">
+<h1>Application server - Documentación técnica<a class="headerlink" href="#application-server-documentacion-tecnica" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="instalacion">
+<h2>Instalación<a class="headerlink" href="#instalacion" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><tt class="docutils literal"><span class="pre">cd</span></tt> al directorio princial, <tt class="docutils literal"><span class="pre">ApplicationServer</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">cmake</span> <span class="pre">.</span></tt></li>
+<li>Para instalar el Application server: <tt class="docutils literal"><span class="pre">make</span> <span class="pre">app</span></tt></li>
+<li>Para instalar Unit tests: <tt class="docutils literal"><span class="pre">make</span> <span class="pre">unitTests</span></tt></li>
+</ol>
+</div>
+<div class="section" id="ejecucion">
+<h2>Ejecución<a class="headerlink" href="#ejecucion" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Para ejecutar el servidor: <tt class="docutils literal"><span class="pre">./app</span> <span class="pre">[opciones]</span></tt></li>
+</ul>
+<p>Las opciones disponibles son:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Opción</th>
+<th class="head">Descripción</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">-h</span></tt></td>
+<td>Muestra esta información.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">-l</span> <span class="pre">[LOG_LEVEL]</span></tt></td>
+<td>Setea el nivel de log a utilizar. 0: ERROR; 1: WARNING; 2: INFO 3: DEBUG</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">-p</span> <span class="pre">[LISTEN_PORT]</span></tt></td>
+<td>Setea el puerto en el que se escucharán las conexiones entrantes.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">-s</span> <span class="pre">[SHARED_SERVER]</span></tt></td>
+<td>Setea la url del Shared Server a utilizar</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Importante</strong>: antes de ejecutar el servidor, se debe crear un directorio <tt class="docutils literal"><span class="pre">db</span></tt> si es que todavía no existe, dentro de <tt class="docutils literal"><span class="pre">Application</span> <span class="pre">Server</span></tt></p>
+<ul class="simple">
+<li>Para ejecutar los tests: <tt class="docutils literal"><span class="pre">./test/unitTests</span></tt></li>
+</ul>
+</div>
+<div class="section" id="estructura-general-de-los-modulos-y-clases-del-servidor">
+<h2>Estructura general de los módulos y clases del servidor<a class="headerlink" href="#estructura-general-de-los-modulos-y-clases-del-servidor" title="Permalink to this headline">¶</a></h2>
+<p>Se dividió la aplicación en varios &#8220;módulos&#8221; con funcionalidades diferentes, de forma que sean lo más independientes posible entre sí, cada uno con funcionalidades bien claras y distintas a las de los demás.</p>
+<p>Así, tenemos el módulo de bases de datos <strong>DB</strong>, que contiene las clases:</p>
+<ul class="simple">
+<li><strong>KeyValueDb</strong> clase &#8220;abstracta&#8221; para una base de datos no relacional, del tipo <em>{clave, valor}</em></li>
+<li><strong>RocksDb</strong> derivada de KeyValueDb, una implementación específica de este tipo de base de datos con la librería RocksDb</li>
+<li><strong>JsonArrayDb</strong> que utiliza a su vez a RocksDb, y contiene como valores a arrays Json, y tiene una interfaz amigable para trabajar con datos en este formato</li>
+</ul>
+<p>Otro módulo es el módulo <strong>Mongoose</strong>, que contiene las clases necesarias para realizar todo lo relacionado con la conexión del servidor y sus clientes, y del Application Server como cliente del Shared Server. Contiene las clases:</p>
+<ul class="simple">
+<li><strong>MgServer</strong> un server multithread, es decir, que por cada request que recibe, lanza un nuevo thread en donde se procesa el mismo, y al finalizar el procesamiento y luego de enviar la respuesta, el thread es destruido</li>
+<li><strong>MgHTTPClient</strong> cliente HTTP, permite realizar un HTTP request a una URL y obtener una respuesta</li>
+<li><strong>MgConnectionManager</strong> wrapper para la estructura &#8220;mg_mgr&#8221; y sus funciones relacionadas, para hacer el código más comprensible y a su vez encapsular un poco el uso de la librería Mongoose</li>
+</ul>
+<p>El módulo <strong>HTTP</strong> tiene toda la funcionalidad requerida para manejar los requests HTTP (crear las respuestas con el código adecuado, por ejemplo 200 para &#8220;Ok&#8221;, transformar la estructura de la librería Mongoose que contiene un request HTTP en un objeto más fácil de manejar, etc.).</p>
+<ul class="simple">
+<li><strong>HTTPResponse</strong></li>
+<li><strong>HTTPRequest</strong></li>
+<li><strong>HTTP</strong> (<em>namespace</em>) facilita la creación de las responses HTTP, por ejemplo, con HTTP::OK(), se crea un HTTP response con el código de status adecuado según el estándar.</li>
+</ul>
+<p>Por lado también hay otras dos partes que son más específicas a la aplicación particular que se desarrolló. La primera, en el directorio <strong>MatchData</strong> controla la lógica de la aplicación, por ejemplo, el manejo de los likes, los matches, la información del login de los usuarios, etc. , pero sin tener en cuenta cómo es que se comunican los clientes con el servidor, ni cómo se comunica éste con el <em>shared server</em>. Para esto, en el módulo <strong>HandlersHTTP</strong> se encuentran las clases encargadas de parsear los requests HTTP de los clientes, determinar qué se debe hacer, pedirle a la entidad que corresponda de MatchData que procese el pedido, y finalmente de generar la respuesta en el formato que espera el cliente.</p>
+<p>(Más detalles en la documentación del código)</p>
+</div>
+<div class="section" id="estructura-de-las-bases-de-datos">
+<h2>Estructura de las bases de datos<a class="headerlink" href="#estructura-de-las-bases-de-datos" title="Permalink to this headline">¶</a></h2>
+<p>Dado que todas las bases de datos son no relacionales, tienen la forma <em>{clave,valor}</em>, todas tienen como clave algún identificador de un usuario, ya sea un email o un id interno al servidor.</p>
+<p><tt class="docutils literal"><span class="pre">userId</span></tt>: identificador del usuario <em>dentro</em> del servidor, se utiliza para la comunicación entre los clientes y el servidor en lugar del email</p>
+<p><tt class="docutils literal"><span class="pre">email</span></tt>: email con que se registró cada usuario</p>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Base de datos <tt class="docutils literal"><span class="pre">login_db</span></tt></dt>
+<dd><p class="first"><strong>clave</strong>: <tt class="docutils literal"><span class="pre">email</span></tt></p>
+<p class="last"><strong>valor</strong>: contraseña correspondiente a ese email</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Base de datos <tt class="docutils literal"><span class="pre">email_userId_db</span></tt></dt>
+<dd><p class="first"><strong>clave</strong>: <tt class="docutils literal"><span class="pre">email</span></tt></p>
+<p class="last"><strong>valor</strong>: <tt class="docutils literal"><span class="pre">userId</span></tt></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Base de datos <tt class="docutils literal"><span class="pre">email_sharedId_db</span></tt></dt>
+<dd><p class="first"><strong>clave</strong>: <tt class="docutils literal"><span class="pre">email</span></tt></p>
+<p class="last"><strong>valor</strong>: identificador del usuario en el <em>Shared server</em> en el cual está registrado</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Base de datos <tt class="docutils literal"><span class="pre">candidate_db</span></tt></dt>
+<dd><p class="first"><strong>clave</strong>: <tt class="docutils literal"><span class="pre">userId</span></tt></p>
+<p class="last"><strong>valor</strong>: último candidato sugerido al usuario</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Base de datos <tt class="docutils literal"><span class="pre">limit_db</span></tt></dt>
+<dd><p class="first"><strong>clave</strong>: <tt class="docutils literal"><span class="pre">userId</span></tt></p>
+<dl class="last docutils">
+<dt><strong>valor</strong>: objeto Json con los siguientes campos:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">lastTime</span></tt>: fecha en que el usuario pidió un candidato por última vez</li>
+<li><tt class="docutils literal"><span class="pre">left</span></tt>: cantidad de candidatos que tiene el usuario disponibles para el día indicado en el campo anterior</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Base de datos <tt class="docutils literal"><span class="pre">distance_db</span></tt></dt>
+<dd><p class="first"><strong>clave</strong>: <tt class="docutils literal"><span class="pre">userId</span></tt></p>
+<p class="last"><strong>valor</strong>: distancia máxima a la que el usuario desea que se encuentren los candidatos sugeridos</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Base de datos <tt class="docutils literal"><span class="pre">matches_db</span></tt></dt>
+<dd><p class="first"><strong>clave</strong>: <tt class="docutils literal"><span class="pre">userId</span></tt></p>
+<p class="last"><strong>valor</strong>: array Json que contiene los ids (internos) de cada uno de los usuarios con los que el usuario tiene un <em>match</em></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Base de datos <tt class="docutils literal"><span class="pre">likes_db</span></tt></dt>
+<dd><p class="first"><strong>clave</strong>: <tt class="docutils literal"><span class="pre">userId</span></tt></p>
+<p class="last"><strong>valor</strong>: array Json que contiene los ids (internos) de cada uno de los usuarios a los que el usuario <em>aceptó</em></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Base de datos <tt class="docutils literal"><span class="pre">dislikes_db</span></tt></dt>
+<dd><p class="first"><strong>clave</strong>: <tt class="docutils literal"><span class="pre">userId</span></tt></p>
+<p class="last"><strong>valor</strong>: array Json que contiene los ids (internos) de cada uno de los usuarios a los que el usuario <em>rechazó</em></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Base de datos <tt class="docutils literal"><span class="pre">likesReceived_db</span></tt></dt>
+<dd><p class="first"><strong>clave</strong>: <tt class="docutils literal"><span class="pre">userId</span></tt></p>
+<p class="last"><strong>valor</strong>: contador que aumenta en 1 cada vez que un usuario acepta a este usuario para un posible <em>match</em> futuro</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Base de datos <tt class="docutils literal"><span class="pre">chat_db</span></tt></dt>
+<dd><p class="first"><strong>clave</strong>: combinación entre los <tt class="docutils literal"><span class="pre">userId</span></tt> de dos usuarios que son match</p>
+<p class="last"><strong>valor</strong>: Json array con los mensajes que se han envíado entre los dos usuarios</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Application server - Documentación técnica</a><ul>
+<li><a class="reference internal" href="#instalacion">Instalación</a></li>
+<li><a class="reference internal" href="#ejecucion">Ejecución</a></li>
+<li><a class="reference internal" href="#estructura-general-de-los-modulos-y-clases-del-servidor">Estructura general de los módulos y clases del servidor</a></li>
+<li><a class="reference internal" href="#estructura-de-las-bases-de-datos">Estructura de las bases de datos</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="#">Application Server 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, Christian Pedersen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
