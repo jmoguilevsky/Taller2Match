@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -37,6 +38,8 @@ public class MatchActivity extends AppCompatActivity {
     private SQLiteHandler db;
     private TextView match_alias;
     private TextView match_email;
+    private String match_id;
+    private String match_name;
     private TextView match_age;
     private TextView match_distance;
     private ImageView match_picture;
@@ -51,6 +54,12 @@ public class MatchActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        // Progress dialog
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Loading match profile...");
+        pDialog.show();
+
         // Obtain and assign the views
         match_alias = (TextView) findViewById(R.id.match_alias);
         match_email = (TextView) findViewById(R.id.match_email);
@@ -63,20 +72,14 @@ public class MatchActivity extends AppCompatActivity {
         db = new SQLiteHandler(getApplicationContext());
         final HashMap<String, String> user = db.getUserDetails();
 
-        // Progress dialog
-        pDialog = new ProgressDialog(this);
-        pDialog.setCancelable(false);
-        pDialog.setMessage("Loading match profile...");
-        pDialog.show();
-
         // Create a POST request, send JSONObject.
         // On success expect an empty JSON
         // On failute expect a JSON with an error field
         String tag_json_req = "req_candidate";
         JSONObject json_params = new JSONObject();
         Intent intent = getIntent();
-        String match_id = intent.getStringExtra("Match ID");
-        Log.d(TAG,match_id);
+        match_id = intent.getStringExtra("Match ID");
+        match_name = intent.getStringExtra("name");
         try {
             json_params.put("id",match_id);
         } catch (JSONException e) {
@@ -115,8 +118,8 @@ public class MatchActivity extends AppCompatActivity {
                             JSONObject cand_location = user.getJSONObject("location");
                             String cand_lat = cand_location.getString("latitude");
                             String cand_long = cand_location.getString("longitude");
-                            int distancia = user.getInt("distance");
-                            match_distance.setText(String.valueOf(distancia));
+                            //int distancia = user.getInt("distance");
+                            //match_distance.setText(String.valueOf(distancia));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -180,6 +183,29 @@ public class MatchActivity extends AppCompatActivity {
         interests_layout.addView(interest_row, new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.MATCH_PARENT,
                 TableLayout.LayoutParams.WRAP_CONTENT));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent=new Intent();
+        intent.putExtra("match_id",match_id);
+        intent.putExtra("match_name",match_name);
+        setResult(1,intent);
+        super.onBackPressed();
     }
 
 }

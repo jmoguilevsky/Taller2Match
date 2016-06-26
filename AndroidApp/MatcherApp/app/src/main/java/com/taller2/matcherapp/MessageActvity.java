@@ -47,6 +47,7 @@ public class MessageActvity extends AppCompatActivity {
     private static final String TAG = MessageActvity.class.getSimpleName();
     private static final int DO_LOAD = 1;
     private String match_id;
+    private String match_name;
     private Button btnSend;
     private ArrayList listMessages;
     private EditText textField;
@@ -55,6 +56,8 @@ public class MessageActvity extends AppCompatActivity {
     private ListView listViewMessages;
     ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     Handler h;
+    private String user_email;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +70,19 @@ public class MessageActvity extends AppCompatActivity {
 
         db = new SQLiteHandler(getApplicationContext());
         final HashMap<String, String> user = db.getUserDetails();
+        user_email = user.get("email");
+        token = user.get("token");
 
-        Intent intent = getIntent();
-        match_id = intent.getStringExtra("Match ID");
+        if (savedInstanceState != null){
+            match_name = savedInstanceState.getString("name");
+            match_id = savedInstanceState.getString("match_id");
+        } else {
+            Intent intent = getIntent();
+            match_name = intent.getStringExtra("Name");
+            match_id = intent.getStringExtra("Match ID");
+        }
+
+        getSupportActionBar().setTitle(match_name);
         textField = (EditText) findViewById(R.id.messageEdit);
 
         listMessages = new ArrayList<>();
@@ -115,6 +128,15 @@ public class MessageActvity extends AppCompatActivity {
                 }, 0, 5, TimeUnit.SECONDS);
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                return;
+            }
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -128,7 +150,8 @@ public class MessageActvity extends AppCompatActivity {
             case R.id.action_profile:
                 Intent profile_intent = new Intent(MessageActvity.this, MatchActivity.class);
                 profile_intent.putExtra("Match ID",match_id);
-                startActivity(profile_intent);
+                profile_intent.putExtra("name",match_name);
+                startActivityForResult(profile_intent, 1);
                 return true;
 
             default:
@@ -143,7 +166,7 @@ public class MessageActvity extends AppCompatActivity {
         super.onPause();
         scheduler.shutdown();
         while (!scheduler.isTerminated()){
-        };
+        }
     }
 
     public void parseContents(String contents){
@@ -160,7 +183,8 @@ public class MessageActvity extends AppCompatActivity {
     }
 
     public void cargarMensajes(){
-        String filePath = "data/data/com.taller2.matcherapp/"+match_id+".txt";
+        String filePath = "data/data/com.taller2.matcherapp/"+match_id+user_email+".txt";
+        Log.d(TAG,filePath);
         File file = new File(filePath);
         if (file.exists()){
             int length = (int) file.length();
@@ -201,15 +225,15 @@ public class MessageActvity extends AppCompatActivity {
         String line_sep = "\r\n";
         String data = isSelf+field_sep+text+line_sep;
 
-        String id = myMessage.getFromID();
+        String match_id = myMessage.getFromID();
 
-        String filePath = "data/data/com.taller2.matcherapp/"+id+".txt";
+        String filePath = "data/data/com.taller2.matcherapp/"+match_id+user_email+".txt";
         File file = new File(filePath);
         try {
             OutputStream fo = new FileOutputStream(file, true);
             fo.write(data.getBytes());
             fo.close();
-            Log.e("Save myMessage","myMessage saved for conversation with id: "+id);
+            Log.e("Save myMessage","myMessage saved for conversation with id: "+match_id);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -253,10 +277,8 @@ public class MessageActvity extends AppCompatActivity {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                // Fetching user details from sqlite
-                HashMap<String, String> user = db.getUserDetails();
                 Map<String, String> params = new HashMap<>();
-                params.put("Authorization", user.get("token"));
+                params.put("Authorization", token);
                 return params;
             }
         };
@@ -296,10 +318,8 @@ public class MessageActvity extends AppCompatActivity {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                // Fetching user details from sqlite
-                HashMap<String, String> user = db.getUserDetails();
                 Map<String, String> params = new HashMap<>();
-                params.put("Authorization", user.get("token"));
+                params.put("Authorization",token);
                 return params;
             }
         };

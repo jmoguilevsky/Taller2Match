@@ -276,7 +276,7 @@ public class LoginActivity extends AppCompatActivity {
         // Define behaviour for click on negative button
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                Toast.makeText(context,"Re-crear la app por favor. No funciona sin la ip seteada!",Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"Re-iniciar la app por favor. No funciona sin la ip seteada!",Toast.LENGTH_LONG).show();
             }
         });
         alert.show();

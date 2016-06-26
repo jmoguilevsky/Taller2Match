@@ -52,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
-        // Start the polling service that listens to messages.
-        // startService(new Intent(getBaseContext(), PollingService.class));
-
         // Obtain and assign views
         matchName = (TextView) findViewById(R.id.match_name);
         imgMatch = (ImageView) findViewById(R.id.match_image);

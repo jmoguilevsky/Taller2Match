@@ -41,6 +41,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private final static String TAG = ChatActivity.class.getSimpleName();
     private ProgressDialog pDialog;
+    private String token;
     SQLiteHandler db = new SQLiteHandler(this);
     ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
@@ -52,16 +53,20 @@ public class ChatActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Your chats");
+
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Fetching matches ...");
+        pDialog.show();
+
+        final HashMap<String, String> user = db.getUserDetails();
+        token = user.get("token");
 
         // Create a hashmap that will have (position,id) as the (key,value) pairs
         final HashMap matches_map = new HashMap<>();
         // Create a list with the matches' names
         final List<String> names_list = new ArrayList<>();
         final List<String> photos_list = new ArrayList<>();
-
-        pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Fetching matches ...");
-        pDialog.show();
 
         // Create a GET request, send JSONObject.
         String tag_json_req = "get_all_matches";
@@ -87,11 +92,12 @@ public class ChatActivity extends AppCompatActivity {
                                 pDialog.dismiss();
                                 return;
                             }
+                            String name = "";
                             JSONArray matches = response.getJSONArray("matches");
                             for (int i = 0; i < matches.length(); i++){
                                 JSONObject user = matches.getJSONObject(i).getJSONObject("user");
                                 String id = user.getString("id");
-                                String name = user.getString("name");
+                                name = user.getString("name");
                                 String photo = user.getString("photo_profile");
                                 // Store data into local containers
                                 matches_map.put(i,id);
@@ -100,7 +106,7 @@ public class ChatActivity extends AppCompatActivity {
                                 pDialog.hide();
                                 pDialog.dismiss();
                             }
-                            construct(names_list,photos_list,matches_map);
+                            construct(names_list,photos_list,matches_map,name);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -118,20 +124,24 @@ public class ChatActivity extends AppCompatActivity {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                // SqLite database handler
-                SQLiteHandler db = new SQLiteHandler(getApplicationContext());
-                // Fetching user details from sqlite
-                HashMap<String, String> user = db.getUserDetails();
                 Map<String, String> params = new HashMap<>();
-                params.put("Authorization", user.get("token"));
+                params.put("Authorization", token);
                 return params;
             }
         };
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_req);
+
+        scheduler.scheduleAtFixedRate
+                (new Runnable() {
+                    public void run() {
+                        Log.i(TAG,"Getting messages");
+                        getMessages();
+                    }
+                }, 0, 5, TimeUnit.SECONDS);
     }
 
-    public void construct(List<String> names_list, List<String> photos_list, final HashMap matches_map){
+    public void construct(List<String> names_list, List<String> photos_list, final HashMap matches_map, final String match_name){
         // Create a custom list adapter to populate the list of matches.
         String[] names_array = names_list.toArray(new String[names_list.size()]);
         String[] photos_array = photos_list.toArray(new String[photos_list.size()]);
@@ -147,23 +157,11 @@ public class ChatActivity extends AppCompatActivity {
                 String match_id = (String) matches_map.get(position);
                 Intent intent = new Intent(ChatActivity.this, MessageActvity.class);
                 intent.putExtra("Match ID",match_id);
+                intent.putExtra("Name",match_name);
                 Log.d("CHAT to MESSAGE",match_id);
                 startActivity(intent);
             }
         });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        scheduler.scheduleAtFixedRate
-                (new Runnable() {
-                    public void run() {
-                        Log.i(TAG,"Getting messages");
-                        getMessages();
-                    }
-                }, 0, 5, TimeUnit.SECONDS);
     }
 
     @Override
@@ -211,10 +209,8 @@ public class ChatActivity extends AppCompatActivity {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                // Fetching user details from sqlite
-                HashMap<String, String> user = db.getUserDetails();
                 Map<String, String> params = new HashMap<>();
-                params.put("Authorization", user.get("token"));
+                params.put("Authorization", token);
                 return params;
             }
         };
@@ -231,15 +227,16 @@ public class ChatActivity extends AppCompatActivity {
         String line_sep = "\r\n";
         String data = isSelf+field_sep+text+line_sep;
 
-        String id = myMessage.getFromID();
+        String match_id = myMessage.getFromID();
+        HashMap<String, String> user = db.getUserDetails();
 
-        String filePath = "data/data/com.taller2.matcherapp/"+id+".txt";
+        String filePath = "data/data/com.taller2.matcherapp/"+match_id+user.get("email")+".txt";
         File file = new File(filePath);
         try {
             OutputStream fo = new FileOutputStream(file, true);
             fo.write(data.getBytes());
             fo.close();
-            Log.e(TAG,"myMessage saved for conversation with id: "+id);
+            Log.e(TAG,"myMessage saved for conversation with id: "+match_id);
         } catch (IOException e) {
             e.printStackTrace();
         }

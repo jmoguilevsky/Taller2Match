@@ -217,8 +217,6 @@ public class RegisterActivity extends AppCompatActivity{
                 latitude = gps.getLatitude();
                 longitude = gps.getLongitude();
 
-                // \n is for new line
-                Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
             }else{
                 // can't get location
                 // GPS or Network is not enabled
